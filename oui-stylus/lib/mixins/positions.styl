@@ -1,0 +1,104 @@
+// (C)opyright 2020-11-17 Dirk Holtwick, holtwick.it. All rights reserved.
+
+// helper
+__pos_helper(type, args) {
+  i = 0;
+
+  if args[i] == "full" {
+    indent = 0;
+
+    if args[i + 1] is a "unit" {
+      indent = rex(args[i + 1]);
+    }
+
+    top: indent;
+    left: indent;
+    right: indent;
+    bottom: indent;
+  } else {
+    for j in 1 .. 4 {
+      if length(args) > i {
+        if args[i + 1] is a "unit" {
+          {args[i]}: rex(args[i + 1]);
+
+          i += 1;
+        } else {
+          {args[i]}: 0;
+        }
+      }
+
+      i += 1;
+    }
+  }
+}
+
+/*
+ * Position utility.
+ *
+ * Synopsis:
+ *
+ *   absolute: <pos> [n] <pos> [n]
+ *
+ * Examples:
+ *
+ *     absolute: top left
+ *     absolute: top 5px left
+ *     absolute: top left 5px
+ *     absolute: top 5px left 5px
+ *
+ */
+absolute() {
+  position: absolute;
+
+  __pos_helper("absolute", arguments);
+}
+
+fixed() {
+  position: fixed;
+
+  __pos_helper("fixed", arguments);
+}
+
+relative() {
+  position: relative;
+
+  __pos_helper("relative", arguments);
+}
+
+sticky() {
+  position: sticky;
+
+  __pos_helper("sticky", arguments);
+}
+
+left(value = base) {
+  if value is a "unit" {
+    left: rex(value);
+  } else {
+    left: value;
+  }
+}
+
+top(value = base) {
+  if value is a "unit" {
+    top: rex(value);
+  } else {
+    top: value;
+  }
+}
+
+bottom(value = base) {
+  if value is a "unit" {
+    bottom: rex(value);
+  } else {
+    bottom: value;
+  }
+}
+
+right(value = base) {
+  if value is a "unit" {
+    right: rex(value);
+  } else {
+    right: value;
+  }
+}

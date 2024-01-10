@@ -1,0 +1,71 @@
+// Use this to start a web app. It makes the viewport non-scroll
+// and full height so you can easily go ahead with stack-x and stack-y
+// to pack it with views
+@require "../mixins/base.styl";
+@require "../mixins/text.styl";
+@require "reset.styl";
+
+statusbar(color) {
+  position: fixed;
+  zindex: 99999;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: -safe-top;
+  background: var(color, black);
+}
+
+tw-app() {
+  if __tw_once("app") {
+    tw-reset();
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      // mobile
+      touch-action: pan-x pan-y; // prevent zoom https://stackoverflow.com/a/62165035/140927
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      // overflow hidden
+      padding: -safe-top -safe-right -safe-bottom -safe-left;
+      font-family: var(--font-sans);
+    }
+
+    // assume this being an app container, usually #app
+    .app {
+      use: stack-x;
+    }
+
+    /* :not(button, input, optgroup, select, textarea, [contenteditable], [contenteditable] *, .ProseMirror *, .selectable *, .selectable) { */
+    * {
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: unquote("default"); // trick to fix Stylus issue
+      // border: none;
+    }
+
+    [contenteditable], [contenteditable] *, .ProseMirror *, .selectable *, .selectable, input, textarea {
+      user-select: text;
+      -webkit-user-select: text;
+      // border: 2px solid red;
+    }
+  }
+}
+
+tw-app-full() {
+  if __tw_once("app-full") {
+    tw-app();
+
+    body {
+      overflow: hidden;
+    }
+
+    .app {
+      height: full;
+    }
+  }
+}
