@@ -1,0 +1,51 @@
+{
+  "name": "oui-monorepo",
+  "version": "0.2.1",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r --filter=oui-* build",
+    "bump": "bumpp package.json zerva-*/package.json --commit",
+    "check": "vue-tsc --noEmit -p tsconfig.json",
+    "clean": "pnpm -r --filter=oui-* run clean",
+    "fix": "node scripts/fix-package-json.js",
+    "preinstall": "npx only-allow pnpm",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prune": "pnpm store prune",
+    "prepublish": "npx only-allow pnpm",
+    "publish": "pnpm -r --filter=oui-* publish --access public",
+    "rebuild": "pnpm -r rebuild",
+    "release": "pnpm run bump && pnpm run build && pnpm run publish && ./scripts/release.sh",
+    "reset": "pnpm -r --filter=oui-* run reset",
+    "test": "pnpm -r --filter=oui-* test",
+    "update": "pnpm -r update -i --latest"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.2",
+    "@antfu/ni": "^0.21.12",
+    "@tsconfig/node18": "^18.2.2",
+    "@types/jest": "^29.5.11",
+    "@types/jsdom": "^21.1.6",
+    "@types/node": "^20.10.8",
+    "@vitejs/plugin-vue": "^4.6.2",
+    "@vue/test-utils": "^2.4.3",
+    "@vue/tsconfig": "^0.5.1",
+    "bumpp": "^9.2.1",
+    "eslint": "^8.56.0",
+    "fast-glob": "^3.3.2",
+    "jsdom": "^23.2.0",
+    "npm-run-all2": "^6.1.1",
+    "only-allow": "^1.2.1",
+    "sort-package-json": "^2.6.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vite-plugin-dts": "^3.7.0",
+    "vitest": "^1.1.3",
+    "vue-tsc": "^1.8.27"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
