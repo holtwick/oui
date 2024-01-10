@@ -12,20 +12,19 @@
     "type": "GitHub Sponsors ❤",
     "url": "https://github.com/sponsors/holtwick"
   },
-  "homepage": "https://github.com/holtwick/twindy#readme",
+  "homepage": "https://github.com/holtwick/oui#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/holtwick/twindy.git"
+    "url": "git+https://github.com/holtwick/oui.git"
   },
   "bugs": {
-    "url": "https://github.com/holtwick/twindy/issues"
+    "url": "https://github.com/holtwick/oui/issues"
   },
   "keywords": [
     "css",
     "framework",
     "stylus",
-    "tailwind",
-    "nib"
+    "oui"
   ],
   "sideEffects": false,
   "exports": {
