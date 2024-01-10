@@ -1,0 +1,39 @@
+{
+  "name": "oui-stylus",
+  "version": "0.13.9",
+  "description": "CSS Framework written in Stylus",
+  "author": {
+    "name": "Dirk Holtwick",
+    "email": "dirk.holtwick@gmail.com",
+    "url": "https://holtwick.de"
+  },
+  "license": "MIT",
+  "funding": {
+    "type": "GitHub Sponsors ❤",
+    "url": "https://github.com/sponsors/holtwick"
+  },
+  "homepage": "https://github.com/holtwick/twindy#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holtwick/twindy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/holtwick/twindy/issues"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "stylus",
+    "tailwind",
+    "nib"
+  ],
+  "sideEffects": false,
+  "exports": {
+    "style": "./index.styl"
+  },
+  "main": "index.styl",
+  "files": [
+    "index.styl",
+    "lib"
+  ]
+}
