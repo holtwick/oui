@@ -7,7 +7,7 @@
 $modal-separator-color = var(--separator-color, -gray-200);
 $modal-border-radius = var(--dialog-radius, 8px);
 
-.tw-modal {
+.oui-modal {
   align-items: center;
   bottom: 0;
   display: none;
@@ -31,7 +31,7 @@ $modal-border-radius = var(--dialog-radius, 8px);
     z-index: -z-index-overlay;
 
     // Background overlay
-    .tw-modal-overlay {
+    .oui-modal-overlay {
       background: var(--dialog-backdrop, rgba(0, 0, 0, 0.75));
       bottom: 0;
       cursor: unquote("default"); // trick to fix Stylus issue
@@ -42,7 +42,7 @@ $modal-border-radius = var(--dialog-radius, 8px);
       top: 0;
     }
 
-    .tw-modal-container {
+    .oui-modal-container {
       animation: slide-down 0.2s ease 1;
       z-index: -z-index-modal;
     }
@@ -137,7 +137,7 @@ $modal-border-radius = var(--dialog-radius, 8px);
       transition: all 200ms ease;
       opacity: 1;
 
-      .tw-modal-container {
+      .oui-modal-container {
         transition: all 200ms ease;
         transform: translate3d(0, 0, 0);
       }
@@ -146,7 +146,7 @@ $modal-border-radius = var(--dialog-radius, 8px);
     &-enter-from, &-leave-to {
       opacity: 0;
 
-      .tw-modal-container {
+      .oui-modal-container {
         transform: translate3d(0, 100%, 0);
       }
     }

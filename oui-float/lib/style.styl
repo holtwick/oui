@@ -2,7 +2,7 @@
 
 .oui-float-transition {
   &-enter-active, &-leave-active {
-    transition: opacity 0.1s;
+    transition: opacity 0.1s ease-in-out;
   }
 
   &-enter-from, &-leave-to {
@@ -12,7 +12,7 @@
 
 .oui-tooltip-transition {
   &-enter-active, &-leave-active {
-    transition: opacity 200ms ease;
+    transition: opacity 200ms ease-in-out;
   }
 
   &-enter-from, &-leave-to {
@@ -115,10 +115,10 @@ $oui-float-arrow-indent-factor = 0.7;
     }
 
     /*
-        &_left, &_right {
-          margin-top: 2;
-          margin-bottom: 2;
-        }
+    &_left, &_right {
+      margin-top: 2;
+      margin-bottom: 2;
+    }
     */
     &_top {
       bottom: -1 * $oui-float-arrow-size; // half size
@@ -154,12 +154,7 @@ $oui-float-arrow-indent-factor = 0.7;
   }
 }
 
-// .sea-menu-fade
-// &-enter-active, &-leave-active
-// transition opacity 0.1s
-
-// &-enter, &-leave-to
-// opacity 0
+/*
 .tw-menu {
   --menu-background: -gray-100; // ButtonFace;
   --menu-border: 1px solid -gray-400; // ButtonShadow;
@@ -234,3 +229,4 @@ $oui-float-arrow-indent-factor = 0.7;
     background: var(--item-separator-color);
   }
 }
+*/
