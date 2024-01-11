@@ -36,6 +36,21 @@ You can set your own CSS class via `class` attribute, the default it `oui-float`
 </div>
 ```
 
+## Dropdown
+
+Even simple is defining a dropdown where the click area and the floating part can be defined in one step:
+
+```vue
+<template>
+  <oui-float>
+    This floats
+    <template #click>
+      Click here!
+    </template>
+  </oui-float>
+</template>
+```
+
 ## Tooltips
 
 As a convenience tooltips can be used without a hassle. Just place the activator somewhere in your project, best in your main `App.vue` like this:

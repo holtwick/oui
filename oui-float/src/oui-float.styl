@@ -14,73 +14,73 @@ $popover-arrow-size = px(12);
 $popover-arrow-indent-factor = 0.7;
 
 // From Bootstrap
-.tw-popover {
-  --popover-color: var(--text-color);
-  --popover-background: var(--secondary-color);
-  --popover-border: none;
-  --popover-shadow: none;
+.oui-float {
+  --float-color: var(--text-color);
+  --float-background: var(--secondary-color);
+  --float-border: none;
+  --float-shadow: none;
   z-index: -z-index-popover;
 
   &.-tooltip {
     // tooltip replacement
-    --popover-color: var(--light-text-color, white);
-    --popover-background: rgb(56, 56, 56); // rgba(118, 118, 118, 1);
-    --popover-border: none; // 1px solid #dddddd;
-    --popover-shadow: rgba(15, 15, 15, 0.2) 0 9px 24px;
+    --float-color: var(--light-text-color, white);
+    --float-background: rgb(56, 56, 56); // rgba(118, 118, 118, 1);
+    --float-border: none; // 1px solid #dddddd;
+    --float-shadow: rgba(15, 15, 15, 0.2) 0 9px 24px;
 
-    // --popover-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
+    // --float-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
     .dark & {
-      --popover-background: black; // rgba(118, 118, 118, 1);
+      --float-background: black; // rgba(118, 118, 118, 1);
     }
 
     pointer-events: none; // avoids flicker
     padding: px(4) px(8);
     border-radius: px(4);
     white-space: pre-line;
-    color: var(--popover-color);
-    box-shadow: var(--popover-shadow);
-    background: var(--popover-background);
-    border: var(--popover-border);
+    color: var(--float-color);
+    box-shadow: var(--float-shadow);
+    background: var(--float-background);
+    border: var(--float-border);
     z-index: -z-index-tooltip;
   }
 
   &.-dropdown {
     // for selecting input values
-    --popover-color: var(--text-color);
-    --popover-background: white;
-    --popover-border: 1px solid $border-color; // 0px 0px 0px 1px #000000;
-    --popover-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
+    --float-color: var(--text-color);
+    --float-background: white;
+    --float-border: 1px solid $border-color; // 0px 0px 0px 1px #000000;
+    --float-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
     min-width: px(200);
     border-radius: px(4);
-    color: var(--popover-color);
-    box-shadow: var(--popover-shadow);
-    background: var(--popover-background);
-    border: var(--popover-border);
+    color: var(--float-color);
+    box-shadow: var(--float-shadow);
+    background: var(--float-background);
+    border: var(--float-border);
     z-index: -z-index-popover;
   }
 
   &.-menu {
     // emulating native context menus
-    --popover-background: var(--menu-background);
-    --popover-border: var(--menu-border);
-    --popover-shadow: var(--menu-shadow);
+    --float-background: var(--menu-background);
+    --float-border: var(--menu-border);
+    --float-shadow: var(--menu-shadow);
     padding: px(8);
     border-radius: px(4);
     white-space: nowrap;
-    color: var(--popover-color);
-    box-shadow: var(--popover-shadow);
-    border: var(--popover-border);
+    color: var(--float-color);
+    box-shadow: var(--float-shadow);
+    border: var(--float-border);
     z-index: -z-index-popover;
   }
 
   position: absolute;
   cursor: unquote("default"); // trick to fix Stylus issue
-  // background: var(--popover-background);
+  // background: var(--float-background);
   padding: 0;
   // z-index 9999
 }
 
-.tw-popover-arrow, .tw-popover-arrow::before {
+.oui-float-arrow, .oui-float-arrow::before {
   position: absolute;
   width: $popover-arrow-size;
   height: $popover-arrow-size;
@@ -88,16 +88,16 @@ $popover-arrow-indent-factor = 0.7;
   overflow: hidden;
 }
 
-.tw-popover-arrow::before {
+.oui-float-arrow::before {
   content: "";
-  background: var(--popover-background);
+  background: var(--float-background);
   // box-shadow: $popoverBorder;
-  border: var(--popover-border);
+  border: var(--float-border);
   overflow: hidden;
-  // box-shadow: var(--popover-shadow);
+  // box-shadow: var(--float-shadow);
 }
 
-.tw-popover[data-popper-placement^="top"] > .tw-popover-arrow {
+.oui-float[data-popper-placement^="top"] > .oui-float-arrow {
   bottom: -1 * $popover-arrow-size; // half size
 
   &:before {
@@ -105,7 +105,7 @@ $popover-arrow-indent-factor = 0.7;
   }
 }
 
-.tw-popover[data-popper-placement^="bottom"] > .tw-popover-arrow {
+.oui-float[data-popper-placement^="bottom"] > .oui-float-arrow {
   top: -1 * $popover-arrow-size; // half size
 
   &:before {
@@ -113,7 +113,7 @@ $popover-arrow-indent-factor = 0.7;
   }
 }
 
-.tw-popover[data-popper-placement^="left"] > .tw-popover-arrow {
+.oui-float[data-popper-placement^="left"] > .oui-float-arrow {
   right: -1 * $popover-arrow-size; // half size
 
   &:before {
@@ -121,7 +121,7 @@ $popover-arrow-indent-factor = 0.7;
   }
 }
 
-.tw-popover[data-popper-placement^="right"] > .tw-popover-arrow {
+.oui-float[data-popper-placement^="right"] > .oui-float-arrow {
   left: -1 * $popover-arrow-size; // half size
 
   &:before {

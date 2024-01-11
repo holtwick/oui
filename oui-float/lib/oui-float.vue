@@ -11,14 +11,21 @@ const props = defineProps<{
   class?: string
 }>()
 
+defineSlots<{
+  default(): any
+  click(): any
+}>()
+
 const active = defineModel<boolean>()
 
-const placement = computed<Placement>(() => props.placement ?? 'top')
-const reference = computed<any>(() => props.reference)
-const className = computed(() => props.class ?? 'oui-float')
+const slotReference = ref()
+const reference = computed<any>(() => slotReference.value ?? props.reference)
 
 const floating = ref()
 const floatingArrow = ref()
+
+const placement = computed<Placement>(() => props.placement ?? 'top')
+const className = computed(() => props.class ?? 'oui-float')
 
 // https://floating-ui.com/docs/vue
 const { floatingStyles, middlewareData } = useFloating(reference, floating, {
@@ -39,6 +46,16 @@ const { floatingStyles, middlewareData } = useFloating(reference, floating, {
 </script>
 
 <template>
+  <template v-if="$slots.click">
+    <div
+      ref="slotReference"
+      style="display: inline-block"
+      @click.prevent.stop="active = !active"
+      @contextmenu.prevent.stop="active = !active"
+    >
+      <slot name="click" />
+    </div>
+  </template>
   <teleport to="body">
     <Transition :name="transition ?? `${className}-transition`">
       <div v-show="active" ref="floating" :style="floatingStyles" :class="className" class="_float">
@@ -47,14 +64,8 @@ const { floatingStyles, middlewareData } = useFloating(reference, floating, {
           class="_float_arrow"
           :style="{
             position: 'absolute',
-            left:
-              middlewareData.arrow?.x != null
-                ? `${middlewareData.arrow.x}px`
-                : '',
-            top:
-              middlewareData.arrow?.y != null
-                ? `${middlewareData.arrow.y}px`
-                : '',
+            left: middlewareData.arrow?.x != null ? `${middlewareData.arrow.x}px` : '',
+            top: middlewareData.arrow?.y != null ? `${middlewareData.arrow.y}px` : '',
           }"
         />
         <div class="_float_inner">

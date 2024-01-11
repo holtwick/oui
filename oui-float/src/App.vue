@@ -17,6 +17,16 @@ const anchor = ref()
     </button>
     <br>
     <p>
+      <OuiFloat :reference="anchor" placement="right">
+        <template #click>
+          <button>tooltip</button>
+        </template>
+        <div class="my-float">
+          This is floating
+        </div>
+      </OuiFloat>
+    </p>
+    <p>
       <button ref="anchor" @click="show = !show">
         Click to toggle
       </button>
@@ -26,6 +36,7 @@ const anchor = ref()
         </div>
       </OuiFloat>
     </p>
+
     <OuiTooltipActivator />
   </div>
 </template>
