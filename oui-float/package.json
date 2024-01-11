@@ -23,7 +23,8 @@
   "exports": {
     ".": {
       "import": "./dist/main.js"
-    }
+    },
+    "./css": "./dist/style.css"
   },
   "module": "./dist/main.js",
   "files": [

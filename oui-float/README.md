@@ -3,7 +3,8 @@
 Vue components that float. Based on [floating-ui](https://floating-ui.com/).
 
 > [!NOTE]
-> **oui** componentents are *headless* i.e. they do not come with CSS. At the end of the page, see how to get ready with CSS.
+> **oui** componentents are *headless* i.e. they do not come with CSS by default. These examples import CSS syles, but you are free to do it from scratch as well.
+
 ## Basic popovers
 
 `oui-float` takes care of most things and is the most general solution for having floating elements attached to some other element. Basic example:
@@ -12,6 +13,8 @@ Vue components that float. Based on [floating-ui](https://floating-ui.com/).
 <script>
 import { ref } from 'vue'
 import { OuiFloat } from 'oui-float'
+
+import 'oui-float/css'
 
 const button = ref()
 const show = ref(false)
@@ -66,5 +69,3 @@ Then each HTML element with a `tooltip` attribute will show the tooltip on mouse
 Italic text has a <i tooltip="Hey, you found it :)">tooltip</i>.
 </p>
 ```
-
-## CSS
