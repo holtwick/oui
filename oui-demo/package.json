@@ -31,7 +31,7 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "check": "vue-tsc --build --force"
   },
   "dependencies": {
     "oui-float": "workspace:*",

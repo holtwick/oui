@@ -37,7 +37,7 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "check": "vue-tsc --build --force"
   },
   "dependencies": {
     "@floating-ui/vue": "^1.0.3",

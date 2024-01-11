@@ -34,5 +34,10 @@
   "files": [
     "index.styl",
     "lib"
-  ]
+  ],
+  "scripts": {
+    "check": "echo skip",
+    "lint": "echo skip",
+    "lint:fix": "echo skip"
+  }
 }

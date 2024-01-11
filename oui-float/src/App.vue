@@ -10,7 +10,11 @@ const anchor = ref()
   <div class="prose">
     <h1>Oui</h1>
     <p>
-      Just another set of UI components for <i :tooltip="'A longer tooltip\nin multiple lines\nYeah!'">Vue.js</i> with a proper French-sounding name
+      Just another set of UI components for <i
+        tooltip="A longer tooltip
+in multiple lines
+Yeah!"
+      >Vue.js</i> with a proper French-sounding name
     </p>
     <button tooltip="Hello, I am a tooltip">
       Tooltip
