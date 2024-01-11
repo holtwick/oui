@@ -49,13 +49,13 @@ font-size(value = base) {
 -font-weight-extrabold = -font-weight-extra-bold;
 -font-weight-extrablack = -font-weight-extra-black;
 
-font-weight(value = normal) {
-  if lookup("-font-weight-" + value) {
-    font-weight: lookup("-font-weight-" + value);
-  } else {
-    font-weight: value;
-  }
-}
+// font-weight(value = normal) {
+//   if lookup("-font-weight-" + value) {
+//     font-weight: lookup("-font-weight-" + value);
+//   } else {
+//     font-weight: value;
+//   }
+// }
 
 // https://tailwindcss.com/docs/letter-spacing
 -letter-spacing-tighter = -0.05em;
@@ -65,13 +65,13 @@ font-weight(value = normal) {
 -letter-spacing-wider = 0.05em;
 -letter-spacing-widest = 0.1em;
 
-letter-spacing(value = normal) {
-  if lookup("-letter-spacing-" + value) {
-    letter-spacing: lookup("-letter-spacing-" + value);
-  } else {
-    letter-spacing: value;
-  }
-}
+// letter-spacing(value = normal) {
+//   if lookup("-letter-spacing-" + value) {
+//     letter-spacing: lookup("-letter-spacing-" + value);
+//   } else {
+//     letter-spacing: value;
+//   }
+// }
 
 break-normal() {
   word-break: normal;

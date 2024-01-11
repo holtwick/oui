@@ -1,5 +1,17 @@
 @require "../mixins";
 
+control-inner = var(--control-inner, white);
+control-color = unquote("var(--control-color, rgba(var(--primary-color-value), 1))");
+control-hover = unquote("var(--control-hover, rgba(var(--primary-color-value), 0.1))");
+control-active = unquote("var(--control-active, rgba(var(--primary-color-value), 0.8))");
+control-radius = var(--control-radius, -border-radius-base);
+control-border = var(--control-border, none);
+input-color = var(--input-color, black);
+input-background = var(--input-background, white);
+input-border = var(--input-border, 1px solid -gray-300);
+input-border-hover = var(--input-border-hover, 1px solid -gray-400);
+input-radius = var(--input-radius, -border-radius-base);
+
 // Don't get distracted by text selections or other sideeffects
 tw-ui() {
   user-select: none;
@@ -10,7 +22,6 @@ tw-ui() {
 tw-button-default() {
   stack-x(8);
   stack-item-center();
-
   /*
     // https://ishadeed.com/article/button-label-alignment/
     // &:before {
@@ -53,7 +64,6 @@ tw-button-default() {
 // A simple button template
 tw-button() {
   tw-button-default();
-
   font-weight: semibold;
   color: control-inner;
   background: control-color;
@@ -105,7 +115,6 @@ tw-input-text() {
 
 tw-input-number() {
   tw-input-default();
-
   width: 12ch;
 }
 
@@ -126,13 +135,10 @@ tw-select-icon() {
 tw-select() {
   tw-input-default();
   tw-select-icon();
-
   padding-y: 6;
 }
 
-// From https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/
 control-boolean-height = px(16);
-// @supports (-webkit-appearance none) or (-moz-appearance none) or (appearance none)
 control-boolean-width = px(32);
 control-boolean-margin = px(1);
 
@@ -220,7 +226,6 @@ tw-boolean-default() {
 
 tw-checkbox() {
   tw-boolean-default();
-
   border-radius: base;
   width: control-boolean-height;
 
@@ -244,7 +249,6 @@ tw-checkbox() {
 
 tw-switch() {
   tw-boolean-default();
-
   height: control-boolean-height; // + px(2)
   width: control-boolean-width;
   border-radius: 999px;
@@ -275,7 +279,6 @@ tw-switch() {
 
 tw-radio() {
   tw-boolean-default();
-
   border-radius: 50%;
 
   &:after {
