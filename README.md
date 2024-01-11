@@ -6,8 +6,10 @@
 
 Libs:
 
+- [oui-float](./oui-float/README.md)
 - [oui-modal](./oui-modal/README.md)
 - [oui-object](./oui-object/README.md)
+
 - [oui-stylus](./oui-stylus/README.md)
 
 Dependencies used in some libs:
