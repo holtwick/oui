@@ -1,5 +1,5 @@
 {
-  "name": "oui-modal",
+  "name": "oui-float",
   "type": "module",
   "version": "0.3.0",
   "author": {
@@ -39,6 +39,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@floating-ui/vue": "^1.0.3",
     "vue": "^3.3.11"
   },
   "devDependencies": {

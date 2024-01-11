@@ -9,9 +9,6 @@ const show = ref(true)
   <div class="prose">
     <h1>Oui</h1>
     <p>Just another set of UI components for Vue.js with a proper French-sounding name</p>
-    <p>
-      <Test />
-    </p>
     <OuiModal v-model="show">
       Hello
     </OuiModal>
