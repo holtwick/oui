@@ -3,6 +3,10 @@ import { type OffsetOptions, type Padding, type Placement, arrow, autoUpdate, fl
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 const props = defineProps<{
   reference: Ref<HTMLElement | undefined>
   transition?: string
@@ -58,7 +62,7 @@ const { floatingStyles, middlewareData, placement: placementActual } = useFloati
   </template>
   <teleport to="body">
     <Transition :name="transition ?? `${String($attrs.class || 'oui-float').split(' ')?.[0]}-transition`">
-      <div v-show="active" ref="floating" :style="floatingStyles" v-bind="$attrs" class="_float">
+      <div v-show="active" ref="floating" :style="floatingStyles" :class="$attrs.class || 'oui-float'" v-bind="$attrs" class="_float">
         <div
           ref="floatingArrow"
           class="_float_arrow"

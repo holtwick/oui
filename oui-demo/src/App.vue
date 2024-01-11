@@ -15,7 +15,7 @@ import Example from './example.vue'
       <ExampleOuiFloat />
     </Example>
 
-    <Example title="oui-float">
+    <Example title="oui-float tooltip">
       <ExampleOuiFloatTooltip />
     </Example>
 

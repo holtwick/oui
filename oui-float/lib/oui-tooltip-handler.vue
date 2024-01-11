@@ -4,7 +4,9 @@ import { ref } from 'vue'
 import type { Placement } from '@floating-ui/vue'
 import OuiFloat from './oui-float.vue'
 
-// const log = Logger('tw:tooltip', globalThis.debugUI ?? false)
+defineOptions({
+  inheritAttrs: false,
+})
 
 let _activated = false
 let ignore = false

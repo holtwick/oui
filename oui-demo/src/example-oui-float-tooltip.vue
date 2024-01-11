@@ -8,5 +8,6 @@ import 'oui-float/css'
   <p>
     Italic text has a <i tooltip="Hey, you found it :)">tooltip</i>.
   </p>
+
   <OuiTooltipActivator />
 </template>
