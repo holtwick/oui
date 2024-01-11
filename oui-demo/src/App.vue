@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import ExampleOuiFloat from './example-oui-float.vue'
+import ExampleOuiFloatTooltip from './example-oui-float-tooltip.vue'
+import ExampleOuiModal from './example-oui-modal.vue'
 import ExampleOuiObject from './example-oui-object.vue'
 import Example from './example.vue'
 </script>
@@ -12,6 +13,14 @@ import Example from './example.vue'
 
     <Example title="oui-float">
       <ExampleOuiFloat />
+    </Example>
+
+    <Example title="oui-float">
+      <ExampleOuiFloatTooltip />
+    </Example>
+
+    <Example title="oui-modal">
+      <ExampleOuiModal />
     </Example>
 
     <Example title="oui-object">

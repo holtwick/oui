@@ -12,7 +12,7 @@ const show = ref(false)
   <button ref="button" @click="show = !show">
     Click me
   </button>
-  <OuiFloat v-modal="show" :reference="button" class="oui-float">
+  <OuiFloat v-model="show" :reference="button" class="oui-float">
     This is the popover
   </OuiFloat>
 </template>

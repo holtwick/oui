@@ -24,7 +24,7 @@ const show = ref(false)
   <button ref="button" @click="show = !show">
     Click me
   </button>
-  <oui-float v-modal="show" :reference="button">
+  <oui-float v-model="show" :reference="button">
     This is the popover
   </oui-float>
 </template>
