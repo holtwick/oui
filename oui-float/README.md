@@ -34,8 +34,8 @@ You can set your own CSS class via `class` attribute, the default it `oui-float`
 
 ```html
 <div class="oui-float _float">
-	<div class="_float_arrow"></div>
-	<div class="_float_content"><slot /><div>
+  <div class="_float_arrow"></div>
+  <div class="_float_content"><slot /><div>
 </div>
 ```
 
