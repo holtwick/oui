@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { type OffsetOptions, type Padding, type Placement, arrow, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
+import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
 import type { Ref } from 'vue'
-import { computed, ref } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 
 defineOptions({
   inheritAttrs: false,
@@ -42,11 +42,14 @@ const { floatingStyles, middlewareData, placement: placementActual } = useFloati
     shift({
       padding: props.padding ?? 16,
     }),
-    arrow({
+    arrowMiddleware({
       element: floatingArrow,
     }),
   ],
 })
+
+const attrs = useAttrs()
+const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
 </script>
 
 <template>
@@ -61,9 +64,10 @@ const { floatingStyles, middlewareData, placement: placementActual } = useFloati
     </div>
   </template>
   <teleport to="body">
-    <Transition :name="transition ?? `${String($attrs.class || 'oui-float').split(' ')?.[0]}-transition`">
+    <Transition :name="transition ?? `${name}-transition`">
       <div v-show="active" ref="floating" :style="floatingStyles" :class="$attrs.class || 'oui-float'" v-bind="$attrs" class="_float">
         <div
+          v-show="arrow ?? false"
           ref="floatingArrow"
           class="_float_arrow"
           :class="`_float_arrow_${placementActual}`"

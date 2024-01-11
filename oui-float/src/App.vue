@@ -21,18 +21,10 @@ Yeah!"
     </button>
     <br>
     <p>
-      <OuiFloat v-model="show" :reference="anchor" placement="right" class="oui-float oui-tooltip _tooltip">
-        <template #click>
-          <button>tooltip</button>
-        </template>
-        This is floating
-      </OuiFloat>
-    </p>
-    <p>
       <button ref="anchor" @click="show = !show">
         Click to toggle
       </button>
-      <OuiFloat v-model="show" :reference="anchor" placement="right">
+      <OuiFloat v-model="show" :reference="anchor" placement="right" :offset="10">
         <div class="my-float">
           This is floating
         </div>

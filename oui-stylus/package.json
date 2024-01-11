@@ -1,6 +1,6 @@
 {
   "name": "oui-stylus",
-  "version": "0.4.0",
+  "version": "0.4.3",
   "description": "CSS Framework written in Stylus",
   "author": {
     "name": "Dirk Holtwick",
@@ -28,11 +28,18 @@
   ],
   "sideEffects": false,
   "exports": {
-    "style": "./index.styl"
+    ".": {
+      "import": "./index.styl",
+      "require": "./index.styl"
+    },
+    "./theme": {
+      "import": "./theme.styl",
+      "require": "./theme.styl"
+    }
   },
   "main": "index.styl",
   "files": [
-    "index.styl",
+    "*.styl",
     "lib"
   ],
   "scripts": {
