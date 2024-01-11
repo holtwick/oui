@@ -27,7 +27,7 @@ withDefaults(
 </script>
 
 <template>
-  <section class="object-visualizer">
+  <section class="oui-object">
     <Wrapper
       :data="data"
       :name="rootName"

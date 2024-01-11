@@ -124,7 +124,7 @@ export default Wrapper
     :expand-signal="expandSignal"
     :expand-on-created-and-updated="expandOnCreatedAndUpdated"
     :get-keys="getKeys"
-    :class="ariaLevel === 0 ? 'object-visualizer' : void 0"
+    :class="ariaLevel === 0 ? 'oui-object' : void 0"
     v-bind="attrs"
   />
 </template>

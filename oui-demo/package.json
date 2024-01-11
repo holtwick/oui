@@ -34,6 +34,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "oui-float": "workspace:*",
     "oui-modal": "workspace:*",
     "oui-object": "workspace:*",
     "oui-stylus": "workspace:*",
