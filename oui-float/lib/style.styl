@@ -1,232 +1,147 @@
 @require "oui-stylus";
 
-.oui-float-transition {
-  &-enter-active, &-leave-active {
-    transition: opacity 0.1s ease-in-out;
-  }
+oui-float() {
+  if __tw_once("oui-float") {
+    &-transition {
+      &-enter-active, &-leave-active {
+        transition: opacity 150ms ease-in-out;
+      }
 
-  &-enter-from, &-leave-to {
-    opacity: 0;
-  }
-}
-
-.oui-tooltip-transition {
-  &-enter-active, &-leave-active {
-    transition: opacity 200ms ease-in-out;
-  }
-
-  &-enter-from, &-leave-to {
-    opacity: 0;
-  }
-}
-
-$oui-float-arrow-size = px(12);
-$oui-float-arrow-indent-factor = 0.7;
-
-// From Bootstrap
-.oui-float {
-  --float-color: var(--text-color);
-  --float-background: var(--secondary-color);
-  --float-border: none;
-  --float-shadow: none;
-  z-index: -z-index-popover;
-
-  &._tooltip {
-    // tooltip replacement
-    --float-color: var(--light-text-color, white);
-    --float-background: rgb(56, 56, 56); // rgba(118, 118, 118, 1);
-    --float-border: none; // 1px solid #dddddd;
-    --float-shadow: rgba(15, 15, 15, 0.2) 0 9px 24px;
-
-    // --float-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
-    .dark & {
-      --float-background: black; // rgba(118, 118, 118, 1);
+      &-enter-from, &-leave-to {
+        opacity: 0;
+      }
     }
 
-    pointer-events: none; // avoids flicker
-    padding: px(4) px(8);
-    border-radius: px(4);
-    white-space: pre-line;
-    color: var(--float-color);
-    box-shadow: var(--float-shadow);
-    background: var(--float-background);
-    border: var(--float-border);
-    z-index: -z-index-tooltip;
-    min-width: 24;
-  }
+    $oui-float-arrow-size = px(12);
+    $oui-float-arrow-indent-factor = 0.7;
 
-  &._dropdown {
-    // for selecting input values
-    --float-color: var(--text-color);
-    --float-background: white;
-    --float-border: 1px solid $border-color; // 0px 0px 0px 1px #000000;
-    --float-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
-    min-width: px(200);
-    border-radius: px(4);
-    color: var(--float-color);
-    box-shadow: var(--float-shadow);
-    background: var(--float-background);
-    border: var(--float-border);
-    z-index: -z-index-popover;
-  }
+    // From Bootstrap
+    & {
+      --float-color: var(--text-color);
+      --float-background: var(--secondary-color);
+      --float-border: none;
+      --float-shadow: none;
+      z-index: -z-index-popover;
 
-  &._menu {
-    // emulating native context menus
-    --float-background: var(--menu-background);
-    --float-border: var(--menu-border);
-    --float-shadow: var(--menu-shadow);
-    padding: px(8);
-    border-radius: px(4);
-    white-space: nowrap;
-    color: var(--float-color);
-    box-shadow: var(--float-shadow);
-    border: var(--float-border);
-    z-index: -z-index-popover;
-  }
+      &._tooltip {
+        // tooltip replacement
+        --float-color: var(--light-text-color, white);
+        --float-background: rgb(56, 56, 56); // rgba(118, 118, 118, 1);
+        --float-border: none; // 1px solid #dddddd;
+        --float-shadow: rgba(15, 15, 15, 0.2) 0 9px 24px;
 
-  position: absolute;
-  cursor: unquote("default"); // trick to fix Stylus issue
-  // background: var(--float-background);
-  padding: 0;
-}
+        // --float-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
+        .dark & {
+          --float-background: black; // rgba(118, 118, 118, 1);
+        }
 
-.oui-float {
-  ._float_arrow {
-    &, &:before {
+        pointer-events: none; // avoids flicker
+        padding: px(4) px(8);
+        border-radius: px(4);
+        white-space: pre-line;
+        color: var(--float-color);
+        box-shadow: var(--float-shadow);
+        background: var(--float-background);
+        border: var(--float-border);
+        z-index: -z-index-tooltip;
+        min-width: 24;
+      }
+
+      &._dropdown {
+        // for selecting input values
+        --float-color: var(--text-color);
+        --float-background: white;
+        --float-border: 1px solid $border-color; // 0px 0px 0px 1px #000000;
+        --float-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
+        min-width: px(200);
+        border-radius: px(4);
+        color: var(--float-color);
+        box-shadow: var(--float-shadow);
+        background: var(--float-background);
+        border: var(--float-border);
+        z-index: -z-index-popover;
+      }
+
+      &._menu {
+        // emulating native context menus
+        --float-background: var(--menu-background);
+        --float-border: var(--menu-border);
+        --float-shadow: var(--menu-shadow);
+        padding: px(8);
+        border-radius: px(4);
+        white-space: nowrap;
+        color: var(--float-color);
+        box-shadow: var(--float-shadow);
+        border: var(--float-border);
+        z-index: -z-index-popover;
+      }
+
       position: absolute;
-      width: $oui-float-arrow-size;
-      height: $oui-float-arrow-size;
-      // z-index: -1;
-      overflow: hidden;
-    }
+      cursor: unquote("default"); // trick to fix Stylus issue
+      // background: var(--float-background);
+      padding: 0;
 
-    &:before {
-      content: "";
-      background: var(--float-background);
-      // box-shadow: $oui-floatBorder;
-      border: var(--float-border);
-      overflow: hidden;
-      // box-shadow: var(--float-shadow);
-    }
+      ._float_arrow {
+        &, &:before {
+          position: absolute;
+          width: $oui-float-arrow-size;
+          height: $oui-float-arrow-size;
+          // z-index: -1;
+          overflow: hidden;
+        }
 
-    &_top, &_bottom {
-      margin-left: 2;
-      margin-right: 2;
-    }
+        &:before {
+          content: "";
+          background: var(--float-background);
+          // box-shadow: $oui-floatBorder;
+          border: var(--float-border);
+          overflow: hidden;
+          // box-shadow: var(--float-shadow);
+        }
 
-    /*
-    &_left, &_right {
-      margin-top: 2;
-      margin-bottom: 2;
-    }
-    */
-    &_top {
-      bottom: -1 * $oui-float-arrow-size; // half size
+        &_top, &_bottom {
+          margin-left: 2;
+          margin-right: 2;
+        }
 
-      &:before {
-        transform: translateY($oui-float-arrow-size * -1 * $oui-float-arrow-indent-factor) rotate(45deg);
-      }
-    }
+        /*
+        &_left, &_right {
+          margin-top: 2;
+          margin-bottom: 2;
+        }
+        */
+        &_top {
+          bottom: -1 * $oui-float-arrow-size; // half size
 
-    &_bottom {
-      top: -1 * $oui-float-arrow-size; // half size
+          &:before {
+            transform: translateY($oui-float-arrow-size * -1 * $oui-float-arrow-indent-factor) rotate(45deg);
+          }
+        }
 
-      &:before {
-        transform: translateY($oui-float-arrow-size * $oui-float-arrow-indent-factor) rotate(45deg);
-      }
-    }
+        &_bottom {
+          top: -1 * $oui-float-arrow-size; // half size
 
-    &_left {
-      right: -1 * $oui-float-arrow-size; // half size
+          &:before {
+            transform: translateY($oui-float-arrow-size * $oui-float-arrow-indent-factor) rotate(45deg);
+          }
+        }
 
-      &:before {
-        transform: translateX($oui-float-arrow-size * -1 * $oui-float-arrow-indent-factor) rotate(45deg);
-      }
-    }
+        &_left {
+          right: -1 * $oui-float-arrow-size; // half size
 
-    &_right {
-      left: -1 * $oui-float-arrow-size; // half size
+          &:before {
+            transform: translateX($oui-float-arrow-size * -1 * $oui-float-arrow-indent-factor) rotate(45deg);
+          }
+        }
 
-      &:before {
-        transform: translateX($oui-float-arrow-size * $oui-float-arrow-indent-factor) rotate(45deg);
+        &_right {
+          left: -1 * $oui-float-arrow-size; // half size
+
+          &:before {
+            transform: translateX($oui-float-arrow-size * $oui-float-arrow-indent-factor) rotate(45deg);
+          }
+        }
       }
     }
   }
 }
-
-/*
-.tw-menu {
-  --menu-background: -gray-100; // ButtonFace;
-  --menu-border: 1px solid -gray-400; // ButtonShadow;
-  --menu-radius: px(4);
-  --item-color: -gray-900; // ButtonText;
-  --item-background: none;
-  --item-hover-color: HighlightText;
-  --item-hover-background: Highlight;
-  --item-active-color: black;
-  --item-active-background: white;
-  --item-separator-color: -gray-300;
-  use: stack-y;
-  cursor: unquote("default"); // trick to fix Stylus issue
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  max-width: 20rem;
-  min-width: 10rem;
-  padding: px(4);
-  background: var(--menu-background);
-  border: var(--menu-border);
-  border-radius: var(--menu-radius);
-  box-shadow: var(--menu-shadow, -box-shadow-md);
-  list-style: none;
-  // z-index: -z-index-popover;
-  font-family: inherit;
-  font-size: 10pt;
-  font-weight: 500;
-
-  .-item, ._item {
-    color: var(--item-color);
-    background: var(--item-background);
-    list-style: none;
-    border-radius: px(2);
-    white-space: nowrap;
-    position: relative;
-    display: flex;
-    padding: px(4) px(8);
-
-    &:hover {
-      color: var(--item-hover-color);
-      background: var(--item-hover-background);
-    }
-
-    &.-active, &:active {
-      color: var(--item-hover-color);
-      background: var(--item-hover-background);
-    }
-  }
-
-  ._checkedPossible, .-checked, ._checked {
-    padding-left: 28;
-  }
-
-  .-checked, ._checked {
-    &:before {
-      position: absolute;
-      left: 8;
-      content: "✔︎";
-    }
-  }
-
-  .-separator, ._separator {
-    display: flex;
-    height: px(1);
-    max-height: px(1);
-    min-height: 1px;
-    border: none;
-    padding: 0;
-    margin-top: px(4);
-    margin-bottom: px(4);
-    background: var(--item-separator-color);
-  }
-}
-*/

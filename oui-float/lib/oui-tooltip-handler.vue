@@ -103,7 +103,7 @@ useEventListener(window, 'mouseup', onTouchUp, useCapture)
     arrow
     :offset="6"
     class="oui-float oui-tooltip _tooltip"
-    transition="oui-tooltip-transition"
+    transition="oui-float-transition"
     :placement="placement"
   >
     {{ text }}

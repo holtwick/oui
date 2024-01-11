@@ -1,62 +1,35 @@
 // (C)opyright 2020-11-17 Dirk Holtwick, holtwick.it. All rights reserved.
 @require "utils.styl";
 
-// 
-// Media
-// 
 -media-sm = "(min-width: 640px)";
 -media-md = "(min-width: 768px)";
 -media-lg = "(min-width: 1024px)";
 -media-xl = "(min-width: 1280px)";
 -media-xl2 = "(min-width: 1536px)";
-// 
-// Color Scheme
-// 
 -dark = "(prefers-color-scheme: dark)";
 -light = "(prefers-color-scheme: light)";
 -media-dark = "(prefers-color-scheme: dark)";
 -media-light = "(prefers-color-scheme: light)";
-// 
-// Orientation
-// https://getbootstrap.com/docs/5.0/layout/breakpoints/#max-width
-// 
+/* Orientation https://getbootstrap.com/docs/5.0/layout/breakpoints/#max-width */
 -media-landscape = "(orientation: landscape)";
 -media-portrait = "(orientation: portrait)";
--media-mobile = "screen and (max-width: 888px)"; // , screen and (pointer: coarse)";
--media-desktop = "screen and (min-width: 888.02px)"; // , screen and (pointer: fine), screen and (pointer: none)";
-// 
-// Pointer
-// 
+-media-mobile = "screen and (max-width: 888px)";
+-media-desktop = "screen and (min-width: 888.02px)";
 -media-pointer-touch = "(hover: none) and (pointer: coarse)";
 -media-pointer-stylus = "(hover: none) and (pointer: fine)";
 -media-pointer-pointer = "(hover) and (pointer: coarse)";
 -media-pointer-mouse = "(hover) and (pointer: fine)";
-// 
-// browser check
-// 
 -media-safariONLY = unquote("(-webkit-hyphens: none)");
 -media-firefoxONLY = unquote("(-moz-appearance: none)");
 -media-chromeONLY = unquote("(-webkit-tap-highlight-color: black)");
 
-// todo: globally?!
-* {
-  flex: none;
-}
-
-// Stacked Layout
-$stack {
+stack-x(space = 0) {
   display: flex;
+  flex-direction: row;
 
-  /* // flex-wrap nowrap
   > * {
     flex: none;
-  } */
-}
-
-stack-x(space = 0) {
-  @extend $stack;
-
-  flex-direction: row;
+  }
 
   if space != 0 {
     space-x: space;
@@ -64,9 +37,12 @@ stack-x(space = 0) {
 }
 
 stack-y(space = 0) {
-  @extend $stack;
-
+  display: flex;
   flex-direction: column;
+
+  > * {
+    flex: none;
+  }
 
   if space != 0 {
     space-y: space;
@@ -83,13 +59,11 @@ vscroll() {
   // https://css-tricks.com/popping-hidden-overflow/
   // -webkit-overflow-scrolling: touch !important;
   // !important is required to override -fix overflow:hidden
-  position: static !important;
-  /* overflow: hidden;
+  position: static !important;   /* overflow: hidden;
   &:hover { */
   overflow: auto !important;
   overflow-x: hidden !important;
-  overflow-y: auto !important;
-  /* }
+  overflow-y: auto !important;   /* }
   // This should speed up rendering quite a bit:
   // https://twitter.com/simurai/status/1219504338764091393
   // https://developer.mozilla.org/en-US/docs/Web/CSS/contain
@@ -128,12 +102,16 @@ container() {
 -z-index-6 = 600;
 -z-index-7 = 700;
 -z-index-8 = 800;
+/* Content > Floating > Overlay > Modal > Popover > Tooltip */
 -z-index-9 = 900;
-// Content > Floating > Overlay > Modal > Popover > Tooltip
--z-index-floating = -z-index-1; // separator-handle, knobs
--z-index-overlay = -z-index-2; // modal backgrounds
--z-index-modal = -z-index-3; // modal, dialog, page (mobile)
--z-index-popover = -z-index-4; // menu, dropdown, popover
+/* separator-handle, knobs */
+-z-index-floating = -z-index-1;
+/* modal backgrounds */
+-z-index-overlay = -z-index-2;
+/* modal, dialog, page (mobile) */
+-z-index-modal = -z-index-3;
+/* menu, dropdown, popover */
+-z-index-popover = -z-index-4;
 -z-index-tooltip = -z-index-1;
 
 grid-wrapped(size = 200, gap = 16) {

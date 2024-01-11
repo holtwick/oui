@@ -1,58 +1,50 @@
-@require "oui-stylus"; /*
---dialog-bg
---dialog-backdrop
---dialog-radius
-*/
+@require "oui-stylus";
 
-$modal-separator-color = var(--separator-color, -gray-200);
-$modal-border-radius = var(--dialog-radius, 8px);
+oui-modal() {
+  if __tw_once("oui-modal") {
+    --separator-color: transparent;
+    --background-color: var(--dialog-bg, white);
+    align-items: center;
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
 
-.oui-modal {
-  align-items: center;
-  bottom: 0;
-  display: none;
-  justify-content: center;
-  overflow: hidden;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
+    @media -media-desktop {
+      padding: 8;
+    }
 
-  @media -media-desktop {
-    padding: 8;
-  }
+    @media -media-mobile {
+      padding: 0;
+    }
 
-  @media -media-mobile {
-    padding: 0;
-  }
+    &:target, &._active {
+      display: flex;
+      z-index: -z-index-overlay;
 
-  &:target, &._active {
-    display: flex;
-    z-index: -z-index-overlay;
+      // Background overlay
+      ._modal_overlay {
+        background: var(--dialog-backdrop, rgba(0, 0, 0, 0.75));
+        bottom: 0;
+        cursor: unquote("default"); // trick to fix Stylus issue
+        display: block;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
 
-    // Background overlay
-    ._modal_overlay {
-      background: var(--dialog-backdrop, rgba(0, 0, 0, 0.75));
-      bottom: 0;
-      cursor: unquote("default"); // trick to fix Stylus issue
-      display: block;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
+      ._modal_container {
+        animation: slide-down 0.2s ease 1;
+        z-index: -z-index-modal;
+      }
     }
 
     ._modal_container {
-      animation: slide-down 0.2s ease 1;
-      z-index: -z-index-modal;
-    }
-  }
-
-  --separator-color: transparent;
-  --background-color: var(--dialog-bg, white);
-
-  ._modal {
-    &_container {
       use: stack-y;
       animation: slide-down 0.2s ease 1;
       z-index: -z-index-modal;
@@ -63,8 +55,8 @@ $modal-border-radius = var(--dialog-radius, 8px);
       height: 90vh;
 
       @media -media-desktop {
-        border: 1px solid $modal-separator-color;
-        border-radius: $modal-border-radius;
+        border: 1px solid var(--separator-color, -gray-200);
+        border-radius: var(--dialog-radius, 8px);
         max-height: 75vh;
       }
 
@@ -76,27 +68,27 @@ $modal-border-radius = var(--dialog-radius, 8px);
         left: 0;
         right: 0;
         bottom: 0;
-        border-top-left-radius: $modal-border-radius;
-        border-top-right-radius: $modal-border-radius;
+        border-top-left-radius: var(--dialog-radius, 8px);
+        border-top-right-radius: var(--dialog-radius, 8px);
       }
     }
 
-    &_header {
+    ._modal_header {
       use: stack-y;
-      border-bottom: 1px solid $modal-separator-color;
+      border-bottom: 1px solid var(--separator-color, -gray-200);
       padding: 16;
       padding-bottom: 0;
       flex: 0;
     }
 
-    &_title {
+    ._modal_title {
       font-weight: normal;
       font-size: lg;
       margin-right: 32;
       margin-bottom: 16;
     }
 
-    &_close {
+    ._modal_close {
       position: absolute;
       top: 2;
       right: 2;
@@ -116,15 +108,15 @@ $modal-border-radius = var(--dialog-radius, 8px);
       }
     }
 
-    &_body {
+    ._modal_body {
       use: stack-item-grow;
       use: stack-item-scroll;
       padding: 16;
       position: relative;
     }
 
-    &_footer {
-      border-top: 1px solid $modal-separator-color;
+    ._modal_footer {
+      border-top: 1px solid var(--separator-color, -gray-200);
       text-align: right;
       white-space: nowrap;
       padding: 16;
@@ -134,26 +126,24 @@ $modal-border-radius = var(--dialog-radius, 8px);
         margin-left: 8;
       }
     }
-  }
-}
 
-.oui-modal {
-  &-transition {
-    &-enter-active, &-leave-active {
-      transition: all 200ms ease;
-      opacity: 1;
-
-      ._modal_container {
+    &-transition {
+      &-enter-active, &-leave-active {
         transition: all 200ms ease;
-        transform: translate3d(0, 0, 0);
+        opacity: 1;
+
+        ._modal_container {
+          transition: all 200ms ease;
+          transform: translate3d(0, 0, 0);
+        }
       }
-    }
 
-    &-enter-from, &-leave-to {
-      opacity: 0;
+      &-enter-from, &-leave-to {
+        opacity: 0;
 
-      ._modal_container {
-        transform: translate3d(0, 100%, 0);
+        ._modal_container {
+          transform: translate3d(0, 100%, 0);
+        }
       }
     }
   }
