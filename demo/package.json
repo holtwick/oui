@@ -25,12 +25,12 @@
     "dist"
   ],
   "scripts": {
-    "start": "vite",
+    "build": "vite build",
+    "check": "vue-tsc --build --force",
     "dev": "vite",
     "preview": "vite preview",
-    "test:unit": "vitest",
-    "build": "vite build",
-    "check": "vue-tsc --build --force"
+    "start": "vite",
+    "test:unit": "vitest"
   },
   "dependencies": {
     "oui-float": "workspace:*",
