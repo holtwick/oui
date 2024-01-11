@@ -28,11 +28,18 @@
   ],
   "sideEffects": false,
   "exports": {
-    "style": "./index.styl"
+    ".": {
+      "import": "./index.styl",
+      "require": "./index.styl"
+    },
+    "./theme": {
+      "import": "./theme.styl",
+      "require": "./theme.styl"
+    }
   },
   "main": "index.styl",
   "files": [
-    "index.styl",
+    "*.styl",
     "lib"
   ],
   "scripts": {

@@ -12,6 +12,123 @@ Goals:
 
 ---
 
+## Naming conventions
+
+In general the **semantic meaning** is prefered over visual aspects.
+
+### Components
+
+CSS for Vue components start with `oui-` like `oui-modal`.
+
+### Modifiers
+
+Modifiers start with an underscore like `_active`. The idea behind this is, that you can more easily use these in Vue class bindings like `:class="{ _active }"` or `:class="[ _active ]"`, because they don't conflict with JS variable names, like `-active` would do. I also want to avoid uppercase letters, and therefore modifiers like `isActive` or `hasValue` (see Bulma).
+
+For widgets with inner structure this might look like this:
+
+```html
+<div class="oui-sample _sample_active">
+  <div class="_sample_list">
+    <div class="_sample_item _sample_active">
+    </div>
+  </div>
+</div>
+```
+
+### CSS variables
+
+```css
+:root {
+  /* Neutral colors */
+  --n0-50: $gray-50;
+  --n0-100: $gray-100;
+  --n0-200: $gray-200;
+  --n0-300: $gray-300;
+  --n0-400: $gray-400;
+  --n0-500: $gray-500;
+  --n0-600: $gray-600;
+  --n0-700: $gray-700;
+  --n0-800: $gray-800;
+  --n0-900: $gray-900;
+  --n0-950: $gray-950;
+
+  /* Brand / primary colors */
+  --p1-50: $primary-50;   /* light */
+  --p1-100: $primary-100;
+  --p1-200: $primary-200;
+  --p1-300: $primary-300;
+  --p1-400: $primary-400;
+  --p1-500: $primary-500; /* signal color */
+  --p1-600: $primary-600;
+  --p1-700: $primary-700;
+  --p1-800: $primary-800;
+  --p1-900: $primary-900;
+  --p1-950: $primary-950; /* dark */
+}
+```
+
+```css
+:root {
+
+  /** Common text and panel colors */
+  --fg: var(--n0-950, black);
+  --bg: var(--n0-50, white);
+  --s2-fg: var(--n0-800);
+  --s2-bg: var(--n0-200);
+  --t3-fg: var(--n0-700);
+  --t3-bg: var(--n0-300);
+
+  /* Hyperlinks */
+  --link-fg: var(--p1-800);
+  --link-fg-hover: var(--p1-700);
+  --link-fg-active: var(--p1-600);
+}
+
+/* Dark mode via class, because user might want to choose */
+.dark {
+  --fg: var(--n0-50, white);
+  --bg: var(--n0-950, black);
+}
+```
+
+`--name-(level)-style-state`
+
+`--link-fg-hover`
+`--input-border-focus`
+`--s2-bg`
+
+- Level (Basics)
+  - `n0` (neutral, usually gray)
+  - `p1` (primary)
+  - `s2` (secondary, usually lighter)
+  - `t3` (ternary, usually even more lighter)
+- Style
+  - `fg` is **foreground color**, corresponds to `color`
+  - `bg` is **background**, corresponds to `background`
+  - `border`
+  - `shadow`
+  - `outline`
+  - `radius`
+- State
+  - `active`
+  - `disabled`
+  - `focus`
+  - `hover`
+
+Do not use words like `color`.
+
+## Colors
+
+We work with color palettes like in Tailwind where `500` is the actual color.
+
+These tools might help to find good values for you particular color:
+
+- [tailwindcss](https://tailwindcss.com/docs/customizing-colors) pick a good one here
+- [tailwindshades](https://www.tailwindshades.com/)
+- [ui colors](https://uicolors.app/create)
+
+---
+
 For websites and web apps there is no way around CSS. It is versatile and powerful, but in some places it is also cumbersome. CSS frameworks make things easier, but sometimes they are already too much. Then there are also utility first CSS frameworks like [Tailwind](https://tailwindcss.com/), which put the [whole design back into HTML](https://tailwindcss.com/docs/utility-first).
 
 Tailwind indeed offers maximum flexibility with attractive results. But it ignores the semantic structure of HTML. Especially if different themes are to be used, the classic approach to separate content and visual design is better.

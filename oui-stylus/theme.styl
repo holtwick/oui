@@ -1,0 +1,112 @@
+:root {
+  /* Neutral colors */
+  --n0-50: #f5f6f6;
+  --n0-100: #e6e7e7;
+  --n0-200: #d0d1d1;
+  --n0-300: #aeb0b2;
+  --n0-400: #7d8082;
+  --n0-500: #6b6e6f;
+  --n0-600: #5b5d5f;
+  --n0-700: #4e4f50;
+  --n0-800: #444546;
+  --n0-900: #3c3d3d;
+  --n0-950: #252527; /* Brand / primary colors */
+  --p1-50: #f3f7fc;
+  --p1-100: #e7eff7;
+  --p1-200: #c9dbee;
+  --p1-300: #9abedf;
+  --p1-400: #639ccd;
+  --p1-500: #4385be;
+  --p1-600: #2e659b;
+  --p1-700: #27527d;
+  --p1-800: #234569;
+  --p1-900: #223c58;
+  --p1-950: #17273a;
+}
+
+:root {
+  // 
+  // branding
+  // 
+  // --p1-fg: $primary-500;
+  // --p1-dark-color: $primary-700;
+  // --p1-darker-color: $primary-800;
+  // --p1-light-color: $primary-400;
+  // --p1-lighter-color: $primary-300;
+  // 
+  // general
+  // 
+  --text-color: var(--n0-800);
+  --background-color: #fefefe;
+  --link-color: var(--p1-dark-color);
+  --link-hover-color: var(--p1-darker-color);
+  --secondary-color: var(--n0-900);
+  --secondary-background: var(--n0-100);
+  --tertiary-color: var(--n0-800);
+  --tertiary-background: var(--n0-200);
+  // 
+  // controls, ui
+  // 
+  --control-color: var(--p1-color);
+  --control-inner: white;
+  --control-hover: var(--p1-dark-color);
+  --control-active: var(--p1-darker-color);
+  --input-color: var(--text-color);
+  --input-background: var(--background-color);
+  --input-border: 1px solid var(--n0-200);
+  --input-border-hover: 1px solid var(--p1-300);
+  --input-focus-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  --input-focus-border: rgba(66, 153, 225, 1);
+  --input-radius: -border-radius-base;
+  // 
+  // 
+  --panel-bg: var(--n0-100);
+  --panel-bg-hover: var(--p1-100);
+  // 
+  --tag-fg: var(--n0-50);
+  --tag-bg: var(--n0-500);
+  --tag-bg-hover: var(--n0-900);
+}
+
+html.dark {
+  --text-color: var(--p1-50);
+  --background-color: var(--n0-950);
+  --link-color: var(--p1-200);
+  --link-hover-color: var(--p1-400);
+  --secondary-color: var(--n0-100);
+  --secondary-background: var(--n0-900);
+  --tertiary-color: var(--n0-200);
+  --tertiary-background: var(--n0-800);
+  --panel-bg: var(--n0-900);
+  --panel-bg-hover: var(--n0-800);
+  --tag-fg: var(--n0-50);
+  --tag-bg: var(--n0-700);
+  --tag-bg-hover: var(--n0-500);
+  --input-color: var(--n0-50);
+  --input-background: var(--n0-950);
+  --input-border: 1px solid var(--n0-500);
+  --input-border-hover: 1px solid var(--p1-400);
+}
+
+/* Common text and panel colors */
+:root {
+  --fg: var(--n0-950, black);
+  --bg: var(--n0-50, white);
+  --s2-fg: var(--n0-800);
+  --s2-bg: var(--n0-200);
+  --t3-fg: var(--n0-700);
+  --t3-bg: var(--n0-300);
+}
+
+/* Hyperlinks */
+:root {
+  --link-fg: var(--p1-800);
+  --link-fg-hover: var(--p1-700);
+  --link-fg-active: var(--p1-600);
+}
+
+/* Dark mode via class, because user might want to choose */
+.dark {
+  --fg: var(--n0-50, white);
+  --bg: var(--n0-950, black);
+}
