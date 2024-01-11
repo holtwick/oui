@@ -79,18 +79,6 @@ export default antfu(
       'zerva-vite/ssr-vue/*/**',
       'examples/vite-ssr/*',
       'examples/vite-ssr/*/**'],
-
-    // ignores: [
-    //   'dist',
-    //   'node_modules',
-    //   'build',
-    //   'tmp',
-    //   'demos',
-    //   'coverage',
-    //   '_archive',
-    //   '*.spec.*',
-    //   'vitest.config.ts',
-    // ],
   },
   {},
   {
@@ -106,6 +94,9 @@ export default antfu(
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
+
+      // Markdown in oui-float example throws error
+      'vue/no-unused-refs': 'off',
     },
   },
 )

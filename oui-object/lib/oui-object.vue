@@ -2,14 +2,14 @@
 import ObjectVisualizer from './lib/ObjectVisualizer.vue'
 
 defineProps<{
-  obj: any
+  value: any
   title?: string
 }>()
 </script>
 
 <template>
   <ObjectVisualizer
-    :data="obj"
+    :data="value"
     :root-name="title ?? 'value'"
     :expand-on-created-and-updated="(path) => path.length < 2"
   />

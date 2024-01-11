@@ -17,9 +17,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+
+  // https://vitejs.dev/guide/build.html#library-mode
   build: {
     lib: {
-      formats: ['es'],
+      // formats: ['es'],
       // Could also be a dictionary or array of multiple entry points
       entry: [fileURLToPath(new URL('./lib/main.ts', import.meta.url))],
       name: 'main',
@@ -29,10 +31,13 @@ export default defineConfig({
     // preserveEntrySignatures: "strict",
       external: 'vue', // Object.keys(pkg.dependencies),
       output: {
-        preserveModules: true,
+        // preserveModules: true,
+        globals: {
+          vue: 'Vue',
+        },
 
         // https://github.com/vitejs/vite/issues/1579#issuecomment-1755386035
-        intro: 'import "./style.css";',
+        // intro: 'import "./style.css";',
       },
     },
   },

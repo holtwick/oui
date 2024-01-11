@@ -1,5 +1,3 @@
-import type { DirectiveBinding } from 'vue'
-
 const _focusableSelectors = [
   'a[href]',
   'area[href]',
