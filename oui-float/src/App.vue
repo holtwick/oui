@@ -26,5 +26,6 @@ const anchor = ref()
         </div>
       </OuiFloat>
     </p>
+    <OuiTooltipActivator />
   </div>
 </template>

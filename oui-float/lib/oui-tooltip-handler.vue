@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
-import OuiPopover from './oui-popover.vue'
+import type { Placement } from '@floating-ui/vue'
+import OuiFloat from './oui-float.vue'
 
 // const log = Logger('tw:tooltip', globalThis.debugUI ?? false)
 
@@ -14,8 +15,8 @@ if (_activated)
 _activated = true
 
 const active = ref<boolean>(false)
-const placement = ref('top')
-const target = ref<HTMLElement | undefined>()
+const placement = ref<Placement>('top')
+const reference = ref()
 const text = ref('')
 
 const delay = 600
@@ -34,7 +35,7 @@ function onTooltipHover(ev: Event) {
   while (el != null && el?.tagName !== 'BODY') {
     const tooltip = el.getAttribute('tooltip')
     if (tooltip && tooltip?.length > 0) {
-      if (el.isEqualNode(target.value as any)) {
+      if (el.isEqualNode(reference.value as any)) {
         didLeave = false
         break
       }
@@ -57,16 +58,16 @@ function onTooltipHover(ev: Event) {
       const tooltip = el.getAttribute('tooltip')
       if (tooltip && tooltip?.length > 0) {
         // el.title = ""
-        target.value = el
+        reference.value = el
         text.value = tooltip?.toString()?.trim() || ''
-        placement.value = el.getAttribute('tooltip-placement') || 'top'
+        placement.value = el.getAttribute('tooltip-placement') || 'top' as any
         active.value = true
         return
       }
       el = el.parentElement
     }
     active.value = false
-    target.value = undefined
+    reference.value = undefined
   }, delay) // debounce
 }
 
@@ -91,12 +92,10 @@ useEventListener(window, 'mousedown', onTouchDown, useCapture)
 useEventListener(window, 'mouseup', onTouchUp, useCapture)
 
 // useEventListener(window, "focus", onTooltipHover, useCapture)
-
-// log("did setup tooltips")
 </script>
 
 <template>
-  <OuiPopover v-model="active" :target="target" arrow theme="tooltip" :placement="placement">
+  <OuiFloat v-model="active" :reference="reference" arrow class="oui-tooltip" :placement="placement">
     {{ text }}
-  </OuiPopover>
+  </OuiFloat>
 </template>
