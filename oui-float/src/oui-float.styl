@@ -10,8 +10,18 @@
   }
 }
 
-$popover-arrow-size = px(12);
-$popover-arrow-indent-factor = 0.7;
+.oui-tooltip-transition {
+  &-enter-active, &-leave-active {
+    transition: opacity 200ms ease;
+  }
+
+  &-enter-from, &-leave-to {
+    opacity: 0;
+  }
+}
+
+$oui-float-arrow-size = px(12);
+$oui-float-arrow-indent-factor = 0.7;
 
 // From Bootstrap
 .oui-float {
@@ -21,7 +31,7 @@ $popover-arrow-indent-factor = 0.7;
   --float-shadow: none;
   z-index: -z-index-popover;
 
-  &.-tooltip {
+  &._tooltip {
     // tooltip replacement
     --float-color: var(--light-text-color, white);
     --float-background: rgb(56, 56, 56); // rgba(118, 118, 118, 1);
@@ -44,7 +54,7 @@ $popover-arrow-indent-factor = 0.7;
     z-index: -z-index-tooltip;
   }
 
-  &.-dropdown {
+  &._dropdown {
     // for selecting input values
     --float-color: var(--text-color);
     --float-background: white;
@@ -59,7 +69,7 @@ $popover-arrow-indent-factor = 0.7;
     z-index: -z-index-popover;
   }
 
-  &.-menu {
+  &._menu {
     // emulating native context menus
     --float-background: var(--menu-background);
     --float-border: var(--menu-border);
@@ -77,64 +87,58 @@ $popover-arrow-indent-factor = 0.7;
   cursor: unquote("default"); // trick to fix Stylus issue
   // background: var(--float-background);
   padding: 0;
-  // z-index 9999
 }
 
-.oui-float-arrow, .oui-float-arrow::before {
-  position: absolute;
-  width: $popover-arrow-size;
-  height: $popover-arrow-size;
-  // z-index: -1;
-  overflow: hidden;
-}
+.oui-float {
+  ._float_arrow, ._float_arrow:before {
+    position: absolute;
+    width: $oui-float-arrow-size;
+    height: $oui-float-arrow-size;
+    // z-index: -1;
+    overflow: hidden;
+  }
 
-.oui-float-arrow::before {
-  content: "";
-  background: var(--float-background);
-  // box-shadow: $popoverBorder;
-  border: var(--float-border);
-  overflow: hidden;
-  // box-shadow: var(--float-shadow);
-}
-
-.oui-float[data-popper-placement^="top"] > .oui-float-arrow {
-  bottom: -1 * $popover-arrow-size; // half size
-
-  &:before {
-    transform: translateY($popover-arrow-size * -1 * $popover-arrow-indent-factor) rotate(45deg);
+  ._float_arrow:before {
+    content: "";
+    background: var(--float-background);
+    // box-shadow: $oui-floatBorder;
+    border: var(--float-border);
+    overflow: hidden;
+    // box-shadow: var(--float-shadow);
   }
 }
 
-.oui-float[data-popper-placement^="bottom"] > .oui-float-arrow {
-  top: -1 * $popover-arrow-size; // half size
+._float_arrow_top {
+  bottom: -1 * $oui-float-arrow-size; // half size
 
   &:before {
-    transform: translateY($popover-arrow-size * $popover-arrow-indent-factor) rotate(45deg);
+    transform: translateY($oui-float-arrow-size * -1 * $oui-float-arrow-indent-factor) rotate(45deg);
   }
 }
 
-.oui-float[data-popper-placement^="left"] > .oui-float-arrow {
-  right: -1 * $popover-arrow-size; // half size
+._float_arrow_bottom {
+  top: -1 * $oui-float-arrow-size; // half size
 
   &:before {
-    transform: translateX($popover-arrow-size * -1 * $popover-arrow-indent-factor) rotate(45deg);
+    transform: translateY($oui-float-arrow-size * $oui-float-arrow-indent-factor) rotate(45deg);
   }
 }
 
-.oui-float[data-popper-placement^="right"] > .oui-float-arrow {
-  left: -1 * $popover-arrow-size; // half size
+._float_arrow_left {
+  right: -1 * $oui-float-arrow-size; // half size
 
   &:before {
-    transform: translateX($popover-arrow-size * $popover-arrow-indent-factor) rotate(45deg);
+    transform: translateX($oui-float-arrow-size * -1 * $oui-float-arrow-indent-factor) rotate(45deg);
   }
 }
 
-// Tooltip Specific
-.tw-tooltip-trigger, .tw-tooltip-trigger-inner {
-  display: inline-block;
-}
+._float_arrow_right {
+  left: -1 * $oui-float-arrow-size; // half size
 
-// 
+  &:before {
+    transform: translateX($oui-float-arrow-size * $oui-float-arrow-indent-factor) rotate(45deg);
+  }
+}
 
 // .sea-menu-fade
 // &-enter-active, &-leave-active
@@ -215,12 +219,4 @@ $popover-arrow-indent-factor = 0.7;
     margin-bottom: px(4);
     background: var(--item-separator-color);
   }
-}
-
-.tooltip-enter-active, .tooltip-leave-active {
-  transition: opacity 200ms ease;
-}
-
-.tooltip-enter-from, .tooltip-leave-to {
-  opacity: 0;
 }

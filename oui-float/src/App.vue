@@ -21,9 +21,7 @@ const anchor = ref()
         <template #click>
           <button>tooltip</button>
         </template>
-        <div class="my-float">
-          This is floating
-        </div>
+        This is floating
       </OuiFloat>
     </p>
     <p>

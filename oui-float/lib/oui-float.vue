@@ -30,7 +30,7 @@ const { floatingStyles, middlewareData } = useFloating(reference, floating, {
   placement,
   whileElementsMounted: autoUpdate,
   middleware: [
-    offset(0),
+    offset(8),
     size(),
     flip(),
     shift({
@@ -60,6 +60,7 @@ const { floatingStyles, middlewareData } = useFloating(reference, floating, {
         <div
           ref="floatingArrow"
           class="_float_arrow"
+          :class="`_float_arrow_${placement}`"
           :style="{
             position: 'absolute',
             left: middlewareData.arrow?.x != null ? `${middlewareData.arrow.x}px` : '',
