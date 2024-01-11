@@ -1,21 +1,22 @@
 <script lang="ts" setup>
 import { useMagicKeys } from '@vueuse/core'
-import { ref, watch } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
 import { vFocustrap } from './oui-focustrap-directive'
 
 defineProps<{
   close?: boolean
   title?: string
+  transition?: string
 }>()
 
 const emit = defineEmits(['close', 'cancel'])
 
-const open = defineModel()
+const _active = defineModel()
 
 const { escape } = useMagicKeys()
 
 watch(escape, (v) => {
-  if (v && open.value)
+  if (v && _active.value)
     doClose()
 })
 
@@ -28,42 +29,44 @@ function doCancel() {
 
 function doClose() {
   emit('close', false)
-  open.value = false
+  _active.value = false
   // emit('update:modelValue', false)
-  open.value = false
+  _active.value = false
 }
 
 function didOpen() {
   root.value?.querySelector('.focus')?.focus()
   // emit('didOpen')
 }
+
+const attrs = useAttrs()
+const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
 </script>
 
 <template>
-  <transition
+  <Transition
     appear
-    name="tw-modal-animation"
+    :name="transition ?? `${name}-transition`"
     @after-enter="didOpen"
   >
     <div
-      v-if="open"
+      v-if="_active"
       ref="root"
-      class="tw-modal"
-      :class="{ active: open }"
+      :class="{ [name]: true, _active }"
       :tabindex="-1"
       aria-modal="true"
       role="dialog"
     >
       <div
-        class="tw-modal-overlay overlay"
+        class="oui-modal-overlay _modal_overlay"
         aria-label="Close"
         @click="doCancel"
       />
-      <div v-focustrap class="tw-modal-container">
+      <div v-focustrap class="oui-modal-container _modal_container">
         <button
           v-if="close"
           tooltip="Close"
-          class="tw-modal-close"
+          class="oui-modal-close _modal_close"
           @click="doCancel"
         >
           <slot name="close">
@@ -85,9 +88,9 @@ function didOpen() {
         </button>
         <header
           v-if="title || $slots.title || $slots.header || close === true"
-          class="tw-modal-header"
+          class="oui-modal-header _modal_header"
         >
-          <div v-if="title || $slots.title" class="tw-modal-title title">
+          <div v-if="title || $slots.title" class="oui-modal-title title _modal_title">
             <slot name="title">
               {{ title }}
             </slot>
@@ -95,13 +98,13 @@ function didOpen() {
 
           <slot name="header" />
         </header>
-        <section class="tw-modal-body body">
+        <section class="oui-modal-body body _modal_body">
           <slot />
         </section>
-        <footer v-if="$slots.footer" class="tw-modal-footer footer">
+        <footer v-if="$slots.footer" class="oui-modal-footer footer _modal_footer">
           <slot name="footer" />
         </footer>
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>

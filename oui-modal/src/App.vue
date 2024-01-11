@@ -12,8 +12,14 @@ const show = ref(false)
     <button @click="show = !show">
       Click to show modal
     </button>
-    <OuiModal v-model="show">
-      Hello
+    <OuiModal v-model="show" close>
+      <template #header>
+        Header
+      </template>
+      Body
+      <template #footer>
+        Footer
+      </template>
     </OuiModal>
   </div>
 </template>
