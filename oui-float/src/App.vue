@@ -17,7 +17,7 @@ const anchor = ref()
     </button>
     <br>
     <p>
-      <OuiFloat :reference="anchor" placement="right">
+      <OuiFloat v-model="show" :reference="anchor" placement="right" class="oui-float oui-tooltip _tooltip">
         <template #click>
           <button>tooltip</button>
         </template>
@@ -30,7 +30,7 @@ const anchor = ref()
       <button ref="anchor" @click="show = !show">
         Click to toggle
       </button>
-      <OuiFloat v-model="show" :reference="anchor" class="oui-float" placement="right">
+      <OuiFloat v-model="show" :reference="anchor" placement="right">
         <div class="my-float">
           This is floating
         </div>

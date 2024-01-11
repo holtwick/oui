@@ -8,7 +8,6 @@ const props = defineProps<{
   transition?: string
   placement?: Placement
   arrow?: boolean
-  class?: string
 }>()
 
 defineSlots<{
@@ -25,7 +24,6 @@ const floating = ref()
 const floatingArrow = ref()
 
 const placement = computed<Placement>(() => props.placement ?? 'top')
-const className = computed(() => props.class ?? 'oui-float')
 
 // https://floating-ui.com/docs/vue
 const { floatingStyles, middlewareData } = useFloating(reference, floating, {
@@ -57,8 +55,8 @@ const { floatingStyles, middlewareData } = useFloating(reference, floating, {
     </div>
   </template>
   <teleport to="body">
-    <Transition :name="transition ?? `${className}-transition`">
-      <div v-show="active" ref="floating" :style="floatingStyles" :class="className" class="_float">
+    <Transition :name="transition ?? `${String($attrs.class || 'oui-float').split(' ')?.[0]}-transition`">
+      <div v-show="active" ref="floating" :style="floatingStyles" v-bind="$attrs" class="_float">
         <div
           ref="floatingArrow"
           class="_float_arrow"
