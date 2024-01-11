@@ -95,7 +95,15 @@ useEventListener(window, 'mouseup', onTouchUp, useCapture)
 </script>
 
 <template>
-  <OuiFloat v-model="active" :reference="reference" arrow class="oui-float oui-tooltip _tooltip" transition="oui-tooltip-transition" :placement="placement">
+  <OuiFloat
+    v-model="active"
+    :reference="reference"
+    arrow
+    :offset="6"
+    class="oui-float oui-tooltip _tooltip"
+    transition="oui-tooltip-transition"
+    :placement="placement"
+  >
     {{ text }}
   </OuiFloat>
 </template>

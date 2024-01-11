@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type Placement, arrow, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
+import { type OffsetOptions, type Padding, type Placement, arrow, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
 
@@ -8,6 +8,8 @@ const props = defineProps<{
   transition?: string
   placement?: Placement
   arrow?: boolean
+  offset?: OffsetOptions
+  padding?: Padding
 }>()
 
 defineSlots<{
@@ -26,15 +28,15 @@ const floatingArrow = ref()
 const placement = computed<Placement>(() => props.placement ?? 'top')
 
 // https://floating-ui.com/docs/vue
-const { floatingStyles, middlewareData } = useFloating(reference, floating, {
+const { floatingStyles, middlewareData, placement: placementActual } = useFloating(reference, floating, {
   placement,
   whileElementsMounted: autoUpdate,
   middleware: [
-    offset(8),
+    offset(props.offset ?? 0),
     size(),
     flip(),
     shift({
-      padding: 16,
+      padding: props.padding ?? 16,
     }),
     arrow({
       element: floatingArrow,
@@ -60,7 +62,7 @@ const { floatingStyles, middlewareData } = useFloating(reference, floating, {
         <div
           ref="floatingArrow"
           class="_float_arrow"
-          :class="`_float_arrow_${placement}`"
+          :class="`_float_arrow_${placementActual}`"
           :style="{
             position: 'absolute',
             left: middlewareData.arrow?.x != null ? `${middlewareData.arrow.x}px` : '',
