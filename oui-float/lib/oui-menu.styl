@@ -14,9 +14,6 @@ oui-menu() {
     --item-separator-color: -gray-300;
     use: stack-y;
     cursor: unquote("default"); // trick to fix Stylus issue
-    // position: absolute;
-    // top: 0;
-    // left: 0;
     max-width: 20rem;
     min-width: 10rem;
     padding: px(4) px(4);
@@ -30,7 +27,7 @@ oui-menu() {
     font-size: 10pt;
     font-weight: 500;
 
-    .-item, ._item {
+    ._menu_item {
       color: var(--item-color);
       background: var(--item-background);
       list-style: none;
@@ -45,17 +42,17 @@ oui-menu() {
         background: var(--item-hover-background);
       }
 
-      &.-active, &:active {
+      &._menu__active, &:active {
         color: var(--item-hover-color);
         background: var(--item-hover-background);
       }
     }
 
-    ._checkedPossible, .-checked, ._checked {
+    ._menu_checked_possible, ._menu_checked {
       padding-left: 28;
     }
 
-    .-checked, ._checked {
+    ._menu_checked {
       &:before {
         position: absolute;
         left: 8;
@@ -63,7 +60,7 @@ oui-menu() {
       }
     }
 
-    .-separator, ._separator {
+    ._menu__separator {
       display: flex;
       height: px(1);
       max-height: px(1);

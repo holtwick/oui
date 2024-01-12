@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { OuiFloat, OuiTooltipActivator } from '../lib/main'
+import { OuiFloat, OuiMenu, OuiTooltipActivator } from '../lib/main'
 
 const show = ref(true)
 const anchor = ref()
+const anchor2 = ref()
+
+function doAction() {
+  alert(123)
+}
 </script>
 
 <template>
@@ -29,6 +34,34 @@ Yeah!"
           This is floating
         </div>
       </OuiFloat>
+    </p>
+
+    <p>
+      <button ref="anchor2">
+        Click to toggle
+      </button>
+      <OuiMenu
+        :reference="anchor2"
+        :items="[
+          {
+            title: 'Hello',
+            action: doAction,
+          },
+          {},
+          {
+            title: 'One',
+            checked: false,
+          },
+          {
+            title: 'Two',
+            checked: true,
+          },
+        ]"
+      >
+        <div class="my-float">
+          This is floating
+        </div>
+      </OuiMenu>
     </p>
 
     <OuiTooltipActivator />

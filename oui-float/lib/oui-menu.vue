@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import type { Placement } from '@floating-ui/vue'
 import type { Ref } from 'vue'
+import { ref } from 'vue'
 import type { OuiMenuItem } from './_types'
 import OuiFloat from './oui-float.vue'
 
@@ -10,9 +12,12 @@ defineOptions({
 const props = defineProps<{
   items: OuiMenuItem[]
   reference: Ref<HTMLElement | undefined>
+  placement?: Placement
   args?: any
   done?: (() => void) | undefined
 }>()
+
+const active = ref(true)
 
 async function doAction(item: OuiMenuItem) {
   item?.action?.(item, ...(props.args ?? []))
@@ -22,12 +27,14 @@ async function doAction(item: OuiMenuItem) {
 
 <template>
   <OuiFloat
+    v-model="active"
     :reference="reference"
-    placement="bottom-start"
+    :placement="placement ?? 'bottom-start'"
     :offset="4"
+    class="oui-menu"
     @close="done?.()"
   >
-    <div class="_menu" @contextmenu.stop.prevent="">
+    <nav class="_menu" @contextmenu.stop.prevent="">
       <template v-for="(item, i) in items" :key="i">
         <a
           v-if="item.title"
@@ -43,6 +50,6 @@ async function doAction(item: OuiMenuItem) {
         </a>
         <hr v-else class="_menu_separator">
       </template>
-    </div>
+    </nav>
   </OuiFloat>
 </template>
