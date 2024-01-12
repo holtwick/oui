@@ -6,10 +6,6 @@
 -media-lg = "(min-width: 1024px)";
 -media-xl = "(min-width: 1280px)";
 -media-xl2 = "(min-width: 1536px)";
--dark = "(prefers-color-scheme: dark)";
--light = "(prefers-color-scheme: light)";
--media-dark = "(prefers-color-scheme: dark)";
--media-light = "(prefers-color-scheme: light)";
 /* Orientation https://getbootstrap.com/docs/5.0/layout/breakpoints/#max-width */
 -media-landscape = "(orientation: landscape)";
 -media-portrait = "(orientation: portrait)";
@@ -22,6 +18,12 @@
 -media-safariONLY = unquote("(-webkit-hyphens: none)");
 -media-firefoxONLY = unquote("(-moz-appearance: none)");
 -media-chromeONLY = unquote("(-webkit-tap-highlight-color: black)");
+-desktop = -media-desktop;
+-mobile = -media-mobile;
+-dark = "(prefers-color-scheme: dark)";
+-light = "(prefers-color-scheme: light)";
+-media-dark = "(prefers-color-scheme: dark)";
+-media-light = "(prefers-color-scheme: light)";
 
 stack-x(space = 0) {
   display: flex;
