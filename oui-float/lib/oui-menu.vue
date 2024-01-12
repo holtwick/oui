@@ -28,11 +28,11 @@ async function doAction(item: OuiMenuItem) {
 <template>
   <OuiFloat
     v-model="active"
+    class="oui-menu"
     :reference="reference"
     :placement="placement ?? 'bottom-start'"
     :offset="4"
     close
-    class="oui-menu"
     @close="done?.()"
   >
     <nav class="_menu" @contextmenu.stop.prevent="">
