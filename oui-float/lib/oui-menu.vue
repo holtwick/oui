@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { Placement } from '@floating-ui/vue'
 import type { Ref } from 'vue'
-import { ref } from 'vue'
 import type { OuiMenuItem } from './_types'
 import OuiFloat from './oui-float.vue'
 
@@ -17,11 +16,12 @@ const props = defineProps<{
   done?: (() => void) | undefined
 }>()
 
-const active = ref(true)
+const active = defineModel({ default: true })
 
 async function doAction(item: OuiMenuItem) {
   item?.action?.(item, ...(props.args ?? []))
   props.done?.()
+  active.value = false
 }
 </script>
 
@@ -31,6 +31,7 @@ async function doAction(item: OuiMenuItem) {
     :reference="reference"
     :placement="placement ?? 'bottom-start'"
     :offset="4"
+    close
     class="oui-menu"
     @close="done?.()"
   >

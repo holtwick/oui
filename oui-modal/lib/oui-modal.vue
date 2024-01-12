@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useMagicKeys } from '@vueuse/core'
+import { onKeyStroke } from '@vueuse/core'
 import { computed, ref, useAttrs, watch } from 'vue'
 import { vFocustrap } from './oui-focustrap-directive'
 
@@ -13,12 +13,20 @@ const emit = defineEmits(['close', 'cancel'])
 
 const _active = defineModel()
 
-const { escape } = useMagicKeys()
-
-watch(escape, (v) => {
-  if (v && _active.value)
-    doClose()
+onKeyStroke('Escape', (e) => {
+  if (_active.value) {
+    e.preventDefault()
+    e.stopPropagation()
+    _active.value = false
+  }
 })
+
+// const { escape } = useMagicKeys()
+
+// watch(escape, (v) => {
+//   if (v && _active.value)
+//     doClose()
+// })
 
 const root = ref()
 
@@ -31,7 +39,6 @@ function doClose() {
   emit('close', false)
   _active.value = false
   // emit('update:modelValue', false)
-  _active.value = false
 }
 
 function didOpen() {

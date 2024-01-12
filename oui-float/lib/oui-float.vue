@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
 import type { Ref } from 'vue'
-import { computed, ref, useAttrs } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
+import { onClickOutside, onKeyStroke } from '@vueuse/core'
 
 defineOptions({
   inheritAttrs: false,
@@ -14,7 +15,10 @@ const props = defineProps<{
   arrow?: boolean
   offset?: OffsetOptions
   padding?: Padding
+  close?: boolean
 }>()
+
+const emit = defineEmits(['close'])
 
 defineSlots<{
   default(): any
@@ -22,6 +26,8 @@ defineSlots<{
 }>()
 
 const active = defineModel<boolean>()
+
+// Floating
 
 const slotReference = ref()
 const reference = computed<any>(() => slotReference.value ?? props.reference)
@@ -47,6 +53,26 @@ const { floatingStyles, middlewareData, placement: placementActual } = useFloati
     }),
   ],
 })
+
+// Close
+
+watch(active, (v) => {
+  if (v === false)
+    emit('close')
+})
+
+function doClose(e?: Event) {
+  if (props.close && active.value) {
+    e?.preventDefault()
+    e?.stopPropagation()
+    active.value = false
+  }
+}
+
+onKeyStroke('Escape', doClose)
+onClickOutside(floating, doClose)
+
+// Name
 
 const attrs = useAttrs()
 const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])

@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { OuiFloat, OuiMenu, OuiTooltipActivator } from '../lib/main'
 
 const show = ref(true)
+const show2 = ref(true)
 const anchor = ref()
 const anchor2 = ref()
 
@@ -37,10 +38,11 @@ Yeah!"
     </p>
 
     <p>
-      <button ref="anchor2">
-        Click to toggle
+      <button ref="anchor2" @click="show2 = !show2">
+        Click to toggle {{ show2 }}
       </button>
       <OuiMenu
+        v-model="show2"
         :reference="anchor2"
         :items="[
           {
@@ -57,11 +59,7 @@ Yeah!"
             checked: true,
           },
         ]"
-      >
-        <div class="my-float">
-          This is floating
-        </div>
-      </OuiMenu>
+      />
     </p>
 
     <OuiTooltipActivator />
