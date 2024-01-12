@@ -64,42 +64,44 @@ export function emitNotification(n: AppNotificationSetup): AppNotificationInfo {
 export function emitNotificationWarn(
   title: string,
   message?: string,
+  timeout = -1,
 ): AppNotificationInfo {
   return emitNotification({
     icon: 'warning',
     mode: 'warn',
     title,
     message,
-    timeout: -1,
+    timeout,
   })
 }
 
 export function emitNotificationError(
   title: string,
   message?: string,
-  timeout?: number,
+  timeout = -1,
 ): AppNotificationInfo {
   return emitNotification({
     icon: 'warning',
     mode: 'error',
     title,
     message,
-    timeout: timeout || -1,
+    timeout,
   })
 }
 
 export const developerLog = reactive<any[]>([])
 
-export function emitNotificationLog(
+export function emitNotificationInfo(
   title: string,
   message?: string,
+  timeout = -1,
 ): AppNotificationInfo | undefined {
   // if (DEBUG) {
   developerLog.unshift({ title, message })
   return emitNotification({
     title,
     message,
-    timeout: 2e3,
+    timeout,
   })
   // }
 }

@@ -35,6 +35,7 @@
   "dependencies": {
     "oui-float": "workspace:*",
     "oui-modal": "workspace:*",
+    "oui-notification": "workspace:*",
     "oui-object": "workspace:*",
     "oui-stylus": "workspace:*",
     "vue": "^3.3.11"

@@ -3,6 +3,7 @@ import ExampleOuiFloat from './example-oui-float.vue'
 import ExampleOuiFloatTooltip from './example-oui-float-tooltip.vue'
 import ExampleOuiModal from './example-oui-modal.vue'
 import ExampleOuiObject from './example-oui-object.vue'
+import ExampleOuiNotification from './example-oui-notification.vue'
 import Example from './example.vue'
 </script>
 
@@ -25,6 +26,10 @@ import Example from './example.vue'
 
     <Example title="oui-object">
       <ExampleOuiObject />
+    </Example>
+
+    <Example title="oui-notification">
+      <ExampleOuiNotification />
     </Example>
   </div>
 </template>

@@ -7,6 +7,7 @@
 Libs:
 
 - [oui-float](./oui-float/README.md)
+- [oui-notification](./oui-notification/README.md)
 - [oui-modal](./oui-modal/README.md)
 - [oui-object](./oui-object/README.md)
 
