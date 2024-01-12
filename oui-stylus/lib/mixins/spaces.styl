@@ -1,6 +1,7 @@
-// (C)opyright 2020-11-19 Dirk Holtwick, holtwick.it. All rights reserved.
+padding-block(value) {
+  padding-block: rex(value);
+}
 
-// Paddings
 padding-left(value) {
   padding-left: rex(value);
 }
@@ -31,7 +32,10 @@ padding-y(value) {
   padding-bottom: value;
 }
 
-// Margins
+margin-block(value) {
+  margin-block: rex(value);
+}
+
 margin-left(value) {
   margin-left: rex(value);
 }
@@ -62,16 +66,13 @@ margin-y(value) {
   margin-bottom: value;
 }
 
-// Spaces
 space-x(value = 8) {
-  // & > * + *
   > *:not(:last-child) {
     margin-right: rex(value);
   }
 }
 
 space-y(value = 8) {
-  // & > * + *
   > *:not(:last-child) {
     margin-bottom: rex(value);
   }

@@ -96,3 +96,5 @@ zerva-bin/bin.cjs
 
 *.sqlite
 *.tsbuildinfo
+
+_archive

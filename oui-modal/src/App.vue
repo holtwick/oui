@@ -6,7 +6,7 @@ const show = ref(false)
 </script>
 
 <template>
-  <div class="prose">
+  <div>
     <h1>Oui</h1>
     <p>Just another set of UI components for Vue.js with a proper French-sounding name</p>
     <button @click="show = !show">

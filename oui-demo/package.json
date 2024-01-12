@@ -1,0 +1,59 @@
+{
+  "name": "oui-demo",
+  "type": "module",
+  "version": "0.5.0",
+  "private": true,
+  "author": {
+    "name": "Dirk Holtwick",
+    "email": "dirk.holtwick@gmail.com",
+    "url": "https://holtwick.de"
+  },
+  "license": "MIT",
+  "funding": {
+    "type": "GitHub Sponsors ❤",
+    "url": "https://github.com/sponsors/holtwick"
+  },
+  "homepage": "https://github.com/holtwick/oui#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holtwick/oui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/holtwick/oui/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "check": "vue-tsc --build --force",
+    "dev": "vite",
+    "preview": "vite preview",
+    "start": "vite",
+    "test:unit": "vitest"
+  },
+  "dependencies": {
+    "oui-float": "workspace:*",
+    "oui-modal": "workspace:*",
+    "oui-notification": "workspace:*",
+    "oui-object": "workspace:*",
+    "oui-stylus": "workspace:*",
+    "vue": "^3.3.11"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@types/jsdom": "^21.1.6",
+    "@types/node": "^18.19.3",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vue/test-utils": "^2.4.3",
+    "@vue/tsconfig": "^0.5.0",
+    "jsdom": "^23.0.1",
+    "npm-run-all2": "^6.1.1",
+    "stylus": "^0.62.0",
+    "typescript": "~5.3.0",
+    "vite": "^5.0.10",
+    "vite-plugin-dts": "^3.7.0",
+    "vitest": "^1.0.4",
+    "vue-tsc": "^1.8.25"
+  }
+}

@@ -1,27 +1,34 @@
 <script lang="ts" setup>
 import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
 import type { Ref } from 'vue'
-import { computed, ref, useAttrs } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
+import { onClickOutside, onKeyStroke } from '@vueuse/core'
 
 defineOptions({
   inheritAttrs: false,
 })
 
 const props = defineProps<{
-  reference: Ref<HTMLElement | undefined>
+  reference?: Ref<HTMLElement | undefined>
   transition?: string
   placement?: Placement
   arrow?: boolean
   offset?: OffsetOptions
   padding?: Padding
+  close?: boolean
 }>()
 
-defineSlots<{
+const emit = defineEmits(['close'])
+
+const slots = defineSlots<{
   default(): any
-  click(): any
+  click(props: { active: boolean }): any
+  trigger(props: { active: boolean }): any
 }>()
 
 const active = defineModel<boolean>()
+
+// Floating
 
 const slotReference = ref()
 const reference = computed<any>(() => slotReference.value ?? props.reference)
@@ -48,8 +55,46 @@ const { floatingStyles, middlewareData, placement: placementActual } = useFloati
   ],
 })
 
+// Close
+
+watch(active, (v) => {
+  if (v === false)
+    emit('close')
+})
+
+function doClose(e?: Event) {
+  if (props.close && active.value) {
+    e?.preventDefault()
+    e?.stopPropagation()
+    active.value = false
+  }
+}
+
+onKeyStroke('Escape', e => doClose (e))
+onClickOutside(floating, e => doClose())
+
+// Name
+
 const attrs = useAttrs()
-const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
+const name = computed(() => String(attrs.class || 'oui-float').split(/\s+/gim)?.[0])
+
+// Click Slot
+
+/* magic, we identify the first slot element and add the triggers! */
+
+const triggerSlot = ref()
+
+watch(triggerSlot, (s) => {
+  const el = s?.nextElementSibling as HTMLElement
+  slotReference.value = el
+  el?.addEventListener('click', () => active.value = !active.value)
+  el?.addEventListener('contextmenu', (ev) => {
+    ev.preventDefault()
+    active.value = !active.value
+  })
+  if (s && !el)
+    console.error('#click slot requires at least one element!')
+})
 </script>
 
 <template>
@@ -60,8 +105,11 @@ const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.
       @click.prevent.stop="active = !active"
       @contextmenu.prevent.stop="active = !active"
     >
-      <slot name="click" />
+      <slot name="click" :active="active === true" />
     </div>
+  </template>
+  <template v-if="$slots.trigger">
+    <component :is="$slots.trigger" ref="triggerSlot" :active="active === true" />
   </template>
   <teleport to="body">
     <Transition :name="transition ?? `${name}-transition`">
