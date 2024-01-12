@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onKeyStroke } from '@vueuse/core'
-import { computed, ref, useAttrs, watch } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import { vFocustrap } from './oui-focustrap-directive'
 import OuiClose from './oui-close.vue'
 

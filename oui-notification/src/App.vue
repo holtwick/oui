@@ -1,3 +1,4 @@
+<!-- eslint-disable no-alert -->
 <script setup lang="ts">
 import { OuiNotificationActivator, emitNotification, emitNotificationError, emitNotificationWarn } from '../lib/main'
 

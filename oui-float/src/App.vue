@@ -8,6 +8,7 @@ const anchor = ref()
 const anchor2 = ref()
 
 function doAction() {
+  // eslint-disable-next-line no-alert
   alert(123)
 }
 </script>
