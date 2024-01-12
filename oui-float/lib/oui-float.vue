@@ -69,8 +69,8 @@ function doClose(e?: Event) {
   }
 }
 
-onKeyStroke('Escape', doClose)
-onClickOutside(floating, doClose)
+onKeyStroke('Escape', e => doClose (e))
+onClickOutside(floating, e => doClose())
 
 // Name
 

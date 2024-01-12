@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { OuiFloat, OuiMenu, OuiTooltipActivator } from '../lib/main'
-import { vActionToggle } from '../lib/lib'
 
 const show = ref(true)
 const show2 = ref(true)
@@ -28,7 +27,7 @@ Yeah!"
     </button>
     <br>
     <p>
-      <button ref="anchor" v-action-toggle="show">
+      <button ref="anchor" @click="show = !show">
         Click to toggle
       </button>
       <OuiFloat v-model="show" :reference="anchor" placement="right" :offset="10">
@@ -39,7 +38,7 @@ Yeah!"
     </p>
 
     <p>
-      <button ref="anchor2" v-menu="show2" @click="show2 = !show2">
+      <button ref="anchor2" @click="show2 = !show2">
         Click to toggle {{ show2 }}
       </button>
       <OuiMenu
