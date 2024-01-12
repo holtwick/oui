@@ -2,7 +2,6 @@
   "name": "oui-notification",
   "type": "module",
   "version": "0.4.3",
-  "private": true,
   "author": {
     "name": "Dirk Holtwick",
     "email": "dirk.holtwick@gmail.com",
