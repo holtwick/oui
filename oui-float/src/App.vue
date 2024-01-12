@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { OuiFloat, OuiMenu, OuiTooltipActivator } from '../lib/main'
+import OuiFloatButton from '../lib/oui-float-button.vue'
 
 const show = ref(true)
-const show2 = ref(true)
+const show2 = ref(false)
 const anchor = ref()
 const anchor2 = ref()
 
@@ -40,7 +41,7 @@ Yeah!"
 
     <p>
       <button ref="anchor2" @click="show2 = !show2">
-        Click to toggle {{ show2 }}
+        OuiMenu {{ show2 }}
       </button>
       <OuiMenu
         v-model="show2"
@@ -61,6 +62,32 @@ Yeah!"
           },
         ]"
       />
+    </p>
+
+    <p>
+      <OuiFloatButton placement="right" :offset="10" name="oui-menu">
+        OuiFloatButton
+
+        <template #float>
+          <div class="my-float">
+            This is floating
+          </div>
+        </template>
+      </OuiFloatButton>
+    </p>
+
+    <p>
+      TRIGGER
+
+      <OuiFloat placement="right" :offset="10">
+        <template #trigger="{ active }">
+          <button>OuiFloat #click {{ active }}</button>
+        </template>
+
+        <div class="my-float">
+          This is floating
+        </div>
+      </OuiFloat>
     </p>
 
     <OuiTooltipActivator />

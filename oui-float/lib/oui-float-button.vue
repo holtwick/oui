@@ -1,15 +1,14 @@
 <script lang="ts" setup>
 import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
-import type { Ref } from 'vue'
-import { computed, ref, useAttrs, watch } from 'vue'
 import { onClickOutside, onKeyStroke } from '@vueuse/core'
+import { computed, ref, watch } from 'vue'
 
 defineOptions({
   inheritAttrs: false,
 })
 
 const props = defineProps<{
-  reference?: Ref<HTMLElement | undefined>
+  name?: string
   transition?: string
   placement?: Placement
   arrow?: boolean
@@ -20,10 +19,9 @@ const props = defineProps<{
 
 const emit = defineEmits(['close'])
 
-const slots = defineSlots<{
+defineSlots<{
   default(): any
-  click(props: { active: boolean }): any
-  trigger(props: { active: boolean }): any
+  float(): any
 }>()
 
 const active = defineModel<boolean>()
@@ -31,7 +29,7 @@ const active = defineModel<boolean>()
 // Floating
 
 const slotReference = ref()
-const reference = computed<any>(() => slotReference.value ?? props.reference)
+const reference = computed<any>(() => slotReference.value)
 
 const floating = ref()
 const floatingArrow = ref()
@@ -72,48 +70,21 @@ function doClose(e?: Event) {
 
 onKeyStroke('Escape', e => doClose (e))
 onClickOutside(floating, e => doClose())
-
-// Name
-
-const attrs = useAttrs()
-const name = computed(() => String(attrs.class || 'oui-float').split(/\s+/gim)?.[0])
-
-// Click Slot
-
-/* magic, we identify the first slot element and add the triggers! */
-
-const triggerSlot = ref()
-
-watch(triggerSlot, (s) => {
-  const el = s?.nextElementSibling as HTMLElement
-  slotReference.value = el
-  el?.addEventListener('click', () => active.value = !active.value)
-  el?.addEventListener('contextmenu', (ev) => {
-    ev.preventDefault()
-    active.value = !active.value
-  })
-  if (s && !el)
-    console.error('#click slot requires at least one element!')
-})
 </script>
 
 <template>
-  <template v-if="$slots.click">
-    <div
-      ref="slotReference"
-      style="display: inline-block"
-      @click.prevent.stop="active = !active"
-      @contextmenu.prevent.stop="active = !active"
-    >
-      <slot name="click" :active="active === true" />
-    </div>
-  </template>
-  <template v-if="$slots.trigger">
-    <component :is="$slots.trigger" ref="triggerSlot" :active="active === true" />
-  </template>
+  <component :is="$slots.float" ref="xxx" class="gfajkhdss" />
+  <button
+    ref="slotReference"
+    v-bind="$attrs"
+    @click.prevent.stop="active = !active"
+    @contextmenu.prevent.stop="active = !active"
+  >
+    <slot />
+  </button>
   <teleport to="body">
     <Transition :name="transition ?? `${name}-transition`">
-      <div v-show="active" ref="floating" :style="floatingStyles" :class="$attrs.class || 'oui-float'" v-bind="$attrs" class="_float">
+      <div v-show="active" ref="floating" :style="floatingStyles" :class="name ?? 'oui-float'" class="_float">
         <div
           v-show="arrow ?? false"
           ref="floatingArrow"
@@ -126,7 +97,9 @@ watch(triggerSlot, (s) => {
           }"
         />
         <div class="_float_inner">
-          <slot />
+          <slot name="float">
+            Please define slot #float.
+          </slot>
         </div>
       </div>
     </Transition>
