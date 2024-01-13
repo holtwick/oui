@@ -3,7 +3,6 @@
 @require "../mixins/colors.styl";
 @require "../mixins/base.styl";
 @require "../mixins/text.styl";
-@require "tailwind.styl";
 
 prose-font-weight-bold = Var(--prose-font-weight-bold, 600);
 prose-list-indent = Var(--prose-list-indent, px(32));
@@ -11,11 +10,6 @@ prose-paragraph-spacing = Var(--prose-paragraph-spacing, px(16));
 prose-table-cell-padding = Var(--prose-table-cell-padding, px(8));
 
 tw-prose() {
-  // tw-reset-form()
-  tw-reset-border();
-  tw-reset-media();
-  tw-reset-monospace();
-
   &, * {
     user-select: text;
     -webkit-user-select: text;
@@ -225,7 +219,6 @@ tw-prose() {
 
 tw-prose-responsive() {
   tw-prose();
-
   max-width: 100%;
 
   // overflow: hidden;
@@ -252,6 +245,5 @@ tw-prose-responsive() {
 tw-prose-float() {
   max-width: 65ch;
   line-height: px(24);
-
   tw-prose();
 }

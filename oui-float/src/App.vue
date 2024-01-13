@@ -79,14 +79,12 @@ Yeah!"
     <p>
       TRIGGER
 
-      <OuiFloat placement="right" :offset="10">
+      <OuiFloat placement="right" :offset="10" close>
         <template #trigger="{ active }">
           <button>OuiFloat #click {{ active }}</button>
         </template>
 
-        <div class="my-float">
-          This is floating
-        </div>
+        This is floating
       </OuiFloat>
     </p>
 

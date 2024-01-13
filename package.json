@@ -1,6 +1,6 @@
 {
   "name": "oui-monorepo",
-  "version": "0.5.1",
+  "version": "0.5.5",
   "private": true,
   "homepage": "https://github.com/holtwick/oui#readme",
   "bugs": {
@@ -35,7 +35,7 @@
     "prepublish": "npx only-allow pnpm",
     "publish": "pnpm -r --filter=oui-* publish --access public",
     "rebuild": "pnpm -r rebuild",
-    "release": "pnpm run bump && pnpm run build && pnpm run publish && ./scripts/release.sh",
+    "release": "pnpm run bump && pnpm run build && pnpm run publish",
     "reset": "pnpm -r --filter=oui-* run reset",
     "test": "pnpm -r --filter=oui-* test",
     "update": "pnpm -r update -i --latest"

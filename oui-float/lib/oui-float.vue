@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
+import { onClickOutside, onKeyStroke } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { computed, ref, useAttrs, watch } from 'vue'
-import { onClickOutside, onKeyStroke } from '@vueuse/core'
 
 defineOptions({
   inheritAttrs: false,
@@ -62,7 +62,7 @@ watch(active, (v) => {
     emit('close')
 })
 
-function doClose(e?: Event) {
+async function doClose(e?: Event) {
   if (props.close && active.value) {
     e?.preventDefault()
     e?.stopPropagation()
@@ -71,7 +71,7 @@ function doClose(e?: Event) {
 }
 
 onKeyStroke('Escape', e => doClose (e))
-onClickOutside(floating, e => doClose())
+onClickOutside(floating, e => doClose(e))
 
 // Name
 
@@ -87,11 +87,15 @@ const triggerSlot = ref()
 watch(triggerSlot, (s) => {
   const el = s?.nextElementSibling as HTMLElement
   slotReference.value = el
-  el?.addEventListener('click', () => active.value = !active.value)
-  el?.addEventListener('contextmenu', (ev) => {
-    ev.preventDefault()
+
+  function toggle(ev: MouseEvent) {
     active.value = !active.value
-  })
+    ev.preventDefault()
+  }
+
+  el?.addEventListener('click', toggle)
+  el?.addEventListener('contextmenu', toggle)
+
   if (s && !el)
     console.error('#click slot requires at least one element!')
 })

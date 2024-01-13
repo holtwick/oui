@@ -4,19 +4,19 @@ control-inner = var(--control-inner, white);
 control-color = unquote("var(--control-color, rgba(var(--primary-color-value), 1))");
 control-hover = unquote("var(--control-hover, rgba(var(--primary-color-value), 0.1))");
 control-active = unquote("var(--control-active, rgba(var(--primary-color-value), 0.8))");
-control-radius = var(--control-radius, -border-radius-base);
+control-radius = var(--control-radius, 4);
 control-border = var(--control-border, none);
 input-color = var(--input-color, black);
 input-background = var(--input-background, white);
 input-border = var(--input-border, 1px solid -gray-300);
 input-border-hover = var(--input-border-hover, 1px solid -gray-400);
-input-radius = var(--input-radius, -border-radius-base);
+input-radius = var(--input-radius, 4);
 
 // Don't get distracted by text selections or other sideeffects
 tw-ui() {
   user-select: none;
   -webkit-user-select: none;
-  cursor: unquote("default"); // trick to fix Stylus issue
+  cursor: default;
 }
 
 tw-button-default() {
