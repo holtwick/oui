@@ -1,0 +1,246 @@
+oui-text() {
+  --text-font-weight-bold: 600;
+  --text-list-indent: px(32);
+  --text-paragraph-spacing: px(16);
+  --text-table-cell-padding: px(8);
+
+  &, * {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: inherit;
+    font-weight: var(--text-font-weight-bold);
+    line-height: 1.2;
+    margin-y: var(--text-paragraph-spacing);
+  }
+
+  h1, .h1 {
+    font-size: 2rem;
+  }
+
+  h2, .h2 {
+    font-size: 1.6rem;
+  }
+
+  h3, .h3 {
+    font-size: 1.4rem;
+  }
+
+  h4, .h4 {
+    font-size: 1.2rem;
+  }
+
+  h5, .h5 {
+    font-size: 1rem;
+  }
+
+  h6, .h6 {
+    font-size: 0.8rem;
+  }
+
+  // Paragraphs
+  p, .p, ol, ul, hr, .hr {
+    margin-y: var(--text-paragraph-spacing);
+  }
+
+  hr, .hr {
+    height: 0;
+    color: inherit;
+  }
+
+  // Semantic text elements
+  a, ins, u, .a, .ins, .u {
+    text-decoration-skip: ink edges;
+  }
+
+  a, .a {
+    color: var(--link-color, -blue-700);
+
+    &:hover {
+      color: var(--link-hover-color, var(--alt-color, -blue-800));
+    }
+
+    &:active {
+      color: var(--link-active-color, var(--link-color, -blue-600));
+    }
+  }
+
+  abbr[title] {
+    border-bottom: 1px dotted;
+    cursor: unquote("help");
+    text-decoration: unquote("none");
+  }
+
+  kbd, tt, *:not(pre) > code {
+    font-size: 0.85rem;
+    font-family: -font-mono;
+    background-color: rgba(#000, 0.08);
+    color: inherit;
+    padding: 0 2;
+    margin: 0;
+    border-radius: 2;
+  }
+
+  pre {
+    font-size: 0.85rem;
+    font-family: -font-mono;
+    background-color: rgba(#000, 0.08);
+    color: inherit;
+    padding: 8 12;
+    border-radius: 4;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.85rem;
+    }
+  }
+
+  b, strong {
+    font-weight: var(--text-font-weight-bold);
+  }
+
+  i, em {
+    font-style: italic;
+  }
+
+  /*
+    sub, sup {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+    }
+  
+  
+    sub {
+      bottom: -0.25em;
+    }
+  
+    sup {
+      top: -0.5em;
+    }
+  */
+  sup {
+    vertical-align: baseline;
+    font-feature-settings: "sups";
+    font-size: 1em;
+  }
+
+  sub {
+    vertical-align: baseline;
+    font-feature-settings: "subs";
+    font-size: 1em;
+  }
+
+  small {
+    font-size: 80%;
+  }
+
+  mark {
+    color: var(--highlight-foreground);
+    background: var(--highlight-background, yellow);
+    padding-top: 0;
+    padding-right: px(2);
+    padding-left: px(2);
+    padding-bottom: px(1);
+    border-radius: px(2);
+  }
+
+  // Blockquote
+  blockquote {
+    border-left: px(2) solid var(--primary-color);
+    padding-left: var(--text-paragraph-spacing);
+  }
+
+  // Lists
+  ul, ol {
+    list-style-position: outside;
+    margin-left: px(32);
+    padding: 0;
+
+    li {
+      margin-top: 0;
+    }
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ul ul {
+    list-style-type: circle;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  dl dt {
+    font-weight: var(--text-font-weight-bold);
+  }
+
+  dl dd {
+    margin-left: var(--text-paragraph-spacing);
+  }
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  img, video, figure {
+    display: block;
+    margin-y: var(--text-paragraph-spacing);
+
+    & > * {
+      margin-y: 0;
+    }
+  }
+
+  table.table {
+    th, td {
+      border-bottom-width: 1px;
+      border-bottom-color: var(--secondary-color);
+      margin: 0;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    tr {
+      &:last-child {
+        border-bottom-width: 0;
+      }
+
+      th {
+        font-weight: var(--text-font-weight-bold);
+        vertical-align: bottom;
+        padding-right: var(--text-table-cell-padding);
+        padding-bottom: var(--text-table-cell-padding);
+        padding-left: var(--text-table-cell-padding);
+        border-bottom-color: var(--secondary-color);
+      }
+
+      td {
+        vertical-align: top;
+        padding: var(--text-table-cell-padding);
+      }
+    }
+  }
+}

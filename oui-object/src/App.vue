@@ -4,7 +4,7 @@ import { OuiObject } from '../lib/main'
 const obj = {
   a: 1,
   b: 'b',
-  c: [1, true, false, 'string', 3.12, null, undefined],
+  c: [1, true, false, 'string fiff <- no ligatures!', 3.12, null, undefined],
   cc: [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
   d: {
     x: {
