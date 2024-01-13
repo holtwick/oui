@@ -5,7 +5,7 @@
 import Wrapper from './components/Wrapper.vue'
 import type { Path } from './util'
 
-import './index.css'
+import './index.styl'
 
 withDefaults(
   defineProps<{
