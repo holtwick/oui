@@ -4,9 +4,9 @@ import type { Ref } from 'vue'
 import type { OuiMenuItem } from './_types'
 import OuiFloat from './oui-float.vue'
 
-defineOptions({
-  inheritAttrs: false,
-})
+// defineOptions({
+//   inheritAttrs: false,
+// })
 
 const props = defineProps<{
   items: OuiMenuItem[]

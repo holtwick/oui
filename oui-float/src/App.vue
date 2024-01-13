@@ -45,6 +45,7 @@ Yeah!"
       </button>
       <OuiMenu
         v-model="show2"
+        hover
         :reference="anchor2"
         :items="[
           {
@@ -64,7 +65,7 @@ Yeah!"
       />
     </p>
 
-    <p>
+    <!-- <p>
       <OuiFloatButton placement="right" :offset="10" name="oui-menu">
         OuiFloatButton
 
@@ -74,17 +75,29 @@ Yeah!"
           </div>
         </template>
       </OuiFloatButton>
-    </p>
+    </p> -->
 
     <p>
       TRIGGER
 
-      <OuiFloat placement="right" :offset="10" close>
+      <OuiFloat placement="right" :offset="10" close hover>
         <template #trigger="{ active }">
           <button>OuiFloat #click {{ active }}</button>
         </template>
 
         This is floating
+
+        <form action="#">
+          <input id="x" type="text" name="x">
+          <select>
+            <option value="1">
+              Eins
+            </option>
+            <option value="2">
+              Eins
+            </option>
+          </select>
+        </form>
       </OuiFloat>
     </p>
 
