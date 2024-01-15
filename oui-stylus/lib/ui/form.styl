@@ -1,12 +1,5 @@
 @require "../mixins";
 
-// Don't get distracted by text selections or other sideeffects
-oui-ui() {
-  user-select: none;
-  -webkit-user-select: none;
-  cursor: default;
-}
-
 oui-input-reset() {
   appearance: none;
   -webkit-appearance: none;
@@ -23,6 +16,11 @@ oui-input-reset() {
   color: inherit;
   text-transform: none;
   vertical-align: baseline;
+
+  &::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
 }
 
 oui-button-default() {
@@ -43,6 +41,8 @@ oui-button-default() {
   max-width: 100%;
   pointer-events: initial;
   vertical-align: middle;
+  user-select: none;
+  -webkit-user-select: none;
 
   // // Fixes alignment issues
   > * {
@@ -153,6 +153,7 @@ control-boolean-width = px(32);
 control-boolean-margin = px(1);
 
 oui-boolean-default() {
+  oui-input-reset();
   --active: var(--button-bg);
   --active-inner: var(--input-bg);
   --border: var(--input-border);
@@ -164,14 +165,13 @@ oui-boolean-default() {
   width: control-boolean-height;
   outline: none;
   display: inline-block;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-  // vertical-align baseline
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   position: relative;
   margin: 0;
   margin-bottom: px(-2); // Align better
-  cursor: pointer;
+  // cursor: pointer;
   border: 1px solid var(--bc, var(--border));
   background: var(--b, var(--background));
   transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
@@ -211,7 +211,7 @@ oui-boolean-default() {
   &:hover {
     &:not(:checked) {
       &:not(:disabled) {
-        --bc: var(--border-hover);
+        border-color: var(--input-border-hover); /* --bc: var(--border-hover); */
       }
     }
   }
@@ -222,7 +222,7 @@ oui-boolean-default() {
 
     &:not(:focus-visible, :active) {
       box-shadow: unquote("inherit");
-      border-color: unquote("inherit");
+      // border-color: unquote("inherit");
     }
   }
 
@@ -230,13 +230,13 @@ oui-boolean-default() {
     line-height: control-boolean-height;
     display: inline-block;
     vertical-align: top;
-    cursor: pointer;
+    // cursor: pointer;
   }
 }
 
 oui-checkbox() {
   oui-boolean-default();
-  border-radius: base;
+  border-radius: 4px;
   width: control-boolean-height;
 
   &:after {
