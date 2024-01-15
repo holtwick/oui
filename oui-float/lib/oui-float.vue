@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
-import { onClickOutside, onKeyStroke } from '@vueuse/core'
+import { type UseElementHoverOptions, onClickOutside, onKeyStroke, useElementHover, useFocusWithin } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { computed, ref, useAttrs, watch } from 'vue'
 
@@ -16,6 +16,9 @@ const props = defineProps<{
   offset?: OffsetOptions
   padding?: Padding
   close?: boolean
+  hover?: boolean
+  delayEnter?: number
+  delayLeave?: number
 }>()
 
 const emit = defineEmits(['close'])
@@ -23,6 +26,7 @@ const emit = defineEmits(['close'])
 const slots = defineSlots<{
   default(): any
   click(props: { active: boolean }): any
+  hover(props: { active: boolean }): any
   trigger(props: { active: boolean }): any
 }>()
 
@@ -98,6 +102,20 @@ watch(triggerSlot, (s) => {
 
   if (s && !el)
     console.error('#click slot requires at least one element!')
+})
+
+const hoverProps: UseElementHoverOptions = {
+  delayLeave: props.delayLeave ?? 250,
+  delayEnter: props.delayEnter ?? 0,
+}
+
+const hoverFloating = useElementHover(floating, hoverProps)
+const hoverReference = useElementHover(reference, hoverProps)
+const { focused } = useFocusWithin(floating)
+
+watch(() => ([hoverFloating.value, hoverReference.value, focused.value]), (v) => {
+  if (props.hover)
+    active.value = !!(hoverFloating.value || hoverReference.value || focused.value)
 })
 </script>
 
