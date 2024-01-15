@@ -1,7 +1,7 @@
 @require "../mixins/base.styl";
 
-tw-layout() {
-  if __tw_once("layout") {
+oui-layout() {
+  if __oui_once("layout") {
     .stack-x {
       use: stack-x;
     }
@@ -43,6 +43,32 @@ tw-layout() {
 
     .divider {
       // use: divider;
+    }
+  }
+}
+
+oui-preset-layout() {
+  if __oui_once("layout") {
+    ._stack_x {
+      use: stack-x;
+    }
+
+    ._stack_y {
+      use: stack-y;
+    }
+
+    ._center {
+      use: stack-item-center;
+    }
+
+    ._scroll {
+      use: stack-item-scroll;
+      contain: content;
+    }
+
+    ._space, ._grow {
+      flex: auto !important;
+      overflow: hidden !important;
     }
   }
 }

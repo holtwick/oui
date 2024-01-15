@@ -1,15 +1,5 @@
 @require "../mixins";
 
-control-hover = unquote("var(--control-hover, rgba(var(--primary-color-value), 0.1))");
-control-active = unquote("var(--control-active, rgba(var(--primary-color-value), 0.8))");
-control-radius = var(--control-radius, 4px);
-control-border = var(--control-border, none);
-input-color = var(--input-color, black);
-input-background = var(--input-background, white);
-input-border = var(--input-border, 1px solid -gray-300);
-input-border-hover = var(--input-border-hover, 1px solid -gray-400);
-input-radius = var(--input-radius, 4px);
-
 // Don't get distracted by text selections or other sideeffects
 oui-ui() {
   user-select: none;
@@ -20,15 +10,18 @@ oui-ui() {
 oui-input-reset() {
   appearance: none;
   -webkit-appearance: none;
-
-  &, *, *::before, *::after {
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    vertical-align: baseline;
-  }
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  line-height: 1;
+  font-size: 16;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  width: auto;
+  min-width: 0;
+  color: inherit;
+  text-transform: none;
 }
 
 oui-button-default() {
@@ -45,7 +38,7 @@ oui-button-default() {
     // }
   */
   display: inline-flex;
-  height: 32;
+  height: var(--button-height, var(--input-height, px(32)));
   max-width: 100%;
   // cursor: pointer;
   pointer-events: initial;
@@ -56,7 +49,7 @@ oui-button-default() {
   }
 
   &:focus {
-    box-shadow: focus; /* Workaround for :focus that otherwise stays after mouse click */
+    box-shadow: var(--input-shadow-focus); /* Workaround for :focus that otherwise stays after mouse click */
 
     &:not(:focus-visible, :active) {
       box-shadow: unquote("inherit");
@@ -77,43 +70,44 @@ oui-button-default() {
 // A simple button template
 oui-button() {
   oui-button-default();
-  font-weight: semibold;
-  color: var(--button-bg);
+  font-weight: 600;
+  color: var(--button-fg);
   background: var(--button-bg);
-  border-radius: control-radius;
+  border-radius: var(--button-radius, var(--input-radius));
+  border: var(--button-border);
   padding-x: 8;
   line-height: 1em;
 
   &:hover:not([disabled]) {
-    background: control-hover;
+    background: var(--button-bg-hover);
   }
 
   &:active:not([disabled]) {
-    background: control-active;
+    background: var(--button-bg-active);
   }
 }
 
 oui-input-default() {
   oui-input-reset();
   padding-x: 8;
-  min-height: 34;
-  border-radius: input-radius;
-  border: input-border;
-  color: input-color;
-  background: input-background;
-  max-width: 100%; /* r:not(&[disabled]), &:hover:not(&:focus), &:hover:not(&:focus-within), &:hover:not(&:focus-visible) */
+  min-height: var(--button-height, var(--input-height, px(32)));
+  border-radius: var(--input-radius);
+  border: var(--input-border);
+  color: var(--input-fg);
+  background: var(--input-bg);
+  max-width: 100%;
 
   &:hover {
-    border: input-border-hover;
+    border: var(--input-border-hover);
   }
 
   &:focus, &:focus-within {
-    box-shadow: focus;
-    border-color: -blue-500 !important; /* Workaround for :focus that otherwise stays after mouse click */
+    box-shadow: var(--input-shadow-focus);
+    border: var(--input-border-focus) !important; /* Workaround for :focus that otherwise stays after mouse click */
 
     &:not(:focus-visible, :active) {
       box-shadow: unquote("inherit");
-      border-color: unquote("inherit");
+      border: unquote("inherit");
     }
   }
 
@@ -125,6 +119,7 @@ oui-input-default() {
 
 oui-input-text() {
   oui-input-default();
+  display: inline-flex;
 }
 
 oui-input-number() {
@@ -132,15 +127,10 @@ oui-input-number() {
   width: 12ch;
 }
 
-oui-label() {
-  font-size: sm;
-  cursor: pointer;
-}
-
 oui-select-icon() {
   padding-right: px(20 + 8);
   background: right no-repeat;
-  background-color: input-background;
+  background-color: var(--input-bg);
   background-position: right px(8) top 50%;
   background-size: px(20) px(20);
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -160,8 +150,8 @@ oui-boolean-default() {
   --active: var(--button-bg);
   --active-inner: var(--button-bg);
   --border: var(--button-bg);
-  --border-hover: control-hover;
-  --background: var(--button-bg);
+  --border-hover: var(--button-bg-hover);
+  --background: var(--input-bg);
   --disabled: -gray-100;
   --disabled-inner: -gray-100;
   height: control-boolean-height;
@@ -221,8 +211,8 @@ oui-boolean-default() {
   }
 
   &:focus {
-    box-shadow: focus;
-    border-color: -blue-500; /* Workaround for :focus that otherwise stays after mouse click */
+    box-shadow: var(--input-shadow-focus);
+    border: var(--input-border-focus); /* Workaround for :focus that otherwise stays after mouse click */
 
     &:not(:focus-visible, :active) {
       box-shadow: unquote("inherit");

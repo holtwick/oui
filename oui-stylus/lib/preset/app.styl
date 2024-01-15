@@ -16,7 +16,7 @@ statusbar(color) {
 }
 
 tw-app() {
-  if __tw_once("app") {
+  if __oui_once("app") {
     tw-reset();
 
     html, body {
@@ -57,7 +57,7 @@ tw-app() {
 }
 
 tw-app-full() {
-  if __tw_once("app-full") {
+  if __oui_once("app-full") {
     tw-app();
 
     body {
