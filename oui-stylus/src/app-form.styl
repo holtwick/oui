@@ -87,51 +87,5 @@ oui-form() {
 }
 
 .oui-form {
-  input[type=text], textarea {
-    oui-input-text();
-  }
-
-  textarea {
-    padding-y: 6;
-    line-height: 1.2;
-  }
-
-  textarea._textarea_grow {
-    overflow: hidden !important;
-    height: 32;
-    resize: none;
-  }
-
-  input[type=number] {
-    oui-input-number();
-  }
-
-  button, input[type="button"], input[type="reset"], input[type="submit"] {
-    oui-button();
-  }
-
-  select {
-    oui-select();
-  }
-
-  /* button + button {
-    margin-left: 8;
-  } */
+  oui-form-default();
 }
-
-/*
-.oui-input-join {
-  input[type], button {
-    border-radius: 0;
-
-    :not(&:only-child):first-child {
-      border-top-left-radius: var(--input-radius);
-      border-bottom-left-radius: var(--input-radius);
-    }
-
-    :not(&:only-child):last-child {
-      border-top-right-radius: var(--input-radius);
-      border-bottom-right-radius: var(--input-radius);
-    }
-  }
-} */
