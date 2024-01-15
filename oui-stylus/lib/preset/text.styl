@@ -56,14 +56,14 @@ oui-text() {
   }
 
   a, .a {
-    color: var(--link-color, -blue-700);
+    color: var(--link-fg);
 
     &:hover {
-      color: var(--link-hover-color, var(--alt-color, -blue-800));
+      color: var(--link-fg-hover);
     }
 
     &:active {
-      color: var(--link-active-color, var(--link-color, -blue-600));
+      color: var(--link-fg-active);
     }
   }
 
@@ -75,8 +75,8 @@ oui-text() {
 
   kbd, tt, *:not(pre) > code {
     font-size: 0.85rem;
-    font-family: -font-mono;
-    background-color: rgba(#000, 0.08);
+    font-family: var(--font-mono);
+    background-color: var(--n0-100);
     color: inherit;
     padding: 0 2;
     margin: 0;
@@ -85,8 +85,8 @@ oui-text() {
 
   pre {
     font-size: 0.85rem;
-    font-family: -font-mono;
-    background-color: rgba(#000, 0.08);
+    font-family: var(--font-mono);
+    background-color: var(--n0-100);
     color: inherit;
     padding: 8 12;
     border-radius: 4;
@@ -144,26 +144,32 @@ oui-text() {
     color: var(--highlight-foreground);
     background: var(--highlight-background, yellow);
     padding-top: 0;
-    padding-right: px(2);
-    padding-left: px(2);
-    padding-bottom: px(1);
-    border-radius: px(2);
+    padding-right: 2;
+    padding-left: 2;
+    padding-bottom: 1;
+    border-radius: 2;
   }
 
   // Blockquote
   blockquote {
-    border-left: px(2) solid var(--primary-color);
+    margin: 0;
+    border-left: 2px solid var(--p1-500);
     padding-left: var(--text-paragraph-spacing);
   }
 
   // Lists
   ul, ol {
-    list-style-position: outside;
-    margin-left: px(32);
+    margin: 0;
     padding: 0;
+    list-style-position: outside;
+    margin-left: 32;
 
     li {
-      margin-top: 0;
+      margin: 0;
+    }
+
+    ul, ol {
+      margin-left: 20;
     }
   }
 
