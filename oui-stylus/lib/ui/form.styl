@@ -22,6 +22,7 @@ oui-input-reset() {
   min-width: 0;
   color: inherit;
   text-transform: none;
+  vertical-align: baseline;
 }
 
 oui-button-default() {
@@ -40,9 +41,10 @@ oui-button-default() {
   display: inline-flex;
   height: var(--button-height, var(--input-height, px(32)));
   max-width: 100%;
-  // cursor: pointer;
   pointer-events: initial;
+  vertical-align: middle;
 
+  // // Fixes alignment issues
   > * {
     display: inline-flex;
     flex: none;
@@ -74,9 +76,8 @@ oui-button() {
   color: var(--button-fg);
   background: var(--button-bg);
   border-radius: var(--button-radius, var(--input-radius));
-  border: var(--button-border);
+  border: 1px solid var(--button-border, transparent);
   padding-x: 8;
-  line-height: 1em;
 
   &:hover:not([disabled]) {
     background: var(--button-bg-hover);
@@ -84,6 +85,10 @@ oui-button() {
 
   &:active:not([disabled]) {
     background: var(--button-bg-active);
+  }
+
+  svg {
+    size: 1em;
   }
 }
 
