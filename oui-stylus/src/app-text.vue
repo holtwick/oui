@@ -4,9 +4,7 @@ import './app-text.styl'
 
 <template>
   <div class="_text">
-    <h1>Welcome</h1>
-
-    <Readme />
+    <h1>Text</h1>
 
     <h1 class="blog-post-title">
       Sample blog post

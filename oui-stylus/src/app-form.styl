@@ -1,0 +1,100 @@
+@require "../index";
+
+oui-form() {
+  &-button {
+    oui-button();
+
+    .webkit & {
+      font-weight: 500;
+      color: buttontext;
+      background: -gray-200;
+
+      &:hover {
+        background: -gray-300;
+      }
+    }
+
+    & + &-button {
+      margin-left: px(8);
+    }
+  }
+
+  &-button-link {
+    oui-button-default();
+    border-radius: 4;
+    color: var(--primary-darker-color);
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  &-input, &-textarea {
+    oui-input-text();
+  }
+
+  &-textarea {
+    min-height: 28; // todo
+    margin-block: 0;
+    padding-top: 3;
+    padding-bottom: 4;
+    resize: none;
+  }
+
+  &-number {
+    oui-input-number();
+  }
+
+  &-input, &-textarea, &-number {
+    &[readonly] {
+      color: var(--secondary-color);
+      cursor: unquote("not-allowed");
+    }
+  }
+
+  &-checkbox {
+    oui-checkbox();
+  }
+
+  &-switch {
+    oui-switch();
+  }
+
+  &-radio {
+    oui-radio();
+  }
+
+  &-select {
+    oui-select();
+  }
+
+  &-label {
+    oui-label();
+  }
+}
+
+.oui {
+  oui-form();
+}
+
+.oui-form {
+  input[type=text], textarea {
+    oui-input-text();
+  }
+
+  input[type=number] {
+    oui-input-number();
+  }
+
+  button {
+    oui-button();
+  }
+
+  select {
+    oui-select();
+  }
+
+  button + button {
+    margin-left: 8;
+  }
+}

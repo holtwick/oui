@@ -1,25 +1,38 @@
 @require "../mixins";
 
-control-inner = var(--control-inner, white);
-control-color = unquote("var(--control-color, rgba(var(--primary-color-value), 1))");
 control-hover = unquote("var(--control-hover, rgba(var(--primary-color-value), 0.1))");
 control-active = unquote("var(--control-active, rgba(var(--primary-color-value), 0.8))");
-control-radius = var(--control-radius, 4);
+control-radius = var(--control-radius, 4px);
 control-border = var(--control-border, none);
 input-color = var(--input-color, black);
 input-background = var(--input-background, white);
 input-border = var(--input-border, 1px solid -gray-300);
 input-border-hover = var(--input-border-hover, 1px solid -gray-400);
-input-radius = var(--input-radius, 4);
+input-radius = var(--input-radius, 4px);
 
 // Don't get distracted by text selections or other sideeffects
-tw-ui() {
+oui-ui() {
   user-select: none;
   -webkit-user-select: none;
   cursor: default;
 }
 
-tw-button-default() {
+oui-input-reset() {
+  appearance: none;
+  -webkit-appearance: none;
+
+  &, *, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+  }
+}
+
+oui-button-default() {
+  oui-input-reset();
   stack-x(8);
   stack-item-center();
   /*
@@ -62,11 +75,11 @@ tw-button-default() {
 }
 
 // A simple button template
-tw-button() {
-  tw-button-default();
+oui-button() {
+  oui-button-default();
   font-weight: semibold;
-  color: control-inner;
-  background: control-color;
+  color: var(--button-bg);
+  background: var(--button-bg);
   border-radius: control-radius;
   padding-x: 8;
   line-height: 1em;
@@ -80,7 +93,8 @@ tw-button() {
   }
 }
 
-tw-input-default() {
+oui-input-default() {
+  oui-input-reset();
   padding-x: 8;
   min-height: 34;
   border-radius: input-radius;
@@ -109,21 +123,21 @@ tw-input-default() {
   }
 }
 
-tw-input-text() {
-  tw-input-default();
+oui-input-text() {
+  oui-input-default();
 }
 
-tw-input-number() {
-  tw-input-default();
+oui-input-number() {
+  oui-input-default();
   width: 12ch;
 }
 
-tw-label() {
+oui-label() {
   font-size: sm;
   cursor: pointer;
 }
 
-tw-select-icon() {
+oui-select-icon() {
   padding-right: px(20 + 8);
   background: right no-repeat;
   background-color: input-background;
@@ -132,9 +146,9 @@ tw-select-icon() {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-tw-select() {
-  tw-input-default();
-  tw-select-icon();
+oui-select() {
+  oui-input-default();
+  oui-select-icon();
   padding-y: 6;
 }
 
@@ -142,12 +156,12 @@ control-boolean-height = px(16);
 control-boolean-width = px(32);
 control-boolean-margin = px(1);
 
-tw-boolean-default() {
-  --active: control-color;
-  --active-inner: control-inner;
-  --border: control-color;
+oui-boolean-default() {
+  --active: var(--button-bg);
+  --active-inner: var(--button-bg);
+  --border: var(--button-bg);
   --border-hover: control-hover;
-  --background: control-inner;
+  --background: var(--button-bg);
   --disabled: -gray-100;
   --disabled-inner: -gray-100;
   height: control-boolean-height;
@@ -224,8 +238,8 @@ tw-boolean-default() {
   }
 }
 
-tw-checkbox() {
-  tw-boolean-default();
+oui-checkbox() {
+  oui-boolean-default();
   border-radius: base;
   width: control-boolean-height;
 
@@ -247,8 +261,8 @@ tw-checkbox() {
   }
 }
 
-tw-switch() {
-  tw-boolean-default();
+oui-switch() {
+  oui-boolean-default();
   height: control-boolean-height; // + px(2)
   width: control-boolean-width;
   border-radius: 999px;
@@ -277,8 +291,8 @@ tw-switch() {
   }
 }
 
-tw-radio() {
-  tw-boolean-default();
+oui-radio() {
+  oui-boolean-default();
   border-radius: 50%;
 
   &:after {
