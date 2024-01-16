@@ -1,10 +1,10 @@
 // (C)opyright 2020-11-17 Dirk Holtwick, holtwick.it. All rights reserved.
 
 // Some aliases for true and false
-on = true;
-off = false;
-yes = true;
-no = false;
+// on = true;
+// off = false;
+// yes = true;
+// no = false;
 
 // Funny shortcuts for nicer code. If you have a function that
 // does not require arguments but want to make it look like
@@ -59,8 +59,8 @@ rexArgs(args) {
 }
  
 // Helper to only add a global mixin once
-__tw_once(name) {
-  check = "__tw_once__" + name;
+__oui_once(name) {
+  check = "__oui_once__" + name;
 
   if lookup(check) != check {
     define(check, check, true);

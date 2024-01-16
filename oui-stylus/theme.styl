@@ -54,17 +54,17 @@
   // 
   // controls, ui
   // 
-  --control-color: var(--p1-color);
+  --control-color: var(--p1-500);
   --control-inner: white;
-  --control-hover: var(--p1-dark-color);
-  --control-active: var(--p1-darker-color);
-  --input-color: var(--text-color);
-  --input-background: var(--background-color);
-  --input-border: 1px solid var(--n0-200);
-  --input-border-hover: 1px solid var(--p1-300);
+  --control-hover: var(--p1-600);
+  --control-active: var(--p1-700);
+  --input-color: var(--fg);
+  --input-background: var(--bg);
+  --input-border: var(--n0-200);
+  --input-border-hover: var(--p1-300);
   --input-focus-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
   --input-focus-border: rgba(66, 153, 225, 1);
-  --input-radius: 4;
+  --input-radius: px(4);
   // 
   // 
   --panel-bg: var(--n0-100);
@@ -73,6 +73,20 @@
   --tag-fg: var(--n0-50);
   --tag-bg: var(--n0-500);
   --tag-bg-hover: var(--n0-900);
+}
+
+:root {
+  --button-fg: white;
+  --button-bg: var(--p1-500);
+  --button-bg-hover: var(--p1-600);
+  --button-bg-active: var(--p1-700);
+  --input-fg: var(--fg);
+  --input-bg: var(--bg);
+  --input-border: var(--n0-200);
+  --input-border-hover: var(--p1-300);
+  --input-border-focus: rgba(66, 153, 225, 1);
+  --input-shadow-focus: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  --input-radius: 4px;
 }
 
 html.dark {
@@ -107,9 +121,9 @@ html.dark {
 
 /* Hyperlinks */
 :root {
-  --link-fg: var(--p1-800);
-  --link-fg-hover: var(--p1-700);
-  --link-fg-active: var(--p1-600);
+  --link-fg: var(--p1-700);
+  --link-fg-hover: var(--p1-800);
+  --link-fg-active: var(--p1-900);
 }
 
 /* Dark mode via class, because user might want to choose */

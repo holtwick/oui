@@ -1,0 +1,91 @@
+@require "../index";
+
+oui-preset-layout();
+
+._form {
+  &_section {
+    margin-block: 16;
+    gap: 8;
+  }
+}
+
+oui-form() {
+  &-button {
+    oui-button();
+
+    .webkit & {
+      font-weight: 500;
+      color: buttontext;
+      background: -gray-200;
+
+      &:hover {
+        background: -gray-300;
+      }
+    }
+
+    & + &-button {
+      margin-left: px(8);
+    }
+  }
+
+  &-button-link {
+    oui-button-default();
+    border-radius: 4;
+    color: var(--primary-darker-color);
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  &-input, &-textarea {
+    oui-input-text();
+  }
+
+  &-textarea {
+    min-height: 28; // todo
+    margin-block: 0;
+    padding-top: 3;
+    padding-bottom: 4;
+    resize: none;
+  }
+
+  &-number {
+    oui-input-number();
+  }
+
+  &-input, &-textarea, &-number {
+    &[readonly] {
+      color: var(--secondary-color);
+      cursor: unquote("not-allowed");
+    }
+  }
+
+  &-checkbox {
+    oui-checkbox();
+  }
+
+  &-switch {
+    oui-switch();
+  }
+
+  &-radio {
+    oui-radio();
+  }
+
+  &-select {
+    oui-select();
+  }
+
+  &-label {
+    oui-label();
+  }
+}
+
+.oui {
+  oui-form();
+}
+
+.oui-form {
+  oui-form-default();
+}

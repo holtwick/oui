@@ -1,7 +1,7 @@
 @require "oui-stylus";
 
 oui-notification() {
-  if __tw_once("oui-notification") {
+  if __oui_once("oui-notification") {
     --notification-color: var(--light-text-color, white);
     --notification-background: rgb(56, 56, 56); // rgba(118, 118, 118, 1);
     --notification-border: none; // 1px solid #dddddd;

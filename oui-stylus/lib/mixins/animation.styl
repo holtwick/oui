@@ -7,7 +7,7 @@
 // https://stylus-lang.com/docs/keyframes.html
 // vendors = moz webkit ms official
 __tw_keyframes() {
-  if __tw_once("animations") {
+  if __oui_once("animations") {
     @keyframes spin {
       to {
         transform: rotate(360deg);
@@ -82,25 +82,21 @@ __tw_keyframes() {
 
 animation-spin() {
   __tw_keyframes();
-
   animation: -animation-spin;
 }
 
 animation-ping() {
   __tw_keyframes();
-
   animation: -animation-ping;
 }
 
 animation-pulse() {
   __tw_keyframes();
-
   animation: -animation-pulse;
 }
 
 animation-bounce() {
   __tw_keyframes();
-
   animation: -animation-bounce;
 }
 
@@ -109,14 +105,12 @@ tw-animation(value = bounce) {
 
   if def != null {
     __tw_keyframes();
-
     animation: def;
   } else {
     error("Undefined animation preset: " + value);
   }
 }
 
-// Transformations
 transform-translate(x = 0, y = 0) {
   --transform-translate-x: x;
   --transform-translate-y: (y || x);
@@ -146,8 +140,8 @@ tw-transform-gpu() {
 
 // Transition
 // https://tailwindcss.com/docs/transition-property
-// defaults:
 -transition-all = all;
+// defaults:
 -transition-none = none;
 -transition-opacity = opacity;
 -transition-transform = transform, -webkit-transform;
@@ -182,9 +176,7 @@ vue-animation-end() {
   &-enter, &-leave-to {
     {block};
   }
-}
-
-/* Example:
+} /* Example:
 
 https://v3.vuejs.org/guide/transitions-enterleave.html#transitioning-single-elements-components
 

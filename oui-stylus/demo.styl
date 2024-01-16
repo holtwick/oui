@@ -3,6 +3,20 @@
 
 oui-fix();
 
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+// oui-reset();
 body {
   font-family: var(--font);
   padding: 0;

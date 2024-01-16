@@ -1,21 +1,13 @@
 @require "../mixins/base.styl";
 
-tw-layout() {
-  if __tw_once("layout") {
+oui-layout() {
+  if __oui_once("layout") {
     .stack-x {
       use: stack-x;
     }
 
     .stack-y {
       use: stack-y;
-    }
-
-    .space-x {
-      use: space-x;
-    }
-
-    .space-y {
-      use: space-y;
     }
 
     .center, .centered {
@@ -35,14 +27,31 @@ tw-layout() {
     .fixed-space {
       width: 24;
     }
+  }
+}
 
-    .gap {
-      // use: space-x();
-      // use: space-y();
+oui-preset-layout() {
+  if __oui_once("layout") {
+    ._stack_x {
+      use: stack-x;
     }
 
-    .divider {
-      // use: divider;
+    ._stack_y {
+      use: stack-y;
+    }
+
+    ._center {
+      use: stack-item-center;
+    }
+
+    ._scroll {
+      use: stack-item-scroll;
+      contain: content;
+    }
+
+    ._space, ._grow {
+      flex: auto !important;
+      overflow: hidden !important;
     }
   }
 }

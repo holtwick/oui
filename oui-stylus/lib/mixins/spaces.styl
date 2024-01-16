@@ -66,23 +66,6 @@ margin-y(value) {
   margin-bottom: value;
 }
 
-space-x(value = 8) {
-  > *:not(:last-child) {
-    margin-right: rex(value);
-  }
-}
-
-space-y(value = 8) {
-  > *:not(:last-child) {
-    margin-bottom: rex(value);
-  }
-}
-
-space(value = 8) {
-  space-x(value);
-  space-y(value);
-}
-
 -safe-top = env(safe-area-inset-top, 0);
 -safe-right = env(safe-area-inset-right, 0);
 -safe-bottom = env(safe-area-inset-bottom, 0);
@@ -95,4 +78,16 @@ safe-padding() {
 
 safe-margin() {
   margin: -safe-top -safe-right -safe-bottom -safe-left;
+}
+
+gap(value) {
+  gap: rex(value);
+}
+
+gap-x(value) {
+  gap: rex(value);
+}
+
+gap-y(value) {
+  gap: rex(value);
 }
