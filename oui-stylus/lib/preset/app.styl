@@ -15,9 +15,9 @@ statusbar(color) {
   background: var(color, black);
 }
 
-tw-app() {
+oui-app() {
   if __oui_once("app") {
-    tw-reset();
+    oui-reset();
 
     html, body {
       height: 100%;
@@ -56,16 +56,16 @@ tw-app() {
   }
 }
 
-tw-app-full() {
+oui-app-full() {
   if __oui_once("app-full") {
-    tw-app();
+    oui-app();
 
     body {
       overflow: hidden;
     }
 
     .app {
-      height: full;
+      height: 10%;
     }
   }
 }

@@ -9,7 +9,7 @@ prose-list-indent = Var(--prose-list-indent, px(32));
 prose-paragraph-spacing = Var(--prose-paragraph-spacing, px(16));
 prose-table-cell-padding = Var(--prose-table-cell-padding, px(8));
 
-tw-prose() {
+oui-prose() {
   &, * {
     user-select: text;
     -webkit-user-select: text;
@@ -217,8 +217,8 @@ tw-prose() {
   }
 }
 
-tw-prose-responsive() {
-  tw-prose();
+oui-prose-responsive() {
+  oui-prose();
   max-width: 100%;
 
   // overflow: hidden;
@@ -242,8 +242,8 @@ tw-prose-responsive() {
   }
 }
 
-tw-prose-float() {
+oui-prose-float() {
   max-width: 65ch;
   line-height: px(24);
-  tw-prose();
+  oui-prose();
 }

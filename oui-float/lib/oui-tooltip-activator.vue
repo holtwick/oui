@@ -12,7 +12,7 @@ let _activated = false
 let ignore = false
 
 if (_activated)
-  throw new Error('tw-tooltip-trigger can only be activated once')
+  throw new Error('oui-tooltip-trigger can only be activated once')
 
 _activated = true
 

@@ -18,7 +18,7 @@ import OuiClose from './oui-close.vue'
           >
             <!-- <div v-if="n.icon" class="oui-notification-icon">
               <slot name="icon" />
-              <tw-icon :name="n.icon" />
+              <oui-icon :name="n.icon" />
             </div> -->
             <div class="oui-notification-body">
               <div class="oui-notification-header">
