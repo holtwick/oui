@@ -1,6 +1,4 @@
-// (C)opyright 2020-11-17 Dirk Holtwick, holtwick.it. All rights reserved.
-@require "base.styl";
-@require "colors.styl";
+@require "./base.styl";
 
 // https://tailwindcss.com/docs/float
 clearfix() {
@@ -8,18 +6,6 @@ clearfix() {
     content: "";
     display: table;
     clear: both;
-  }
-}
-
-// https://tailwindcss.com/docs/display#hidden
-hidden() {
-  display: none;
-}
-
-// https://tailwindcss.com/docs/placeholder-color
-placeholder(placeholderColor = -text-500) {
-  &::placeholder {
-    color: placeholderColor;
   }
 }
 

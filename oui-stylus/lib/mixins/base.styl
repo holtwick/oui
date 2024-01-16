@@ -1,24 +1,16 @@
-// (C)opyright 2020-11-17 Dirk Holtwick, holtwick.it. All rights reserved.
-
-// Some aliases for true and false
-// on = true;
-// off = false;
-// yes = true;
-// no = false;
-
 // Funny shortcuts for nicer code. If you have a function that
 // does not require arguments but want to make it look like
 // it was a regular property you have those choices:
  
 use(fn) {
   for fn in arguments {
-    wfn = lookup("tw-" + fn);
+    wfn = lookup("oui-" + fn);
     if wfn is a "function" {
       wfn();
     } else if fn is a "function" {
       fn();
     } else {
-      s('/* Error: Unknown mixin with name "%s" or "tw-%s" */', fn, fn);
+      s('/* Error: Unknown mixin with name "%s" or "oui-%s" */', fn, fn);
       error("Unknown mixin: " + fn);
     }
   }
@@ -30,11 +22,11 @@ use(fn) {
 // We assume that `1rem == 16px`, so `1rex == 0.0625rem`
 // The advantage is that the sizes nicely scale to different
 // default font sizes defined in `html`
-tw-size-factor ?= (1 / 16)rem;
+oui-size-factor ?= (1 / 16)rem;
 
 rex(value) {
   if value is a "unit" && unit(value) == "" && (value != 0) {
-    value * tw-size-factor;
+    value * oui-size-factor;
   } else {
     value;
   }

@@ -52,6 +52,27 @@ import { SmilePlus } from 'lucide-vue-next'
         Happy
       </label>
     </div>
+    <div class="_form_section">
+      <div>
+        <label>
+          <input type="radio" value="1">
+          One
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="radio" value="2" checked>
+          Two
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="radio" value="3">
+          Three
+        </label>
+      </div>
+    </div>
+
     <div class="_form_section _stack_x">
       <button disabled>
         Cancel

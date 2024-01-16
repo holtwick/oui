@@ -1,5 +1,4 @@
-// (C)opyright 2020-11-17 Dirk Holtwick, holtwick.it. All rights reserved.
-@require "utils.styl";
+@require "./base.styl";
 
 -media-sm = "(min-width: 640px)";
 -media-md = "(min-width: 768px)";
@@ -26,14 +25,13 @@
 -media-light = "(prefers-color-scheme: light)";
 -media-print = print;
 -media-screen = screen;
+-media-fullscreen = "(display-mode: fullscreen)";
+-media-standalone = "(display-mode: standalone)";
+-fullscreen = -media-fullscreen;
 
 stack-x(space = 0) {
   display: flex;
   flex-direction: row;
-
-  > * {
-    flex: none;
-  }
 
   if space != 0 {
     gap: space;
@@ -43,10 +41,6 @@ stack-x(space = 0) {
 stack-y(space = 0) {
   display: flex;
   flex-direction: column;
-
-  > * {
-    flex: none;
-  }
 
   if space != 0 {
     gap: space;

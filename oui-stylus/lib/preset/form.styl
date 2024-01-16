@@ -1,4 +1,4 @@
-oui-form-default() {
+oui-form-all() {
   input[type=text], textarea {
     oui-input-text();
   }
@@ -15,11 +15,65 @@ oui-form-default() {
     oui-input-number();
   }
 
+  input[type=checkbox]:not(.oui-switch) {
+    oui-checkbox();
+  }
+
+  input[type=radio] {
+    oui-radio();
+  }
+
   button, input[type="button"], input[type="reset"], input[type="submit"] {
     oui-button();
   }
 
   select {
+    oui-select();
+  }
+}
+
+oui-form() {
+  &-button {
+    oui-button();
+  }
+
+  &-text, &-input {
+    oui-input-text();
+  }
+
+  &-textarea {
+    oui-input-textarea();
+  }
+
+  &-textarea-grow {
+    oui-input-textarea-grow();
+  }
+
+  &-number {
+    oui-input-number();
+  }
+
+  &-checkbox]:not(.oui-switch) {
+    oui-checkbox();
+  }
+
+  &-number {
+    oui-input-number();
+  }
+
+  &-checkbox {
+    oui-checkbox();
+  }
+
+  &-switch {
+    oui-switch();
+  }
+
+  &-radio {
+    oui-radio();
+  }
+
+  &-select {
     oui-select();
   }
 }

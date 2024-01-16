@@ -242,7 +242,7 @@ The included reset canonizes all elements so that they are used purely semantica
 However, _twindy_ generally does not add styles on its own, so we have to call the following mix in at the beginning of the CSS file:
 
 ```stylus
-tw-reset()
+oui-reset()
 ```
 
 ## Prose
@@ -251,7 +251,7 @@ Similar to the reset, there are also predefined styles for continuous text passa
 
 ```stylus
 .prose
-  tw-prose()
+  oui-prose()
 ```
 
 ## Shortcuts

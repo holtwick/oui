@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { OuiFloat, OuiMenu, OuiTooltipActivator } from '../lib/main'
+import { OuiFloat, OuiMenu, OuiMenuItems, OuiTooltipActivator } from '../lib/main'
 import OuiFloatButton from '../lib/oui-float-button.vue'
 
 const show = ref(true)
@@ -99,6 +99,26 @@ Yeah!"
           </select>
         </form>
       </OuiFloat>
+    </p>
+
+    <p class="oui-menu">
+      <OuiMenuItems
+        :items="[
+          {
+            title: 'Hello',
+            action: doAction,
+          },
+          {},
+          {
+            title: 'One',
+            checked: false,
+          },
+          {
+            title: 'Two',
+            checked: true,
+          },
+        ]"
+      />
     </p>
 
     <OuiTooltipActivator />
