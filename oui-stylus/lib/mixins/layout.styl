@@ -30,10 +30,6 @@ stack-x(space = 0) {
   display: flex;
   flex-direction: row;
 
-  > * {
-    flex: none;
-  }
-
   if space != 0 {
     gap: space;
   }
@@ -42,10 +38,6 @@ stack-x(space = 0) {
 stack-y(space = 0) {
   display: flex;
   flex-direction: column;
-
-  > * {
-    flex: none;
-  }
 
   if space != 0 {
     gap: space;
