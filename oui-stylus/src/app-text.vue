@@ -160,9 +160,8 @@ site.write(htmlPath, $.html())
     </p>
     <p>
       <img
-        src="https://holtwick.de/download/sample-face.jpg"
-        alt="mage-20180321174319"
-        width="200"
+        src="https://holtwick.de/icon.png"
+        alt="Icon"
       >
     </p>
     <p>

@@ -43,12 +43,24 @@ import { SmilePlus } from 'lucide-vue-next'
     <div class="_form_section">
       <label>
         <input type="checkbox" class="oui-checkbox">
+        Not checked
+      </label>
+    </div>
+    <div class="_form_section">
+      <label>
+        <input type="checkbox" class="oui-checkbox" checked>
         Checked
       </label>
     </div>
     <div class="_form_section">
       <label>
         <input type="checkbox" class="oui-switch">
+        Unhappy
+      </label>
+    </div>
+    <div class="_form_section">
+      <label>
+        <input type="checkbox" class="oui-switch" checked>
         Happy
       </label>
     </div>

@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import AppText from './app-text.vue'
-import AppForm from './app-form.vue'
-import AppLayout from './app-layout.vue'
+import AppDemo from './app-demo.vue'
 </script>
 
 <template>
-  <AppLayout />
-  <AppForm />
-  <AppText />
+  <div class="_stack_x" style="gap: 16px">
+    <div>
+      <AppDemo />
+    </div>
+    <div class="dark default">
+      <AppDemo />
+    </div>
+  </div>
 </template>
