@@ -1,51 +1,264 @@
-/* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
 :root {
-  --step--2: clamp(0.6944rem, 0.6577rem + 0.1836vi, 0.8rem);
-  --step--1: clamp(0.8333rem, 0.7754rem + 0.2899vi, 1rem);
-  --step-0: clamp(1rem, 0.913rem + 0.4348vi, 1.25rem);
-  --step-1: clamp(1.2rem, 1.0739rem + 0.6304vi, 1.5625rem);
-  --step-2: clamp(1.44rem, 1.2615rem + 0.8924vi, 1.9531rem);
-  --step-3: clamp(1.728rem, 1.4799rem + 1.2407vi, 2.4414rem);
-  --step-4: clamp(2.0736rem, 1.7334rem + 1.7011vi, 3.0518rem);
-  --step-5: clamp(2.4883rem, 2.027rem + 2.3067vi, 3.8147rem);
+  --step--2: unquote("clamp(0.6944rem, 0.6913rem + 0.0157vw, 0.7035rem)");
+  --step--1: unquote("clamp(0.8333rem, 0.797rem + 0.1816vw, 0.9377rem)");
+  --step-0: unquote("clamp(1rem, 0.913rem + 0.4348vw, 1.25rem)");
+  --step-1: unquote("clamp(1.2rem, 1.0378rem + 0.8109vw, 1.6663rem)");
+  --step-2: unquote("clamp(1.44rem, 1.1683rem + 1.3585vw, 2.2211rem)");
+  --step-3: unquote("clamp(1.728rem, 1.2992rem + 2.1439vw, 2.9607rem)");
+  --step-4: unquote("clamp(2.0736rem, 1.4221rem + 3.2575vw, 3.9467rem)");
+  --step-5: unquote("clamp(2.4883rem, 1.5239rem + 4.8219vw, 5.2609rem)");
 }
 
-/* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-:root {
-  --space-3xs: clamp(0.25rem, 0.2283rem + 0.1087vi, 0.3125rem);
-  --space-2xs: clamp(0.5rem, 0.4565rem + 0.2174vi, 0.625rem);
-  --space-xs: clamp(0.75rem, 0.6848rem + 0.3261vi, 0.9375rem);
-  --space-s: clamp(1rem, 0.913rem + 0.4348vi, 1.25rem);
-  --space-m: clamp(1.5rem, 1.3696rem + 0.6522vi, 1.875rem);
-  --space-l: clamp(2rem, 1.8261rem + 0.8696vi, 2.5rem);
-  --space-xl: clamp(3rem, 2.7391rem + 1.3043vi, 3.75rem);
-  --space-2xl: clamp(4rem, 3.6522rem + 1.7391vi, 5rem);
-  --space-3xl: clamp(6rem, 5.4783rem + 2.6087vi, 7.5rem); /* One-up pairs */
-  --space-3xs-2xs: clamp(0.25rem, 0.1196rem + 0.6522vi, 0.625rem);
-  --space-2xs-xs: clamp(0.5rem, 0.3478rem + 0.7609vi, 0.9375rem);
-  --space-xs-s: clamp(0.75rem, 0.5761rem + 0.8696vi, 1.25rem);
-  --space-s-m: clamp(1rem, 0.6957rem + 1.5217vi, 1.875rem);
-  --space-m-l: clamp(1.5rem, 1.1522rem + 1.7391vi, 2.5rem);
-  --space-l-xl: clamp(2rem, 1.3913rem + 3.0435vi, 3.75rem);
-  --space-xl-2xl: clamp(3rem, 2.3043rem + 3.4783vi, 5rem);
-  --space-2xl-3xl: clamp(4rem, 2.7826rem + 6.087vi, 7.5rem); /* Custom pairs */
-  --space-s-l: clamp(1rem, 0.4783rem + 2.6087vi, 2.5rem);
-}
+oui-utopia() {
+  --text-font-weight-bold: 600;
+  --text-list-indent: px(32);
+  --text-paragraph-spacing: px(16);
+  --text-table-cell-padding: px(8);
+  font-size: Var(--step-0);
 
-/* @link https://utopia.fyi/grid/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-:root {
-  --grid-max-width: 77.5rem;
-  --grid-gutter: var(--space-s-l, clamp(1rem, 0.4783rem + 2.6087vw, 2.5rem));
-  --grid-columns: 12;
-}
+  &, * {
+    user-select: text;
+    -webkit-user-select: text;
+  }
 
-.u-container {
-  max-width: var(--grid-max-width);
-  padding-inline: var(--grid-gutter);
-  margin-inline: auto;
-}
+  h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+    font-weight: var(--text-font-weight-bold);
+    line-height: 1;
+    margin-y: var(--text-paragraph-spacing);
+  }
 
-.u-grid {
-  display: grid;
-  gap: var(--grid-gutter);
-}
+  h1 {
+    font-size: var(--step-4);
+  }
+
+  h2 {
+    font-size: var(--step-3);
+  }
+
+  h3 {
+    font-size: var(--step-2);
+  }
+
+  h4 {
+    font-size: var(--step-1);
+  }
+
+  h5 {
+    font-size: var(--step-0);
+  }
+
+  h6 {
+    font-size: var(--step--1);
+  }
+
+  // Paragraphs
+  p, .p, ol, ul, hr {
+    margin-y: var(--text-paragraph-spacing);
+  }
+
+  hr {
+    height: 0;
+    color: inherit;
+  }
+
+  // Semantic text elements
+  a, ins, u {
+    text-decoration-skip: ink edges;
+  }
+
+  a {
+    color: var(--link-fg);
+
+    &:hover {
+      color: var(--link-fg-hover);
+    }
+
+    &:active {
+      color: var(--link-fg-active);
+    }
+  }
+
+  abbr[title] {
+    border-bottom: 1px dotted;
+    cursor: unquote("help");
+    text-decoration: unquote("none");
+  }
+
+  kbd, tt, *:not(pre) > code {
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    background-color: var(--s2-bg);
+    color: inherit;
+    padding: 0 2;
+    margin: 0;
+    border-radius: 2;
+  }
+
+  pre {
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    background-color: var(--s2-bg);
+    color: inherit;
+    padding: 8 12;
+    border-radius: 4;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.85rem;
+    }
+  }
+
+  b, strong {
+    font-weight: var(--text-font-weight-bold);
+  }
+
+  i, em {
+    font-style: italic;
+  }
+
+  /*
+    sub, sup {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+    }
+  
+  
+    sub {
+      bottom: -0.25em;
+    }
+  
+    sup {
+      top: -0.5em;
+    }
+  */
+  sup {
+    vertical-align: baseline;
+    font-feature-settings: "sups";
+    font-size: 1em;
+  }
+
+  sub {
+    vertical-align: baseline;
+    font-feature-settings: "subs";
+    font-size: 1em;
+  }
+
+  small {
+    font-size: 80%;
+  }
+
+  mark {
+    color: var(--mark-fg);
+    background: var(--mark-bg, yellow);
+    padding-top: 0;
+    padding-right: 2;
+    padding-left: 2;
+    padding-bottom: 1;
+    border-radius: 2;
+  }
+
+  // Blockquote
+  blockquote {
+    margin: 0;
+    border-left: 2px solid var(--p1-500);
+    padding-left: var(--text-paragraph-spacing);
+  }
+
+  // Lists
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style-position: outside;
+    margin-left: 32;
+
+    li {
+      margin: 0;
+    }
+
+    ul, ol {
+      margin-left: 20;
+    }
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ul ul {
+    list-style-type: circle;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  dl dt {
+    font-weight: var(--text-font-weight-bold);
+  }
+
+  dl dd {
+    margin-left: var(--text-paragraph-spacing);
+  }
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  img, video, figure {
+    display: block;
+    margin-y: var(--text-paragraph-spacing);
+
+    & > * {
+      margin-y: 0;
+    }
+  }
+
+  table.table {
+    th, td {
+      border-bottom-width: 1px;
+      border-bottom-color: var(--secondary-color);
+      margin: 0;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    tr {
+      &:last-child {
+        border-bottom-width: 0;
+      }
+
+      th {
+        font-weight: var(--text-font-weight-bold);
+        vertical-align: bottom;
+        padding-right: var(--text-table-cell-padding);
+        padding-bottom: var(--text-table-cell-padding);
+        padding-left: var(--text-table-cell-padding);
+        border-bottom-color: var(--secondary-color);
+      }
+
+      td {
+        vertical-align: top;
+        padding: var(--text-table-cell-padding);
+      }
+    }
+  }
+} // utopia.fyi/type/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 *//* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 *//* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,20,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
