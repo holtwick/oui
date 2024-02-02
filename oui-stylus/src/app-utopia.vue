@@ -11,41 +11,32 @@ import './app-utopia.styl'
       January 1, 2014 by <a href="#">Mark</a>
     </p>
 
-    <h1>Header Überschrift (yes) 1</h1>
-    <h2>Header Überschrift (yes) 2</h2>
-    <h3>Header Überschrift (yes) 3</h3>
-    <h4>Header Überschrift (yes) 4</h4>
-    <h5>Header Überschrift (yes) 5</h5>
+    <h1>Überschrift 1</h1>
+    <h2>Überschrift 2</h2>
+    <h3>Überschrift 3</h3>
 
-    <h1>Header Überschrift (yes) 1</h1>
+    <h1>Überschrift 1</h1>
     <p>
       This blog post shows a few different types of content that's supported and
       styled with Bootstrap. Basic typography, images, and code are all
       supported.
     </p>
 
-    <h2>Header Überschrift (yes) 2</h2>
+    <h2>Überschrift 2</h2>
     <p>
       This blog post shows a few different types of content that's supported and
       styled with Bootstrap. Basic typography, images, and code are all
       supported.
     </p>
 
-    <h3>Header Überschrift (yes) 3</h3>
+    <h3>Überschrift 3</h3>
     <p>
       This blog post shows a few different types of content that's supported and
       styled with Bootstrap. Basic typography, images, and code are all
       supported.
     </p>
 
-    <h4>Header Überschrift (yes) 4</h4>
-    <p>
-      This blog post shows a few different types of content that's supported and
-      styled with Bootstrap. Basic typography, images, and code are all
-      supported.
-    </p>
-
-    <h5>Header Überschrift (yes) 5</h5>
+    <h4>Überschrift 4</h4>
     <p>
       This blog post shows a few different types of content that's supported and
       styled with Bootstrap. Basic typography, images, and code are all
