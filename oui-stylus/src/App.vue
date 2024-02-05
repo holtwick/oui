@@ -27,10 +27,10 @@ const comp = computed(() => modes[mode.value])
   </div>
 
   <div v-if="comp" class="_stack_x" style="gap: 16px; width: 100%;">
-    <div>
+    <div class="_grow">
       <component :is="comp" />
     </div>
-    <div v-if="dark" class="dark default">
+    <div v-if="dark" class="_grow dark default">
       <component :is="comp" />
     </div>
   </div>

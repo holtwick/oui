@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import './app-utopia.styl'
+import './app-utopia-text.styl'
 </script>
 
 <template>
