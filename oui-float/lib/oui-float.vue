@@ -24,10 +24,10 @@ const props = defineProps<{
 const emit = defineEmits(['close'])
 
 const slots = defineSlots<{
-  default(): any
-  click(props: { active: boolean }): any
-  hover(props: { active: boolean }): any
-  trigger(props: { active: boolean }): any
+  default: () => any
+  click: (props: { active: boolean }) => any
+  hover: (props: { active: boolean }) => any
+  trigger: (props: { active: boolean }) => any
 }>()
 
 const active = defineModel<boolean>()
