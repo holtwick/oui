@@ -20,8 +20,8 @@ const props = defineProps<{
 const emit = defineEmits(['close'])
 
 defineSlots<{
-  default(): any
-  float(): any
+  default: () => any
+  float: () => any
 }>()
 
 const active = defineModel<boolean>()

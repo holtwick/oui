@@ -2,22 +2,22 @@
 
 oui-menu() {
   if __oui_once("oui-menu") {
-    --menu-background: -gray-100; // ButtonFace;
+    --menu-bg: -gray-100; // ButtonFace;
     --menu-border: 1px solid -gray-400; // ButtonShadow;
     --menu-radius: px(4);
-    --item-color: -gray-900; // ButtonText;
-    --item-background: none;
-    --item-hover-color: HighlightText;
-    --item-hover-background: Highlight;
-    --item-active-color: black;
-    --item-active-background: white;
-    --item-separator-color: -gray-300;
+    --item-fg: -gray-900; // ButtonText;
+    --item-bg: none;
+    --item-hover-fg: HighlightText;
+    --item-hover-bg: Highlight;
+    // --item-active-color: black;
+    // --item-active-background: white;
+    --item-separator: -gray-300;
     use: stack-y;
     cursor: default;
     max-width: 20rem;
     min-width: 10rem;
     padding: px(4) px(4);
-    background: var(--menu-background);
+    background: var(--menu-bg);
     border: var(--menu-border);
     border-radius: var(--menu-radius);
     box-shadow: var(--menu-shadow, -box-shadow-md);
@@ -28,8 +28,8 @@ oui-menu() {
     font-weight: 500;
 
     ._menu_item {
-      color: var(--item-color);
-      background: var(--item-background);
+      color: var(--item-fg);
+      background: var(--item-bg);
       list-style: none;
       border-radius: px(2);
       white-space: nowrap;
@@ -38,13 +38,13 @@ oui-menu() {
       padding: px(4) px(8);
 
       &:hover {
-        color: var(--item-hover-color);
-        background: var(--item-hover-background);
+        color: var(--item-hover-fg);
+        background: var(--item-hover-bg);
       }
 
       &._menu__active, &:active {
-        color: var(--item-hover-color);
-        background: var(--item-hover-background);
+        color: var(--item-hover-fg);
+        background: var(--item-hover-bg);
       }
     }
 
@@ -69,7 +69,7 @@ oui-menu() {
       padding: 0;
       margin-top: px(4);
       margin-bottom: px(4);
-      background: var(--item-separator-color);
+      background: var(--item-separator);
     }
   }
 }

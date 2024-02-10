@@ -149,7 +149,11 @@ oui-select-icon() {
   background-color: var(--input-bg);
   background-position: right px(4) top 50%;
   background-size: px(20) px(20);
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='currentColor' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='rgba(0,0,0,0.5)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+  .dark & {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='rgba(255,255,255,0.5)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
 }
 
 oui-select() {
@@ -166,7 +170,7 @@ control-boolean-margin = px(1);
 oui-boolean-default() {
   oui-input-reset();
   --active: var(--button-bg);
-  --active-inner: var(--input-bg);
+  --active-inner: var(--button-fg);
   --border: var(--input-border);
   --border-hover: var(--button-bg-hover);
   --background: var(--input-bg);

@@ -126,6 +126,7 @@ These tools might help to find good values for you particular color:
 - [tailwindcss](https://tailwindcss.com/docs/customizing-colors) pick a good one here
 - [tailwindshades](https://www.tailwindshades.com/)
 - [ui colors](https://uicolors.app/create)
+- [tints.dev](https://www.tints.dev/)
 
 ---
 
