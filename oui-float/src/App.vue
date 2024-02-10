@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { OuiFloat, OuiMenu, OuiMenuItems, OuiTooltipActivator } from '../lib/main'
-import OuiFloatButton from '../lib/oui-float-button.vue'
 
 const show = ref(true)
 const show2 = ref(false)
