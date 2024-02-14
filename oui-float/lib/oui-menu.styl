@@ -26,6 +26,7 @@ oui-menu() {
     font-family: inherit;
     font-size: 10pt;
     font-weight: 500;
+    user-select: none;
 
     ._menu_item {
       color: var(--item-fg);
@@ -46,6 +47,11 @@ oui-menu() {
         color: var(--item-hover-fg);
         background: var(--item-hover-bg);
       }
+    }
+
+    ._menu_disabled {
+      opacity: 0.6;
+      pointer-events: none;
     }
 
     ._menu_checked_possible, ._menu_checked {

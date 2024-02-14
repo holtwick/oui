@@ -3,6 +3,8 @@ export interface OuiMenuItem {
   title?: string
   value?: string
   checked?: boolean | ((id: OuiMenuItem) => boolean | undefined)
-  blocked?: boolean
+  disabled?: boolean
+  close?: boolean
+  // blocked?: boolean
   action?: (item: OuiMenuItem, ...args: any[]) => void
 }

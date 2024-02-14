@@ -21,7 +21,10 @@ const props = defineProps<{
   delayLeave?: number
 }>()
 
-const emit = defineEmits(['close'])
+const emit = defineEmits<{
+  close: []
+  dblclick: [e: MouseEvent]
+}>()
 
 const slots = defineSlots<{
   default: () => any
@@ -97,6 +100,7 @@ watch(triggerSlot, (s) => {
     ev.preventDefault()
   }
 
+  el?.addEventListener('dblclick', toggle)
   el?.addEventListener('click', toggle)
   el?.addEventListener('contextmenu', toggle)
 

@@ -7,6 +7,9 @@ const show2 = ref(false)
 const anchor = ref()
 const anchor2 = ref()
 
+const check1 = ref(false)
+const check2 = ref(true)
+
 function doAction() {
   // eslint-disable-next-line no-alert
   alert(123)
@@ -51,14 +54,23 @@ Yeah!"
             title: 'Hello',
             action: doAction,
           },
+          {
+            title: 'Hello Disabled',
+            disabled: true,
+            action: doAction,
+          },
           {},
           {
             title: 'One',
-            checked: false,
+            checked: check1,
+            action: () => check1 = !check1,
+            close: false,
           },
           {
             title: 'Two',
-            checked: true,
+            checked: check2,
+            action: () => check2 = !check2,
+            close: false,
           },
         ]"
       />
@@ -102,6 +114,7 @@ Yeah!"
 
     <p class="oui-menu">
       <OuiMenuItems
+        class="demo-menu"
         :items="[
           {
             title: 'Hello',
@@ -111,10 +124,12 @@ Yeah!"
           {
             title: 'One',
             checked: false,
+            close: false,
           },
           {
             title: 'Two',
             checked: true,
+            close: false,
           },
         ]"
       />

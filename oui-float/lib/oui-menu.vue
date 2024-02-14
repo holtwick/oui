@@ -14,6 +14,11 @@ defineProps<{
 }>()
 
 const active = defineModel({ default: true })
+
+function onDone(item: OuiMenuItem) {
+  if (item.close !== false)
+    active.value = false
+}
 </script>
 
 <template>
@@ -27,9 +32,11 @@ const active = defineModel({ default: true })
     @close="done?.()"
   >
     <OuiMenuItems
+      v-model="active"
       :items="items"
       :args="args"
       :done="done"
+      @done="onDone"
     />
   </OuiFloat>
 </template>
