@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
-import { type UseElementHoverOptions, onClickOutside, onKeyStroke, useElementHover, useFocusWithin } from '@vueuse/core'
+import { type UseElementHoverOptions, onKeyStroke, useElementHover, useEventListener, useFocusWithin } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { computed, ref, useAttrs, watch } from 'vue'
 
@@ -78,7 +78,21 @@ async function doClose(e?: Event) {
 }
 
 onKeyStroke('Escape', e => doClose (e))
-onClickOutside(floating, e => doClose(e))
+
+useEventListener('pointerdown', (e) => {
+  if (!active.value)
+    return undefined
+  if (floating?.value?.contains?.(e.target) === true)
+    return undefined
+  if (reference?.value?.contains?.(e.target) === true)
+    return undefined
+  // doClose(e)
+  active.value = false
+}, {
+  passive: true,
+})
+
+// onClickOutside(floating, e => doClose(e))
 
 // Name
 

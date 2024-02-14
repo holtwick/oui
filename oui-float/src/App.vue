@@ -1,14 +1,40 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { OuiFloat, OuiMenu, OuiMenuItems, OuiTooltipActivator } from '../lib/main'
+import { computed, ref } from 'vue'
+import { OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiTooltipActivator } from '../lib/main'
 
 const show = ref(true)
 const show2 = ref(false)
+const show3 = ref(false)
 const anchor = ref()
 const anchor2 = ref()
 
 const check1 = ref(false)
 const check2 = ref(true)
+
+const items = computed<OuiMenuItem[]>(() => [
+  {
+    title: 'Hello',
+    action: doAction,
+  },
+  {
+    title: 'Hello Disabled',
+    disabled: true,
+    action: doAction,
+  },
+  {},
+  {
+    title: 'One',
+    checked: check1.value,
+    action: () => check1.value = !check1.value,
+    close: false,
+  },
+  {
+    title: 'Two',
+    checked: check2.value,
+    action: () => check2.value = !check2.value,
+    close: false,
+  },
+])
 
 function doAction() {
   // eslint-disable-next-line no-alert
@@ -49,31 +75,15 @@ Yeah!"
         v-model="show2"
         hover
         :reference="anchor2"
-        :items="[
-          {
-            title: 'Hello',
-            action: doAction,
-          },
-          {
-            title: 'Hello Disabled',
-            disabled: true,
-            action: doAction,
-          },
-          {},
-          {
-            title: 'One',
-            checked: check1,
-            action: () => check1 = !check1,
-            close: false,
-          },
-          {
-            title: 'Two',
-            checked: check2,
-            action: () => check2 = !check2,
-            close: false,
-          },
-        ]"
+        :items="items"
       />
+    &nbsp;
+      <OuiMenu
+        v-model="show3"
+        :items="items"
+      >
+        <button>Menu2 {{ show3 }}</button>
+      </OuiMenu>
     </p>
 
     <!-- <p>
@@ -115,23 +125,7 @@ Yeah!"
     <p class="oui-menu">
       <OuiMenuItems
         class="demo-menu"
-        :items="[
-          {
-            title: 'Hello',
-            action: doAction,
-          },
-          {},
-          {
-            title: 'One',
-            checked: false,
-            close: false,
-          },
-          {
-            title: 'Two',
-            checked: true,
-            close: false,
-          },
-        ]"
+        :items="items"
       />
     </p>
 

@@ -7,7 +7,7 @@ import OuiMenuItems from './oui-menu-items.vue'
 
 defineProps<{
   items: OuiMenuItem[]
-  reference: Ref<HTMLElement | undefined>
+  reference?: Ref<HTMLElement | undefined>
   placement?: Placement
   args?: any
   done?: (() => void) | undefined
@@ -31,6 +31,9 @@ function onDone(item: OuiMenuItem) {
     close
     @close="done?.()"
   >
+    <template v-if="!reference && $slots.default" #click>
+      <slot />
+    </template>
     <OuiMenuItems
       v-model="active"
       :items="items"

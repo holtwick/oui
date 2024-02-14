@@ -11,11 +11,15 @@ const emit = defineEmits<{
   done: [item: OuiMenuItem]
 }>()
 
+const active = defineModel({ default: true })
+
 async function doAction(item: OuiMenuItem) {
   setTimeout(() => {
     item?.action?.(item, ...(props.args ?? [])) // todo is that ok?
   }, 50)
   emit('done', item)
+  if (item.close !== false)
+    active.value = false
   props.done?.()
 }
 </script>
