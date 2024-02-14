@@ -7,12 +7,20 @@ const props = defineProps<{
   done?: (() => void) | undefined
 }>()
 
+const emit = defineEmits<{
+  done: [item: OuiMenuItem]
+}>()
+
 const active = defineModel({ default: true })
 
 async function doAction(item: OuiMenuItem) {
-  item?.action?.(item, ...(props.args ?? []))
+  setTimeout(() => {
+    item?.action?.(item, ...(props.args ?? [])) // todo is that ok?
+  }, 50)
+  emit('done', item)
+  if (item.close !== false)
+    active.value = false
   props.done?.()
-  active.value = false
 }
 </script>
 
@@ -23,6 +31,7 @@ async function doAction(item: OuiMenuItem) {
         v-if="item.title"
         class="_menu_item"
         :class="{
+          _menu_disabled: item.disabled === true,
           _menu_checked_possible: item.checked != null,
           _menu_checked: typeof item.checked === 'function' ? item.checked(item) : !!item.checked,
         }"

@@ -1,6 +1,6 @@
 {
   "name": "oui-monorepo",
-  "version": "0.8.3",
+  "version": "0.8.6",
   "private": true,
   "homepage": "https://github.com/holtwick/oui#readme",
   "bugs": {
@@ -59,7 +59,7 @@
     "sort-package-json": "^2.6.0",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3",
-    "vite": "^5.1.1",
+    "vite": "^5.1.2",
     "vite-plugin-dts": "^3.7.2",
     "vitest": "^1.2.2",
     "vue-tsc": "^1.8.27"

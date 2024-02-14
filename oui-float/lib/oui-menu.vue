@@ -7,13 +7,18 @@ import OuiMenuItems from './oui-menu-items.vue'
 
 defineProps<{
   items: OuiMenuItem[]
-  reference: Ref<HTMLElement | undefined>
+  reference?: Ref<HTMLElement | undefined>
   placement?: Placement
   args?: any
   done?: (() => void) | undefined
 }>()
 
 const active = defineModel({ default: true })
+
+function onDone(item: OuiMenuItem) {
+  if (item.close !== false)
+    active.value = false
+}
 </script>
 
 <template>
@@ -26,10 +31,15 @@ const active = defineModel({ default: true })
     close
     @close="done?.()"
   >
+    <template v-if="!reference && $slots.default" #click>
+      <slot />
+    </template>
     <OuiMenuItems
+      v-model="active"
       :items="items"
       :args="args"
       :done="done"
+      @done="onDone"
     />
   </OuiFloat>
 </template>
