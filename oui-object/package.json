@@ -1,7 +1,7 @@
 {
   "name": "oui-object",
   "type": "module",
-  "version": "0.8.5",
+  "version": "0.8.7",
   "author": {
     "name": "Dirk Holtwick",
     "email": "dirk.holtwick@gmail.com",
