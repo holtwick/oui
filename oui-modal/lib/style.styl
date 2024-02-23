@@ -28,7 +28,9 @@ oui-modal() {
 
       // Background overlay
       ._modal_overlay {
-        background: var(--dialog-backdrop, rgba(0, 0, 0, 0.75));
+        background: var(--dialog-backdrop, rgba(0, 0, 0, 0.16));
+        backdrop-filter: blur(4px);
+        // background: var(--dialog-backdrop, rgba(0, 0, 0, 0.75));
         bottom: 0;
         cursor: default;
         display: block;

@@ -4,16 +4,16 @@
 
 **Just another set of UI components for Vue.js with a proper French-sounding name.**
 
+CSS and Styleguide:
+
+- [oui-stylus](./oui-stylus/README.md)
+
 Libs:
 
 - [oui-float](./oui-float/README.md)
 - [oui-notification](./oui-notification/README.md)
 - [oui-modal](./oui-modal/README.md)
 - [oui-object](./oui-object/README.md)
-
-CSS:
-
-- [oui-stylus](./oui-stylus/README.md)
 
 Dependencies used in some libs:
 
