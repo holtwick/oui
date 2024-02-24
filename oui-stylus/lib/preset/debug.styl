@@ -1,0 +1,78 @@
+
+oui-debug() {
+  .debug {
+    position: fixed;
+    width: 1rem;
+    height: 1rem;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(255, 0, 0, 0.33);
+    overflow: hidden;
+    border: 0.5rem rgba(255, 0, 0, 0.33) solid;
+    z-index: 99999;
+    border-radius: 2rem;
+    color: transparent;
+    white-space: pre-wrap;
+    font-family: var(--font-mono, monospace);
+
+    .debug-content {
+      display: none;
+      padding: 1rem;
+    }
+
+    &:hover, &:active, &.-show {
+      border-radius: 4px;
+      padding: 1rem;
+      width: auto;
+      height: auto;
+      max-width: 80%;
+      max-height: 80%;
+      bottom: 1rem;
+      right: 1rem;
+      overflow: auto;
+      background: white;
+      border-color: red;
+      color: black;
+
+      .debug-content {
+        display: block;
+      }
+    }
+  }
+
+  .-bg1 {
+    background-color: rgba(128, 0, 128, 0.5) !important;
+  }
+
+  .-bg2 {
+    background-color: rgba(43, 0, 128, 0.5) !important;
+  }
+
+  .-bg3 {
+    background-color: rgba(15, 0, 128, 0.5) !important;
+  }
+
+  .-bd1 {
+    border: 1px solid rgba(128, 0, 128, 0.5) !important;
+  }
+
+  .-bd2 {
+    border: 1px solid rgba(43, 0, 128, 0.5) !important;
+  }
+
+  .-bd3 {
+    border: 1px solid rgba(15, 0, 128, 0.5) !important;
+  }
+
+  .-ol1 {
+    outline: 1px solid rgba(128, 0, 128, 0.5) !important;
+  }
+
+  .-ol2 {
+    outline: 1px solid rgba(43, 0, 128, 0.5) !important;
+  }
+
+  .-ol3 {
+    outline: 1px solid rgba(15, 0, 128, 0.5) !important;
+  }
+}
