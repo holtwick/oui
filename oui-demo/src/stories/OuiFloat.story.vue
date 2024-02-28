@@ -32,3 +32,9 @@ const show = ref(false)
     </Variant>
   </story>
 </template>
+
+<docs lang="md">
+  # My documentation
+
+  Checkout this [cool video](https://www.youtube.com/watch?v=dQw4w9WgXcQ)!
+</docs>
