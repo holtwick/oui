@@ -1,6 +1,6 @@
 import './css.styl'
 
-export * from './_types'
+export { type OuiMenuItem } from './_types'
 
 export { default as OuiFloat } from './oui-float.vue'
 export { default as OuiMenu } from './oui-menu.vue'
