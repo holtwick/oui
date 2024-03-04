@@ -1,3 +1,4 @@
+<!-- eslint-disable no-alert -->
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { LoggerInterface } from 'zeed'

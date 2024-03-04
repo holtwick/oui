@@ -1,4 +1,5 @@
 import { defineSetupVue3 } from '@histoire/plugin-vue'
+
 // import { createPinia } from 'pinia'
 import WrapperGlobal from './WrapperGlobal.vue'
 

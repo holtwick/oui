@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { logEvent } from 'histoire/client'
 import { ref } from 'vue'
 import { OuiFloat } from 'oui-float'
 

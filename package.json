@@ -1,26 +1,29 @@
 {
   "name": "oui-monorepo",
+  "type": "module",
   "version": "0.9.1",
   "private": true,
-  "homepage": "https://github.com/holtwick/oui#readme",
-  "bugs": {
-    "url": "https://github.com/holtwick/oui/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/holtwick/oui.git"
-  },
-  "funding": {
-    "type": "GitHub Sponsors ❤",
-    "url": "https://github.com/sponsors/holtwick"
-  },
-  "license": "MIT",
   "author": {
     "name": "Dirk Holtwick",
     "email": "dirk.holtwick@gmail.com",
     "url": "https://holtwick.de"
   },
-  "type": "module",
+  "license": "MIT",
+  "funding": {
+    "type": "GitHub Sponsors ❤",
+    "url": "https://github.com/sponsors/holtwick"
+  },
+  "homepage": "https://github.com/holtwick/oui#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holtwick/oui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/holtwick/oui/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "build": "pnpm -r --filter=oui-* build",
     "bump": "bumpp package.json oui-*/package.json --commit",
@@ -63,8 +66,5 @@
     "vite-plugin-dts": "^3.7.2",
     "vitest": "^1.2.2",
     "vue-tsc": "^1.8.27"
-  },
-  "engines": {
-    "node": ">=18.0.0"
   }
 }

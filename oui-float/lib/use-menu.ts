@@ -1,4 +1,4 @@
-import { type DirectiveBinding, ref } from 'vue'
+import type { DirectiveBinding } from 'vue'
 import { isRecord } from 'zeed'
 import OuiMenu from './oui-menu.vue'
 import type { OuiMenuItem } from './_types'
