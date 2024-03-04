@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiTooltipActivator } from '../lib/main'
+import type { LoggerInterface } from 'zeed'
+import { Logger, uuid } from 'zeed'
+import { OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiTooltipActivator, useMenu, vMenu } from '../lib/main'
+
+const log: LoggerInterface = Logger('app-menu')
 
 const show = ref(true)
 const show2 = ref(false)
@@ -39,6 +43,23 @@ const items = computed<OuiMenuItem[]>(() => [
 function doAction() {
   // eslint-disable-next-line no-alert
   alert(123)
+}
+
+const mitems: OuiMenuItem[] = [{
+  title: 'Hello',
+  action: value => alert(value),
+}]
+
+// const menu = useMenu(mitems)
+const menu = useMenu(() => ([{
+  title: `Hello ${uuid()}`,
+  action: (_menuItem, value) => {
+    alert(value)
+  },
+}]))
+
+function menuWithArgs(value: any) {
+  return (...args: any) => menu(value, ...args)
 }
 </script>
 
@@ -129,6 +150,23 @@ Yeah!"
       />
     </p>
 
+    <hr>
+
+    <button v-menu="menu">
+      Dynamic Menu
+    </button>
+
+    <button v-menu="menuWithArgs(1)">
+      Dynamic Menu 1
+    </button>
+
+    <button v-menu="menuWithArgs(2)">
+      Dynamic Menu 2
+    </button>
+
+    <div v-menu="menu" style="border: 1px solid black; width: 200px; height: 200px;">
+      Click somewhere
+    </div>
     <OuiTooltipActivator />
   </div>
 </template>

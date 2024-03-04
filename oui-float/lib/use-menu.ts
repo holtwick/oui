@@ -1,19 +1,28 @@
-import { OuiMenu } from 'oui-float'
-import type { DirectiveBinding } from 'vue'
+import { type DirectiveBinding, ref } from 'vue'
+import { isRecord } from 'zeed'
+import OuiMenu from './oui-menu.vue'
 import type { OuiMenuItem } from './_types'
 import { mountComponentAsApp } from './app-helper'
 
-import 'oui-float/css'
+type OuiMenuCreator = (...args: any) => OuiMenuItem[]
 
-type OuiMenus = (OuiMenuItem[] | undefined | null | false)[]
-type OuiMenuCreator = (...args: any) => OuiMenus
+function generateGetBoundingClientRect(x = 0, y = 0) {
+  return () => ({
+    width: 0,
+    height: 0,
+    top: y,
+    right: x,
+    bottom: y,
+    left: x,
+  } as DOMRect)
+}
 
 /**
  * Context menu emulation.
  *
  * If triggered by BUTTON it will show as a drop down, else close to the mouse position.
  */
-export function useMenu(itemsSource: OuiMenus | OuiMenuCreator) {
+export function useMenu(itemsSource: (OuiMenuItem | false | undefined | null)[] | OuiMenuCreator) {
   let app: any
 
   // todo this would require to use it top level always
@@ -26,13 +35,11 @@ export function useMenu(itemsSource: OuiMenus | OuiMenuCreator) {
     const event = args.find((a: any) => a instanceof Event) as MouseEvent
     const { clientX: x, clientY: y, target } = event
 
-    let reference
-    // let popoverTarget: any = {
-    //   getBoundingClientRect: generateGetBoundingClientRect(x + 4, y + 4),
-    // }
+    let cursor: HTMLElement | null = target as any
+
+    let reference: HTMLElement | undefined | null
 
     // Uses containing BUTTON if available
-    let cursor: HTMLElement | null = target as any
     while (cursor) {
       if (cursor.tagName?.toUpperCase() === 'BUTTON') {
         reference = cursor
@@ -41,18 +48,12 @@ export function useMenu(itemsSource: OuiMenus | OuiMenuCreator) {
       cursor = cursor.parentElement
     }
 
-    // cursor?.classList.add("menuVisible") // todo highlight selected item
+    if (reference == null && target != null) {
+      reference = target as any
+      reference!.getBoundingClientRect = generateGetBoundingClientRect(x + 4, y + 4)
+    }
 
-    // function generateGetBoundingClientRect(x = 0, y = 0) {
-    //   return () => ({
-    //     width: 0,
-    //     height: 0,
-    //     top: y,
-    //     right: x,
-    //     bottom: y,
-    //     left: x,
-    //   })
-    // }
+    // cursor?.classList.add("menuVisible") // todo highlight selected item
 
     // Nothing more to be done with this event
     event.stopPropagation()
@@ -96,19 +97,18 @@ export function useMenu(itemsSource: OuiMenus | OuiMenuCreator) {
 
 /** Vue3 Directive! */
 export const vMenu = {
-  mounted: (el: HTMLElement, binding: DirectiveBinding) => {
+  mounted: (element: HTMLElement, binding: DirectiveBinding) => {
     // log("v-menu", el, binding)
-    const fn = binding.value
     // log.assert(typeof fn === 'function', 'v-menu requires function as argument')
-    el.addEventListener('contextmenu', (ev: MouseEvent) => {
+    element.addEventListener('contextmenu', (event: MouseEvent) => {
       // log('v-menu context')
-      ev.preventDefault() // no system menu
-      binding.value(ev)
+      event.preventDefault() // no system menu
+      binding.value(event, element)
     })
 
-    el.addEventListener('click', (ev: MouseEvent) => {
+    element.addEventListener('click', (event: MouseEvent) => {
       // log('v-menu click')
-      binding.value(ev)
+      binding.value(event, element)
     })
   },
 }
