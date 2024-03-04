@@ -1,7 +1,7 @@
 {
   "name": "oui-demo",
   "type": "module",
-  "version": "0.8.7",
+  "version": "0.9.0",
   "private": true,
   "author": {
     "name": "Dirk Holtwick",
@@ -30,6 +30,9 @@
     "dev": "vite",
     "preview": "vite preview",
     "start": "vite",
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview",
     "test:unit": "vitest"
   },
   "dependencies": {
@@ -41,12 +44,14 @@
     "vue": "^3.4.19"
   },
   "devDependencies": {
+    "@histoire/plugin-vue": "^0.17.12",
     "@tsconfig/node18": "^18.2.2",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20.11.17",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.4",
     "@vue/tsconfig": "^0.5.1",
+    "histoire": "^0.17.9",
     "jsdom": "^24.0.0",
     "npm-run-all2": "^6.1.2",
     "stylus": "^0.62.0",
