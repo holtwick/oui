@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "build": "vite build",
-    "check": "vue-tsc --build --force",
+    "check": "vue-tsc --noEmit",
     "dev": "vite",
     "preview": "vite preview",
     "start": "vite",

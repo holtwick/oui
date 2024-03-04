@@ -7,7 +7,9 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [
     vue(),
-    dts(),
+    dts({
+      rollupTypes: true,
+    }),
   ],
   resolve: {
     alias: {
@@ -18,21 +20,13 @@ export default defineConfig({
   // https://vitejs.dev/guide/build.html#library-mode
   build: {
     lib: {
-      // formats: ['es'],
-      // Could also be a dictionary or array of multiple entry points
+      formats: ['es'],
       entry: [fileURLToPath(new URL('./lib/main.ts', import.meta.url))],
-      name: 'main',
       fileName: 'main',
     },
     rollupOptions: {
-    // preserveEntrySignatures: "strict",
+      // preserveEntrySignatures: "strict",
       external: 'vue', // Object.keys(pkg.dependencies),
-      output: {
-        // preserveModules: true,
-        globals: {
-          vue: 'Vue',
-        },
-      },
     },
   },
 })
