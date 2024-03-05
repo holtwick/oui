@@ -24,7 +24,12 @@
     "css",
     "framework",
     "stylus",
-    "oui"
+    "oui",
+    "oui-kit",
+    "vue",
+    "ui",
+    "typescript",
+    "headless"
   ],
   "sideEffects": [
     "**/*.css"
@@ -47,7 +52,6 @@
   "module": "./dist/lib.js",
   "types": "./dist/lib.d.ts",
   "files": [
-    "*.styl",
     "dist",
     "stylus"
   ],
@@ -60,6 +64,7 @@
     "dev": "vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "prepublishOnly": "nr build",
     "preview": "vite preview",
     "start": "nr dev",
     "story:build": "histoire build",
