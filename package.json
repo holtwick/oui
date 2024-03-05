@@ -39,7 +39,10 @@
       "types": "./dist/lib.d.ts",
       "import": "./dist/lib.js"
     },
-    "./css": "./dist/style.css",
+    "./css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    },
     "./stylus": {
       "import": "./stylus/index.styl",
       "require": "./stylus/index.styl"

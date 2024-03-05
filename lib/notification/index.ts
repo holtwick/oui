@@ -1,5 +1,3 @@
-import './css.styl'
-
 export * from './_types'
 export * from './notification'
 

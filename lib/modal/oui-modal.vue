@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { onKeyStroke } from '@vueuse/core'
 import { computed, ref, useAttrs } from 'vue'
+import { OuiClose } from '../basic'
 import { vFocustrap } from './oui-focustrap-directive'
-import OuiClose from './oui-close.vue'
+
+import './css.styl'
 
 defineProps<{
   close?: boolean
