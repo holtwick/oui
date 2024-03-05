@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { OuiFloat } from 'oui-float'
-
-import 'oui-float/css'
+import { OuiFloat } from '@/lib'
 
 function initialState() {
   return {

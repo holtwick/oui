@@ -1,3 +1,5 @@
+/// <reference types="histoire" />
+
 import { URL, fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -28,5 +30,9 @@ export default defineConfig({
       // preserveEntrySignatures: "strict",
       external: 'vue', // Object.keys(pkg.dependencies),
     },
+  },
+
+  histoire: {
+    setupFile: '/stoires/histoire.setup.ts',
   },
 })

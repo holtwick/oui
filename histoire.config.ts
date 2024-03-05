@@ -7,10 +7,10 @@ export default defineConfig({
   plugins: [
     HstVue(),
   ],
-  setupFile: 'src/histoire.setup.ts',
+  setupFile: 'stories/histoire.setup.ts',
   outDir: '.histoire/dist',
   storyMatch: [
-    'src/**/*.story.vue',
+    'stories/**/*.story.vue',
   ],
   storyIgnored: [
     '**/node_modules/**',
