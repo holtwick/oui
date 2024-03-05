@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.9.3",
+  "version": "0.10.2",
   "author": {
     "name": "Dirk Holtwick",
     "email": "dirk.holtwick@gmail.com",
@@ -64,7 +64,7 @@
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "prepublish": "npx only-allow pnpm",
-    "release": "nr bump && nr build && nr publish",
+    "release": "nr bump && nr build && na publish",
     "start": "nr dev",
     "story:build": "histoire build",
     "story:dev": "histoire dev",
