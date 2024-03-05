@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+import { OuiClose } from '../basic'
 import { notifications } from './notification'
-import OuiClose from './oui-close.vue'
+
+import './css.styl'
 </script>
 
 <template>
