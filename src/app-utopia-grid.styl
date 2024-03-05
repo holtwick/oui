@@ -1,0 +1,51 @@
+@require "../stylus/index";
+@require "../stylus/preset/utopia";
+
+._utopia_grid {
+  /* @link https://utopia.fyi/grid/calculator?c=320,16,1.2,1240,20,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  --grid-max-width: 77.5rem;
+  --grid-gutter: var(--space-s-l, clamp(1rem, 0.4783rem + 2.6087vw, 2.5rem));
+  --grid-columns: 12;
+  background: #ccc;
+
+  ._grid_container {
+    max-width: var(--grid-max-width);
+    padding-inline: var(--grid-gutter);
+    margin-inline: auto;
+    background: #eee;
+  }
+
+  ._grid {
+    display: grid;
+    gap: var(--grid-gutter);
+  }
+
+  ._grid_2up {
+    @media all and (min-width: 40rem) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  ._grid_3up {
+    @media all and (min-width: 40rem) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media all and (min-width: 50rem) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .grid_1to3up {
+    @media all and (min-width: 50rem) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .box {
+    background: purple;
+    color: white;
+    padding: 16;
+    margin-bottom: var(--grid-gutter);
+  }
+}

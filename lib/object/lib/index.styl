@@ -1,0 +1,134 @@
+@require "../../../stylus/index.styl";
+
+.oui-object {
+  margin: 0;
+  padding: 16;
+  font-family: var(--font-mono);
+  font-size: 12;
+  line-height: 1.4;
+  cursor: default;
+  overflow: auto;
+  background-color: var(--n0-50, #ffffff);
+  border-radius: 4;
+
+  >* {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .value {
+    white-space: nowrap;
+  }
+
+  .array>.value, .object>.value {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+  }
+
+  .array[aria-expanded="false"]>.count, .object[aria-expanded="false"]>.count {
+    margin-right: 0.5rem;
+  }
+
+  .indicator {
+    font-size: 0.8rem;
+    padding-right: 0.3rem;
+    user-select: none;
+    vertical-align: text-bottom;
+  }
+
+  >*>.preview {
+    font-style: italic;
+  }
+
+  .value>.array, .value>.object {
+    position: relative;
+    left: -0.8rem;
+  }
+
+  /* light */
+  .null>.value, .undefined>.value {
+    color: #80868a;
+  }
+
+  .boolean>.value, .true>.value, .false>.value {
+    color: #1a1aa6;
+  }
+
+  .number>.value {
+    color: #1a1aa6;
+  }
+
+  .string>.value {
+    color: #c80200;
+  }
+
+  .quotes {
+    color: #c80200;
+  }
+
+  .indicator {
+    color: #5f6367;
+  }
+
+  .key {
+    color: #881180;
+  }
+
+  .separator {
+    color: #202124;
+  }
+
+  .count {
+    color: #5f6367;
+  }
+
+  .preview {
+    color: #202124;
+  }
+
+  /* dark */
+  @media -dark {
+    background-color: #202124;
+
+    .null>.value {
+      color: #80868a;
+    }
+
+    .true>.value, .false>.value {
+      color: #9980ff;
+    }
+
+    .number>.value {
+      color: #9980ff;
+    }
+
+    .string>.value {
+      color: #36d4c7;
+    }
+
+    .quotes {
+      color: #36d4c7;
+    }
+
+    .indicator {
+      color: #9aa0a6;
+    }
+
+    .key {
+      color: #5db0d7;
+    }
+
+    .separator {
+      color: #e8eaed;
+    }
+
+    .count {
+      color: #9aa0a6;
+    }
+
+    .preview {
+      color: #e8eaed;
+    }
+  }
+}
