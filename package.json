@@ -1,8 +1,7 @@
 {
-  "name": "oui-monorepo",
+  "name": "oui",
   "type": "module",
   "version": "0.9.2",
-  "private": true,
   "author": {
     "name": "Dirk Holtwick",
     "email": "dirk.holtwick@gmail.com",
@@ -21,13 +20,48 @@
   "bugs": {
     "url": "https://github.com/holtwick/oui/issues"
   },
+  "keywords": [
+    "css",
+    "framework",
+    "stylus",
+    "oui"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/lib.js"
+    },
+    "./css": "./dist/style.css",
+    "./stylus": {
+      "import": "./stylus/index.styl",
+      "require": "./stylus/index.styl"
+    },
+    "./theme": {
+      "import": "./stylus/theme.styl",
+      "require": "./stylus/theme.styl"
+    }
+  },
+  "module": "./dist/lib.js",
+  "types": "./dist/lib.d.ts",
+  "files": [
+    "*.styl",
+    "dist",
+    "stylus"
+  ],
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "pnpm -r --filter=oui-* build",
+    "build": "vite build",
+    "check": "vue-tsc --noEmit",
+    "dev": "vite",
+    "preview": "vite preview",
+    "start": "vite",
+    "test:unit": "vitest",
     "bump": "bumpp package.json oui-*/package.json --commit",
-    "check": "vue-tsc --noEmit -p tsconfig.json",
     "clean": "pnpm -r --filter=oui-* run clean",
     "fix": "node scripts/fix-package-json.js",
     "preinstall": "npx only-allow pnpm",
@@ -43,6 +77,12 @@
     "test": "pnpm -r --filter=oui-* test",
     "update": "pnpm -r update -i --latest"
   },
+  "dependencies": {
+    "@floating-ui/vue": "^1.0.6",
+    "@vueuse/core": "^10.9.0",
+    "vue": "^3.4.21",
+    "zeed": "^0.17.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.2",
     "@antfu/ni": "^0.21.12",
@@ -57,9 +97,11 @@
     "eslint": "^8.56.0",
     "fast-glob": "^3.3.2",
     "jsdom": "^24.0.0",
+    "lucide-vue-next": "^0.344.0",
     "npm-run-all2": "^6.1.2",
     "only-allow": "^1.2.1",
     "sort-package-json": "^2.6.0",
+    "stylus": "^0.62.0",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3",
     "vite": "^5.1.2",
