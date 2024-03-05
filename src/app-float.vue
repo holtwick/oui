@@ -5,7 +5,7 @@ import type { LoggerInterface } from 'zeed'
 import { Logger, uuid } from 'zeed'
 import { OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiTooltipActivator, useMenu, vMenu } from '@/lib'
 
-import './index.styl'
+import './app-float.styl'
 
 const log: LoggerInterface = Logger('app-menu')
 

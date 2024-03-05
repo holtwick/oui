@@ -2,8 +2,6 @@
 import { ref } from 'vue'
 import { OuiModal } from '@/lib'
 
-import './index.styl'
-
 const show = ref(false)
 </script>
 
