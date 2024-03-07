@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.10.9",
+  "version": "0.11.0",
   "author": {
     "name": "Dirk Holtwick",
     "email": "dirk.holtwick@gmail.com",
@@ -73,6 +73,7 @@
     "story:build": "histoire build",
     "story:dev": "histoire dev",
     "story:preview": "histoire preview",
+    "upload": "nr story:build && rsync -rvz .histoire/dist/* cy:public_html/oui.holtwick.de",
     "test": "vitest"
   },
   "dependencies": {
@@ -96,7 +97,6 @@
     "fast-glob": "^3.3.2",
     "histoire": "^0.17.9",
     "jsdom": "^24.0.0",
-    "lucide-vue-next": "^0.350.0",
     "npm-run-all2": "^6.1.2",
     "only-allow": "^1.2.1",
     "sort-package-json": "^2.8.0",

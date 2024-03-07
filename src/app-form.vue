@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import './app-form.styl'
-import { SmilePlus } from 'lucide-vue-next'
+import { OuiClose } from '@/lib'
 </script>
 
 <template>
@@ -90,8 +90,8 @@ import { SmilePlus } from 'lucide-vue-next'
         Cancel
       </button>
       <button>OK</button>
-      <button><SmilePlus /> Smile</button>
-      <button>Smile <SmilePlus /></button>
+      <button><OuiClose /> Smile</button>
+      <button>Smile <OuiClose /></button>
     </div>
   </div>
 </template>
