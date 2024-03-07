@@ -69,7 +69,7 @@
     "lint:fix": "eslint . --fix",
     "prepublishOnly": "nr build",
     "preview": "vite preview",
-    "start": "nr dev",
+    "start": "nr story:dev",
     "story:build": "histoire build",
     "story:dev": "histoire dev",
     "story:preview": "histoire preview",

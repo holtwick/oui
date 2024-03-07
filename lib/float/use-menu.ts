@@ -1,10 +1,14 @@
 import type { DirectiveBinding } from 'vue'
-import { isRecord } from 'zeed'
+import type { LoggerInterface } from 'zeed'
+import { Logger, isRecord } from 'zeed'
 import OuiMenu from './oui-menu.vue'
 import type { OuiMenuItem } from './_types'
 import { mountComponentAsApp } from './app-helper'
 
+const log: LoggerInterface = Logger('use-menu')
+
 type OuiMenuCreator = (...args: any) => OuiMenuItem[]
+type OuiMenuItemSource = (OuiMenuItem | false | undefined | null)[] | OuiMenuCreator
 
 function generateGetBoundingClientRect(x = 0, y = 0) {
   return () => ({
@@ -17,35 +21,39 @@ function generateGetBoundingClientRect(x = 0, y = 0) {
   } as DOMRect)
 }
 
+function isSeparator(item: any) {
+  return item === null || (isRecord(item) && Object.keys(item).length === 0)
+}
+
 /**
  * Context menu emulation.
  *
  * If triggered by BUTTON it will show as a drop down, else close to the mouse position.
  */
-export function useMenu(itemsSource: (OuiMenuItem | false | undefined | null)[] | OuiMenuCreator) {
+export function useMenu(itemsSource: OuiMenuItemSource) {
   let app: any
 
   // todo this would require to use it top level always
   // onBeforeUnmount(() => app?.done())
 
   return (...args: any) => {
-    // log('useMenu trigger', args)
+    log('useMenu trigger', args)
 
     // Find and handle event
     const event = args.find((a: any) => a instanceof Event) as MouseEvent
     const { clientX: x, clientY: y, target } = event
 
-    let cursor: HTMLElement | null = target as any
+    let cursorElement: HTMLElement | null = target as any
 
     let reference: HTMLElement | undefined | null
 
     // Uses containing BUTTON if available
-    while (cursor) {
-      if (cursor.tagName?.toUpperCase() === 'BUTTON') {
-        reference = cursor
+    while (cursorElement) {
+      if (cursorElement.tagName?.toUpperCase() === 'BUTTON') {
+        reference = cursorElement
         break
       }
-      cursor = cursor.parentElement
+      cursorElement = cursorElement.parentElement
     }
 
     if (reference == null && target != null) {
@@ -64,10 +72,6 @@ export function useMenu(itemsSource: (OuiMenuItem | false | undefined | null)[] 
     const items = (dynamic ? itemsSource(...args) : itemsSource).filter(item => item != null && item !== false)
 
     // Cleanup separators at ends and multiple
-    const isSeparator = (item: any) => item === null || (isRecord(item) && Object.keys(item).length === 0)
-
-    // log('items', JSON.stringify(items, null, 2))
-
     for (let i = items.length - 1; i >= 0; i--) {
       if (isSeparator(items[i])) {
         if (i === 0 || i === items.length - 1 || isSeparator(items[i - 1]) || isSeparator(items[i + 1]))
@@ -75,7 +79,7 @@ export function useMenu(itemsSource: (OuiMenuItem | false | undefined | null)[] 
       }
     }
 
-    // log('items', items)
+    log('items', items)
 
     if (items.length <= 0)
       return
@@ -90,24 +94,34 @@ export function useMenu(itemsSource: (OuiMenuItem | false | undefined | null)[] 
       // app.awaitDone.then(() => (app = undefined))
     }
     else {
-      // log.warn('useMenu target missing')
+      log.warn('useMenu target missing')
     }
   }
 }
 
+export function useMenuWithValue<T = any>(itemsSource: OuiMenuCreator) {
+  const menu = useMenu(itemsSource)
+  return (value: T) => {
+    return (...args: any) => menu(value, ...args)
+  }
+}
+
+// export function menuWithArgs(value: any) {
+//   return (...args: any) => menu(value, ...args)
+// }
+
 /** Vue3 Directive! */
 export const vMenu = {
   mounted: (element: HTMLElement, binding: DirectiveBinding) => {
-    // log("v-menu", el, binding)
-    // log.assert(typeof fn === 'function', 'v-menu requires function as argument')
+    log('v-menu', element, binding)
+    log.assert(typeof binding.value === 'function', 'v-menu requires function as argument')
     element.addEventListener('contextmenu', (event: MouseEvent) => {
-      // log('v-menu context')
+      log('v-menu context')
       event.preventDefault() // no system menu
       binding.value(event, element)
     })
-
     element.addEventListener('click', (event: MouseEvent) => {
-      // log('v-menu click')
+      log('v-menu click')
       binding.value(event, element)
     })
   },
