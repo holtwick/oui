@@ -33,7 +33,7 @@ const menu = useMenuWithValue((item: number) => [{
       <HstCheckbox v-model="state.show" title="show" />
     </template>
     <Variant title="useMenu" :init-state="initialState">
-      <template #default="{ state }">
+      <template #default>
         <button ref="button" v-menu="simpleMenu">
           Click me
         </button>
@@ -41,7 +41,7 @@ const menu = useMenuWithValue((item: number) => [{
       </template>
     </Variant>
     <Variant title="useMenuWithValue" :init-state="initialState">
-      <template #default="{ state }">
+      <template #default>
         <button ref="button" v-menu="menu(1)">
           Click 1
         </button>
