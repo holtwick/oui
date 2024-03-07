@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { SmilePlus } from 'lucide-vue-next'
+import { OuiClose } from '@/lib'
 
 import './form.story.styl'
 </script>
 
 <template>
   <Story auto-props-disabled>
-    <Variant title="Form" :init-state="initialState">
+    <Variant title="Form">
       <template #default>
         <div class="_form oui-form">
           <h1>Form</h1>
@@ -104,8 +104,8 @@ import './form.story.styl'
               Cancel
             </button>
             <button>OK</button>
-            <button><SmilePlus /> Smile</button>
-            <button>Smile <SmilePlus /></button>
+            <button><OuiClose /> Smile</button>
+            <button>Smile <OuiClose /></button>
           </div>
         </div>
       </template>

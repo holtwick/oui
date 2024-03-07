@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { OuiClose } from '@/lib'
+
 import './app-layout.styl'
-import { SmilePlus } from 'lucide-vue-next'
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import { SmilePlus } from 'lucide-vue-next'
     <h1>Layout</h1>
     <div class="container _stack_x">
       <div class="box _center">
-        <SmilePlus />
+        <OuiClose />
       </div>
       <div class="_space" />
       <div class="box" />
