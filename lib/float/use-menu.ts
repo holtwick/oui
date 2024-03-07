@@ -105,24 +105,3 @@ export function useMenuWithValue<T = any>(itemsSource: OuiMenuCreator) {
     return (...args: any) => menu(value, ...args)
   }
 }
-
-// export function menuWithArgs(value: any) {
-//   return (...args: any) => menu(value, ...args)
-// }
-
-/** Vue3 Directive! */
-export const vMenu = {
-  mounted: (element: HTMLElement, binding: DirectiveBinding) => {
-    log('v-menu', element, binding)
-    log.assert(typeof binding.value === 'function', 'v-menu requires function as argument')
-    element.addEventListener('contextmenu', (event: MouseEvent) => {
-      log('v-menu context')
-      event.preventDefault() // no system menu
-      binding.value(event, element)
-    })
-    element.addEventListener('click', (event: MouseEvent) => {
-      log('v-menu click')
-      binding.value(event, element)
-    })
-  },
-}
