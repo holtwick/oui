@@ -4,10 +4,11 @@ import { Logger, isRecord } from 'zeed'
 import OuiMenu from './oui-menu.vue'
 import type { OuiMenuItem } from './_types'
 import { mountComponentAsApp } from './app-helper'
+import { OuiMenuItems } from '.'
 
 const log: LoggerInterface = Logger('use-menu')
 
-type OuiMenuCreator = (...args: any) => OuiMenuItem[]
+type OuiMenuCreator<T = any> = (value: T, ...args: any) => OuiMenuItem[]
 type OuiMenuItemSource = (OuiMenuItem | false | undefined | null)[] | OuiMenuCreator
 
 function generateGetBoundingClientRect(x = 0, y = 0) {
@@ -43,11 +44,9 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
     const event = args.find((a: any) => a instanceof Event) as MouseEvent
     const { clientX: x, clientY: y, target } = event
 
-    let cursorElement: HTMLElement | null = target as any
-
+    // Find reference element. Use containing BUTTON if available
     let reference: HTMLElement | undefined | null
-
-    // Uses containing BUTTON if available
+    let cursorElement: HTMLElement | null = target as any
     while (cursorElement) {
       if (cursorElement.tagName?.toUpperCase() === 'BUTTON') {
         reference = cursorElement
@@ -56,6 +55,7 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
       cursorElement = cursorElement.parentElement
     }
 
+    // No element? Then narrow down the coordinates on screen.
     if (reference == null && target != null) {
       reference = target as any
       reference!.getBoundingClientRect = generateGetBoundingClientRect(x + 4, y + 4)
@@ -67,9 +67,12 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
     event.stopPropagation()
     event.preventDefault()
 
-    // Items
-    const dynamic = typeof itemsSource === 'function'
-    const items = (dynamic ? itemsSource(...args) : itemsSource).filter(item => item != null && item !== false)
+    // Items with empty ones filted out
+    const items = (
+      typeof itemsSource === 'function'
+        ? (itemsSource as any)(...args)
+        : itemsSource
+    ) .filter((item: any) => item != null && item !== false)
 
     // Cleanup separators at ends and multiple
     for (let i = items.length - 1; i >= 0; i--) {
@@ -81,9 +84,11 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
 
     log('items', items)
 
+    // No item? Don't show.
     if (items.length <= 0)
       return
 
+    // We have a hook? Then show the menu eventually
     if (reference) {
       app?.done()
       app = mountComponentAsApp(OuiMenu, {
@@ -99,7 +104,8 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
   }
 }
 
-export function useMenuWithValue<T = any>(itemsSource: OuiMenuCreator) {
+/** Menu function where an argument can be passed, like: `const menu = useMenuWithValue(value => [...])` then in HTML `v-menu="menu(item)"` */
+export function useMenuWithValue<T = any>(itemsSource: OuiMenuCreator<T>) {
   const menu = useMenu(itemsSource)
   return (value: T) => {
     return (...args: any) => menu(value, ...args)
