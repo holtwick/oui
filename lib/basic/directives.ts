@@ -35,3 +35,23 @@ export const vActionTrue = {
     })
   },
 }
+
+/** Vue3 Directive! Fixes an issue in WKWebView where the cursor pretends text selection even if user-select: none; */
+export const vNoSelection = {
+  mounted: (el: HTMLElement, _binding: DirectiveBinding) => {
+    log.warn('v-no-selection, use with care! causes issues on draggable!')
+    if (!el.draggable) {
+      el.addEventListener('pointermove', (ev: MouseEvent) =>
+        ev.preventDefault(),
+      )
+    }
+  },
+}
+
+/** Vue3 Directive! Fixes an issue in WKWebView where the cursor pretends text selection even if user-select: none; */
+export const vAutofocus = {
+  mounted: (el: HTMLElement, _binding: DirectiveBinding) => {
+    log('focus', el)
+    setTimeout(() => el.focus(), 50)
+  },
+}
