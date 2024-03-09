@@ -1,4 +1,4 @@
-oui-form-all() {
+oui-form-defaults() {
   input[type=text], textarea {
     oui-input-text();
   }
@@ -29,6 +29,33 @@ oui-form-all() {
 
   select {
     oui-select();
+  }
+
+  label {
+    display: block;
+  }
+
+  label:has(input:not([type=checkbox]):not([type=radio])), label:has(select), label:has(textarea) {
+    input, select, textarea {
+      display: block !important;
+      margin-top: 4 !important;
+      max-width: 100%;
+    }
+
+    input, textarea {
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+
+  form {
+    use: stack-y;
+    gap: 16;
+
+    section {
+      use: stack-x;
+      gap: 6;
+    }
   }
 }
 
