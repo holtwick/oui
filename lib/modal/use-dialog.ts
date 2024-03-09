@@ -3,10 +3,8 @@ import { useDispose } from 'zeed'
 import { mountComponentAsApp } from '../basic/app-helper'
 import OuiDialog from './oui-dialog.vue'
 
-// const log = Logger('ui:dialog', globalThis.debugUI ?? false)
-
 /** Environment for JS dialog replacements */
-export function useDialog(component: Component = OuiDialog) {
+export function useDialog<T = Component>(component: T = OuiDialog) {
   let cancel: any
 
   async function showDialog<T>(props: any) {
