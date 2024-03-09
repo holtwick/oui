@@ -14,7 +14,7 @@ defineProps<{
 
 const emit = defineEmits(['close', 'cancel'])
 
-const _active = defineModel()
+const _active = defineModel({ default: true })
 
 onKeyStroke('Escape', (e) => {
   if (_active.value) {
@@ -54,54 +54,56 @@ const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.
 </script>
 
 <template>
-  <Transition
-    appear
-    :name="transition ?? `${name}-transition`"
-    @after-enter="didOpen"
-  >
-    <div
-      v-if="_active"
-      ref="root"
-      :class="{ [name]: true, _active }"
-      :tabindex="-1"
-      aria-modal="true"
-      role="dialog"
+  <Teleport to="body">
+    <Transition
+      appear
+      :name="transition ?? `${name}-transition`"
+      @after-enter="didOpen"
     >
       <div
-        class="oui-modal-overlay _modal_overlay"
-        aria-label="Close"
-        @click="doCancel"
-      />
-      <div v-focustrap class="oui-modal-container _modal_container">
-        <button
-          v-if="close"
-          tooltip="Close"
-          class="oui-modal-close _modal_close"
+        v-if="_active"
+        ref="root"
+        :class="{ [name]: true, _active }"
+        :tabindex="-1"
+        aria-modal="true"
+        role="dialog"
+      >
+        <div
+          class="oui-modal-overlay _modal_overlay"
+          aria-label="Close"
           @click="doCancel"
-        >
-          <slot name="close">
-            <OuiClose />
-          </slot>
-        </button>
-        <header
-          v-if="title || $slots.title || $slots.header || close === true"
-          class="oui-modal-header _modal_header"
-        >
-          <div v-if="title || $slots.title" class="oui-modal-title title _modal_title">
-            <slot name="title">
-              {{ title }}
+        />
+        <div v-focustrap class="oui-modal-container _modal_container">
+          <button
+            v-if="close"
+            tooltip="Close"
+            class="oui-modal-close _modal_close"
+            @click="doCancel"
+          >
+            <slot name="close">
+              <OuiClose />
             </slot>
-          </div>
+          </button>
+          <header
+            v-if="title || $slots.title || $slots.header || close === true"
+            class="oui-modal-header _modal_header"
+          >
+            <div v-if="title || $slots.title" class="oui-modal-title title _modal_title">
+              <slot name="title">
+                {{ title }}
+              </slot>
+            </div>
 
-          <slot name="header" />
-        </header>
-        <section class="oui-modal-body body _modal_body">
-          <slot />
-        </section>
-        <footer v-if="$slots.footer" class="oui-modal-footer footer _modal_footer">
-          <slot name="footer" />
-        </footer>
+            <slot name="header" />
+          </header>
+          <section class="oui-modal-body body _modal_body">
+            <slot />
+          </section>
+          <footer v-if="$slots.footer" class="oui-modal-footer footer _modal_footer">
+            <slot name="footer" />
+          </footer>
+        </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
+  </Teleport>
 </template>
