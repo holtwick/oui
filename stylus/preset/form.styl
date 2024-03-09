@@ -19,6 +19,10 @@ oui-form-defaults() {
     oui-checkbox();
   }
 
+  input[type=switch], input.oui-switch[type=checkbox] {
+    oui-switch();
+  }
+
   input[type=radio] {
     oui-radio();
   }
@@ -80,16 +84,12 @@ oui-form() {
     oui-input-number();
   }
 
-  &-checkbox]:not(.oui-switch) {
+  &-checkbox {
     oui-checkbox();
   }
 
   &-number {
     oui-input-number();
-  }
-
-  &-checkbox {
-    oui-checkbox();
   }
 
   &-switch {
