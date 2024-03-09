@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { vAutofocus } from '../basic/directives'
-import OuiButton from './oui-button.vue'
 import OuiModal from './oui-modal.vue'
 
 const props = defineProps<{
@@ -34,10 +33,6 @@ function doCancel() {
 
 <template>
   <OuiModal
-    class="oui-dialog"
-    active
-    standalone
-    :close="false"
     :title="title"
     @close="doCancel"
   >

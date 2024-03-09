@@ -4,6 +4,7 @@ import { defineSetupVue3 } from '@histoire/plugin-vue'
 // import WrapperGlobal from './WrapperGlobal.vue'
 
 // import './global.css'
+import './stylus/story.styl'
 
 export const setupVue3 = defineSetupVue3(({ app, addWrapper }) => {
   // const pinia = createPinia()

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { useDialog } from '@/lib'
+import OuiDialogExample from './oui-dialog-example.vue'
+import { OuiDialog, useDialog } from '@/lib'
 
 function initialState() {
   return {
@@ -8,6 +9,7 @@ function initialState() {
 }
 
 const { alert, confirm, prompt } = useDialog()
+const { open } = useDialog(OuiDialogExample)
 </script>
 
 <template>
@@ -17,15 +19,20 @@ const { alert, confirm, prompt } = useDialog()
     </template>
     <Variant title="useDialog" :init-state="initialState">
       <template #default="{ state }">
-        <button @click="alert('Hello World')">
-          Alert
-        </button>
-        <button @click="confirm('Hello World')">
-          Confirm
-        </button>
-        <button @click="prompt('Hello World')">
-          Prompt
-        </button>
+        <div class="button-group">
+          <button @click="alert('Hello World')">
+            Alert
+          </button>
+          <button @click="confirm('Hello World')">
+            Confirm
+          </button>
+          <button @click="prompt('Hello World')">
+            Prompt
+          </button>
+          <button @click="open">
+            Custom
+          </button>
+        </div>
       </template>
     </Variant>
   </story>

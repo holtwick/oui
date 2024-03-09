@@ -1,5 +1,9 @@
 import { ref } from 'vue'
 import type { DirectiveBinding } from 'vue'
+import type { LoggerInterface } from 'zeed'
+import { Logger } from 'zeed'
+
+const log: LoggerInterface = Logger('directives')
 
 /** Vue3 Directive! */
 export const vActionToggle = {
