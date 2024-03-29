@@ -28,7 +28,15 @@ function doToggleSort(name: string) {
     <thead>
       <tr>
         <template v-for="col, pos in columns" :key="col.name">
-          <th :class="{ _sortable: col.sortable === true, _asc: sortAsc, _desc: !sortAsc, _active: sortName === col.name }" @click="doToggleSort(col.name)">
+          <th
+            :class="{
+              _sortable: col.sortable === true,
+              _asc: sortName === col.name && sortAsc,
+              _desc: sortName === col.name && !sortAsc,
+              _active: sortName === col.name,
+            }"
+            @click="doToggleSort(col.name)"
+          >
             <slot :name="`header-${col.name}`" v-bind="{ col, pos }">
               {{ col.title ?? col.name }}
               <template v-if="col.sortable === true && sortName === col.name" />
@@ -42,7 +50,13 @@ function doToggleSort(name: string) {
         <tr>
           <template v-for="col, pos in columns" :key="col.name">
             <td :align="col.align ?? 'left'" :valign="col.valign ?? 'top'">
-              <slot :name="`col-${col.name}`" v-bind="{ value: row[col.name], col, pos }">
+              <slot
+                :name="`col-${col.name}`" v-bind="{
+                  value: row[col.name],
+                  col,
+                  pos,
+                  row }"
+              >
                 {{ row[col.name] }}
               </slot>
             </td>
