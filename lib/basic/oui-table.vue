@@ -7,9 +7,15 @@ defineProps<{
   columns: OuiTableColumn<K>[]
   data: T[]
   footer?: boolean
+  selectable?: boolean
+}>()
+
+const emit = defineEmits<{
+  context: [row: T, pos: number, event: Event]
 }>()
 
 const modelSort = defineModel<string>('sort')
+const modelSelected = defineModel<number | undefined>()
 
 const sortName = computed(() => parseOrderby(modelSort.value).field)
 const sortAsc = computed(() => parseOrderby(modelSort.value).asc)
@@ -20,6 +26,13 @@ function doToggleSort(name: string) {
     return
   }
   modelSort.value = `${name} asc`
+}
+
+function doSelect(pos: number) {
+  if (modelSelected.value === pos)
+    modelSelected.value = undefined
+  else
+    modelSelected.value = pos
 }
 </script>
 
@@ -46,10 +59,20 @@ function doToggleSort(name: string) {
       </tr>
     </thead>
     <tbody>
-      <template v-for="row in data" :key="row">
-        <tr>
+      <template v-for="row, rowPos in data" :key="row">
+        <tr
+          :class="{
+            _selectable: selectable,
+            _active: modelSelected === rowPos,
+          }"
+          @click="doSelect(rowPos)"
+          @contextmenu.prevent="emit('context', row, rowPos, $event)"
+        >
           <template v-for="col, pos in columns" :key="col.name">
-            <td :align="col.align ?? 'left'" :valign="col.valign ?? 'top'">
+            <td
+              :align="col.align ?? 'left'"
+              :valign="col.valign ?? 'top'"
+            >
               <slot
                 :name="`col-${col.name}`" v-bind="{
                   value: row[col.name],

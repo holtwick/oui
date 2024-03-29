@@ -2,11 +2,13 @@
 import { computed, reactive } from 'vue'
 import { sortedOrderby } from 'zeed'
 import type { OuiTableColumn } from '../lib'
-import { OuiTable } from '../lib'
+import { OuiTable, useMenu, useMenuWithValue } from '../lib'
 
 const state = reactive({
   sort: '',
   footer: true,
+  selectable: true,
+  selected: undefined,
 })
 
 const columns: OuiTableColumn[] = [
@@ -23,18 +25,42 @@ const _data = [
 ]
 
 const data = computed(() => sortedOrderby(_data, state.sort))
+
+const menu = useMenu((row: any) => [
+  {
+    title: row.one ?? '-',
+    // eslint-disable-next-line no-alert
+    action: () => alert('Hello World'),
+  },
+  {},
+  {
+    title: row.two ?? '-',
+    // eslint-disable-next-line no-alert
+    action: () => alert('Hello World'),
+  },
+])
 </script>
 
 <template>
   <Story auto-props-disabled>
     <template #controls>
       <HstText v-model="state.sort" title="Sort" />
+      <HstNumber v-model="state.selected" title="Selected" />
       <HstCheckbox v-model="state.footer" title="Show footer" />
+      <HstCheckbox v-model="state.selectable" title="Selectable" />
     </template>
     <Variant title="Default">
       <template #default>
         <div>
-          <OuiTable v-model:sort="state.sort" :columns="columns" :data="data" :footer="state.footer">
+          <OuiTable
+            v-model="state.selected"
+            v-model:sort="state.sort"
+            :columns="columns"
+            :data="data"
+            :footer="state.footer"
+            :selectable="state.selectable"
+            @context="menu"
+          >
             <template #col-one="{ value, col }">
               {{ col.name }} {{ value }}
             </template>
