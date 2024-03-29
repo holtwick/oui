@@ -51,6 +51,7 @@ const menu = useMenu((row: any) => [
     </template>
     <Variant title="Default">
       <template #default>
+        <h2>Complex example</h2>
         <div>
           <OuiTable
             v-model="state.selected"
@@ -76,6 +77,11 @@ const menu = useMenu((row: any) => [
               ONE
             </template>
           </OuiTable>
+        </div>
+
+        <h2>Without columns definitions - super simple</h2>
+        <div>
+          <OuiTable :data="data" />
         </div>
       </template>
     </Variant>

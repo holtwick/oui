@@ -3,12 +3,18 @@ import { computed } from 'vue'
 import { parseOrderby } from 'zeed'
 import type { OuiTableColumn } from './_types'
 
-defineProps<{
-  columns: OuiTableColumn<K>[]
+const props = withDefaults(defineProps<{
   data: T[]
-  footer?: boolean
+  columns?: OuiTableColumn<K>[]
+  header?: boolean | undefined
+  footer?: boolean | undefined
   selectable?: boolean
-}>()
+}>(), {
+  columns: undefined,
+  header: undefined,
+  footer: false,
+  selectable: true,
+})
 
 const emit = defineEmits<{
   context: [row: T, pos: number, event: Event]
@@ -19,6 +25,9 @@ const modelSelected = defineModel<number | undefined>()
 
 const sortName = computed(() => parseOrderby(modelSort.value).field)
 const sortAsc = computed(() => parseOrderby(modelSort.value).asc)
+
+const cols = computed<OuiTableColumn<K>[]>(() => props.columns ?? (Object.keys(props.data?.[0] ?? {}) as any)?.map((name: string) => ({ name })))
+const showHeader = computed(() => props.header ?? props.columns != null)
 
 function doToggleSort(name: string) {
   if (sortName.value === name) {
@@ -38,9 +47,9 @@ function doSelect(pos: number) {
 
 <template>
   <table class="oui-table">
-    <thead>
+    <thead v-if="showHeader">
       <tr>
-        <template v-for="col, pos in columns" :key="col.name">
+        <template v-for="col, pos in cols" :key="col.name">
           <th
             :class="{
               _sortable: col.sortable === true,
@@ -68,7 +77,7 @@ function doSelect(pos: number) {
           @click="doSelect(rowPos)"
           @contextmenu.prevent="emit('context', row, rowPos, $event)"
         >
-          <template v-for="col, pos in columns" :key="col.name">
+          <template v-for="col, pos in cols" :key="col.name">
             <td
               :align="col.align ?? 'left'"
               :valign="col.valign ?? 'top'"
@@ -87,9 +96,9 @@ function doSelect(pos: number) {
         </tr>
       </template>
     </tbody>
-    <tfoot v-if="footer">
+    <tfoot v-if="footer === true">
       <tr>
-        <template v-for="col, pos in columns" :key="col.name">
+        <template v-for="col, pos in cols" :key="col.name">
           <td :align="col.align ?? 'left'" :valign="col.valign ?? 'top'">
             <slot :name="`footer-${col.name}`" v-bind="{ col, pos }">
               {{ col.footer ?? '' }}
