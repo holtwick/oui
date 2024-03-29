@@ -35,6 +35,8 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
   // todo this would require to use it top level always
   // onBeforeUnmount(() => app?.done())
 
+  let lastX: number, lastY: number, lastReference: any
+
   return (...args: any) => {
     log('useMenu trigger', args)
 
@@ -65,6 +67,15 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
     event.stopPropagation()
     event.preventDefault()
 
+    // Second click closes, this is like macOS does it as well
+    if (reference?.isSameNode(lastReference) || (x === lastX && y === lastY)) {
+      lastX = -1
+      lastY = -1
+      lastReference = undefined
+      app?.done()
+      return
+    }
+
     // Items with empty ones filted out
     const items = (
       typeof itemsSource === 'function'
@@ -88,6 +99,10 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
 
     // We have a hook? Then show the menu eventually
     if (reference) {
+      lastX = x
+      lastY = y
+      lastReference = reference
+
       app?.done()
       app = mountComponentAsApp(OuiMenu, {
         items,
