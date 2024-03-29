@@ -8,6 +8,6 @@ export { default as OuiMenuItems } from './oui-menu-items.vue'
 export { default as OuiTooltipActivator } from './oui-tooltip-activator.vue'
 
 export { useMenu, useMenuWithValue } from './use-menu'
-export { vMenu } from './v-menu'
+export { vMenu, vMenuContext, vContext } from './v-menu'
 
 // export { vActionToggle } from './lib'

@@ -21,3 +21,20 @@ export const vMenu = {
     })
   },
 }
+
+export const vMenuContext = {
+  updated: (element: any, binding: DirectiveBinding) => {
+    log.assert(typeof binding.value === 'function', 'v-menu requires function as argument')
+    element.__ouiVMenuContext = binding.value
+  },
+  mounted: (element: any, binding: DirectiveBinding) => {
+    log.assert(typeof binding.value === 'function', 'v-menu requires function as argument')
+    element.__ouiVMenuContext = binding.value
+    element.addEventListener('contextmenu', (event: MouseEvent) => {
+      event.preventDefault() // no system menu
+      element.__ouiVMenuContext?.(event, element)
+    })
+  },
+}
+
+export const vContext = vMenuContext

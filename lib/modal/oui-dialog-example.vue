@@ -25,7 +25,7 @@ async function doCancel() {
 </script>
 
 <template>
-  <OuiModal :title="title" @close="doCancel">
+  <OuiModal @close="doCancel">
     <div>
       Example Dialog Mode
     </div>

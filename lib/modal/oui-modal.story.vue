@@ -27,7 +27,7 @@ function initialState() {
           Body
           <template #footer>
             Footer
-          </template>          
+          </template>
         </OuiModal>
       </template>
     </Variant>
