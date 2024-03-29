@@ -1,10 +1,8 @@
-import type { DirectiveBinding } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger, isRecord } from 'zeed'
 import { mountComponentAsApp } from '../basic/app-helper'
 import OuiMenu from './oui-menu.vue'
 import type { OuiMenuItem } from './_types'
-import { OuiMenuItems } from '.'
 
 const log: LoggerInterface = Logger('use-menu')
 

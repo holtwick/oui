@@ -4,11 +4,11 @@ import { mountComponentAsApp } from '../basic/app-helper'
 import OuiDialog from './oui-dialog.vue'
 
 /** Environment for JS dialog replacements */
-export function useDialog<T = Component>(component: T = OuiDialog) {
+export function useDialog<T extends Component>(component?: T) {
   let cancel: any
 
   async function showDialog<T>(props: any) {
-    const dialogApp = mountComponentAsApp<T>(component, props)
+    const dialogApp = mountComponentAsApp<T>(component ?? OuiDialog, props)
     cancel = dialogApp.cancel
     return dialogApp.awaitDone
   }

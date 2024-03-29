@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import OuiDialogExample from './oui-dialog-example.vue'
-import { OuiDialog, useDialog } from '@/lib'
+import { useDialog } from '@/lib'
 
 function initialState() {
   return {
@@ -18,7 +18,7 @@ const { open } = useDialog(OuiDialogExample)
       <HstCheckbox v-model="state.show" title="show" />
     </template>
     <Variant title="useDialog" :init-state="initialState">
-      <template #default="{ state }">
+      <template #default>
         <div class="button-group">
           <button @click="alert('Hello World')">
             Alert
