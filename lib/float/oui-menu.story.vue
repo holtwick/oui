@@ -29,19 +29,15 @@ const menu = useMenuWithValue((item: number) => [{
 
 <template>
   <Story auto-props-disabled>
-    <template #controls="{ state }">
-      <HstCheckbox v-model="state.show" title="show" />
-    </template>
-    <Variant title="useMenu" :init-state="initialState">
+    <Variant :init-state="initialState">
       <template #default>
+        <h1>v-menu</h1>
         <button ref="button" v-menu="simpleMenu">
           Click me
         </button>
         <p>You may click with right or left mouse key.</p>
-      </template>
-    </Variant>
-    <Variant title="useMenuWithValue" :init-state="initialState">
-      <template #default>
+
+        <h1>useMenuWithValue</h1>
         <button ref="button" v-menu="menu(1)">
           Click 1
         </button>
