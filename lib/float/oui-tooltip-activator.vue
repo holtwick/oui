@@ -30,11 +30,11 @@ function onTooltipHover(ev: Event) {
     return
 
   clearTimeout(debounceTimer)
-  let el: HTMLElement | null = ev.target as any
+  let el: Element | null = ev.target as any
 
   // Check if we are still inside. If not, hide immediately
   let didLeave = true
-  while (el != null && el?.tagName !== 'BODY') {
+  while (el instanceof Element && el.tagName !== 'BODY') {
     const tooltip = el.getAttribute('tooltip')
     if (tooltip && tooltip?.length > 0) {
       if (el.isEqualNode(reference.value as any)) {
@@ -52,14 +52,9 @@ function onTooltipHover(ev: Event) {
 
   // Show tooltip on rest with some delay
   debounceTimer = setTimeout(() => {
-    while (el != null && el?.tagName !== 'BODY') {
-      // let title = el.title
-      // if (title) {
-      //   el.setAttribute("tooltip", title)
-      // }
+    while (el instanceof Element && el.tagName !== 'BODY') {
       const tooltip = el.getAttribute('tooltip')
       if (tooltip && tooltip?.length > 0) {
-        // el.title = ""
         reference.value = el
         text.value = tooltip?.toString()?.trim() || ''
         placement.value = el.getAttribute('tooltip-placement') || 'top' as any

@@ -32,6 +32,9 @@ const { open } = useDialog(OuiDialogExample)
           <button @click="open">
             Custom
           </button>
+          <button @click="open">
+            Custom
+          </button>          
         </div>
       </template>
     </Variant>
