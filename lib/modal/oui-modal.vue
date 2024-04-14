@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onKeyStroke } from '@vueuse/core'
+import { onKeyStroke, useEventListener } from '@vueuse/core'
 import { computed, ref, useAttrs } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
@@ -41,8 +41,8 @@ if (window.visualViewport != null) {
     // window.scrollTo(0, 0)
   }
 
-  window.visualViewport.addEventListener('resize', resizeHandler)
-  window.visualViewport.addEventListener('scroll', resizeHandler)
+  useEventListener(window.visualViewport, 'resize', resizeHandler)
+  useEventListener(window.visualViewport, 'scroll', resizeHandler)
 }
 
 // const { escape } = useMagicKeys()
@@ -66,8 +66,11 @@ function doClose() {
 }
 
 function didOpen() {
-  root.value?.querySelector('.focus')?.focus()
-  // emit('didOpen')
+  if (root.value) {
+    root.value.querySelector('.focus')?.focus()
+
+    useEventListener(root.value, 'touchmove', (e: any) => e.preventDefault())
+  }
 }
 
 const attrs = useAttrs()
