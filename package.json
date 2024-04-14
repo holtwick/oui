@@ -80,31 +80,31 @@
     "@floating-ui/vue": "^1.0.6",
     "@vueuse/core": "^10.9.0",
     "vue": "^3.4.21",
-    "zeed": "^0.19.2"
+    "zeed": "^0.20.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.12.1",
+    "@antfu/eslint-config": "^2.13.3",
     "@antfu/ni": "^0.21.12",
-    "@histoire/plugin-vue": "^0.17.15",
+    "@histoire/plugin-vue": "^0.17.17",
     "@tsconfig/node18": "^18.2.4",
     "@types/jest": "^29.5.12",
     "@types/jsdom": "^21.1.6",
-    "@types/node": "^20.12.4",
+    "@types/node": "^20.12.7",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.5",
     "@vue/tsconfig": "^0.5.1",
-    "eslint": "^8.57.0",
+    "eslint": "^9.0.0",
     "fast-glob": "^3.3.2",
-    "histoire": "^0.17.15",
+    "histoire": "^0.17.17",
     "jsdom": "^24.0.0",
     "npm-run-all2": "^6.1.2",
     "only-allow": "^1.2.1",
     "stylus": "^0.63.0",
     "tsup": "^8.0.2",
-    "typescript": "^5.4.4",
+    "typescript": "^5.4.5",
     "vite": "^5.2.8",
-    "vite-plugin-dts": "^3.8.1",
-    "vitest": "^1.4.0",
-    "vue-tsc": "^2.0.10"
+    "vite-plugin-dts": "^3.8.2",
+    "vitest": "^1.5.0",
+    "vue-tsc": "^2.0.13"
   }
 }

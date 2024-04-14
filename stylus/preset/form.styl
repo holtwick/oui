@@ -19,7 +19,7 @@ oui-form-defaults() {
     oui-checkbox();
   }
 
-  input[type=switch], input.oui-switch[type=checkbox] {
+  input[type=switch], input[type=checkbox].oui-switch {
     oui-switch();
   }
 
@@ -37,6 +37,7 @@ oui-form-defaults() {
 
   label {
     display: block;
+    user-select: none;
   }
 
   label:has(input:not([type=checkbox]):not([type=radio])), label:has(select), label:has(textarea) {
@@ -52,7 +53,7 @@ oui-form-defaults() {
     }
   }
 
-  form {
+  &, form {
     use: stack-y;
     gap: 16;
 
