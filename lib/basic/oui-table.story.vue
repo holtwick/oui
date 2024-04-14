@@ -66,7 +66,7 @@ const menu = useMenu((row: any) => [
               {{ col.name }} {{ value }}
             </template>
             <template #col-action="{ value, col }">
-              <button size="small" @click="console.log(value, col)">
+              <button class="oui-button" size="small" @click="console.log(value, col)">
                 Action
               </button>
             </template>
