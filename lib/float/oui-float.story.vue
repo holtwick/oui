@@ -9,7 +9,6 @@ function initialState() {
 }
 
 const button = ref()
-const show = ref(false)
 </script>
 
 <template>

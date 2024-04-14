@@ -80,24 +80,24 @@ oui-modal() {
       use: stack-y;
       border-bottom: 1px solid var(--modal-separator, -gray-200);
       padding: 16;
-      padding-bottom: 0;
-      flex: 0;
     }
 
+    /*
     ._modal_title {
       font-weight: normal;
       font-size: lg;
       margin-right: 32;
       margin-bottom: 16;
-    }
-
+      background: orange;
+    } 
+    */
     ._modal_close {
       position: absolute;
-      top: 2;
-      right: 2;
-      background: inherit;
-      border-radius: 4;
-      z-index: 99999;
+      top: 0;
+      right: 0;
+      background: transparent;
+      border-radius: var(--dialog-radius, 8px);
+      // z-index: 99999;
       font-size: lg; // SVG will adopt
       cursor: unquote("pointer");
       padding: 12;
@@ -111,23 +111,24 @@ oui-modal() {
       }
     }
 
-    ._modal_body {
-      use: stack-item-grow;
-      use: stack-item-scroll;
-      padding: 16;
-      position: relative;
-    }
-
     ._modal_footer {
       border-top: 1px solid var(--modal-separator, -gray-200);
       text-align: right;
       white-space: nowrap;
       padding: 16;
-      padding-top: 0;
 
       > * {
         margin-left: 8;
       }
+    }
+
+    ._modal_body {
+      use: stack-item-grow;
+      use: stack-item-scroll;
+      margin: 0;
+      padding-y: 0;
+      padding-x: 16;
+      position: relative;
     }
 
     &-transition {

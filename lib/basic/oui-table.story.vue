@@ -2,7 +2,7 @@
 import { computed, reactive } from 'vue'
 import { sortedOrderby } from 'zeed'
 import type { OuiTableColumn } from '../lib'
-import { OuiTable, useMenu, useMenuWithValue } from '../lib'
+import { OuiTable, useMenu } from '../lib'
 
 const state = reactive({
   sort: '',

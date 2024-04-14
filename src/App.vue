@@ -2,7 +2,7 @@
 import { useLocalStorage } from '@vueuse/core'
 import { computed } from 'vue'
 
-const modes = import.meta.glob('./app-*.vue', {
+const modes = import.meta.glob('./(app-*|*.story.).vue', {
   import: 'default',
   eager: true,
 })
