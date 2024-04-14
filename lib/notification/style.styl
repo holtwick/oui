@@ -78,6 +78,7 @@ oui-notification() {
       use: stack-x;
 
       &-body {
+        position: relative;
         use: stack-y;
         use: stack-item-grow;
         gap: px(8);
@@ -109,9 +110,17 @@ oui-notification() {
       }
 
       &-close {
+        position: absolute;
+        right: 0;
+        top: 0;
         // color: white !important;
         cursor: unquote("pointer");
         opacity: 0.5;
+
+        button {
+          padding: 0;
+          border: none;
+        }
 
         svg {
           size: 1em;

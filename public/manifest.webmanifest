@@ -1,6 +1,6 @@
 {
   "description": "Oui demo app",
-  "display": "standalone",
+  "display": "fullscreen",
   "id": "de.holtwick.oui",
   "lang": "en",
   "name": "Oui",
@@ -8,7 +8,7 @@
   "start_url": "/",
   "scope": "/",
   "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "theme_color": "#000000",
   "icons": [
     {
       "sizes": "64x64",

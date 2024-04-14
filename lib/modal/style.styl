@@ -5,14 +5,14 @@ oui-modal() {
     --modal-separator: transparent;
     --modal-bg: var(--dialog-bg, white);
     align-items: center;
-    bottom: 0;
     display: none;
     justify-content: center;
     overflow: hidden;
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-    top: 0;
+    bottom: 0;
 
     @media -media-desktop {
       padding: 8;
@@ -32,11 +32,11 @@ oui-modal() {
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         // background: var(--dialog-backdrop, rgba(0, 0, 0, 0.75));
-        bottom: 0;
         cursor: default;
         display: block;
-        left: 0;
         position: absolute;
+        bottom: 0;
+        left: 0;
         right: 0;
         top: 0;
       }
@@ -55,7 +55,6 @@ oui-modal() {
       box-shadow: lg;
       background: var(--modal-bg, -gray-50);
       width: Min(64ch, 90vw);
-      height: 90vh;
 
       @media -media-desktop {
         border: 1px solid var(--modal-separator, -gray-200);
@@ -64,15 +63,16 @@ oui-modal() {
       }
 
       @media -media-mobile {
-        position: absolute;
+        position: fixed;
         width: auto;
-        height: auto;
-        top: px(44);
+        // height: auto;
+        top: calc(44px + var(--visible-offset-top, 0));
         left: 0;
         right: 0;
         bottom: 0;
         border-top-left-radius: var(--dialog-radius, 8px);
         border-top-right-radius: var(--dialog-radius, 8px);
+        height: calc(var(--visible-height, 100vh) - 44px);
       }
     }
 
@@ -80,42 +80,35 @@ oui-modal() {
       use: stack-y;
       border-bottom: 1px solid var(--modal-separator, -gray-200);
       padding: 16;
+      padding-right: 40;
+      font-weight: 600;
     }
 
-    /*
-    ._modal_title {
-      font-weight: normal;
-      font-size: lg;
-      margin-right: 32;
-      margin-bottom: 16;
-      background: orange;
-    } 
-    */
     ._modal_close {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 2;
+      right: 2;
       background: transparent;
       border-radius: var(--dialog-radius, 8px);
       // z-index: 99999;
-      font-size: lg; // SVG will adopt
+      font-size: 16;
       cursor: unquote("pointer");
+      color: inherit;
       padding: 12;
       border: none;
       appearance: none;
 
       &:hover {
         color: var(--primary-color);
-        // border-radius base
-        // background -gray-200
       }
     }
 
     ._modal_footer {
       border-top: 1px solid var(--modal-separator, -gray-200);
       text-align: right;
-      white-space: nowrap;
+      // white-space: nowrap;
       padding: 16;
+      padding-bottom: -safe-bottom;
 
       > * {
         margin-left: 8;
@@ -126,6 +119,7 @@ oui-modal() {
       use: stack-item-grow;
       use: stack-item-scroll;
       margin: 0;
+      min-height: 32;
       padding-y: 0;
       padding-x: 16;
       position: relative;

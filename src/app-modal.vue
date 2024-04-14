@@ -14,11 +14,15 @@ const show = ref(false)
     </button>
     <OuiModal v-model="show" close>
       <template #header>
-        Header
+        Header Header Header Header Header Header Header
       </template>
-      Body
+      <div style="background: red; height: 10vh;" />
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores eum incidunt officia facilis id, magni fugiat temporibus labore, facere, sequi nostrum cum asperiores eligendi eos. Libero voluptas facilis quos ipsam!
+      <br>
+      <br>
+      <input type="text" class="oui-input">
       <template #footer>
-        Footer
+        Footer Footer Footer Footer Footer Footer Footer
       </template>
     </OuiModal>
   </div>
