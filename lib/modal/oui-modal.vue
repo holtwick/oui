@@ -37,7 +37,7 @@ if (window.visualViewport != null) {
     document.documentElement.style.height = visibleHeight
     log('new height', visibleHeight, window.visualViewport)
     rootCss.setProperty('--visible-height', visibleHeight)
-    rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
+    // rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
     // window.scrollTo(0, 0)
   }
 
@@ -66,11 +66,10 @@ function doClose() {
 }
 
 function didOpen() {
-  if (root.value) {
+  if (root.value)
     root.value.querySelector('.focus')?.focus()
 
-    useEventListener(root.value, 'touchmove', (e: any) => e.preventDefault())
-  }
+  // useEventListener(root.value, 'touchmove', (e: any) => e.preventDefault(), true)
 }
 
 const attrs = useAttrs()
