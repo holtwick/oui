@@ -34,7 +34,7 @@ const { open } = useDialog(OuiDialogExample)
           </button>
           <button @click="open">
             Custom
-          </button>          
+          </button>
         </div>
       </template>
     </Variant>

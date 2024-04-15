@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { onKeyStroke } from '@vueuse/core'
+import { onKeyStroke, useEventListener } from '@vueuse/core'
 import { computed, ref, useAttrs } from 'vue'
+import type { LoggerInterface } from 'zeed'
+import { Logger } from 'zeed'
 import { OuiClose } from '../basic'
 import { vFocustrap } from './oui-focustrap-directive'
 
@@ -14,6 +16,8 @@ defineProps<{
 
 const emit = defineEmits(['close', 'cancel'])
 
+const log: LoggerInterface = Logger('oui-modal')
+
 const _active = defineModel({ default: true })
 
 onKeyStroke('Escape', (e) => {
@@ -23,6 +27,23 @@ onKeyStroke('Escape', (e) => {
     _active.value = false
   }
 })
+
+const rootCss = document.documentElement.style
+
+if (window.visualViewport != null) {
+  function resizeHandler() {
+    const visibleHeight = `${window.visualViewport?.height.toString()}px`
+    const visibleOffsetTop = `${window.visualViewport?.offsetTop.toString()}px`
+    document.documentElement.style.height = visibleHeight
+    log('new height', visibleHeight, window.visualViewport)
+    rootCss.setProperty('--visible-height', visibleHeight)
+    // rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
+    // window.scrollTo(0, 0)
+  }
+
+  useEventListener(window.visualViewport, 'resize', resizeHandler)
+  useEventListener(window.visualViewport, 'scroll', resizeHandler)
+}
 
 // const { escape } = useMagicKeys()
 
@@ -45,8 +66,10 @@ function doClose() {
 }
 
 function didOpen() {
-  root.value?.querySelector('.focus')?.focus()
-  // emit('didOpen')
+  if (root.value)
+    root.value.querySelector('.focus')?.focus()
+
+  // useEventListener(root.value, 'touchmove', (e: any) => e.preventDefault(), true)
 }
 
 const attrs = useAttrs()

@@ -231,21 +231,16 @@ oui-boolean-default() {
     }
   }
 
-  &:focus {
-    box-shadow: var(--input-shadow-focus);
-    border-color: var(--input-border-focus); /* Workaround for :focus that otherwise stays after mouse click */
-
-    &:not(:focus-visible, :active) {
-      box-shadow: unquote("inherit");
-      // border-color: unquote("inherit");
-    }
-  }
-
   & + label {
     line-height: control-boolean-height;
     display: inline-block;
     vertical-align: top;
     // cursor: pointer;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--input-shadow-focus);
+    border-color: var(--input-border-focus); /* Workaround for :focus that otherwise stays after mouse click */
   }
 }
 
@@ -299,6 +294,11 @@ oui-switch() {
         opacity: 0.6;
       }
     }
+  }
+
+  &:focus-visible {
+    box-shadow: var(--input-shadow-focus);
+    border-color: var(--input-border-focus); /* Workaround for :focus that otherwise stays after mouse click */
   }
 }
 

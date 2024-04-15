@@ -126,6 +126,15 @@ import { OuiClose } from '@/lib'
   </story>
 </template>
 
+<style lang="stylus">
+@require "../index.styl"
+
+form {
+  padding 8
+  oui-form-defaults()
+}
+</style>
+
 <docs lang="md">
 # oui-form
 

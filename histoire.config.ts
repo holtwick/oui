@@ -19,10 +19,10 @@ export default defineConfig({
   tree: {
     file: 'path',
   },
-  defaultStoryProps: {
-    layout: {
-      type: 'single',
-      iframe: false,
-    },
-  },
+  // defaultStoryProps: {
+  //   layout: {
+  //     type: 'single',
+  //     iframe: false,
+  //   },
+  // },
 })

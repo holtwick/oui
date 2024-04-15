@@ -2,7 +2,7 @@
 import { computed, reactive } from 'vue'
 import { sortedOrderby } from 'zeed'
 import type { OuiTableColumn } from '../lib'
-import { OuiTable, useMenu, useMenuWithValue } from '../lib'
+import { OuiTable, useMenu } from '../lib'
 
 const state = reactive({
   sort: '',
@@ -66,7 +66,7 @@ const menu = useMenu((row: any) => [
               {{ col.name }} {{ value }}
             </template>
             <template #col-action="{ value, col }">
-              <button size="small" @click="console.log(value, col)">
+              <button class="oui-button" size="small" @click="console.log(value, col)">
                 Action
               </button>
             </template>

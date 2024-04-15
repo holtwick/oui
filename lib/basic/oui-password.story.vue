@@ -1,23 +1,23 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { getTimestamp } from 'zeed'
-import { OuiDatetime } from '../lib'
+import { OuiPassword } from '../lib'
 
 const state = reactive({
-  value: getTimestamp(),
+  value: '',
 })
 </script>
 
 <template>
   <Story auto-props-disabled>
     <template #controls>
-      <HstText v-model="state.value" title="Datetime" />
+      <HstText v-model="state.value" title="Password" />
     </template>
     <Variant title="Default">
       <template #default>
         <div>
-          <OuiDatetime
+          <OuiPassword
             v-model="state.value"
+            show-meter
           />
         </div>
       </template>

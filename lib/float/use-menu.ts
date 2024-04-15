@@ -68,7 +68,7 @@ export function useMenu(itemsSource: OuiMenuItemSource) {
     event.preventDefault()
 
     // Second click closes, this is like macOS does it as well
-    if (app != null && reference?.isSameNode(lastReference) || (x === lastX && y === lastY)) {
+    if (app != null && (reference?.isSameNode(lastReference) || (x === lastX && y === lastY))) {
       log('close on second click')
       lastX = -1
       lastY = -1
