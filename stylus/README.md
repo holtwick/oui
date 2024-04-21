@@ -24,13 +24,14 @@ CSS for Vue components start with `oui-` like `oui-modal`.
 
 Modifiers start with an underscore like `_active`. The idea behind this is, that you can more easily use these in Vue class bindings like `:class="{ _active }"` or `:class="[ _active ]"`, because they don't conflict with JS variable names, like `-active` would do. I also want to avoid uppercase letters, and therefore modifiers like `isActive` or `hasValue` (see Bulma).
 
+Modifiers should only be defined together with other class names, like `&._active`.
+
 For widgets with inner structure this might look like this:
 
 ```html
-<div class="oui-sample _sample_active">
-  <div class="_sample_list">
-    <div class="_sample_item _sample_active">
-    </div>
+<div class="oui-list">
+  <div class="oui-list-item" :class="[_active]">
+    ...
   </div>
 </div>
 ```

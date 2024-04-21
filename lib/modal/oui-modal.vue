@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onKeyStroke, useEventListener } from '@vueuse/core'
-import { computed, ref, useAttrs } from 'vue'
+import { computed, onMounted, ref, useAttrs } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 import { OuiClose } from '../basic'
@@ -43,6 +43,8 @@ if (window.visualViewport != null) {
 
   useEventListener(window.visualViewport, 'resize', resizeHandler)
   useEventListener(window.visualViewport, 'scroll', resizeHandler)
+
+  onMounted(resizeHandler)
 }
 
 // const { escape } = useMagicKeys()

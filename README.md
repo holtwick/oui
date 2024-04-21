@@ -17,9 +17,9 @@ Libs:
 
 Dependencies used in some libs:
 
- - [@vueuse/core](https://www.npmjs.com/package/@vueuse/core)
- - [@floating-ui](https://www.npmjs.com/package/@floating-ui/dom)
- - [zeed](https://www.npmjs.com/package/zeed)
+- [@vueuse/core](https://www.npmjs.com/package/@vueuse/core)
+- [@floating-ui](https://www.npmjs.com/package/@floating-ui/dom)
+- [zeed](https://www.npmjs.com/package/zeed)
 
 Technologies:
 
