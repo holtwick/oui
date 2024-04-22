@@ -5,6 +5,7 @@ import OuiClose from './oui-close.vue'
 
 const state = reactive({
   disabled: false,
+  dropdown: false,
 })
 </script>
 
@@ -12,6 +13,7 @@ const state = reactive({
   <Story auto-props-disabled>
     <template #controls>
       <HstCheckbox v-model="state.disabled" title="Disabled" />
+      <HstCheckbox v-model="state.dropdown" title="Drop down" />
       <!-- <HstText v-model="state.value" title="Datetime" /> -->
     </template>
     <Variant title="Default">
@@ -41,15 +43,15 @@ const state = reactive({
           </OuiButton>
           <br>
           <br>
-          <OuiButton size="small">
+          <OuiButton size="small" :dropdown="state.dropdown">
             Small
           </OuiButton>
 
-          <OuiButton size="normal">
+          <OuiButton size="normal" :dropdown="state.dropdown">
             Normal
           </OuiButton>
 
-          <OuiButton size="large">
+          <OuiButton size="large" :dropdown="state.dropdown">
             Large
           </OuiButton>
           <br>

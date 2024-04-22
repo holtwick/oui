@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { OuiModal } from '@/lib'
+import OuiButton from '../lib/basic/oui-button.vue'
+import { OuiModal, vAutofocus } from '@/lib'
 
 const show = ref(false)
 </script>
@@ -22,7 +23,12 @@ const show = ref(false)
       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores eum incidunt officia facilis id, magni fugiat temporibus labore, facere, sequi nostrum cum asperiores eligendi eos. Libero voluptas facilis quos ipsam!</p>
       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores eum incidunt officia facilis id, magni fugiat temporibus labore, facere, sequi nostrum cum asperiores eligendi eos. Libero voluptas facilis quos ipsam!</p>
       <template #footer>
-        Footer Footer Footer Footer Footer Footer Footer
+        <OuiButton mode="secondary">
+          Cancel
+        </OuiButton>
+        <OuiButton v-autofocus mode="primary">
+          OK
+        </OuiButton>
       </template>
     </OuiModal>
   </div>
