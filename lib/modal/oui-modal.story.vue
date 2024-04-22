@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { OuiModal } from '@/lib'
+import { OuiButton, OuiModal } from '@/lib'
 
 function initialState() {
   return {
@@ -17,9 +17,9 @@ function initialState() {
       <template #default="{ state }">
         <h1>Oui</h1>
         <p>Just another set of UI components for Vue.js with a proper French-sounding name</p>
-        <button @click="state.show = !state.show">
+        <OuiButton @click="state.show = !state.show">
           Click to show modal
-        </button>
+        </OuiButton>
         <OuiModal v-model="state.show" close>
           <template #header>
             Header

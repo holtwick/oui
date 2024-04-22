@@ -4,7 +4,7 @@ import { Logger } from 'zeed'
 
 withDefaults(defineProps<{
   title?: string
-  mode?: 'primary' | 'danger'
+  mode?: 'primary' | 'danger' | 'secondary'
 }>(), {
 })
 

@@ -99,6 +99,7 @@
     "fast-glob": "^3.3.2",
     "histoire": "^0.17.17",
     "jsdom": "^24.0.0",
+    "lucide-vue-next": "^0.372.0",
     "npm-run-all2": "^6.1.2",
     "only-allow": "^1.2.1",
     "stylus": "^0.63.0",

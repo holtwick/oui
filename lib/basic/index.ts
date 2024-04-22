@@ -2,6 +2,7 @@ export * from './_types'
 export * from './directives'
 export * from './formatters'
 
+export { default as OuiButton } from './oui-button.vue'
 export { default as OuiCheckbox } from './oui-checkbox.vue'
 export { default as OuiClose } from './oui-close.vue'
 export { default as OuiDatetime } from './oui-datetime.vue'
