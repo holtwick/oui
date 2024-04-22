@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiSwitch } from '../lib'
+import { OuiCheckbox } from '../lib'
 
 const state = reactive({
   value: false,
@@ -16,11 +16,19 @@ const state = reactive({
       <template #default>
         <div>
           <label>
-            <OuiSwitch
+            <OuiCheckbox
               v-model="state.value"
             />
             Just a switch
           </label>
+        </div>
+        <div>
+          <OuiCheckbox v-model="state.value" switch>
+            Switch with label
+          </OuiCheckbox>
+        </div>
+        <div>
+          <OuiCheckbox v-model="state.value" title="Checkbox with label" />
         </div>
       </template>
     </Variant>
