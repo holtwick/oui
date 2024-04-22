@@ -1,0 +1,18 @@
+@require "../../stylus/index.styl";
+
+.oui-stars {
+  use: stack-x;
+  display: inline-flex;
+
+  svg {
+    size: 1em;
+  }
+
+  &:hover ._hover {
+    color: -yellow-400;
+  }
+
+  ._active {
+    color: -yellow-500;
+  }
+}
