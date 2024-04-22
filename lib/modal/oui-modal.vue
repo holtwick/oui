@@ -12,6 +12,7 @@ defineProps<{
   close?: boolean
   title?: string
   transition?: string
+  noSheet?: boolean
 }>()
 
 const emit = defineEmits(['close', 'cancel'])
@@ -88,7 +89,7 @@ const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.
       <div
         v-if="_active"
         ref="root"
-        :class="{ [name]: true, _active }"
+        :class="{ [name]: true, _active, _modal_sheet: !noSheet }"
         :tabindex="-1"
         aria-modal="true"
         role="dialog"

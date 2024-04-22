@@ -80,11 +80,11 @@
   "dependencies": {
     "@floating-ui/vue": "^1.0.6",
     "@vueuse/core": "^10.9.0",
-    "vue": "^3.4.21",
+    "vue": "^3.4.23",
     "zeed": "^0.20.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.13.3",
+    "@antfu/eslint-config": "^2.15.0",
     "@antfu/ni": "^0.21.12",
     "@histoire/plugin-vue": "^0.17.17",
     "@tsconfig/node18": "^18.2.4",
@@ -95,7 +95,7 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.5",
     "@vue/tsconfig": "^0.5.1",
-    "eslint": "^9.0.0",
+    "eslint": "^9.1.0",
     "fast-glob": "^3.3.2",
     "histoire": "^0.17.17",
     "jsdom": "^24.0.0",
@@ -104,9 +104,9 @@
     "stylus": "^0.63.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
-    "vite": "^5.2.8",
-    "vite-plugin-dts": "^3.8.2",
+    "vite": "^5.2.10",
+    "vite-plugin-dts": "^3.8.3",
     "vitest": "^1.5.0",
-    "vue-tsc": "^2.0.13"
+    "vue-tsc": "^2.0.14"
   }
 }

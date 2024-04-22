@@ -19,7 +19,9 @@ oui-modal() {
     }
 
     @media -media-mobile {
-      padding: 0;
+      :has(._modal_sheet) & {
+        padding: 0;
+      }
     }
 
     &:target, &._active {
@@ -55,20 +57,22 @@ oui-modal() {
       box-shadow: lg;
       background: var(--modal-bg, -gray-50);
       width: Min(64ch, 90vw);
-
-      @media -media-desktop {
-        border: 1px solid var(--modal-separator, -gray-200);
-        border-radius: var(--dialog-radius, 8px);
-        max-height: 75vh;
-      }
+      border: 1px solid var(--modal-separator, -gray-200);
+      border-radius: var(--dialog-radius, 8px);
+      max-height: 75vh;
 
       @media -media-mobile {
-        position: fixed;
-        width: auto;
-        top: calc(44px + var(--visible-offset-top, 0px));
-        height: calc(var(--visible-height, 100vh) - 44px);
-        border-top-left-radius: var(--dialog-radius, 8px);
-        border-top-right-radius: var(--dialog-radius, 8px);
+        :has(._modal_sheet) & {
+          border: inherit;
+          border-radius: inherit;
+          max-height: inherit;
+          position: fixed;
+          width: 100%;
+          top: calc(44px + var(--visible-offset-top, 0px));
+          height: calc(var(--visible-height, 100vh) - 44px);
+          border-top-left-radius: var(--dialog-radius, 8px);
+          border-top-right-radius: var(--dialog-radius, 8px);
+        }
       }
     }
 
@@ -104,8 +108,8 @@ oui-modal() {
       text-align: right;
       // white-space: nowrap;
       padding: 16;
-      padding-bottom: -safe-bottom;
 
+      // padding-bottom: -safe-bottom;
       > * {
         margin-left: 8;
       }
