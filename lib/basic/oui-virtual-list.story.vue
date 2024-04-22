@@ -2,6 +2,7 @@
 import { useVirtualList } from '@vueuse/core'
 import { reactive } from 'vue'
 import { createArray, uuid } from 'zeed'
+import { OuiVirtualList } from '@/lib'
 
 const state = reactive({
   sort: '',
@@ -29,27 +30,17 @@ const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(visibleI
         <h2>Complex example</h2>
         {{ visibleItems.length }}
         <div>
-          <div
-            v-bind="containerProps"
-            style="max-height: 400px; overflow: scroll; border: 1px solid purple"
+          <OuiVirtualList
+            :data="visibleItems"
+            :height="19"
+            style="height: 400px"
           >
-            <div v-bind="wrapperProps">
-              <div
-                v-for="{ index, data: item } in list"
-                :key="index"
-                :style="{
-                  height: `32px`,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }"
-              >
-                <div class="user">
-                  {{ item.id }}
-                </div>
-              </div>
-            </div>
-          <!-- <OuiTable
+            <template #default="{ item }">
+              {{ item.id }}
+            </template>
+          </ouivirtuallist>
+        </div>
+        <!-- <OuiTable
             v-model="state.selected"
             v-model:sort="state.sort"
             :columns="columns"
@@ -79,22 +70,7 @@ const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(visibleI
         <div>
           <OuiTable :data="data" />
         </div> -->
-          </div>
-        </div>
       </template>
     </Variant>
   </Story>
 </template>
-
-<style scoped>
-.scroller {
-  height: 100%;
-}
-
-.user {
-  height: 32%;
-  padding: 0 12px;
-  display: flex;
-  align-items: center;
-}
-</style>

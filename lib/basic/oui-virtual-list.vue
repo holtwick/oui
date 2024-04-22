@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
 //   context: [row: T, pos: number, event: Event]
 // }>()
 
-const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(props.data, { itemHeight: 32 })
+const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(props.data, { itemHeight: props.height })
 </script>
 
 <template>
@@ -24,13 +24,11 @@ const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(props.da
       <div
         v-for="{ index, data: item } in list"
         :key="index"
-        :style="{ height: `${height}px` }"
+        :xstyle="{ height: `${height}px` }"
       >
-        <div>
-          <slot :item="item" :index="index">
-            Placeholder {{ index }}
-          </slot>
-        </div>
+        <slot :item="item" :index="index">
+          Placeholder {{ index }}
+        </slot>
       </div>
     </div>
   </div>
