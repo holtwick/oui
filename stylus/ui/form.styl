@@ -65,7 +65,7 @@ oui-button-default() {
     background-color: var(--t3-bg);
     color: var(--t3-fg);
     // opacity: 0.6;
-    cursor: initial;
+    cursor: not-allowed;
   }
 
   // icon
@@ -244,6 +244,14 @@ oui-boolean-default() {
     --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
   }
 
+  &._checkbox_intermediate {
+    --b: var(--active);
+    --bc: var(--active);
+    --d-o: 0.3s;
+    --d-t: 0.6s;
+    --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+  }
+
   &:disabled {
     --b: var(--disabled);
     cursor: not-allowed;
@@ -300,6 +308,18 @@ oui-checkbox() {
   &:checked {
     --o: 1;
     --r: 43deg;
+  }
+
+  &._checkbox_intermediate {
+    --o: 1;
+    --r: 90deg;
+
+    &:after {
+      top: 1;
+      left: 4;
+      width: 6;
+      border-bottom: 0;
+    }
   }
 }
 

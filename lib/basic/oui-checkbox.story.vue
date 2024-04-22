@@ -4,6 +4,7 @@ import { OuiCheckbox } from '../lib'
 
 const state = reactive({
   value: false,
+  intermediateValue: null,
 })
 </script>
 
@@ -29,6 +30,13 @@ const state = reactive({
         </div>
         <div>
           <OuiCheckbox v-model="state.value" title="Checkbox with label" />
+        </div>
+        <div>
+          <OuiCheckbox
+            v-model="state.intermediateValue"
+            intermediate
+            title="Checkbox with intermediate value"
+          />
         </div>
       </template>
     </Variant>

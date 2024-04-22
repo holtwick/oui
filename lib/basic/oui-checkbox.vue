@@ -4,11 +4,11 @@ import { computed } from 'vue'
 const props = withDefaults(defineProps<{
   title?: string
   switch?: boolean
+  intermediate?: boolean
 }>(), {
   switch: false,
+  intermediate: false,
 })
-
-const klass = computed(() => props.switch ? 'oui-switch' : 'oui-checkbox')
 
 const model = defineModel({ required: true })
 
@@ -21,6 +21,13 @@ const modelBool = computed({
   set(value: any) {
     model.value = value
   },
+})
+
+const klass = computed(() => {
+  const klasses = [props.switch ? 'oui-switch' : 'oui-checkbox']
+  if (model.value == null)
+    klasses.push('_checkbox_intermediate')
+  return klasses
 })
 </script>
 
