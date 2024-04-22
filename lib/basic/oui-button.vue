@@ -1,18 +1,16 @@
 <script lang="ts" setup>
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
-
 withDefaults(defineProps<{
   title?: string
-  mode?: 'primary' | 'danger' | 'secondary'
+  mode?: 'primary' | 'danger' | 'secondary' | 'ghost'
+  size?: 'small' | 'normal' | 'large'
 }>(), {
+  mode: 'secondary',
+  size: 'normal',
 })
-
-const log: LoggerInterface = Logger('oui-button')
 </script>
 
 <template>
-  <button class="oui-button" :class="mode ? `_${mode}` : undefined">
+  <button class="oui-button" :class="[mode && `_button_mode_${mode}`, size && `_button_size_${size}`]">
     <slot>{{ title }}</slot>
   </button>
 </template>
