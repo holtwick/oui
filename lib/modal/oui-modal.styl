@@ -129,8 +129,9 @@
     padding-top: 0;
   }
 
-  ._modal_body + ._modal_footer {
-    padding-top: 0;
+  &._modal_has_footer ._modal_body {
+    // todo: 4px to allow focus ring to show up correctly
+    padding-bottom: 4;
   }
 
   &._modal_size_small ._modal_container {

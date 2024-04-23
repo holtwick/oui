@@ -92,6 +92,7 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
           [$attrs.class as string]: true,
           _active,
           _modal_sheet: !noSheet,
+          _modal_has_footer: $slots.footer,
           [`_modal_size_${size}`]: true }"
         :tabindex="-1"
         aria-modal="true"

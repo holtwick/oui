@@ -20,24 +20,22 @@ const { open } = useDialog(OuiDialogExample)
       <HstCheckbox v-model="state.show" title="show" />
     </template>
     <Variant title="useDialog" :init-state="initialState">
-      <template #default>
+      <template #default="{ state }">
         <div>
           <OuiButton @click="alert('Hello World')">
             Alert
           </OuiButton>
-          <OuiButton @click="confirm('Hello World')">
+          <OuiButton @click="confirm('Hello World').then(v => state.value = v)">
             Confirm
           </OuiButton>
-          <OuiButton @click="prompt('Hello World')">
+          <OuiButton @click="prompt('Hello World').then(v => state.value = v)">
             Prompt
           </OuiButton>
-          <OuiButton @click="open">
-            Custom
-          </OuiButton>
-          <OuiButton @click="open">
+          <OuiButton @click="open().then(v => state.value = v)">
             Custom
           </OuiButton>
         </div>
+        <pre>Result = {{ state.value }}</pre>
       </template>
     </Variant>
   </story>
