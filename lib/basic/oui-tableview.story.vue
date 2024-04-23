@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { createArray, sortedOrderby, uuid } from 'zeed'
 import type { OuiTableColumn } from '../lib'
-import { OuiTable, useMenu } from '../lib'
+import { OuiDraggable, OuiTable, useMenu } from '../lib'
 import OuiTableview from './oui-tableview.vue'
 
 const state = reactive({
@@ -38,6 +38,8 @@ const menu = useMenu((row: any) => [
     action: () => alert('Hello World'),
   },
 ])
+
+const x = ref(0)
 </script>
 
 <template>

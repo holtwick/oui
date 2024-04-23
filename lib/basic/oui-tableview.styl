@@ -6,6 +6,7 @@
   width: 100%;
   overflow-x: auto; // this does not work together with sticky headers
   border-collapse: collapse;
+  position: relative;
 
   ._tableview {
     &_row {
@@ -25,31 +26,6 @@
 
       &:last-child {
         padding-right: 0;
-      }
-    }
-
-    &_body {
-      use: stack-item-grow;
-
-      ._tableview_cell {
-        vertical-align: top;
-        border-right: 1px solid var(--t3-bg);
-
-        &:last-child {
-          border-right: none;
-        }
-      }
-
-      ._tableview_row {
-        border-bottom: 1px solid var(--s2-fg);
-
-        &._selectable:hover:not(._active) {
-          background: var(--t3-bg);
-        }
-
-        &._active {
-          background: var(--s2-bg);
-        }
       }
     }
 
@@ -81,10 +57,44 @@
       }
     }
 
+    &_body {
+      use: stack-item-grow;
+
+      ._tableview_cell {
+        vertical-align: top;
+        border-right: 1px solid var(--t3-bg);
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+
+      ._tableview_row {
+        border-bottom: 1px solid var(--s2-fg);
+
+        &._selectable:hover:not(._active) {
+          background: var(--t3-bg);
+        }
+
+        &._active {
+          background: var(--s2-bg);
+        }
+      }
+    }
+
     &_footer {
       ._tableview_row {
         border-top: 2px solid var(--s2-fg);
       }
+    }
+
+    &_resize {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      // background: rgba(255, 0, 0, 0.098);
+      cursor: col-resize;
     }
   }
 }

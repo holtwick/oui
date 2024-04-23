@@ -1,10 +1,11 @@
 <script lang="ts" setup generic="K extends string, T extends Record<K, any>">
-import { computed, createApp, reactive, watch } from 'vue'
-import { arraySetArrayInPlace, createArray, parseOrderby } from 'zeed'
+import { computed, reactive, watch } from 'vue'
+import { arraySetArrayInPlace, arraySum, parseOrderby } from 'zeed'
 import type { OuiTableColumn } from './_types'
 import OuiVirtualList from './oui-virtual-list.vue'
 
 import './oui-tableview.styl'
+import OuiDraggable from './oui-draggable.vue'
 
 const props = withDefaults(defineProps<{
   data: T[]
@@ -15,7 +16,6 @@ const props = withDefaults(defineProps<{
   selectable?: boolean
 }>(), {
   rowHeight: 44,
-  columns: undefined,
   header: undefined,
   footer: false,
   selectable: true,
@@ -31,7 +31,7 @@ const modelSelected = defineModel<number | undefined>()
 const sortName = computed(() => parseOrderby(modelSort.value).field)
 const sortAsc = computed(() => parseOrderby(modelSort.value).asc)
 
-const widths = reactive([])
+const widths = reactive<number[]>([])
 
 watch(() => props.data, () => {
   arraySetArrayInPlace(widths, props.columns.map(c => c.width ?? 120))
@@ -60,7 +60,7 @@ function doSelect(pos: number) {
 </script>
 
 <template>
-  <div class="oui-tableview" :style="tableStyle">
+  <div v-if="columns != null && data != null" class="oui-tableview" :style="tableStyle">
     <div v-if="showHeader" class="_tableview_header">
       <div class="_tableview_row">
         <template v-for="col, pos in columns" :key="col.name">
@@ -127,5 +127,12 @@ function doSelect(pos: number) {
         </template>
       </div>
     </div>
+    <template v-for="w, i in widths" :key="i">
+      <OuiDraggable
+        class="_tableview_resize"
+        :style="`left: ${arraySum(widths.slice(0, i + 1)) - 2}px`"
+        @move="({ deltaX }) => widths[i] = Math.max(columns[i].minWidth ?? 80, Math.min(columns[i].maxWidth ?? 300, widths[i] + deltaX))"
+      />
+    </template>
   </div>
 </template>
