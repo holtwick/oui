@@ -187,7 +187,7 @@ site.write(htmlPath, $.html())
       sit amet.
     </p>
 
-    <h1>Prose Demo</h1>
+    <h1>Text Demo</h1>
     <p>
       <b>Lorem ipsum</b> <i>dolor sit amet</i>
       <u>consectetur adipisicing</u> elit. <mark>Consectetur</mark>,

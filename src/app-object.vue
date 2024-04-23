@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { OuiObject } from '@/lib'
+import { OuiObject, OuiText } from '@/lib'
 
 const obj = {
   a: 1,
@@ -17,9 +17,9 @@ const obj = {
 </script>
 
 <template>
-  <div class="prose">
+  <OuiText>
     <h1>Oui</h1>
     <p>Just another set of UI components for Vue.js with a proper French-sounding name</p>
     <OuiObject :value="obj" title="sample" />
-  </div>
+  </OuiText>
 </template>
