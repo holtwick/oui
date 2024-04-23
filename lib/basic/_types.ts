@@ -11,4 +11,7 @@ export interface OuiTableColumn<K = string> {
   align?: 'left' | 'center' | 'right'
   valign?: 'top' | 'middle' | 'bottom'
   footer?: string
+  width?: number
+  minWidth?: number
+  maxWidth?: number
 }
