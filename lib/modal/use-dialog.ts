@@ -42,10 +42,16 @@ export function useDialog<T extends Component>(component?: T) {
       })) as string
     },
     async dialog(this: void, props: any) {
-      return await showDialog(props)
+      return await showDialog({
+        mode: 'dialog',
+        ...props,
+      })
     },
     async open(this: void, props?: any) {
-      return await showDialog(props ?? {})
+      return await showDialog({
+        mode: 'dialog',
+        ...props,
+      })
     },
   }
 }

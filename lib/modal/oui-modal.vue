@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onKeyStroke, useEventListener } from '@vueuse/core'
-import { computed, ref, useAttrs } from 'vue'
+import { computed, onMounted, ref, useAttrs } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 import { OuiClose } from '../basic'
@@ -12,6 +12,7 @@ defineProps<{
   close?: boolean
   title?: string
   transition?: string
+  noSheet?: boolean
 }>()
 
 const emit = defineEmits(['close', 'cancel'])
@@ -43,6 +44,8 @@ if (window.visualViewport != null) {
 
   useEventListener(window.visualViewport, 'resize', resizeHandler)
   useEventListener(window.visualViewport, 'scroll', resizeHandler)
+
+  onMounted(resizeHandler)
 }
 
 // const { escape } = useMagicKeys()
@@ -86,7 +89,7 @@ const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.
       <div
         v-if="_active"
         ref="root"
-        :class="{ [name]: true, _active }"
+        :class="{ [name]: true, _active, _modal_sheet: !noSheet }"
         :tabindex="-1"
         aria-modal="true"
         role="dialog"

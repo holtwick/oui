@@ -1,5 +1,7 @@
 @require "../mixins";
 
+input-height = 32;
+
 oui-input-reset() {
   appearance: none;
   -webkit-appearance: none;
@@ -37,7 +39,8 @@ oui-button-default() {
     // }
   */
   display: inline-flex;
-  height: var(--button-height, var(--input-height, px(32)));
+  // height: var(--button-height, var(--input-height, px(32)));
+  // padding: calc(((var(--button-height, var(--input-height, px(32))) - 16) / 2));
   max-width: 100%;
   pointer-events: initial;
   vertical-align: middle;
@@ -59,8 +62,10 @@ oui-button-default() {
   }
 
   &[disabled] {
-    opacity: 0.6;
-    cursor: initial;
+    background-color: var(--t3-bg);
+    color: var(--t3-fg);
+    // opacity: 0.6;
+    cursor: not-allowed;
   }
 
   // icon
@@ -77,7 +82,6 @@ oui-button() {
   background: var(--button-bg);
   border-radius: var(--button-radius, var(--input-radius));
   border: 1px solid var(--button-border, transparent);
-  padding-x: 8;
 
   &:hover:not([disabled]) {
     background: var(--button-bg-hover);
@@ -90,12 +94,44 @@ oui-button() {
   svg {
     size: 1em;
   }
+
+  & + & {
+    margin-left: 8;
+  }
+
+  &._button_mode_danger {
+    background: -red-700;
+  }
+
+  padding: 8;
+
+  &._button_size_small {
+    padding: 4;
+    font-size: 13; // height=20px
+  }
+
+  &._button_size_large {
+    padding: 12;
+    font-size: 20; // height=44px
+  }
+
+  &._button_dropdown::after {
+    display: inline-block;
+    margin-left: 0; // 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+  }
 }
 
 oui-input-default() {
   oui-input-reset();
   padding-x: 8;
-  min-height: var(--button-height, var(--input-height, px(32)));
+  // min-height: var(--button-height, var(--input-height, px(32)));
+  min-height: input-height;
   border-radius: var(--input-radius);
   border: 1px solid var(--input-border);
   color: var(--input-fg);
@@ -134,7 +170,7 @@ oui-input-textarea() {
 
 oui-input-textarea-grow() {
   overflow: hidden !important;
-  height: 32;
+  height: input-height;
   resize: none;
 }
 
@@ -208,6 +244,14 @@ oui-boolean-default() {
     --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
   }
 
+  &._checkbox_intermediate {
+    --b: var(--active);
+    --bc: var(--active);
+    --d-o: 0.3s;
+    --d-t: 0.6s;
+    --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+  }
+
   &:disabled {
     --b: var(--disabled);
     cursor: not-allowed;
@@ -264,6 +308,18 @@ oui-checkbox() {
   &:checked {
     --o: 1;
     --r: 43deg;
+  }
+
+  &._checkbox_intermediate {
+    --o: 1;
+    --r: 90deg;
+
+    &:after {
+      top: 1;
+      left: 4;
+      width: 6;
+      border-bottom: 0;
+    }
   }
 }
 

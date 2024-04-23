@@ -5,26 +5,23 @@ import { Logger } from 'zeed'
 
 const log: LoggerInterface = Logger('directives')
 
-/** Vue3 Directive! */
+/** Vue3 Directive! Toggle ref value on click or context menu. */
 export const vActionToggle = {
   mounted: (el: HTMLElement, binding: DirectiveBinding, ...args: any) => {
-    // console.log(el, binding, args)
     if (binding instanceof ref)
       throw new Error('v-action-toggle requires ref as argument')
     el.addEventListener('contextmenu', (ev: MouseEvent) => {
-      // console.log('menu')
       ev.preventDefault() // no system menu
       binding.value = !binding.value
     })
 
     el.addEventListener('click', (ev: MouseEvent) => {
-      // console.log('click', binding)
       binding.value = !binding.value
     })
   },
 }
 
-/** Vue3 Directive! */
+/** Vue3 Directive! Set ref value to true on click or context menu. */
 export const vActionTrue = {
   mounted: (el: HTMLElement, binding: DirectiveBinding) => {
     if (binding instanceof ref)
@@ -52,7 +49,7 @@ export const vNoSelection = {
   },
 }
 
-/** Vue3 Directive! Fixes an issue in WKWebView where the cursor pretends text selection even if user-select: none; */
+/** Vue3 Directive! Set focus onMounted  */
 export const vAutofocus = {
   mounted: (el: HTMLElement, _binding: DirectiveBinding) => {
     log('focus', el)

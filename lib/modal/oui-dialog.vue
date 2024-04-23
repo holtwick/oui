@@ -6,7 +6,7 @@ import OuiModal from './oui-modal.vue'
 const props = defineProps<{
   title?: string
   message: string
-  mode: 'alert' | 'prompt' | 'confirm'
+  mode: 'alert' | 'prompt' | 'confirm' | 'dialog'
   cancel?: string
   confirm?: string
   done?: any
@@ -34,6 +34,7 @@ function doCancel() {
 <template>
   <OuiModal
     :title="title"
+    :no-sheet="mode !== 'dialog'"
     @close="doCancel"
   >
     <div>
