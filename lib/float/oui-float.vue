@@ -4,7 +4,7 @@ import { type UseElementHoverOptions, onKeyStroke, useElementHover, useEventList
 import type { Ref } from 'vue'
 import { computed, ref, useAttrs, watch } from 'vue'
 
-import './css.styl'
+import './oui-float.styl'
 
 defineOptions({
   inheritAttrs: false,

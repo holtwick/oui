@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import './oui-form.styl'
+
 withDefaults(defineProps<{
   title?: string
   mode?: 'primary' | 'danger' | 'secondary' | 'ghost'

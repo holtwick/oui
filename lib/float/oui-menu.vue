@@ -5,6 +5,8 @@ import type { OuiMenuItem } from './_types'
 import OuiFloat from './oui-float.vue'
 import OuiMenuItems from './oui-menu-items.vue'
 
+import './oui-menu.styl'
+
 defineProps<{
   items: OuiMenuItem[]
   reference?: Ref<HTMLElement | undefined>

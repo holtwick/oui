@@ -78,10 +78,7 @@ oui-button-default() {
 oui-button() {
   oui-button-default();
   font-weight: 600;
-  color: var(--button-fg);
-  background: var(--button-bg);
   border-radius: var(--button-radius, var(--input-radius));
-  border: 1px solid var(--button-border, transparent);
 
   &:hover:not([disabled]) {
     background: var(--button-bg-hover);
@@ -95,14 +92,21 @@ oui-button() {
     size: 1em;
   }
 
+  // Add space if multiple buttons
   & + & {
     margin-left: 8;
   }
+
+  // Colors
+  color: var(--button-fg);
+  background: var(--button-bg);
+  border: 1px solid var(--button-border, transparent);
 
   &._button_mode_danger {
     background: -red-700;
   }
 
+  // Sizes
   padding: 8;
 
   &._button_size_small {

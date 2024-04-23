@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
+import './oui-form.styl'
+
 const props = withDefaults(defineProps<{
   title?: string
   switch?: boolean

@@ -1,19 +1,24 @@
 <script lang="ts" setup>
 import { onKeyStroke, useEventListener } from '@vueuse/core'
-import { computed, onMounted, ref, useAttrs } from 'vue'
+import { onMounted, ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 import { OuiClose } from '../basic'
 import { vFocustrap } from './oui-focustrap-directive'
 
-import './css.styl'
+import './oui-modal.styl'
 
-defineProps<{
+withDefaults(defineProps<{
   close?: boolean
   title?: string
   transition?: string
   noSheet?: boolean
-}>()
+  size?: 'small' | 'normal' | 'large'
+}>(), {
+  close: false,
+  noSheet: false,
+  size: 'normal',
+})
 
 const emit = defineEmits(['close', 'cancel'])
 
@@ -48,13 +53,6 @@ if (window.visualViewport != null) {
   onMounted(resizeHandler)
 }
 
-// const { escape } = useMagicKeys()
-
-// watch(escape, (v) => {
-//   if (v && _active.value)
-//     doClose()
-// })
-
 const root = ref()
 
 function doCancel() {
@@ -75,8 +73,7 @@ function didOpen() {
   // useEventListener(root.value, 'touchmove', (e: any) => e.preventDefault(), true)
 }
 
-const attrs = useAttrs()
-const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
+const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
 </script>
 
 <template>
@@ -89,7 +86,13 @@ const name = computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.
       <div
         v-if="_active"
         ref="root"
-        :class="{ [name]: true, _active, _modal_sheet: !noSheet }"
+
+        :class="{
+          [name]: true,
+          [$attrs.class as string]: true,
+          _active,
+          _modal_sheet: !noSheet,
+          [`_modal_size_${size}`]: true }"
         :tabindex="-1"
         aria-modal="true"
         role="dialog"

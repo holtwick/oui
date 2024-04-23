@@ -3,6 +3,8 @@ import { computed } from 'vue'
 import { parseOrderby } from 'zeed'
 import type { OuiTableColumn } from './_types'
 
+import './oui-table.styl'
+
 const props = withDefaults(defineProps<{
   data: T[]
   columns?: OuiTableColumn<K>[]
