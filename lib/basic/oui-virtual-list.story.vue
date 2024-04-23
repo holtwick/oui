@@ -28,15 +28,14 @@ const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(visibleI
     <Variant title="Default">
       <template #default>
         <h2>Complex example</h2>
-        {{ visibleItems.length }}
         <div>
           <OuiVirtualList
             :data="visibleItems"
-            :height="19"
+            :height="20"
             style="height: 400px"
           >
-            <template #default="{ item }">
-              {{ item.id }}
+            <template #default="{ item, index }">
+              {{ index }}. <tt>{{ item.id }}</tt>
             </template>
           </ouivirtuallist>
         </div>

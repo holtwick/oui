@@ -24,7 +24,7 @@ const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(props.da
       <div
         v-for="{ index, data: item } in list"
         :key="index"
-        :xstyle="{ height: `${height}px` }"
+        :style="{ height: `${height}px` }"
       >
         <slot :item="item" :index="index">
           Placeholder {{ index }}
