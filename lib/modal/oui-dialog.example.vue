@@ -2,6 +2,7 @@
 import { nextTick, ref } from 'vue'
 import { sleep } from 'zeed'
 import OuiModal from './oui-modal.vue'
+import { OuiButton } from '@/lib'
 
 const props = defineProps<{
   done?: any
@@ -25,10 +26,8 @@ async function doCancel() {
 </script>
 
 <template>
-  <OuiModal @close="doCancel">
-    <div>
-      Example Dialog Mode
-    </div>
+  <OuiModal title="Example Dialog Mode" @close="doCancel">
+    <div />
     <template #footer>
       <div class="button-group">
         <div v-if="wait" class="wait center">
@@ -36,13 +35,16 @@ async function doCancel() {
           &nbsp;
           Please wait 2 seconds...
         </div>
+        <OuiButton v-else mode="danger">
+          Delete
+        </OuiButton>
         <div class="space" />
-        <button :disabled="wait" @click="doCancel">
+        <OuiButton :disabled="wait" mode="secondary" @click="doCancel">
           Cancel
-        </button>
-        <button :disabled="wait" @click="doConfirm">
-          OK
-        </button>
+        </OuiButton>
+        <OuiButton :disabled="wait" @click="doConfirm">
+          Save
+        </OuiButton>
       </div>
     </template>
   </OuiModal>
