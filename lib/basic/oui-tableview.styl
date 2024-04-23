@@ -1,19 +1,23 @@
 @require "../../stylus/index.styl";
 
 .oui-tableview {
-  display: block; // for responisve scrolling
-  max-width: 100%;
+  // display: block; // for responisve scrolling
+  use: stack-y;
+  width: 100%;
   overflow-x: auto; // this does not work together with sticky headers
   border-collapse: collapse;
 
   ._tableview {
     &_row {
-      use: stack-x;
+      display: grid;
+      grid-template-columns: var(--tableview-columns);
+      width: 100%;
     }
 
     &_cell {
       margin: 0;
       padding: 4 8;
+      use: ellipsis;
 
       &:first-child {
         padding-left: 0;
@@ -25,9 +29,10 @@
     }
 
     &_body {
+      use: stack-item-grow;
+
       ._tableview_cell {
         vertical-align: top;
-        border-bottom: 1px solid var(--s2-fg);
         border-right: 1px solid var(--t3-bg);
 
         &:last-child {
@@ -35,24 +40,26 @@
         }
       }
 
-      ._tableview_row._selectable:hover:not(._active) {
-        background: var(--t3-bg);
-      }
+      ._tableview_row {
+        border-bottom: 1px solid var(--s2-fg);
 
-      ._tableview_row._active {
-        background: var(--s2-bg);
-      }
+        &._selectable:hover:not(._active) {
+          background: var(--t3-bg);
+        }
 
-      /* tr:last-child td {
-        border-bottom: none;
-      } */
+        &._active {
+          background: var(--s2-bg);
+        }
+      }
     }
 
     &_header {
-      ._tableview_cell {
+      ._tableview_row {
         font-weight: 600;
         border-bottom: 2px solid var(--s2-fg);
+      }
 
+      ._tableview_cell {
         &._sortable {
           cursor: unquote("pointer");
           user-select: none;
@@ -71,6 +78,12 @@
         &._desc:after {
           content: "▾";
         }
+      }
+    }
+
+    &_footer {
+      ._tableview_row {
+        border-top: 2px solid var(--s2-fg);
       }
     }
   }

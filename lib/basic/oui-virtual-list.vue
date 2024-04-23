@@ -18,7 +18,7 @@ const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(props.da
 <template>
   <div
     v-bind="containerProps"
-    style="max-height: 100%; overflow: scroll;"
+    style="max-height: 100%; overflow-y: auto;"
   >
     <div v-bind="wrapperProps">
       <div

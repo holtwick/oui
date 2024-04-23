@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, reactive } from 'vue'
-import { sortedOrderby } from 'zeed'
+import { createArray, sortedOrderby, uuid } from 'zeed'
 import type { OuiTableColumn } from '../lib'
 import { OuiTable, useMenu } from '../lib'
 import OuiTableview from './oui-tableview.vue'
@@ -14,16 +14,14 @@ const state = reactive({
 
 const columns: OuiTableColumn[] = [
   { title: '#', name: 'id', sortable: false },
-  { title: 'One', name: 'one', sortable: true },
+  { title: 'One', name: 'one', sortable: true, width: 200 },
   { title: 'Two', name: 'two', sortable: true, footer: 'Two feet' },
   { title: '', name: 'action', align: 'right' },
 ]
 
-const _data = [
-  { id: 1, one: 1, two: 2 },
-  { id: 2, one: 11, two: 22 },
-  { id: 3, one: 111 }, // missing one
-]
+const _data = createArray(1000, (index) => {
+  return { id: index, one: uuid(), two: uuid() }
+})
 
 const data = computed(() => sortedOrderby(_data, state.sort))
 
@@ -61,6 +59,7 @@ const menu = useMenu((row: any) => [
             :data="data"
             :footer="state.footer"
             :selectable="state.selectable"
+            style="height: 400px;"
             @context="menu"
           >
             <template #col-one="{ value, col }">
@@ -78,11 +77,6 @@ const menu = useMenu((row: any) => [
               ONE
             </template>
           </OuiTableview>
-        </div>
-
-        <h2>Without columns definitions - super simple</h2>
-        <div>
-          <OuiTableview :data="data" />
         </div>
       </template>
     </Variant>
