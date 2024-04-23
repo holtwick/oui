@@ -2,7 +2,7 @@
 import { OuiClose } from '../basic'
 import { notifications } from './notification'
 
-import './css.styl'
+import './oui-notification.styl'
 </script>
 
 <template>

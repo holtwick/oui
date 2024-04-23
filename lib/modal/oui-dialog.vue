@@ -1,6 +1,10 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { sleep } from 'zeed'
 import { vAutofocus } from '../basic/directives'
+import OuiButton from '../basic/oui-button.vue'
+import OuiInput from '../basic/oui-input.vue'
+import OuiText from '../basic/oui-text.vue'
 import OuiModal from './oui-modal.vue'
 
 const props = defineProps<{
@@ -29,25 +33,53 @@ function doCancel() {
   else
     props.done?.(false)
 }
+
+const ok = ref()
+onMounted(async () => {
+  await sleep(500)
+  ok.value?.focus()
+})
+
+const fallbackTitles: Record<string, string> = {
+  alert: 'Alert',
+  confirm: 'Confirm',
+  prompt: 'Prompt',
+}
 </script>
 
 <template>
   <OuiModal
-    :title="title"
+    :title="title ?? fallbackTitles[mode]"
     :no-sheet="mode !== 'dialog'"
+    size="small"
+    class="oui-dialog"
     @close="doCancel"
   >
-    <div>
-      {{ message }}
-    </div>
-    <input v-if="mode === 'prompt'" v-model="value" v-autofocus>
+    <OuiText>
+      <p>{{ message }}</p>
+
+      <OuiInput
+        v-if="mode === 'prompt'"
+        v-model="value"
+        v-autofocus
+        @keypress.enter="doConfirm"
+      />
+    </OuiText>
     <template #footer>
-      <button @click="doCancel">
+      <OuiButton
+        mode="secondary"
+        @click="doCancel"
+      >
         {{ cancel ?? 'Cancel' }}
-      </button>
-      <button v-if="mode === 'confirm' || mode === 'prompt'" @click="doConfirm">
+      </OuiButton>
+      <OuiButton
+        v-if="mode === 'confirm' || mode === 'prompt'"
+        ref="ok"
+        autofocus
+        @click="doConfirm"
+      >
         {{ confirm ?? 'OK' }}
-      </button>
+      </OuiButton>
     </template>
   </OuiModal>
 </template>

@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import OuiDialogExample from './oui-dialog-example.vue'
-import { useDialog } from '@/lib'
+import { OuiButton, useDialog } from '@/lib'
 
 function initialState() {
   return {
     show: false,
+    value: null,
   }
 }
 
@@ -15,26 +16,27 @@ const { open } = useDialog(OuiDialogExample)
 <template>
   <Story auto-props-disabled>
     <template #controls="{ state }">
+      <HstJson v-model="state.value" title="Result" />
       <HstCheckbox v-model="state.show" title="show" />
     </template>
     <Variant title="useDialog" :init-state="initialState">
       <template #default>
-        <div class="button-group">
-          <button @click="alert('Hello World')">
+        <div>
+          <OuiButton @click="alert('Hello World')">
             Alert
-          </button>
-          <button @click="confirm('Hello World')">
+          </OuiButton>
+          <OuiButton @click="confirm('Hello World')">
             Confirm
-          </button>
-          <button @click="prompt('Hello World')">
+          </OuiButton>
+          <OuiButton @click="prompt('Hello World')">
             Prompt
-          </button>
-          <button @click="open">
+          </OuiButton>
+          <OuiButton @click="open">
             Custom
-          </button>
-          <button @click="open">
+          </OuiButton>
+          <OuiButton @click="open">
             Custom
-          </button>
+          </OuiButton>
         </div>
       </template>
     </Variant>

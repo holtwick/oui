@@ -1,5 +1,3 @@
-import './css.styl'
-
 export { type OuiMenuItem } from './_types'
 
 export { default as OuiFloat } from './oui-float.vue'

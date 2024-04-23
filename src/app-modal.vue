@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import OuiButton from '../lib/basic/oui-button.vue'
+import OuiText from '../lib/basic/oui-text.vue'
+import OuiInput from '../lib/basic/oui-input.vue'
 import { OuiModal, vAutofocus } from '@/lib'
 
 const show = ref(false)
+const value = ref('Hello')
 </script>
 
 <template>
@@ -17,11 +20,11 @@ const show = ref(false)
       <template #header>
         Header Header Header Header Header Header Header
       </template>
-      <br>
-      <input type="text" class="oui-input">
-      <br>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores eum incidunt officia facilis id, magni fugiat temporibus labore, facere, sequi nostrum cum asperiores eligendi eos. Libero voluptas facilis quos ipsam!</p>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores eum incidunt officia facilis id, magni fugiat temporibus labore, facere, sequi nostrum cum asperiores eligendi eos. Libero voluptas facilis quos ipsam!</p>
+      <OuiText>
+        <OuiInput v-model="value" />
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores eum incidunt officia facilis id, magni fugiat temporibus labore, facere, sequi nostrum cum asperiores eligendi eos. Libero voluptas facilis quos ipsam!</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores eum incidunt officia facilis id, magni fugiat temporibus labore, facere, sequi nostrum cum asperiores eligendi eos. Libero voluptas facilis quos ipsam!</p>
+      </OuiText>
       <template #footer>
         <OuiButton mode="secondary">
           Cancel
