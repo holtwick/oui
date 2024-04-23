@@ -1,3 +1,5 @@
+import './css.styl'
+
 export * from './_types'
 export * from './directives'
 export * from './formatters'

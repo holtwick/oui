@@ -3,6 +3,8 @@ import { useFileDialog } from '@vueuse/core'
 import type { LoggerInterface } from 'zeed'
 import { Logger, createPromise } from 'zeed'
 
+import './oui-form.styl'
+
 const log: LoggerInterface = Logger('oui-file')
 
 const { files, open, reset, onChange } = useFileDialog({

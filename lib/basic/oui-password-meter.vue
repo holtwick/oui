@@ -58,7 +58,5 @@ function scorePassword(pass: string) {
 </script>
 
 <template>
-  <div>
-    <div class="oui-password-strength" :data-score="score" />
-  </div>
+  <div class="oui-password-strength" :data-score="score" />
 </template>

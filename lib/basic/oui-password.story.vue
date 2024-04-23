@@ -17,6 +17,7 @@ const state = reactive({
         <div>
           <OuiPassword
             v-model="state.value"
+            placeholder="Enter a strong password"
             show-meter
           />
         </div>

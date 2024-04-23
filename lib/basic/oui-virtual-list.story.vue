@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useVirtualList } from '@vueuse/core'
 import { reactive } from 'vue'
 import { createArray, uuid } from 'zeed'
 import { OuiVirtualList } from '@/lib'
@@ -13,8 +12,6 @@ const state = reactive({
 
 const items = createArray(1000, i => ({ id: uuid() }))
 const visibleItems = reactive(items)
-
-const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(visibleItems, { itemHeight: 32 })
 </script>
 
 <template>
@@ -35,7 +32,8 @@ const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(visibleI
             style="height: 400px"
           >
             <template #default="{ item, index }">
-              {{ index }}. <tt>{{ item.id }}</tt>
+              {{ index }}.
+              <tt>{{ item.id }}</tt>
             </template>
           </ouivirtuallist>
         </div>
