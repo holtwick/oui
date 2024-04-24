@@ -11,14 +11,16 @@ const props = withDefaults(defineProps<{
   data: T[]
   columns: OuiTableColumn<K>[]
   rowHeight?: number
-  header?: boolean | undefined
-  footer?: boolean | undefined
+  header?: boolean
+  footer?: boolean
   selectable?: boolean
+  fillLast?: boolean
 }>(), {
   rowHeight: 44,
-  header: undefined,
+  header: true,
   footer: false,
   selectable: true,
+  fillLast: true,
 })
 
 const emit = defineEmits<{
@@ -33,15 +35,19 @@ const sortAsc = computed(() => parseOrderby(modelSort.value).asc)
 
 const widths = reactive<number[]>([])
 
-watch(() => props.data, () => {
-  arraySetArrayInPlace(widths, props.columns.map(c => c.width ?? 120))
+watch(() => [props.data, props.fillLast], () => {
+  let values = props.columns.map(c => c.width ?? 120)
+  if (props.fillLast)
+    values = values.slice(0, -1)
+  arraySetArrayInPlace(widths, values)
 }, { immediate: true })
 
-// const cols = computed<OuiTableColumn<K>[]>(() => props.columns ?? (Object.keys(props.data?.[0] ?? {}) as any)?.map((name: string) => ({ name })))
-const showHeader = computed(() => props.header ?? props.columns != null)
-const tableStyle = computed(() => `--tableview-columns: ${
-  widths.map(w => `${w ?? 120}px`).join(' ')
-}`)
+const tableStyle = computed(() => {
+  const values = widths.map(w => `${w ?? 120}px`)
+  if (props.fillLast)
+    values.push('auto')
+  return `--tableview-columns: ${values.join(' ')}`
+})
 
 function doToggleSort(name: string) {
   if (sortName.value === name) {
@@ -61,7 +67,7 @@ function doSelect(pos: number) {
 
 <template>
   <div v-if="columns != null && data != null" class="oui-tableview" :style="tableStyle">
-    <div v-if="showHeader" class="_tableview_header">
+    <div v-if="header" class="_tableview_header">
       <div class="_tableview_row">
         <template v-for="col, pos in columns" :key="col.name">
           <div
@@ -72,7 +78,7 @@ function doSelect(pos: number) {
               _desc: sortName === col.name && !sortAsc,
               _active: sortName === col.name,
             }"
-            @xclick="doToggleSort(col.name)"
+            @click="doToggleSort(col.name)"
           >
             <slot :name="`header-${col.name}`" v-bind="{ col, pos }">
               {{ col.title ?? col.name }}
@@ -115,7 +121,7 @@ function doSelect(pos: number) {
         </div>
       </template>
     </OuiVirtualList>
-    <div v-if="footer === true" class="_tableview_footer">
+    <div v-if="footer" class="_tableview_footer">
       <div class="_tableview_row">
         <template v-for="col, pos in columns" :key="col.name">
           <div class="_tableview_cell" :align="col.align ?? 'left'" :valign="col.valign ?? 'top'">

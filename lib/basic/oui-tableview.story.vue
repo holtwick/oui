@@ -10,6 +10,7 @@ const state = reactive({
   footer: true,
   selectable: true,
   selected: undefined,
+  fillLast: true,
 })
 
 const columns: OuiTableColumn[] = [
@@ -49,6 +50,7 @@ const x = ref(0)
       <HstNumber v-model="state.selected" title="Selected" />
       <HstCheckbox v-model="state.footer" title="Show footer" />
       <HstCheckbox v-model="state.selectable" title="Selectable" />
+      <HstCheckbox v-model="state.fillLast" title="Fill last col" />
     </template>
     <Variant title="Default">
       <template #default>
@@ -61,6 +63,7 @@ const x = ref(0)
             :data="data"
             :footer="state.footer"
             :selectable="state.selectable"
+            :fill-last="state.fillLast"
             style="height: 400px;"
             @context="menu"
           >
