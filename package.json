@@ -1,10 +1,10 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.14.5",
+  "version": "0.15.0",
   "author": {
-    "name": "Dirk Holtwick",
     "email": "dirk.holtwick@gmail.com",
+    "name": "Dirk Holtwick",
     "url": "https://holtwick.de"
   },
   "license": "MIT",
@@ -39,24 +39,21 @@
       "types": "./dist/lib.d.ts",
       "import": "./dist/lib.js"
     },
-    "./css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    },
-    "./stylus": {
-      "import": "./stylus/index.styl",
-      "require": "./stylus/index.styl"
-    },
-    "./theme": {
-      "import": "./stylus/theme.styl",
-      "require": "./stylus/theme.styl"
-    }
+    "./css": "./dist/style.css",
+    "./lib": "./lib/index.styl",
+    "./stylus": "./stylus/index.styl",
+    "./theme": "./stylus/theme.styl",
+    "./default-app": "./stylus/default-app.styl",
+    "./default-page": "./stylus/default-page.styl"
   },
   "module": "./dist/lib.js",
   "types": "./dist/lib.d.ts",
   "files": [
-    "dist",
-    "stylus"
+    "dist/*.css",
+    "dist/*.js",
+    "dist/*.ts",
+    "lib/**/*.styl",
+    "stylus/**/*.styl"
   ],
   "engines": {
     "node": ">=18.0.0"
@@ -65,17 +62,17 @@
     "build": "vite build",
     "check": "vue-tsc --noEmit",
     "dev": "vite",
+    "generate-pwa-assets": "pwa-assets-generator",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepublishOnly": "nr build",
     "preview": "vite preview",
-    "generate-pwa-assets": "pwa-assets-generator",
     "start": "nr story:dev",
     "story:build": "histoire build",
     "story:dev": "histoire dev",
     "story:preview": "histoire preview",
-    "upload": "nr story:build && rsync -rvz .histoire/dist/* cy:public_html/oui.holtwick.de",
-    "test": "vitest"
+    "test": "vitest",
+    "upload": "nr story:build && rsync -rvz .histoire/dist/* cy:public_html/oui.holtwick.de"
   },
   "dependencies": {
     "@floating-ui/vue": "^1.0.6",

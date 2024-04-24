@@ -5,8 +5,6 @@
 import Wrapper from './components/Wrapper.vue'
 import type { Path } from './util'
 
-import './index.styl'
-
 withDefaults(
   defineProps<{
     data: unknown

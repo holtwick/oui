@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import ObjectVisualizer from './lib/ObjectVisualizer.vue'
 
+import './oui-object.styl'
+
 defineProps<{
   value: any
   title?: string

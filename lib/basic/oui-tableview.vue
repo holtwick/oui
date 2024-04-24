@@ -3,9 +3,9 @@ import { computed, reactive, watch } from 'vue'
 import { arraySetArrayInPlace, arraySum, parseOrderby } from 'zeed'
 import type { OuiTableColumn } from './_types'
 import OuiVirtualList from './oui-virtual-list.vue'
+import OuiDraggable from './oui-draggable.vue'
 
 import './oui-tableview.styl'
-import OuiDraggable from './oui-draggable.vue'
 
 const props = withDefaults(defineProps<{
   data: T[]
