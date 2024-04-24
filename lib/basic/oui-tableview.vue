@@ -101,6 +101,7 @@ function doSelect(pos: number) {
             >
               <slot
                 :name="`col-${col.name}`" v-bind="{
+                  index,
                   value: item[col.name],
                   col,
                   pos,
