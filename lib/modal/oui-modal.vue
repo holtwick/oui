@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 import { OuiClose } from '../basic'
-import { vFocustrap } from './oui-focustrap-directive'
+import { vFocustrap } from './oui-modal.focustrap'
 
 import './oui-modal.styl'
 

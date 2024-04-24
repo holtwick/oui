@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import OuiDialogExample from './oui-dialog-example.vue'
+import OuiDialogExample from './oui-dialog.example.vue'
 import { OuiButton, useDialog } from '@/lib'
 
 function initialState() {

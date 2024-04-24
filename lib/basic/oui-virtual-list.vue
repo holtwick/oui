@@ -1,35 +1,106 @@
 <script lang="ts" setup generic="K extends string, T extends Record<K, any>">
-import { useVirtualList } from '@vueuse/core'
+// Derived from https://github.com/waningflow/vue3-virtual-list
+// Which is under MIT License https://github.com/waningflow/vue3-virtual-list/blob/master/package.json#L11
+
+import { onMounted, ref, toRefs, watch } from 'vue'
+// import { bus, useOnBus } from '@/protocol'
+
+import './oui-virtual-list.styl'
 
 const props = withDefaults(defineProps<{
   data: T[]
-  height?: number
+  rowHeight?: number
+  rowBuffer?: number
 }>(), {
-  height: 20,
+  rowHeight: 20,
+  rowBuffer: 5,
 })
 
-// const emit = defineEmits<{
-//   context: [row: T, pos: number, event: Event]
-// }>()
+const { data, rowBuffer, rowHeight } = toRefs(props)
+const root = ref<HTMLElement | null>(null)
+const margin = /* props.margin ?? */ 0
+const poolSteps = Math.ceil(rowBuffer.value / 10) * 2
+const scrollHeight = ref(data.value.length * rowHeight.value + 2 * margin)
+const indexFirst = ref(0)
+const indexLast = ref(0)
+const paddingTop = ref(margin)
 
-const { scrollTo, containerProps, wrapperProps, list } = useVirtualList(props.data, { itemHeight: props.height })
+let containerSize = 0
+let isScrollBusy = false
+let lastScrollX = 0
+
+function handleScroll() {
+  if (!root.value)
+    return
+
+  const scrollLeft = root.value.scrollLeft
+  if (scrollLeft !== lastScrollX)
+    lastScrollX = scrollLeft
+    // bus.emit('updateScroll', scrollLeft)
+
+  if (isScrollBusy)
+    return
+
+  isScrollBusy = true
+
+  requestAnimationFrame(() => {
+    isScrollBusy = false
+    if (!root.value)
+      return
+    const range: number[] = []
+
+    range[0] = Math.floor(root.value.scrollTop / rowHeight.value) - Math.floor(rowBuffer.value / 2)
+    range[0] = Math.max(range[0], 0)
+
+    range[1] = range[0] + Math.floor(root.value.clientHeight / rowHeight.value) + rowBuffer.value
+    range[1] = Math.min(Math.ceil(range[1] / poolSteps) * poolSteps, data.value.length) // don't update too often
+
+    range[0] = Math.max(Math.floor(range[0] / poolSteps) * poolSteps, 0)
+
+    indexFirst.value = range[0]
+    indexLast.value = range[1]
+    paddingTop.value = range[0] * rowHeight.value + margin
+  })
+}
+
+watch(data, (cData) => {
+  scrollHeight.value = cData.length * rowHeight.value
+})
+
+watch(rowHeight, (cRowHeight) => {
+  scrollHeight.value = data.value.length * cRowHeight
+})
+
+watch(() => data.value.length, handleScroll)
+
+// useOnBus('listScrollTop', () => {
+//   if (root.value)
+//     root.value.scrollTop = 0
+//   handleScroll()
+// })
+
+onMounted(() => {
+  if (!root.value)
+    return
+  containerSize = root.value.clientHeight
+  const contentLines = Math.ceil(containerSize / rowHeight.value)
+  const totalLines = contentLines + rowBuffer.value
+  const range = [0, totalLines]
+  indexFirst.value = range[0]
+  indexLast.value = range[0] + range[1]
+})
 </script>
 
 <template>
-  <div
-    v-bind="containerProps"
-    style="max-height: 100%; overflow: scroll;"
-  >
-    <div v-bind="wrapperProps">
-      <div
-        v-for="{ index, data: item } in list"
-        :key="index"
-        :style="{ height: `${height}px` }"
-      >
-        <slot :item="item" :index="index">
-          Placeholder {{ index }}
-        </slot>
-      </div>
+  <div ref="root" class="oui-virtual-list" @scroll.passive="handleScroll">
+    <div :style="`height: ${scrollHeight}px; padding-top: ${paddingTop}px`">
+      <template v-for="(item, index) in data.slice(indexFirst, indexLast)" :key="indexFirst + index">
+        <div :style="{ height: `${rowHeight}px` }">
+          <slot :item="item" :index="indexFirst + index">
+            Placeholder {{ index }}
+          </slot>
+        </div>
+      </template>
     </div>
   </div>
 </template>

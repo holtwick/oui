@@ -247,13 +247,13 @@ However, _twindy_ generally does not add styles on its own, so we have to call t
 oui-reset()
 ```
 
-## Prose
+## Text
 
-Similar to the reset, there are also predefined styles for continuous text passages, which can be used optionally. For example, for elements within the `.prose` class:
+Similar to the reset, there are also predefined styles for continuous text passages, which can be used optionally. For example, for elements within the `.text` class:
 
 ```stylus
-.prose
-  oui-prose()
+.text
+  oui-text()
 ```
 
 ## Shortcuts
@@ -262,7 +262,7 @@ To make the code look more like CSS you can use the `tw` expander for functional
 
 ```stylus
 article
-  tw prose
+  use text
 ```
 
 But it is also possible to add multiple calls like shown in the following sections.

@@ -3,7 +3,7 @@
 import { computed, ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger, uuid } from 'zeed'
-import { OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiTooltipActivator, useMenu, vMenu } from '@/lib'
+import { OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiText, OuiTooltipActivator, useMenu, vMenu } from '@/lib'
 
 import './app-float.styl'
 
@@ -67,7 +67,7 @@ function menuWithArgs(value: any) {
 </script>
 
 <template>
-  <div class="prose">
+  <OuiText>
     <h1>Oui</h1>
     <p>
       Just another set of UI components for <i
@@ -170,6 +170,6 @@ Yeah!"
     <div v-menu="menu" style="border: 1px solid black; width: 200px; height: 200px;">
       Click somewhere
     </div>
-    <OuiTooltipActivator />
-  </div>
+  </OuiText>
+  <OuiTooltipActivator />
 </template>
