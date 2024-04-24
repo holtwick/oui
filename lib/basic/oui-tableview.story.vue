@@ -2,7 +2,7 @@
 import { computed, reactive, ref } from 'vue'
 import { createArray, sortedOrderby, uuid } from 'zeed'
 import type { OuiTableColumn } from '../lib'
-import { OuiDraggable, OuiTable, useMenu } from '../lib'
+import { useMenu } from '../lib'
 import OuiTableview from './oui-tableview.vue'
 
 const state = reactive({
@@ -67,8 +67,8 @@ const x = ref(0)
             <template #col-one="{ value, col }">
               {{ col.name }} {{ value }}
             </template>
-            <template #col-action="{ value, col }">
-              <button class="oui-button" size="small" @click="console.log(value, col)">
+            <template #col-action="{ item, col }">
+              <button class="oui-button" size="small" @click="console.log(item.id, col)">
                 Action
               </button>
             </template>

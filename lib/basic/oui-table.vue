@@ -70,14 +70,14 @@ function doSelect(pos: number) {
       </tr>
     </thead>
     <tbody>
-      <template v-for="row, rowPos in data" :key="row">
+      <template v-for="item, rowPos in data" :key="item">
         <tr
           :class="{
             _selectable: selectable,
             _active: modelSelected === rowPos,
           }"
           @click="doSelect(rowPos)"
-          @contextmenu.prevent="emit('context', row, rowPos, $event)"
+          @contextmenu.prevent="emit('context', item, rowPos, $event)"
         >
           <template v-for="col, pos in cols" :key="col.name">
             <td
@@ -86,12 +86,12 @@ function doSelect(pos: number) {
             >
               <slot
                 :name="`col-${col.name}`" v-bind="{
-                  value: row[col.name],
+                  value: item[col.name],
                   col,
                   pos,
-                  row }"
+                  item }"
               >
-                {{ row[col.name] }}
+                {{ item[col.name] }}
               </slot>
             </td>
           </template>
