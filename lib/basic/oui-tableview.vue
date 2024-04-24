@@ -77,9 +77,6 @@ function doSelect(pos: number) {
             <slot :name="`header-${col.name}`" v-bind="{ col, pos }">
               {{ col.title ?? col.name }}
               <template v-if="col.sortable === true && sortName === col.name" />
-              <span @click="(widths as any)[pos] -= 100">
-                {{ widths[pos] }}
-              </span>
             </slot>
           </div>
         </template>
@@ -107,7 +104,8 @@ function doSelect(pos: number) {
                   value: item[col.name],
                   col,
                   pos,
-                  row: item }"
+                  item,
+                }"
               >
                 {{ item[col.name] }}
               </slot>
