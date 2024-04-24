@@ -63,8 +63,8 @@ const x = ref(0)
             :data="data"
             :footer="state.footer"
             :selectable="state.selectable"
-            style="height: 400px;"
             :fill-last="state.fillLast"
+            style="height: 400px;"
             @context="menu"
           >
             <template #col-one="{ value, col }">

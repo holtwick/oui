@@ -14,6 +14,15 @@ import { OuiClose } from '@/lib'
       <input type="text">
       <button>Hello</button>
     </div>
+
+    <div class="_form_section _stack_x">
+      <div class="oui-input-group">
+        <input type="text">
+        <button>Hello</button>
+        <button>Hello</button>
+      </div>
+    </div>
+
     <div class="_form_section">
       <input type="number" min="0" max="120">
     </div>
