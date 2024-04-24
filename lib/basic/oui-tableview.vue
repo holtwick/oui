@@ -85,7 +85,7 @@ function doSelect(pos: number) {
         </template>
       </div>
     </div>
-    <OuiVirtualList class="_tableview_body" :data="data" :height="rowHeight">
+    <OuiVirtualList class="_tableview_body" :data="data" :row-height="rowHeight">
       <template #default="{ item, index }">
         <div
           class="_tableview_row"
