@@ -72,6 +72,7 @@ const x = ref(0)
       :header="state.header"
       :selectable="state.selectable"
       :fill-last="state.fillLast"
+      :row-attrs="(_item, index) => index % 2 === 0 ? { style: 'background:var(--p1-100)' } : {}"
       style="height: 400px;"
       @context="menu"
     >

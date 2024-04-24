@@ -3,13 +3,15 @@ import './oui-form.styl'
 
 withDefaults(defineProps<{
   title?: string
-  mode?: 'primary' | 'danger' | 'secondary' | 'ghost'
+  mode?: 'primary' | 'danger' | 'secondary' | 'success' | 'ghost'
   size?: 'small' | 'normal' | 'large'
   dropdown?: boolean
+  outline?: boolean
 }>(), {
   mode: 'secondary',
   size: 'normal',
   dropdown: false,
+  outline: false,
 })
 </script>
 

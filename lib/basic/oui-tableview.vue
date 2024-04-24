@@ -15,12 +15,14 @@ const props = withDefaults(defineProps<{
   footer?: boolean
   selectable?: boolean
   fillLast?: boolean
+  rowAttrs?: (item: T, index: number) => Record<string, string>
 }>(), {
   rowHeight: 44,
   header: true,
   footer: false,
   selectable: true,
   fillLast: true,
+  rowAttrs: () => ({}),
 })
 
 const emit = defineEmits<{
@@ -49,12 +51,14 @@ const tableStyle = computed(() => {
   return `--tableview-columns: ${values.join(' ')}`
 })
 
-function doToggleSort(name: string) {
-  if (sortName.value === name) {
-    modelSort.value = `${name} ${!sortAsc.value ? 'asc' : 'desc'}`
+function doToggleSort(col: OuiTableColumn<K>) {
+  if (col.sortable !== true)
+    return
+  if (sortName.value === col.name) {
+    modelSort.value = `${col.name} ${!sortAsc.value ? 'asc' : 'desc'}`
     return
   }
-  modelSort.value = `${name} asc`
+  modelSort.value = `${col.name} asc`
 }
 
 function doSelect(pos: number) {
@@ -78,7 +82,7 @@ function doSelect(pos: number) {
               _desc: sortName === col.name && !sortAsc,
               _active: sortName === col.name,
             }"
-            @click="doToggleSort(col.name)"
+            @click="doToggleSort(col)"
           >
             <slot :name="`header-${col.name}`" v-bind="{ col, pos }">
               {{ col.title ?? col.name }}
@@ -96,6 +100,7 @@ function doSelect(pos: number) {
             _selectable: selectable,
             _active: modelSelected === index,
           }"
+          v-bind="rowAttrs(item, index)"
           @click="doSelect(index)"
           @contextmenu.prevent="emit('context', item, index, $event)"
         >
