@@ -16,6 +16,9 @@ const config: UserConfig = {
       '@': fileURLToPath(new URL('./lib', import.meta.url)),
     },
   },
+  server: {
+    port: 8080,
+  },
 
 }
 

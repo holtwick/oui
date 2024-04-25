@@ -9,6 +9,8 @@ const props = withDefaults(defineProps<{
   size: number
   minSize: number
   maxSize: number
+  color?: string
+  hide?: boolean
 }>(), {
 })
 
@@ -19,19 +21,21 @@ const style = ref()
 
 <template>
   <template v-if="side === 'right' || side === 'bottom'">
-    <div :style="style" v-bind="$attrs">
+    <div v-show="hide !== true" :style="style" v-bind="$attrs">
       <slot />
     </div>
   </template>
   <OuiSeparator
+    v-show="hide !== true"
     v-model="paneSize"
     v-model:style-value="style"
     :side="side"
     :min-size="minSize"
     :max-size="maxSize"
+    :color="color"
   />
   <template v-if="side === 'left' || side === 'top'">
-    <div :style="style" v-bind="$attrs">
+    <div v-show="hide !== true" :style="style" v-bind="$attrs">
       <slot />
     </div>
   </template>

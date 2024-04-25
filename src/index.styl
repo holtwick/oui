@@ -1,10 +1,4 @@
-@require "../stylus/default-page.styl";
-
-.app-demo {
-  border-bottom: 2px solid #ccc;
-  margin-bottom: 16;
-  padding-bottom: 16;
-}
+@require "../stylus/default-app.styl";
 
 .default {
   color: var(--fg);
@@ -14,4 +8,71 @@
 
 .oui-form {
   oui-form-defaults();
+}
+
+.oui-demo {
+  height: 100%;
+  use: stack-y;
+
+  &-header {
+    use: stack-x;
+    padding: 16;
+    background: var(--s2-bg);
+    border-bottom: 1px solid var(--t3-fg);
+    gap: 8;
+
+    ._middle {
+      use: center;
+    }
+  }
+
+  &-body {
+    use: stack-x;
+    use: grow;
+  }
+
+  &-sidebar {
+    use: stack-y;
+
+    h1 {
+      font-weight: 600;
+      font-size: 24;
+      margin-bottom: 16;
+    }
+  }
+
+  &-props {
+    use: stack-y;
+    use: grow;
+    gap: 8;
+
+    label {
+      display: block;
+    }
+  }
+
+  &-state, &-props {
+    padding: 16;
+  }
+
+  &-sandbox {
+    use: grow;
+
+    &:not(._sidebyside) {
+      use: scroll;
+      padding: 16;
+    }
+
+    &._sidebyside {
+      use: stack-x;
+      padding: 0;
+
+      > div {
+        use: grow;
+        use: scroll;
+        padding: 16;
+        min-height: 100%;
+      }
+    }
+  }
 }

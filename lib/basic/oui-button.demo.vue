@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiButton, OuiCheckbox, OuiClose } from '@/lib'
+import { OuiButton, OuiCheckbox, OuiClose, OuiDemo } from '@/lib'
 
 const state = reactive({
   disabled: false,
@@ -9,9 +9,6 @@ const state = reactive({
 </script>
 
 <template>
-  <OuiCheckbox v-model="state.disabled" switch title="Disabled" />
-  <OuiCheckbox v-model="state.dropdown" switch title="Drop down" />
-
   <div>
     <OuiButton :disabled="state.disabled" title="Title" />
     <br>
@@ -62,4 +59,9 @@ const state = reactive({
       <OuiClose />
     </OuiButton>
   </div>
+
+  <OuiDemo :state="state">
+    <OuiCheckbox v-model="state.disabled" switch title="Disabled" />
+    <OuiCheckbox v-model="state.dropdown" switch title="Drop down" />
+  </OuiDemo>
 </template>

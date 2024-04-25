@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import type { OuiDraggableEvent } from './_types'
 import OuiDraggable from './oui-draggable.vue'
 import { px } from './lib'
@@ -11,6 +11,7 @@ const props = withDefaults(defineProps<{
   minSize: number
   maxSize: number
   absolute?: boolean
+  color?: string
 }>(), {
   absolute: false,
 })
@@ -36,6 +37,11 @@ function setSize(value: number) {
   updateStyle()
 }
 
+onMounted(() => {
+  if (modelSize.value && (modelSize.value < props.minSize || modelSize.value > props.maxSize))
+    setSize(modelSize.value)
+})
+
 let startSize = 0
 
 function doHandleMoveStart(e: OuiDraggableEvent) {
@@ -58,6 +64,8 @@ function doHandleMoveEnd(e: OuiDraggableEvent) {
   doHandleMove(e)
   _active.value = false
 }
+
+const style = computed(() => props.color ? `--separator: ${props.color}` : undefined)
 </script>
 
 <template>
@@ -68,6 +76,7 @@ function doHandleMoveEnd(e: OuiDraggableEvent) {
       _active,
       _absolute: absolute,
     }"
+    :style="style"
     @move-start="doHandleMoveStart"
     @move-end="doHandleMoveEnd"
     @move="doHandleMove"

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiCard, OuiCheckbox, OuiObject, OuiResizeable } from '@/lib'
+import { OuiCheckbox, OuiDemo, OuiObject, OuiResizeable } from '@/lib'
 
 import './oui-resizeable.demo.styl'
 
@@ -46,12 +46,7 @@ const size = 200
     </OuiResizeable>
   </div>
 
-  <Teleport to="#props">
-    <OuiCard title="Options">
-      <OuiCheckbox v-model="state.showSepHandle" switch>
-        showSepHandle
-      </OuiCheckbox>
-      <OuiObject :value="state" />
-    </OuiCard>
-  </Teleport>
+  <OuiDemo :state="state">
+    <OuiCheckbox v-model="state.showSepHandle" switch title="showSepHandle" />
+  </OuiDemo>
 </template>

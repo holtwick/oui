@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { isArray, isPrimitive } from 'zeed'
-import './oui-form.styl'
 import { computed } from 'vue'
+import { isPrimitive } from 'zeed'
+
+import './oui-form.styl'
 
 const props = withDefaults(defineProps<{
   options?: [string | number, string | number][] | (string | number)[]
@@ -11,8 +12,7 @@ const props = withDefaults(defineProps<{
 
 const model = defineModel({ required: true })
 
-const allOptions = computed(() => (props.options ?? []).map(v => isPrimitive(v) ? [v, v] : v,
-))
+const allOptions = computed(() => (props.options ?? []).map(v => isPrimitive(v) ? [v, v] : v))
 </script>
 
 <template>
