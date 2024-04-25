@@ -74,7 +74,7 @@ const x = ref(0)
       :selectable="state.selectable"
       :fill-last="state.fillLast"
       :scroll-to-end="state.scrollToEnd"
-      :row-attrs="(_item, index) => index % 2 === 0 ? { style: 'background:var(--p1-100)' } : {}"
+      :row-attrs="(_item, index) => index % 2 === 0 ? { style: 'background: var(--s2-bg)' } : {}"
       style="height: 400px;"
       @context="menu"
     >
