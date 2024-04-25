@@ -151,7 +151,11 @@ function doSelect(pos: number) {
         side="right"
         :min-size="columns[i].minWidth ?? 80"
         :max-size="columns[i].maxWidth ?? 300"
-        :style="`left: ${px(arraySum(widths.slice(0, i + 1)) - 2)}`"
+        data-test="hello"
+        :style="{
+          color: 'green',
+          left: px(arraySum(widths.slice(0, i + 1)) - 1),
+        }"
       />
     </template>
   </div>

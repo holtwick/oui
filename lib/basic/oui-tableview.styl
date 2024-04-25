@@ -8,7 +8,12 @@
   overflow-x: auto; // this does not work together with sticky headers
   border-collapse: collapse;
   position: relative;
-  --separator-handle: transparent;
+
+  .oui-separator {
+    // --separator: red;
+    // --separator-handle: green;
+    position: absolute;
+  }
 
   ._tableview {
     &_row {

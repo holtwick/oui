@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiObject, OuiResizeable } from '@/lib'
+import { OuiCheckbox, OuiObject, OuiResizeable } from '@/lib'
 
 import './app-resizeable.styl'
 
@@ -12,6 +12,7 @@ const state = reactive({
   selected: undefined,
   fillLast: true,
   scrollToEnd: false,
+  showSepHandle: false,
 })
 
 const minSize = 100
@@ -21,7 +22,15 @@ const size = 200
 
 <template>
   <h2>Resizeable</h2>
-  <div class="app-resizeable" style="--separator-handle: rgba(255,0,0,0.25)">
+  <p>
+    <OuiCheckbox v-model="state.showSepHandle" switch>
+      showSepHandle
+    </OuiCheckbox>
+  </p>
+  <div
+    class="app-resizeable"
+    :style="state.showSepHandle && '--separator-handle: rgba(255,0,0,0.25)'"
+  >
     <OuiResizeable side="bottom" :min-size="minSize" :max-size="maxSize" :size="size" class="top" name="top">
       Top
     </OuiResizeable>
@@ -39,6 +48,7 @@ const size = 200
     <OuiResizeable side="top" :min-size="minSize" :max-size="maxSize" :size="size" class="bottom" name="bottom">
       Bottom
     </OuiResizeable>
+
+    <OuiObject :value="state" />
   </div>
-  <OuiObject :value="state" />
 </template>

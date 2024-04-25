@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import type { OuiDraggableEvent } from './_types'
 import OuiDraggable from './oui-draggable.vue'
+import { px } from './lib'
 
 import './oui-separator.styl'
 
@@ -9,15 +10,30 @@ const props = withDefaults(defineProps<{
   side: 'top' | 'left' | 'right' | 'bottom'
   minSize: number
   maxSize: number
+  absolute?: boolean
 }>(), {
+  absolute: false,
 })
 
 const _active = ref(false)
 
 const modelSize = defineModel<number>({ required: true })
+const modelStyle = defineModel<any>('styleValue', { required: false })
+
+function updateStyle() {
+  modelStyle.value = {
+    [props.side === 'top' || props.side === 'bottom'
+      ? 'height'
+      : 'width'
+    ]: px(modelSize.value),
+  }
+}
+
+updateStyle()
 
 function setSize(value: number) {
   modelSize.value = Math.max(props.minSize, Math.min(props.maxSize, value))
+  updateStyle()
 }
 
 let startSize = 0
@@ -50,6 +66,7 @@ function doHandleMoveEnd(e: OuiDraggableEvent) {
     :class="{
       [`_${side}`]: true,
       _active,
+      _absolute: absolute,
     }"
     @move-start="doHandleMoveStart"
     @move-end="doHandleMoveEnd"

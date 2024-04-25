@@ -1,7 +1,12 @@
 @require "../../stylus/index.styl";
 
 .oui-separator {
+  position: relative;
   background: var(--separator, transparent);
+
+  &._absolute {
+    position: absolute;
+  }
 
   &:hover {
     background: var(--separator-hover, var(--fg));
@@ -12,7 +17,6 @@
   }
 
   &._left, &._right {
-    position: absolute;
     width: 1px;
     height: 100%;
     cursor: unquote("col-resize");
@@ -30,11 +34,9 @@
   }
 
   &._top, &._bottom {
-    position: absolute;
     height: 1px;
     width: 100%;
     cursor: unquote("row-resize");
-    sepHandleSize = px(5);
 
     &:after {
       position: absolute;
@@ -46,5 +48,21 @@
       content: " ";
       z-index: -z-index-floating;
     }
+  }
+
+  &._left {
+    left: var(--separator-shift, 0);
+  }
+
+  &._right {
+    right: var(--separator-shift, 0);
+  }
+
+  &._top {
+    top: var(--separator-shift, 0);
+  }
+
+  &._bottom {
+    bottom: var(--separator-shift, 0);
   }
 }

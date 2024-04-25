@@ -12,6 +12,7 @@ const state = reactive({
   selected: undefined,
   fillLast: true,
   scrollToEnd: false,
+  showSepHandle: false,
 })
 
 const columns: OuiTableColumn[] = [
@@ -62,8 +63,11 @@ const x = ref(0)
     <OuiCheckbox v-model="state.scrollToEnd" switch>
       scrollToEnd
     </OuiCheckbox>
+    <OuiCheckbox v-model="state.showSepHandle" switch>
+      showSepHandle
+    </OuiCheckbox>
   </p>
-  <div style="--separator-handle: rgba(255,0,0,0.25)">
+  <div :style="state.showSepHandle && '--separator-handle: rgba(255,0,0,0.25)'">
     <OuiTableview
       v-model="state.selected"
       v-model:sort="state.sort"

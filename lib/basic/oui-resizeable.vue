@@ -1,12 +1,9 @@
 <script lang="ts" setup>
 import { useLocalStorage } from '@vueuse/core'
-import { computed, onMounted, ref } from 'vue'
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
-import { px } from './lib'
+import { ref } from 'vue'
 import OuiSeparator from './oui-separator.vue'
 
-import './oui-resizeable.styl'
+// import './oui-resizeable.styl'
 
 const props = withDefaults(defineProps<{
   name: string
@@ -17,53 +14,29 @@ const props = withDefaults(defineProps<{
 }>(), {
 })
 
-// const modelSize = defineModel<number>({ required: false, default: props.size })
-
-const log: LoggerInterface = Logger('oui-resizeable')
-
 const paneSize = useLocalStorage(`oui.resizeable.${props.name}`, props.size)
 
-function setSize(value: number) {
-  paneSize.value = Math.max(props.minSize, Math.min(props.maxSize, value))
-}
-
-setSize(paneSize.value)
-
-const root = ref()
-
-const borderSize = ref(0)
-
-const style = computed(() => {
-  if (props.side === 'top' || props.side === 'bottom') {
-    return {
-      'height': px(paneSize.value),
-      '--resizeable-border-size': borderSize.value,
-    }
-  }
-  else {
-    return {
-      'width': px(paneSize.value),
-      
-      '--resizeable-border-size': borderSize.value,
-    }
-  }
-})
-
-onMounted(() => {
-  const borderSize = Number.parseFloat(window.getComputedStyle(root.value).borderLeftWidth)
-})
+const style = ref()
 </script>
 
 <template>
-  <div ref="root" :style="style" class="oui-resizeable">
-    <OuiSeparator
-      v-model="paneSize"
-      :side="side"
-      :min-size="minSize"
-      :max-size="maxSize"
-      class="oui-resizeable-separator"
-    />
-    name={{ name }} size={{ paneSize }}
-    <slot />
-  </div>
+  <template v-if="side === 'right' || side === 'bottom'">
+    <div :style="style" class="oui-resizeable" v-bind="$attrs">
+      <slot />
+    </div>
+  </template>
+  <OuiSeparator
+    v-model="paneSize"
+    v-model:style-value="style"
+    :side="side"
+    :min-size="minSize"
+    :max-size="maxSize"
+    style="position: relative;"
+    class="oui-resizeable-separator"
+  />
+  <template v-if="side === 'left' || side === 'top'">
+    <div :style="style" class="oui-resizeable" v-bind="$attrs">
+      <slot />
+    </div>
+  </template>
 </template>
