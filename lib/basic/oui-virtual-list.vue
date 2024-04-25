@@ -3,6 +3,7 @@
 // Which is under MIT License https://github.com/waningflow/vue3-virtual-list/blob/master/package.json#L11
 
 import { onMounted, ref, toRefs, watch } from 'vue'
+import { px } from './lib'
 // import { bus, useOnBus } from '@/protocol'
 
 import './oui-virtual-list.styl'
@@ -11,13 +12,15 @@ const props = withDefaults(defineProps<{
   data: T[]
   rowHeight?: number
   rowBuffer?: number
+  scrollToEnd?: boolean
 }>(), {
   rowHeight: 20,
   rowBuffer: 5,
+  scrollToEnd: false,
 })
 
 const { data, rowBuffer, rowHeight } = toRefs(props)
-const root = ref<HTMLElement | null>(null)
+const root = ref<HTMLElement>()
 const margin = /* props.margin ?? */ 0
 const poolSteps = Math.ceil(rowBuffer.value / 10) * 2
 const scrollHeight = ref(data.value.length * rowHeight.value + 2 * margin)
@@ -79,6 +82,17 @@ watch(() => data.value.length, handleScroll)
 //   handleScroll()
 // })
 
+function scrollToEnd() {
+  if (root.value) {
+    if (props.scrollToEnd)
+      root.value.scrollTop = scrollHeight.value
+    else
+      root.value.scrollTop = 0
+  }
+}
+
+watch(() => props.scrollToEnd, scrollToEnd)
+
 onMounted(() => {
   if (!root.value)
     return
@@ -88,14 +102,15 @@ onMounted(() => {
   const range = [0, totalLines]
   indexFirst.value = range[0]
   indexLast.value = range[0] + range[1]
+  scrollToEnd()
 })
 </script>
 
 <template>
   <div ref="root" class="oui-virtual-list" @scroll.passive="handleScroll">
-    <div :style="`height: ${scrollHeight}px; padding-top: ${paddingTop}px`">
+    <div :style="`height: ${px(scrollHeight)}; padding-top: ${px(paddingTop)}`">
       <template v-for="(item, index) in data.slice(indexFirst, indexLast)" :key="indexFirst + index">
-        <div :style="{ height: `${rowHeight}px` }">
+        <div :style="{ height: `${px(rowHeight)}` }">
           <slot :item="item" :index="indexFirst + index">
             Placeholder {{ index }}
           </slot>

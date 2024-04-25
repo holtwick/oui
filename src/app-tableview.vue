@@ -11,6 +11,7 @@ const state = reactive({
   selectable: true,
   selected: undefined,
   fillLast: true,
+  scrollToEnd: false,
 })
 
 const columns: OuiTableColumn[] = [
@@ -58,9 +59,9 @@ const x = ref(0)
     <OuiCheckbox v-model="state.header" switch>
       header
     </OuiCheckbox>
-    <OuiSelect
-      :options="['small', 'large']"
-    />
+    <OuiCheckbox v-model="state.scrollToEnd" switch>
+      scrollToEnd
+    </OuiCheckbox>
   </p>
   <div>
     <OuiTableview
@@ -72,6 +73,7 @@ const x = ref(0)
       :header="state.header"
       :selectable="state.selectable"
       :fill-last="state.fillLast"
+      :scroll-to-end="state.scrollToEnd"
       :row-attrs="(_item, index) => index % 2 === 0 ? { style: 'background:var(--p1-100)' } : {}"
       style="height: 400px;"
       @context="menu"

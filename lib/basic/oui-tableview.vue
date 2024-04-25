@@ -2,8 +2,9 @@
 import { computed, reactive, watch } from 'vue'
 import { arraySetArrayInPlace, arraySum, parseOrderby } from 'zeed'
 import type { OuiTableColumn } from './_types'
-import OuiVirtualList from './oui-virtual-list.vue'
 import OuiDraggable from './oui-draggable.vue'
+import OuiVirtualList from './oui-virtual-list.vue'
+import { px } from './lib'
 
 import './oui-tableview.styl'
 
@@ -15,13 +16,15 @@ const props = withDefaults(defineProps<{
   footer?: boolean
   selectable?: boolean
   fillLast?: boolean
-  rowAttrs?: (item: T, index: number) => Record<string, string>
+  scrollToEnd?: boolean
+  rowAttrs?: (item: T, index: number) => any // Record<string, string>
 }>(), {
   rowHeight: 44,
   header: true,
   footer: false,
   selectable: true,
   fillLast: true,
+  scrollToEnd: false,
   rowAttrs: () => ({}),
 })
 
@@ -45,7 +48,7 @@ watch(() => [props.data, props.fillLast], () => {
 }, { immediate: true })
 
 const tableStyle = computed(() => {
-  const values = widths.map(w => `${w ?? 120}px`)
+  const values = widths.map(w => px(w ?? 120))
   if (props.fillLast)
     values.push('auto')
   return `--tableview-columns: ${values.join(' ')}`
@@ -92,7 +95,12 @@ function doSelect(pos: number) {
         </template>
       </div>
     </div>
-    <OuiVirtualList class="_tableview_body" :data="data" :row-height="rowHeight">
+    <OuiVirtualList
+      class="_tableview_body"
+      :data="data"
+      :row-height="rowHeight"
+      :scroll-to-end="scrollToEnd"
+    >
       <template #default="{ item, index }">
         <div
           class="_tableview_row"
@@ -140,7 +148,7 @@ function doSelect(pos: number) {
     <template v-for="w, i in widths" :key="i">
       <OuiDraggable
         class="_tableview_resize"
-        :style="`left: ${arraySum(widths.slice(0, i + 1)) - 2}px`"
+        :style="`left: ${px(arraySum(widths.slice(0, i + 1)) - 2)}`"
         @move="({ deltaX }) => widths[i] = Math.max(columns[i].minWidth ?? 80, Math.min(columns[i].maxWidth ?? 300, widths[i] + deltaX))"
       />
     </template>
