@@ -1,37 +1,33 @@
 <script lang="ts" setup>
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
+import { ref } from 'vue'
 import type { OuiDraggableEvent } from './_types'
 import OuiDraggable from './oui-draggable.vue'
 
+import './oui-separator.styl'
+
 const props = withDefaults(defineProps<{
   side: 'top' | 'left' | 'right' | 'bottom'
-  size: number
   minSize: number
   maxSize: number
 }>(), {
 })
 
-const emit = defineEmits<{
-  size: [size: number]
-}>()
+const _active = ref(false)
 
-const log: LoggerInterface = Logger('oui-separator')
+const modelSize = defineModel<number>({ required: true })
 
 function setSize(value: number) {
-  const size = Math.max(props.minSize, Math.min(props.maxSize, value))
-  log('size', size)
-  emit('size', size)
+  modelSize.value = Math.max(props.minSize, Math.min(props.maxSize, value))
 }
 
 let startSize = 0
 
 function doHandleMoveStart(e: OuiDraggableEvent) {
-  startSize = props.size
+  _active.value = true
+  startSize = modelSize.value
 }
 
 function doHandleMove(e: OuiDraggableEvent) {
-  log('move', e.pageX, e.deltaY)
   if (props.side === 'top')
     setSize(startSize + e.moveY)
   else if (props.side === 'bottom')
@@ -43,13 +39,18 @@ function doHandleMove(e: OuiDraggableEvent) {
 }
 
 function doHandleMoveEnd(e: OuiDraggableEvent) {
-  doHandleMoveEnd(e)
+  doHandleMove(e)
+  _active.value = false
 }
 </script>
 
 <template>
   <OuiDraggable
-    :class="`_${side}`"
+    class="oui-separator"
+    :class="{
+      [`_${side}`]: true,
+      _active,
+    }"
     @move-start="doHandleMoveStart"
     @move-end="doHandleMoveEnd"
     @move="doHandleMove"

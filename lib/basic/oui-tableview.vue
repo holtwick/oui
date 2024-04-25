@@ -2,7 +2,7 @@
 import { computed, reactive, watch } from 'vue'
 import { arraySetArrayInPlace, arraySum, parseOrderby } from 'zeed'
 import type { OuiTableColumn } from './_types'
-import OuiDraggable from './oui-draggable.vue'
+import OuiSeparator from './oui-separator.vue'
 import OuiVirtualList from './oui-virtual-list.vue'
 import { px } from './lib'
 
@@ -146,10 +146,12 @@ function doSelect(pos: number) {
       </div>
     </div>
     <template v-for="w, i in widths" :key="i">
-      <OuiDraggable
-        class="_tableview_resize"
+      <OuiSeparator
+        v-model="widths[i]"
+        side="right"
+        :min-size="columns[i].minWidth ?? 80"
+        :max-size="columns[i].maxWidth ?? 300"
         :style="`left: ${px(arraySum(widths.slice(0, i + 1)) - 2)}`"
-        @move="({ deltaX }) => widths[i] = Math.max(columns[i].minWidth ?? 80, Math.min(columns[i].maxWidth ?? 300, widths[i] + deltaX))"
       />
     </template>
   </div>

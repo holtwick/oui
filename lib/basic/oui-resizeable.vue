@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useLocalStorage } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 import { px } from './lib'
@@ -17,6 +17,8 @@ const props = withDefaults(defineProps<{
 }>(), {
 })
 
+// const modelSize = defineModel<number>({ required: false, default: props.size })
+
 const log: LoggerInterface = Logger('oui-resizeable')
 
 const paneSize = useLocalStorage(`oui.resizeable.${props.name}`, props.size)
@@ -29,23 +31,37 @@ setSize(paneSize.value)
 
 const root = ref()
 
+const borderSize = ref(0)
+
 const style = computed(() => {
-  if (props.side === 'top' || props.side === 'bottom')
-    return { height: px(paneSize.value) }
-  else
-    return { width: px(paneSize.value) }
+  if (props.side === 'top' || props.side === 'bottom') {
+    return {
+      'height': px(paneSize.value),
+      '--resizeable-border-size': borderSize.value,
+    }
+  }
+  else {
+    return {
+      'width': px(paneSize.value),
+      
+      '--resizeable-border-size': borderSize.value,
+    }
+  }
+})
+
+onMounted(() => {
+  const borderSize = Number.parseFloat(window.getComputedStyle(root.value).borderLeftWidth)
 })
 </script>
 
 <template>
   <div ref="root" :style="style" class="oui-resizeable">
     <OuiSeparator
+      v-model="paneSize"
       :side="side"
-      :size="paneSize"
       :min-size="minSize"
       :max-size="maxSize"
       class="oui-resizeable-separator"
-      @size="setSize"
     />
     name={{ name }} size={{ paneSize }}
     <slot />

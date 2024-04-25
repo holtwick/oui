@@ -45,7 +45,7 @@ const x = ref(0)
 </script>
 
 <template>
-  <h2>Complex example</h2>
+  <h2>Tableview</h2>
   <p>
     <OuiCheckbox v-model="state.fillLast" switch>
       fillLast
@@ -63,7 +63,7 @@ const x = ref(0)
       scrollToEnd
     </OuiCheckbox>
   </p>
-  <div>
+  <div style="--separator-handle: rgba(255,0,0,0.25)">
     <OuiTableview
       v-model="state.selected"
       v-model:sort="state.sort"

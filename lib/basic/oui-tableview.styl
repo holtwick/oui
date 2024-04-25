@@ -8,6 +8,7 @@
   overflow-x: auto; // this does not work together with sticky headers
   border-collapse: collapse;
   position: relative;
+  --separator-handle: transparent;
 
   ._tableview {
     &_row {
@@ -87,15 +88,6 @@
       ._tableview_row {
         border-top: 2px solid var(--s2-fg);
       }
-    }
-
-    &_resize {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      // background: rgba(255, 0, 0, 0.098);
-      cursor: col-resize;
     }
   }
 }

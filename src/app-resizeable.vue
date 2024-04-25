@@ -21,7 +21,7 @@ const size = 200
 
 <template>
   <h2>Resizeable</h2>
-  <div class="app-resizeable">
+  <div class="app-resizeable" style="--separator-handle: rgba(255,0,0,0.25)">
     <OuiResizeable side="bottom" :min-size="minSize" :max-size="maxSize" :size="size" class="top" name="top">
       Top
     </OuiResizeable>

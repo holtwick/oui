@@ -1,0 +1,50 @@
+@require "../../stylus/index.styl";
+
+.oui-separator {
+  background: var(--separator, transparent);
+
+  &:hover {
+    background: var(--separator-hover, var(--fg));
+  }
+
+  &._active {
+    background: var(--separator-active, var(--p1-fg));
+  }
+
+  &._left, &._right {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    cursor: unquote("col-resize");
+
+    &:after {
+      position: absolute;
+      background: var(--separator-handle, transparent);
+      top: 0;
+      left: unquote("calc(-1 * 0.5 * var(--separator-handle-size, 5px))");
+      width: unquote("calc(var(--separator-handle-size, 5px) + 1px)");
+      height: 100%;
+      content: " ";
+      z-index: -z-index-floating;
+    }
+  }
+
+  &._top, &._bottom {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    cursor: unquote("row-resize");
+    sepHandleSize = px(5);
+
+    &:after {
+      position: absolute;
+      background: var(--separator-handle, transparent);
+      left: 0;
+      top: unquote("calc(-1 * 0.5 * var(--separator-handle-size, 5px))");
+      height: unquote("calc(var(--separator-handle-size, 5px) + 1px)");
+      width: 100%;
+      content: " ";
+      z-index: -z-index-floating;
+    }
+  }
+}

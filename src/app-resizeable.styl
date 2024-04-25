@@ -1,6 +1,9 @@
 @require "../stylus/index";
 
 .app-resizeable {
+  --separator: var(--t3-fg);
+  --separator-hover: var(--fg);
+  --separator-active: var(--p1-fg);
   use: stack-y;
   width: 100%;
   height: 600;
@@ -8,6 +11,7 @@
 
   .left {
     background: -red-100;
+    border: 3px dotted -red-500;
   }
 
   .middle {
@@ -16,13 +20,16 @@
 
   .right {
     background: -green-100;
+    border: 3px dotted -green-500;
   }
 
   .top {
     background: -purple-100;
+    border: 3px dotted -purple-500;
   }
 
   .bottom {
     background: -orange-100;
+    border: 3px dotted -orange-500;
   }
 }

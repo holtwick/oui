@@ -2,60 +2,25 @@
 
 .oui-resizeable {
   position: relative;
+  box-sizing: border-box;
 
   .oui-resizeable-separator {
-    background: red;
-
-    &._left, &._right {
-      position: absolute;
-      width: 1px;
-      height: 100%;
-      cursor: unquote("col-resize");
-      sepHandleSize = px(5);
-
-      &:after {
-        position: absolute;
-        background: rgba(255, 255, 0, 0.314);
-        top: 0;
-        left: -(sepHandleSize * 0.5);
-        width: sepHandleSize + px(1);
-        height: 100%;
-        content: " ";
-      }
-    }
+    box-sizing: border-box;
 
     &._left {
-      left: 0;
+      left: var(--resizeable-border-size, 0);
     }
 
     &._right {
-      right: 0;
-    }
-
-    &._top, &._bottom {
-      position: absolute;
-      height: 1px;
-      width: 100%;
-      cursor: unquote("row-resize");
-      sepHandleSize = px(5);
-
-      &:after {
-        position: absolute;
-        background: rgba(255, 255, 0, 0.314);
-        left: 0;
-        top: -(sepHandleSize * 0.5);
-        height: sepHandleSize + px(1);
-        width: 100%;
-        content: " ";
-      }
+      right: var(--resizeable-border-size, 0);
     }
 
     &._top {
-      top: 0;
+      top: var(--resizeable-border-size, 0);
     }
 
     &._bottom {
-      bottom: 0;
+      bottom: var(--resizeable-border-size, 0);
     }
   }
 }
