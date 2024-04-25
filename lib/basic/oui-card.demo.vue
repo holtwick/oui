@@ -3,7 +3,7 @@ import { OuiCard } from '@/lib'
 </script>
 
 <template>
-  <OuiCard>
+  <OuiCard title="Sample Card">
     Hello
   </OuiCard>
 </template>

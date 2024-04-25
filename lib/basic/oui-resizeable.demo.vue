@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiCheckbox, OuiObject, OuiResizeable } from '@/lib'
+import { OuiCard, OuiCheckbox, OuiObject, OuiResizeable } from '@/lib'
 
-import './app-resizeable.styl'
+import './oui-resizeable.demo.styl'
 
 const state = reactive({
   sort: '',
@@ -22,11 +22,7 @@ const size = 200
 
 <template>
   <h2>Resizeable</h2>
-  <p>
-    <OuiCheckbox v-model="state.showSepHandle" switch>
-      showSepHandle
-    </OuiCheckbox>
-  </p>
+
   <div
     class="app-resizeable"
     :style="state.showSepHandle && '--separator-handle: rgba(255,0,0,0.25)'"
@@ -48,7 +44,14 @@ const size = 200
     <OuiResizeable side="top" :min-size="minSize" :max-size="maxSize" :size="size" class="bottom" name="bottom">
       Bottom
     </OuiResizeable>
-
-    <OuiObject :value="state" />
   </div>
+
+  <Teleport to="#props">
+    <OuiCard title="Options">
+      <OuiCheckbox v-model="state.showSepHandle" switch>
+        showSepHandle
+      </OuiCheckbox>
+      <OuiObject :value="state" />
+    </OuiCard>
+  </Teleport>
 </template>

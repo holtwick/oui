@@ -1,8 +1,5 @@
 <script lang="ts" setup>
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
-
-const props = defineProps<{
+defineProps<{
   title?: string
 }>()
 </script>
@@ -16,7 +13,9 @@ const props = defineProps<{
         </slot>
       </slot>
     </div>
-    <slot />
+    <div class="oui-card-body">
+      <slot />
+    </div>
     <div v-if="$slots.footer" class="oui-card-footer">
       <slot name="footer" />
     </div>
