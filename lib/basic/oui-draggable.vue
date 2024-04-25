@@ -3,16 +3,10 @@ import { useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
+import type { OuiDraggableEvent } from './_types'
 
 const emit = defineEmits<{
-  move: [{
-    x: number
-    y: number
-    pageX: number
-    pageY: number
-    deltaX: number
-    deltaY: number
-  }]
+  move: [OuiDraggableEvent]
 }>()
 
 const log: LoggerInterface = Logger('oui-draggable')

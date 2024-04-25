@@ -1,0 +1,28 @@
+@require "../stylus/index";
+
+.app-resizeable {
+  use: stack-y;
+  width: 100%;
+  height: 600;
+  background: -blue-100;
+
+  .left {
+    background: -red-100;
+  }
+
+  .middle {
+    use: stack-x;
+  }
+
+  .right {
+    background: -green-100;
+  }
+
+  .top {
+    background: -purple-100;
+  }
+
+  .bottom {
+    background: -orange-100;
+  }
+}

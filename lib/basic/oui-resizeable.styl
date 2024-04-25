@@ -1,0 +1,125 @@
+@require "../../stylus/index.styl";
+
+.oui-resizeable {
+  position: relative;
+
+  .oui-resizeable-separator {
+    background: red;
+
+    &._left, &._right {
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      cursor: unquote("col-resize");
+      sepHandleSize = px(5);
+
+      &:after {
+        position: absolute;
+        background: rgba(255, 255, 0, 0.314);
+        top: 0;
+        left: -(sepHandleSize * 0.5);
+        width: sepHandleSize + px(1);
+        height: 100%;
+        content: " ";
+      }
+    }
+
+    &._left {
+      left: 0;
+    }
+
+    &._right {
+      right: 0;
+    }
+
+    &._top, &._bottom {
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      cursor: unquote("row-resize");
+      sepHandleSize = px(5);
+
+      &:after {
+        position: absolute;
+        background: rgba(255, 255, 0, 0.314);
+        left: 0;
+        top: -(sepHandleSize * 0.5);
+        height: sepHandleSize + px(1);
+        width: 100%;
+        content: " ";
+      }
+    }
+
+    &._top {
+      top: 0;
+    }
+
+    &._bottom {
+      bottom: 0;
+    }
+  }
+}
+
+/*
+.app-separator {
+  background: var(--separator-color);
+  width: 1px;
+  height: inherit;
+
+  &.app-separator-vertical {
+    height: 1px;
+    width: inherit;
+  }
+
+  &.active {
+    background: var(--separator-active-color) !important;
+  }
+
+  &-resizable {
+    position: relative;
+    cursor: unquote("col-resize");
+    overflow: visible;
+
+    &:after {
+      display: flex;
+      position: absolute;
+      opacity: 0.5;
+      top: 0;
+      left: -($sepHandleSize * 0.5);
+      width: $sepHandleSize + px(1);
+      height: 100%;
+      cursor: unquote("col-resize");
+      z-index: -z-index-floating;
+      content: " ";
+    }
+
+    &.app-separator-vertical {
+      cursor: unquote("row-resize");
+
+      &:after {
+        left: 0;
+        top: -($sepHandleSize * 0.5);
+        width: 100%;
+        height: $sepHandleSize + px(1);
+        cursor: unquote("row-resize");
+      }
+    }
+
+    &:hover {
+      background: var(--separator-focus-color);
+    }
+
+    // &:hover:after {
+    // background: var(--separator-focus-color);
+    // }
+    &.invisible {
+      width: 0;
+      min-width: 0;
+
+      &:after {
+        width: $sepHandleSize;
+      }
+    }
+  }
+}
+*/

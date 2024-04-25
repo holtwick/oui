@@ -15,3 +15,12 @@ export interface OuiTableColumn<K = string> {
   minWidth?: number
   maxWidth?: number
 }
+
+export interface OuiDraggableEvent {
+  x: number
+  y: number
+  pageX: number
+  pageY: number
+  deltaX: number
+  deltaY: number
+}
