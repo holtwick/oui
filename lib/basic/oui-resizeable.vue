@@ -3,8 +3,6 @@ import { useLocalStorage } from '@vueuse/core'
 import { ref } from 'vue'
 import OuiSeparator from './oui-separator.vue'
 
-// import './oui-resizeable.styl'
-
 const props = withDefaults(defineProps<{
   name: string
   side: 'top' | 'left' | 'right' | 'bottom'
@@ -21,7 +19,7 @@ const style = ref()
 
 <template>
   <template v-if="side === 'right' || side === 'bottom'">
-    <div :style="style" class="oui-resizeable" v-bind="$attrs">
+    <div :style="style" v-bind="$attrs">
       <slot />
     </div>
   </template>
@@ -31,11 +29,9 @@ const style = ref()
     :side="side"
     :min-size="minSize"
     :max-size="maxSize"
-    style="position: relative;"
-    class="oui-resizeable-separator"
   />
   <template v-if="side === 'left' || side === 'top'">
-    <div :style="style" class="oui-resizeable" v-bind="$attrs">
+    <div :style="style" v-bind="$attrs">
       <slot />
     </div>
   </template>
