@@ -1,0 +1,68 @@
+@require "../../stylus/index.styl";
+
+.oui-separator {
+  position: relative;
+  background: var(--separator, transparent);
+
+  &._absolute {
+    position: absolute;
+  }
+
+  &:hover {
+    background: var(--separator-hover, var(--fg));
+  }
+
+  &._active {
+    background: var(--separator-active, var(--p1-fg));
+  }
+
+  &._left, &._right {
+    width: 1px;
+    height: 100%;
+    cursor: unquote("col-resize");
+
+    &:after {
+      position: absolute;
+      background: var(--separator-handle, transparent);
+      top: 0;
+      left: unquote("calc(-1 * 0.5 * var(--separator-handle-size, 5px))");
+      width: unquote("calc(var(--separator-handle-size, 5px) + 1px)");
+      height: 100%;
+      content: " ";
+      z-index: -z-index-floating;
+    }
+  }
+
+  &._top, &._bottom {
+    height: 1px;
+    width: 100%;
+    cursor: unquote("row-resize");
+
+    &:after {
+      position: absolute;
+      background: var(--separator-handle, transparent);
+      left: 0;
+      top: unquote("calc(-1 * 0.5 * var(--separator-handle-size, 5px))");
+      height: unquote("calc(var(--separator-handle-size, 5px) + 1px)");
+      width: 100%;
+      content: " ";
+      z-index: -z-index-floating;
+    }
+  }
+
+  &._left {
+    left: var(--separator-shift, 0);
+  }
+
+  &._right {
+    right: var(--separator-shift, 0);
+  }
+
+  &._top {
+    top: var(--separator-shift, 0);
+  }
+
+  &._bottom {
+    bottom: var(--separator-shift, 0);
+  }
+}

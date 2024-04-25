@@ -9,6 +9,12 @@
   border-collapse: collapse;
   position: relative;
 
+  .oui-separator {
+    // --separator: red;
+    // --separator-handle: green;
+    position: absolute;
+  }
+
   ._tableview {
     &_row {
       display: grid;
@@ -87,15 +93,6 @@
       ._tableview_row {
         border-top: 2px solid var(--s2-fg);
       }
-    }
-
-    &_resize {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      // background: rgba(255, 0, 0, 0.098);
-      cursor: col-resize;
     }
   }
 }

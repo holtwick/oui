@@ -54,7 +54,7 @@ const x = ref(0)
     </template>
     <Variant title="Default">
       <template #default>
-        <h2>Complex example</h2>
+        <h2>Tableview</h2>
         <div>
           <OuiTableview
             v-model="state.selected"

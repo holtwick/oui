@@ -3,16 +3,12 @@ import { useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
+import type { OuiDraggableEvent } from './_types'
 
 const emit = defineEmits<{
-  move: [{
-    x: number
-    y: number
-    pageX: number
-    pageY: number
-    deltaX: number
-    deltaY: number
-  }]
+  moveStart: [OuiDraggableEvent]
+  move: [OuiDraggableEvent]
+  moveEnd: [OuiDraggableEvent]
 }>()
 
 const log: LoggerInterface = Logger('oui-draggable')
@@ -23,8 +19,32 @@ let dragging = false
 let collapsed = false
 let startX = 0
 let startY = 0
+let lastX = 0
+let lastY = 0
 let deltaX = 0
 let deltaY = 0
+
+function translateMouseEvent(e: MouseEvent): OuiDraggableEvent {
+  const { pageX, pageY } = e
+  deltaX = pageX - lastX
+  deltaY = pageY - lastY
+  lastX = pageX
+  lastY = pageY
+  const moveX = startX - pageX
+  const moveY = startY - pageY
+  const info = {
+    startX,
+    startY,
+    pageX,
+    pageY,
+    deltaX,
+    deltaY,
+    moveX,
+    moveY,
+  }
+  // log('event', info)
+  return info
+}
 
 function cancelEvent(e: MouseEvent) {
   // log('sep cancel')
@@ -37,6 +57,9 @@ function onMouseDown(e: MouseEvent) {
   dragging = true
   startX = pageX
   startY = pageY
+  lastX = pageX
+  lastY = pageY
+  emit('moveStart', translateMouseEvent(e))
   bindEvents()
   return cancelEvent(e)
 }
@@ -44,27 +67,13 @@ function onMouseDown(e: MouseEvent) {
 function onMouseMove(e: MouseEvent) {
   if (!dragging)
     return
-  const { pageX, pageY } = e
-  deltaX = pageX - startX
-  deltaY = pageY - startY
-
-  startX = pageX
-  startY = pageY
-
-  log('xy', deltaX, deltaY, pageX, startX)
-  emit('move', {
-    pageX,
-    pageY,
-    x: deltaX,
-    y: deltaY,
-    deltaX,
-    deltaY,
-  })
+  emit('move', translateMouseEvent(e))
   return cancelEvent(e)
 }
 
 function onMouseUp(e: MouseEvent) {
   dragging = false
+  emit('moveEnd', translateMouseEvent(e))
   unbindEvents()
   return cancelEvent(e)
 }
