@@ -14,11 +14,15 @@ const log: LoggerInterface = Logger('oui-form-item')
 <template>
   <template v-if="title">
     <div class="oui-form-item">
-      <label :for="id">
-        {{ title }}
-        <span v-if="required">*</span>
+      <label>
+        <div class="oui-form-item-title">
+          {{ title }}
+          <span v-if="required">*</span>
+        </div>
+        <div class="oui-form-item-body">
+          <slot />
+        </div>
       </label>
-      <slot />
     </div>
   </template>
   <template v-else>

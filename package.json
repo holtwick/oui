@@ -40,11 +40,11 @@
       "import": "./dist/lib.js"
     },
     "./css": "./dist/style.css",
+    "./default-app": "./stylus/default-app.styl",
+    "./default-page": "./stylus/default-page.styl",
     "./lib": "./lib/index.styl",
     "./stylus": "./stylus/index.styl",
-    "./theme": "./stylus/theme.styl",
-    "./default-app": "./stylus/default-app.styl",
-    "./default-page": "./stylus/default-page.styl"
+    "./theme": "./stylus/theme.styl"
   },
   "module": "./dist/lib.js",
   "types": "./dist/lib.d.ts",
@@ -60,6 +60,7 @@
   },
   "scripts": {
     "build": "vite build",
+    "build:demo": "BUILD_DEMO=1 vite build",
     "check": "vue-tsc --noEmit",
     "dev": "vite",
     "generate-pwa-assets": "pwa-assets-generator",
@@ -67,12 +68,13 @@
     "lint:fix": "eslint . --fix",
     "prepublishOnly": "nr build",
     "preview": "vite preview",
-    "start": "nr story:dev",
+    "start": "nr dev",
     "story:build": "histoire build",
     "story:dev": "histoire dev",
     "story:preview": "histoire preview",
+    "story:upload": "nr story:build && rsync -rvz .histoire/dist/* cy:public_html/oui.holtwick.de",
     "test": "vitest",
-    "upload": "nr story:build && rsync -rvz .histoire/dist/* cy:public_html/oui.holtwick.de"
+    "upload": "nr build:demo && rsync -rvz dist/* cy:public_html/oui.holtwick.de"
   },
   "dependencies": {
     "@floating-ui/vue": "^1.0.6",
