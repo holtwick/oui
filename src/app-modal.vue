@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import OuiButton from '../lib/basic/oui-button.vue'
-import OuiText from '../lib/basic/oui-text.vue'
-import OuiInput from '../lib/basic/oui-input.vue'
-import { OuiModal, vAutofocus } from '@/lib'
+import { OuiButton, OuiInput, OuiModal, OuiText, vAutofocus } from '@/lib'
 
 const show = ref(false)
 const value = ref('Hello')
@@ -11,11 +8,9 @@ const value = ref('Hello')
 
 <template>
   <div>
-    <h1>Oui</h1>
-    <p>Just another set of UI components for Vue.js with a proper French-sounding name</p>
-    <button @click="show = !show">
+    <OuiButton @click="show = !show">
       Click to show modal
-    </button>
+    </OuiButton>
     <OuiModal v-model="show" close>
       <template #header>
         Header Header Header Header Header Header Header
