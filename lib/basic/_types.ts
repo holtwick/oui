@@ -16,11 +16,25 @@ export interface OuiTableColumn<K = string> {
   maxWidth?: number
 }
 
+// interface OuiDraggablePosition {
+//   x: number
+//   y: number
+// }
+
 export interface OuiDraggableEvent {
-  x: number
-  y: number
+  // x: number
+  // y: number
+
+  startX: number
+  startY: number
   pageX: number
   pageY: number
   deltaX: number
   deltaY: number
+  moveX: number
+  moveY: number
+  // page: OuiDraggablePosition
+  // delta: OuiDraggablePosition
+  // pos: OuiDraggablePosition
+  // origin: OuiDraggablePosition
 }

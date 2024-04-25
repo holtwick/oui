@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { useLocalStorage } from '@vueuse/core'
 import { computed, ref } from 'vue'
+import type { LoggerInterface } from 'zeed'
+import { Logger } from 'zeed'
 import { px } from './lib'
-import OuiDraggable from './oui-draggable.vue'
+import OuiSeparator from './oui-separator.vue'
 
 import './oui-resizeable.styl'
-import type { OuiDraggableEvent } from './_types'
 
 const props = withDefaults(defineProps<{
   name: string
@@ -15,6 +16,8 @@ const props = withDefaults(defineProps<{
   maxSize: number
 }>(), {
 })
+
+const log: LoggerInterface = Logger('oui-resizeable')
 
 const paneSize = useLocalStorage(`oui.resizeable.${props.name}`, props.size)
 
@@ -32,16 +35,19 @@ const style = computed(() => {
   else
     return { width: px(paneSize.value) }
 })
-
-function doHandleMove(e: OuiDraggableEvent) {
-  setSize(paneSize.value + e.pageX)
-}
 </script>
 
 <template>
   <div ref="root" :style="style" class="oui-resizeable">
-    <OuiDraggable class="oui-resizeable-separator" :class="`_${side}`" @move="doHandleMove" />
-    {{ paneSize }}
+    <OuiSeparator
+      :side="side"
+      :size="paneSize"
+      :min-size="minSize"
+      :max-size="maxSize"
+      class="oui-resizeable-separator"
+      @size="setSize"
+    />
+    name={{ name }} size={{ paneSize }}
     <slot />
   </div>
 </template>

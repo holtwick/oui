@@ -2,9 +2,6 @@ import { useEventListener } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { onMounted, ref } from 'vue'
 import { Logger } from 'zeed'
-import { useWindowResize } from './window-resize'
-
-const log = Logger('sep', globalThis.debugUI ?? false)
 
 interface SeparatorState {
   value: number
@@ -139,7 +136,6 @@ export function useSeparator(
     value.value = calcElementSize(lastSeparatorState)
   }
 
-  useWindowResize(recalc)
   onMounted(recalc)
 
   return {
