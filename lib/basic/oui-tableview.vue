@@ -170,6 +170,5 @@ function scrollX(x: number) {
         :name="`oui.tableview.${name}.col.size.${i}`"
       />
     </template>
-    <pre>{{ widths }}</pre>
   </div>
 </template>
