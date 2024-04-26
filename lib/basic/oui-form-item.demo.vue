@@ -1,14 +1,16 @@
 <script lang="ts" setup>
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
 import { reactive } from 'vue'
-import OuiInput from './oui-input.vue'
-
-const log: LoggerInterface = Logger('oui-form-item.demo')
+import { getTimestamp } from 'zeed'
+import { OuiDatetime, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 
 const state = reactive({
   value1: '',
   value2: '',
+  number: 42,
+  text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis velit, distinctio adipisci culpa, numquam impedit hic consequuntur unde illo illum sunt aliquid aut beatae natus? Repellendus vel laborum doloribus tempore?',
+  password: 'Secr3!',
+  select: '',
+  datetime: getTimestamp(),
 })
 </script>
 
@@ -16,5 +18,10 @@ const state = reactive({
   <div>
     <OuiInput v-model="state.value1" />
     <OuiInput v-model="state.value2" title="Value with label" required />
+    <OuiInputNumber v-model="state.number" title="Number" />
+    <OuiTextarea v-model="state.text" title="Text" />
+    <OuiPassword v-model="state.password" title="Password" />
+    <OuiSelect v-model="state.select" title="Select" :options="['One', 'Two', 'Three']" />
+    <OuiDatetime v-model="state.datetime" title="Date and Time" />
   </div>
 </template>

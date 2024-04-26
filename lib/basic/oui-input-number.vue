@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { uuid } from 'zeed'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
@@ -7,13 +6,11 @@ import './oui-form.styl'
 withDefaults(defineProps<{
   title?: string
   required?: boolean
-  type?: 'text' | 'url' | 'email' | 'tel' | 'search'
   id?: string
 }>(), {
-  type: 'text',
 })
 
-const model = defineModel({ required: true })
+const model = defineModel<number>({ required: true })
 </script>
 
 <template>
@@ -21,8 +18,8 @@ const model = defineModel({ required: true })
     <input
       :id="id"
       v-model="model"
-      :type="type"
-      class="oui-input oui-input-string"
+      type="number"
+      class="oui-number"
       v-bind="$attrs"
     >
   </OuiFormItem>

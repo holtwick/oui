@@ -1,8 +1,16 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { getTimestamp } from 'zeed'
+import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
+
+withDefaults(defineProps<{
+  title?: string
+  required?: boolean
+  id?: string
+}>(), {
+})
 
 const model = defineModel<number>({
   required: true,
@@ -38,5 +46,7 @@ const date = computed({
 </script>
 
 <template>
-  <input v-model="date" type="datetime-local" class="oui-input">
+  <OuiFormItem :id="id" :title="title" :required="required">
+    <input v-model="date" type="datetime-local" class="oui-input oui-input-datetime">
+  </OuiFormItem>
 </template>
