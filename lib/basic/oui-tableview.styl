@@ -5,7 +5,7 @@
   // display: block; // for responisve scrolling
   use: stack-y;
   width: 100%;
-  overflow-x: auto; // this does not work together with sticky headers
+  overflow: hidden;
   border-collapse: collapse;
   position: relative;
 
@@ -40,6 +40,7 @@
       ._tableview_row {
         font-weight: 600;
         border-bottom: 2px solid var(--s2-fg);
+        overflow: hidden;
       }
 
       ._tableview_cell {
@@ -92,6 +93,7 @@
     &_footer {
       ._tableview_row {
         border-top: 2px solid var(--s2-fg);
+        overflow: hidden;
       }
     }
   }

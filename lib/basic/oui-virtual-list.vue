@@ -19,6 +19,10 @@ const props = withDefaults(defineProps<{
   scrollToEnd: false,
 })
 
+const emit = defineEmits<{
+  scrollX: [number]
+}>()
+
 const { data, rowBuffer, rowHeight } = toRefs(props)
 const root = ref<HTMLElement>()
 const margin = /* props.margin ?? */ 0
@@ -63,6 +67,8 @@ function handleScroll() {
     indexFirst.value = range[0]
     indexLast.value = range[1]
     paddingTop.value = range[0] * rowHeight.value + margin
+
+    emit('scrollX', root.value.scrollLeft)
   })
 }
 

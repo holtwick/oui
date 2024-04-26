@@ -1,5 +1,5 @@
 <script lang="ts" setup generic="K extends string, T extends Record<K, any>">
-import { computed, reactive, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { arraySetArrayInPlace, arraySum, parseOrderby } from 'zeed'
 import type { OuiTableColumn } from './_types'
 import OuiSeparator from './oui-separator.vue'
@@ -70,11 +70,24 @@ function doSelect(pos: number) {
   else
     modelSelected.value = pos
 }
+
+const marginLeft = ref(0)
+
+const headerElement = ref<HTMLElement>()
+const footerElement = ref<HTMLElement>()
+
+function scrollX(x: number) {
+  marginLeft.value = x
+  if (headerElement.value)
+    headerElement.value.style.marginLeft = px(-1 * x)
+  if (footerElement.value)
+    footerElement.value.style.marginLeft = px(-1 * x)
+}
 </script>
 
 <template>
   <div v-if="columns != null && data != null" class="oui-tableview" :style="tableStyle">
-    <div v-if="header" class="_tableview_header">
+    <div v-if="header" ref="headerElement" class="_tableview_header">
       <div class="_tableview_row">
         <template v-for="col, pos in columns" :key="col.name">
           <div
@@ -100,6 +113,7 @@ function doSelect(pos: number) {
       :data="data"
       :row-height="rowHeight"
       :scroll-to-end="scrollToEnd"
+      @scroll-x="scrollX"
     >
       <template #default="{ item, index }">
         <div
@@ -134,7 +148,7 @@ function doSelect(pos: number) {
         </div>
       </template>
     </OuiVirtualList>
-    <div v-if="footer" class="_tableview_footer">
+    <div v-if="footer" ref="footerElement" class="_tableview_footer">
       <div class="_tableview_row">
         <template v-for="col, pos in columns" :key="col.name">
           <div class="_tableview_cell" :align="col.align ?? 'left'" :valign="col.valign ?? 'top'">
@@ -153,8 +167,7 @@ function doSelect(pos: number) {
         :max-size="columns[i].maxWidth ?? 300"
         data-test="hello"
         :style="{
-          color: 'green',
-          left: px(arraySum(widths.slice(0, i + 1)) - 1),
+          left: px(arraySum(widths.slice(0, i + 1)) - 1 - marginLeft),
         }"
       />
     </template>
