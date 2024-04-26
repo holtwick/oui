@@ -19,7 +19,8 @@
     &_row {
       display: grid;
       grid-template-columns: var(--tableview-columns);
-      width: 100%;
+      min-width: 100%;
+      width: max-content; // fixes backround scroll issues
     }
 
     &_cell {
@@ -40,7 +41,6 @@
       ._tableview_row {
         font-weight: 600;
         border-bottom: 2px solid var(--s2-fg);
-        overflow: hidden;
       }
 
       ._tableview_cell {
