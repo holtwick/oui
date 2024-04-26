@@ -43,3 +43,32 @@
     margin-bottom: 6;
   }
 }
+
+.oui-notice {
+  use: center;
+  text-align: center;
+  height: 100%;
+  color: var(--s2-fg);
+
+  &-body {
+    use: stack-y;
+    gap: 16;
+    max-width: min(40ch, 80%);
+  }
+
+  svg {
+    size: 1em;
+  }
+
+  &-title {
+    font-size: 32;
+    font-weight: 500;
+  }
+
+  &-icon svg {
+    size: 64;
+  }
+
+  &-message {
+  }
+}

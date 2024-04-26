@@ -3,9 +3,9 @@
 import { computed, ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger, uuid } from 'zeed'
-import { OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiText, OuiTooltipActivator, useMenu, vMenu } from '@/lib'
+import { OuiButton, OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiText, OuiTooltipActivator, useMenu, vMenu } from '@/lib'
 
-import './app-float.styl'
+import './oui-float.demo.styl'
 
 const log: LoggerInterface = Logger('app-menu')
 
@@ -76,14 +76,14 @@ in multiple lines
 Yeah!"
       >Vue.js</i> with a proper French-sounding name
     </p>
-    <button tooltip="Hello, I am a tooltip">
+    <OuiButton tooltip="Hello, I am a tooltip">
       Tooltip
-    </button>
+    </OuiButton>
     <br>
     <p>
-      <button ref="anchor" @click="show = !show">
+      <OuiButton ref="anchor" @click="show = !show">
         Click to toggle
-      </button>
+      </OuiButton>
       <OuiFloat v-model="show" :reference="anchor" placement="right" :offset="10">
         <div class="my-float">
           This is floating
@@ -92,9 +92,9 @@ Yeah!"
     </p>
 
     <p>
-      <button ref="anchor2" @click="show2 = !show2">
+      <OuiButton ref="anchor2" @click="show2 = !show2">
         OuiMenu {{ show2 }}
-      </button>
+      </OuiButton>
       <OuiMenu
         v-model="show2"
         hover
@@ -106,7 +106,7 @@ Yeah!"
         v-model="show3"
         :items="items"
       >
-        <button>Menu2 {{ show3 }}</button>
+        <OuiButton>Menu2 {{ show3 }}</OuiButton>
       </OuiMenu>
     </p>
 
@@ -127,7 +127,7 @@ Yeah!"
 
       <OuiFloat placement="right" :offset="10" close hover>
         <template #trigger="{ active }">
-          <button>OuiFloat #click {{ active }}</button>
+          <OuiButton>OuiFloat #click {{ active }}</OuiButton>
         </template>
 
         This is floating
@@ -155,17 +155,17 @@ Yeah!"
 
     <hr>
 
-    <button v-menu="menu">
+    <OuiButton v-menu="menu">
       Dynamic Menu
-    </button>
+    </OuiButton>
 
-    <button v-menu="menuWithArgs(1)">
+    <OuiButton v-menu="menuWithArgs(1)">
       Dynamic Menu 1
-    </button>
+    </OuiButton>
 
-    <button v-menu="menuWithArgs(2)">
+    <OuiButton v-menu="menuWithArgs(2)">
       Dynamic Menu 2
-    </button>
+    </OuiButton>
 
     <div v-menu="menu" style="border: 1px solid black; width: 200px; height: 200px;">
       Click somewhere
