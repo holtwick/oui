@@ -22,12 +22,7 @@ const config: UserConfig = {
 
 }
 
-if (process.env.HISTOIRE) {
-  config.histoire = {
-    setupFile: '/histoire.setup.ts',
-  }
-}
-else if (!process.env.BUILD_DEMO) {
+if (!process.env.BUILD_DEMO) {
   config.plugins?.push(
     dts({
       rollupTypes: true,

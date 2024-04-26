@@ -1,8 +1,8 @@
 <!-- eslint-disable no-alert -->
 <script setup lang="ts">
-import { OuiNotificationActivator, emitNotification, emitNotificationError, emitNotificationWarn } from '@/lib'
+import { OuiButton, OuiNotificationActivator, emitNotification, emitNotificationError, emitNotificationWarn } from '@/lib'
 
-setTimeout(() => {
+function triggerAll() {
   // setInterval(() => {
   //   emitNotification({
   //     icon: "questions",
@@ -60,13 +60,16 @@ setTimeout(() => {
   // if (isNotificationAllowed("questions")) {
   //   emitNotificationError("VISIBLE", "Bad news...")
   // }
-}, 1000)
+}
 </script>
 
 <template>
-  <div>
-    <h1>Oui</h1>
-    <p>Just another set of UI components for Vue.js with a proper French-sounding name</p>
-  </div>
+  <OuiText>
+    <p>
+      <OuiButton @click="triggerAll">
+        Trigger All
+      </OuiButton>
+    </p>
+  </OuiText>
   <OuiNotificationActivator />
 </template>

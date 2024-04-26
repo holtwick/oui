@@ -12,8 +12,10 @@ const log: LoggerInterface = Logger('app-menu')
 const show = ref(true)
 const show2 = ref(false)
 const show3 = ref(false)
+const show4 = ref(true)
 const anchor = ref()
 const anchor2 = ref()
+const button = ref()
 
 const check1 = ref(false)
 const check2 = ref(true)
@@ -170,6 +172,13 @@ Yeah!"
     <div v-menu="menu" style="border: 1px solid black; width: 200px; height: 200px;">
       Click somewhere
     </div>
+
+    <OuiButton ref="button" @click="show4 = !show4">
+      Click me
+    </OuiButton>
+    <OuiFloat v-model="show4" :reference="button">
+      This is the popover
+    </OuiFloat>
   </OuiText>
   <OuiTooltipActivator />
 </template>

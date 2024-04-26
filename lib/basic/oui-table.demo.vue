@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { computed, reactive } from 'vue'
 import { sortedOrderby } from 'zeed'
-import { OuiTable, useMenu } from '@/lib'
-import type { OuiTableColumn } from '@/lib'
+import type { OuiTableColumn } from '../lib'
+import { OuiCheckbox, OuiDemo, OuiInput, OuiInputNumber, OuiTable, useMenu } from '../lib'
 
 const state = reactive({
   sort: '',
   footer: true,
   selectable: true,
-  selected: undefined,
+  selected: -1,
 })
 
 const columns: OuiTableColumn[] = [
@@ -74,12 +74,10 @@ const menu = useMenu((row: any) => [
   <div>
     <OuiTable :data="data" />
   </div>
+  <OuiDemo :state="state">
+    <OuiInput v-model="state.sort" title="Sort" />
+    <OuiInputNumber v-model="state.selected" title="Selected" />
+    <OuiCheckbox v-model="state.footer" title="Show footer" />
+    <OuiCheckbox v-model="state.selectable" title="Selectable" />
+  </OuiDemo>
 </template>
-
-<style lang="stylus">
-@require "../stylus/index.styl"
-
-.oui-table {
-  oui-table()
-}
-</style>

@@ -46,7 +46,6 @@ const x = ref(0)
 </script>
 
 <template>
-  <h2>Tableview</h2>
   <div :style="state.showSepHandle && '--separator-handle: rgba(255,0,0,0.25)'">
     <OuiTableview
       v-model="state.selected"
@@ -60,7 +59,7 @@ const x = ref(0)
       :fill-last="state.fillLast"
       :scroll-to-end="state.scrollToEnd"
       :row-attrs="(_item, index) => index % 2 === 0 ? { style: 'background: var(--s2-bg)' } : {}"
-      style="height: 400px;"
+      style="height: 80vh"
       @context="menu"
     >
       <template #col-one="{ value, col }">
