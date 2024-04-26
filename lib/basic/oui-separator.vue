@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useLocalStorage } from '@vueuse/core'
 import type { OuiDraggableEvent } from './_types'
 import OuiDraggable from './oui-draggable.vue'
 import { px } from './lib'
@@ -8,17 +9,23 @@ import './oui-separator.styl'
 
 const props = withDefaults(defineProps<{
   side: 'top' | 'left' | 'right' | 'bottom'
+  modelValue: number
   minSize: number
   maxSize: number
   absolute?: boolean
   color?: string
+  name?: string
 }>(), {
   absolute: false,
 })
 
+const emit = defineEmits(['update:modelValue'])
+
+const modelSize = props.name ? useLocalStorage(`oui.separator.${props.name}`, props.modelValue) : ref(props.modelValue)
+// const modelSize = defineModel<number>({ required: true })
+
 const _active = ref(false)
 
-const modelSize = defineModel<number>({ required: true })
 const modelStyle = defineModel<any>('styleValue', { required: false })
 
 function updateStyle() {
@@ -30,16 +37,19 @@ function updateStyle() {
   }
 }
 
-updateStyle()
-
 function setSize(value: number) {
   modelSize.value = Math.max(props.minSize, Math.min(props.maxSize, value))
+  emit('update:modelValue', modelSize.value)
   updateStyle()
 }
 
 onMounted(() => {
-  if (modelSize.value && (modelSize.value < props.minSize || modelSize.value > props.maxSize))
+  if (props.name)
     setSize(modelSize.value)
+  else if (modelSize.value && (modelSize.value < props.minSize || modelSize.value > props.maxSize))
+    setSize(modelSize.value)
+  else
+    updateStyle()
 })
 
 let startSize = 0

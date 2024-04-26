@@ -51,6 +51,7 @@ const x = ref(0)
     <OuiTableview
       v-model="state.selected"
       v-model:sort="state.sort"
+      name="demo"
       :columns="columns"
       :data="data"
       :footer="state.footer"
