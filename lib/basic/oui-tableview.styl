@@ -5,7 +5,7 @@
   // display: block; // for responisve scrolling
   use: stack-y;
   width: 100%;
-  overflow-x: auto; // this does not work together with sticky headers
+  overflow: hidden;
   border-collapse: collapse;
   position: relative;
 
@@ -19,7 +19,8 @@
     &_row {
       display: grid;
       grid-template-columns: var(--tableview-columns);
-      width: 100%;
+      min-width: 100%;
+      width: max-content; // fixes backround scroll issues
     }
 
     &_cell {
@@ -92,6 +93,7 @@
     &_footer {
       ._tableview_row {
         border-top: 2px solid var(--s2-fg);
+        overflow: hidden;
       }
     }
   }

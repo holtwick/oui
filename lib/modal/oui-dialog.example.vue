@@ -1,12 +1,18 @@
 <script lang="ts" setup>
-import { nextTick, ref } from 'vue'
-import { sleep } from 'zeed'
+import { nextTick, reactive, ref } from 'vue'
+import { cloneObject, sleep } from 'zeed'
 import OuiModal from './oui-modal.vue'
-import { OuiButton } from '@/lib'
+import { OuiButton, OuiInput, OuiSelect, OuiStars, OuiText, OuiWait } from '@/lib'
 
 const props = defineProps<{
   done?: any
 }>()
+
+const item = reactive({
+  name: '',
+  gender: '',
+  rating: 0,
+})
 
 const wait = ref(false)
 
@@ -15,28 +21,31 @@ async function doConfirm() {
   await nextTick()
 
   // Do something like sending data
-  await sleep(2000)
+  await sleep(1000)
 
-  props.done?.(true)
+  props.done?.(cloneObject(item))
 }
 
 async function doCancel() {
-  props.done?.(false)
+  props.done?.(undefined)
 }
 </script>
 
 <template>
   <OuiModal title="Example Dialog Mode" @close="doCancel">
-    <div>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt delectus illum tenetur sint atque unde, voluptates facere assumenda in repellendus! Cupiditate laborum recusandae facere dicta reiciendis odio enim dolorum illum!
-    </div>
+    <OuiText>
+      <b>Lorem ipsum</b>, dolor sit amet consectetur adipisicing elit. Deserunt delectus illum tenetur sint atque unde, voluptates facere assumenda in repellendus! Cupiditate laborum recusandae facere dicta reiciendis odio enim dolorum illum!
+      <OuiInput v-model="item.name" title="Your Name" required />
+      <OuiSelect v-model="item.gender" title="Your Gender" :options="['Female', 'Male', 'Other']" />
+      <OuiStars v-model="item.rating" title="Did you like Oui so far?" />
+    </OuiText>
     <template #footer>
       <div class="_stack_x _center">
         <div v-if="wait" class="_stack_x wait">
-          <div class="loader" />
+          <OuiWait />
           <div>
             &nbsp;
-            Please wait 2 seconds...
+            Please wait one second...
           </div>
         </div>
         <OuiButton v-else mode="danger">
@@ -53,36 +62,3 @@ async function doCancel() {
     </template>
   </OuiModal>
 </template>
-
-<style>
-/* https://css-loaders.com/spinner/ */
-.wait  {
-  opacity: 0.8;
-}
-
-.loader {
-  height: 1rem;
-  width: 1rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 2px solid var(--fg, black);
-  animation:
-    l20-1 0.8s infinite linear alternate,
-    l20-2 1.6s infinite linear;
-}
-@keyframes l20-1{
-   0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
-   12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
-   25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
-   50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
-   100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
-}
-@keyframes l20-2{
-  0%    {transform:scaleY(1)  rotate(0deg)}
-  49.99%{transform:scaleY(1)  rotate(135deg)}
-  50%   {transform:scaleY(-1) rotate(0deg)}
-  100%  {transform:scaleY(-1) rotate(-135deg)}
-}
-</style>

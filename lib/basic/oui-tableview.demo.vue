@@ -19,7 +19,7 @@ const columns: OuiTableColumn[] = [
   { title: '#', name: 'id', sortable: false },
   { title: 'One', name: 'one', sortable: true, width: 200 },
   { title: 'Two', name: 'two', sortable: true, footer: 'Two feet' },
-  { title: '', name: 'action', align: 'right' },
+  { title: 'Action', name: 'action', align: 'right' },
 ]
 
 const _data = createArray(1000, (index) => {
