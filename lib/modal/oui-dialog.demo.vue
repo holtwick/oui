@@ -26,6 +26,12 @@ const { open } = useDialog(OuiDialogExample)
     <OuiButton @click="open().then(v => state.value = v as any)">
       Custom
     </OuiButton>
+
+    <br>
+    <br>
+    <br>
+
+    <pre>result = {{ state.value }}</pre>
   </div>
   <OuiDemo :state="state" />
 </template>
