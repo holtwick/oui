@@ -27,18 +27,22 @@ async function doCancel() {
 
 <template>
   <OuiModal title="Example Dialog Mode" @close="doCancel">
-    <div />
+    <div>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt delectus illum tenetur sint atque unde, voluptates facere assumenda in repellendus! Cupiditate laborum recusandae facere dicta reiciendis odio enim dolorum illum!
+    </div>
     <template #footer>
-      <div class="button-group">
-        <div v-if="wait" class="wait center">
+      <div class="_stack_x _center">
+        <div v-if="wait" class="_stack_x wait">
           <div class="loader" />
-          &nbsp;
-          Please wait 2 seconds...
+          <div>
+            &nbsp;
+            Please wait 2 seconds...
+          </div>
         </div>
         <OuiButton v-else mode="danger">
           Delete
         </OuiButton>
-        <div class="space" />
+        <div class="_space" />
         <OuiButton :disabled="wait" mode="secondary" @click="doCancel">
           Cancel
         </OuiButton>
