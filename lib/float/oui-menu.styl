@@ -1,16 +1,28 @@
 @require "../../stylus/index.styl";
 
 .oui-menu {
-  --menu-bg: -gray-100; // ButtonFace;
-  --menu-border: 1px solid -gray-400; // ButtonShadow;
+  --menu-bg: var(--n0-50); // ButtonFace;
+  --menu-border: 1px solid var(--n0-300); // ButtonShadow;
   --menu-radius: px(4);
-  --item-fg: -gray-900; // ButtonText;
+  --item-fg: var(--n0-950); // ButtonText;
   --item-bg: none;
-  --item-hover-fg: HighlightText;
-  --item-hover-bg: Highlight;
+  --item-hover-fg: var(--fg, HighlightText);
+  --item-hover-bg: var(--p1-200, Highlight);
   // --item-active-color: black;
   // --item-active-background: white;
-  --item-separator: -gray-300;
+  --item-separator: var(--n0-300);
+
+  .dark & {
+    --menu-bg: var(--n0-900); // ButtonFace;
+    --menu-border: 1px solid var(--n0-600); // ButtonShadow;
+    --menu-radius: px(4);
+    --item-fg: var(--fg);
+    --item-bg: none;
+    --item-hover-fg: var(--fg);
+    --item-hover-bg: var(--p1-800);
+    --item-separator: var(--n0-600);
+  }
+
   use: stack-y;
   cursor: default;
   max-width: 20rem;

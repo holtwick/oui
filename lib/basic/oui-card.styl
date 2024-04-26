@@ -1,0 +1,23 @@
+@require "../../stylus/index.styl";
+
+.oui-card {
+  border: 1px solid var(--t3-bg);
+  border-radius: 8;
+  background: var(--s2-bg);
+  use: stack-y;
+
+  &-header {
+    font-weight: 600;
+    margin-bottom: 12;
+    margin: 16;
+    margin-bottom: 0;
+  }
+
+  &-body {
+    margin: 16;
+  }
+
+  &-header + &-body {
+    margin-top: 12;
+  }
+}

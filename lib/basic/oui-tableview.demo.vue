@@ -2,7 +2,7 @@
 import { computed, reactive, ref } from 'vue'
 import { createArray, sortedOrderby, uuid } from 'zeed'
 import type { OuiTableColumn } from '@/lib'
-import { OuiCheckbox, OuiObject, OuiSelect, OuiTableview, useMenu } from '@/lib'
+import { OuiCheckbox, OuiDemo, OuiTableview, useMenu } from '@/lib'
 
 const state = reactive({
   sort: '',
@@ -47,26 +47,6 @@ const x = ref(0)
 
 <template>
   <h2>Tableview</h2>
-  <p>
-    <OuiCheckbox v-model="state.fillLast" switch>
-      fillLast
-    </OuiCheckbox>
-    <OuiCheckbox v-model="state.selectable" switch>
-      selectable
-    </OuiCheckbox>
-    <OuiCheckbox v-model="state.footer" switch>
-      footer
-    </OuiCheckbox>
-    <OuiCheckbox v-model="state.header" switch>
-      header
-    </OuiCheckbox>
-    <OuiCheckbox v-model="state.scrollToEnd" switch>
-      scrollToEnd
-    </OuiCheckbox>
-    <OuiCheckbox v-model="state.showSepHandle" switch>
-      showSepHandle
-    </OuiCheckbox>
-  </p>
   <div :style="state.showSepHandle && '--separator-handle: rgba(255,0,0,0.25)'">
     <OuiTableview
       v-model="state.selected"
@@ -98,6 +78,25 @@ const x = ref(0)
       </template>
     </OuiTableview>
 
-    <OuiObject :value="state" />
+    <OuiDemo :state="state">
+      <OuiCheckbox v-model="state.fillLast" switch>
+        fillLast
+      </OuiCheckbox>
+      <OuiCheckbox v-model="state.selectable" switch>
+        selectable
+      </OuiCheckbox>
+      <OuiCheckbox v-model="state.footer" switch>
+        footer
+      </OuiCheckbox>
+      <OuiCheckbox v-model="state.header" switch>
+        header
+      </OuiCheckbox>
+      <OuiCheckbox v-model="state.scrollToEnd" switch>
+        scrollToEnd
+      </OuiCheckbox>
+      <OuiCheckbox v-model="state.showSepHandle" switch>
+        showSepHandle
+      </OuiCheckbox>
+    </OuiDemo>
   </div>
 </template>
