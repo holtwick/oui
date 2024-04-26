@@ -55,7 +55,6 @@
     position: relative;
     box-shadow: lg;
     background: var(--modal-bg, -gray-50);
-    width: Min(64ch, 90vw);
     border: 1px solid var(--modal-separator, -gray-200);
     border-radius: var(--dialog-radius, 8px);
     max-height: 75vh;
@@ -107,11 +106,6 @@
     text-align: right;
     // white-space: nowrap;
     padding: 16;
-
-    // padding-bottom: -safe-bottom;
-    > * {
-      margin-left: 8;
-    }
   }
 
   ._modal_body {
@@ -134,8 +128,12 @@
     padding-bottom: 4;
   }
 
+  ._modal_container {
+    width: Min(52ch, 90vw);
+  }
+
   &._modal_size_small ._modal_container {
-    width: Min(32ch, 90vw);
+    width: Min(36ch, 90vw);
   }
 
   &._modal_size_large ._modal_container {
