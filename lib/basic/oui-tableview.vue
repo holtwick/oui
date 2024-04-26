@@ -18,6 +18,7 @@ const props = withDefaults(defineProps<{
   fillLast?: boolean
   scrollToEnd?: boolean
   rowAttrs?: (item: T, index: number) => any // Record<string, string>
+  name?: string
 }>(), {
   rowHeight: 44,
   header: true,
@@ -165,11 +166,10 @@ function scrollX(x: number) {
         side="right"
         :min-size="columns[i].minWidth ?? 80"
         :max-size="columns[i].maxWidth ?? 300"
-        data-test="hello"
-        :style="{
-          left: px(arraySum(widths.slice(0, i + 1)) - 1 - marginLeft),
-        }"
+        :style="{ left: px(arraySum(widths.slice(0, i + 1)) - 1 - marginLeft) }"
+        :name="`oui.tableview.${name}.col.size.${i}`"
       />
     </template>
+    <pre>{{ widths }}</pre>
   </div>
 </template>
