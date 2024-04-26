@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { uuid } from 'zeed'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'

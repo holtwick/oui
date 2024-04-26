@@ -2,7 +2,7 @@
 import { nextTick, reactive, ref } from 'vue'
 import { cloneObject, sleep } from 'zeed'
 import OuiModal from './oui-modal.vue'
-import { OuiButton, OuiInput, OuiSelect, OuiText, OuiWait } from '@/lib'
+import { OuiButton, OuiInput, OuiSelect, OuiStars, OuiText, OuiWait } from '@/lib'
 
 const props = defineProps<{
   done?: any
@@ -10,6 +10,8 @@ const props = defineProps<{
 
 const item = reactive({
   name: '',
+  gender: '',
+  rating: 0,
 })
 
 const wait = ref(false)
@@ -34,7 +36,8 @@ async function doCancel() {
     <OuiText>
       <b>Lorem ipsum</b>, dolor sit amet consectetur adipisicing elit. Deserunt delectus illum tenetur sint atque unde, voluptates facere assumenda in repellendus! Cupiditate laborum recusandae facere dicta reiciendis odio enim dolorum illum!
       <OuiInput v-model="item.name" title="Your Name" required />
-      <OuiSelect v-model="item.name" title="Your Name" required />
+      <OuiSelect v-model="item.gender" title="Your Gender" :options="['Female', 'Male', 'Other']" />
+      <OuiStars v-model="item.rating" title="Did you like Oui so far?" />
     </OuiText>
     <template #footer>
       <div class="_stack_x _center">
