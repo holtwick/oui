@@ -76,7 +76,7 @@
     "@floating-ui/vue": "^1.0.6",
     "@vueuse/core": "^10.9.0",
     "vue": "^3.4.26",
-    "zeed": "^0.20.3"
+    "zeed": "^0.20.6"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.16.1",

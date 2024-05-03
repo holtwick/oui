@@ -36,7 +36,7 @@ oui-layout() {
 }
 
 oui-preset-layout() {
-  if __oui_once("layout") {
+  if __oui_once("layoutpreset") {
     ._stack_x {
       use: stack-x;
     }
@@ -57,6 +57,43 @@ oui-preset-layout() {
     ._space, ._grow {
       flex: auto !important;
       overflow: hidden !important;
+    }
+  }
+}
+
+oui-preset-layout-attrs() {
+  if __oui_once("layoutattrs") {
+    .ox {
+      use: stack-x;
+    }
+
+    .oy {
+      use: stack-y;
+    }
+
+    .oc {
+      use: stack-item-center;
+    }
+
+    .oscroll {
+      use: stack-item-scroll;
+      contain: content;
+    }
+
+    .ospace, .ogrow {
+      flex: auto;
+    }
+
+    .ofix {
+      flex: 0;
+    }
+
+    .ogap {
+      gap: var(--space-s, px(8));
+    }
+
+    .odots {
+      use: ellipsis;
     }
   }
 }
