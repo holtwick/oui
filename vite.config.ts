@@ -1,5 +1,3 @@
-/// <reference types="histoire" />
-
 import { URL, fileURLToPath } from 'node:url'
 import process from 'node:process'
 import type { UserConfig } from 'vite'
@@ -16,10 +14,9 @@ const config: UserConfig = {
       '@': fileURLToPath(new URL('./lib', import.meta.url)),
     },
   },
-  server: {
-    port: 8080,
-  },
-
+  // server: {
+  //   port: 8080,
+  // },
 }
 
 if (!process.env.BUILD_DEMO) {

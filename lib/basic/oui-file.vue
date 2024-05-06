@@ -4,12 +4,22 @@ import type { LoggerInterface } from 'zeed'
 import { Logger, createPromise } from 'zeed'
 
 import './oui-form.styl'
+import './oui-file.styl'
+
+const props = withDefaults(defineProps<{
+  title?: string
+  accept?: string
+  multiple?: boolean
+}>(), {
+  accept: 'image/*',
+  multiple: false,
+})
 
 const log: LoggerInterface = Logger('oui-file')
 
 const { files, open, reset, onChange } = useFileDialog({
-  accept: 'image/*',
-  multiple: false,
+  accept: props.accept,
+  multiple: props.multiple,
 })
 
 const model = defineModel<string | undefined | null>({ required: true })
@@ -36,10 +46,10 @@ onChange(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="oui-file">
     <img v-if="model" :src="model">
-    <button @click.prevent="() => open()">
-      Choose file...
+    <button class="oui-file-button" @click.prevent="() => open()">
+      <slot>{{ title ?? 'Choose file...' }}</slot>
     </button>
   </div>
 </template>
