@@ -10,10 +10,15 @@ const props = withDefaults(defineProps<{
   title?: string
   accept?: string
   multiple?: boolean
+  preview?: boolean
 }>(), {
   accept: 'image/*',
   multiple: false,
 })
+
+const emit = defineEmits<{
+  delete: []
+}>()
 
 const log: LoggerInterface = Logger('oui-file')
 
@@ -43,12 +48,17 @@ onChange(async () => {
     reset()
   }
 })
+
+function doSelect() {
+  log('select')
+  open()
+}
 </script>
 
 <template>
   <div class="oui-file">
     <img v-if="model" :src="model">
-    <button class="oui-file-button" @click.prevent="() => open()">
+    <button class="oui-file-button" @click.prevent="doSelect">
       <slot>{{ title ?? 'Choose file...' }}</slot>
     </button>
   </div>

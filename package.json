@@ -75,18 +75,18 @@
   "dependencies": {
     "@floating-ui/vue": "^1.0.6",
     "@vueuse/core": "^10.9.0",
-    "vue": "^3.4.26",
+    "vue": "^3.4.27",
     "zeed": "^0.20.6"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.16.1",
+    "@antfu/eslint-config": "^2.16.2",
     "@antfu/ni": "^0.21.12",
     "@tsconfig/node18": "^18.2.4",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.8",
+    "@types/node": "^20.12.10",
     "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vue/test-utils": "^2.4.5",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^9.2.0",
     "only-allow": "^1.2.1",
