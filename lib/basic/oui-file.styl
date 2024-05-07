@@ -1,0 +1,28 @@
+@require "../../stylus/index.styl";
+
+.oui-file {
+  use: stack-x;
+  gap: 8;
+
+  img {
+    size: 64;
+    border-radius: 4;
+  }
+
+  button {
+    use: center;
+    color: var(--fg);
+    border: 1px dashed var(--s2-fg);
+    border-radius: 4;
+    padding: 8;
+    height: 64;
+    min-width: 64;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--p1-fg);
+      border-color: var(--p1-fg);
+      // background: var(--t3-bg);
+    }
+  }
+}
