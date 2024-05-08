@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import './oui-notice.styl'
+
 defineProps<{
   title?: string
 }>()

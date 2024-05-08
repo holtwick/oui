@@ -115,10 +115,8 @@ function toggleDark() {
         class="oui-demo-sidebar"
       >
         <div class="oui-demo-props">
-          <h1>Properties</h1>
           <div id="props" />
           <br>
-          <h1>State</h1>
           <div id="state" />
         </div>
         <template v-if="doc">
