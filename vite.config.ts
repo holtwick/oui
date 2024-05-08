@@ -22,6 +22,23 @@ const config: UserConfig = {
         // md.use(MarkdownPrism)
 
         md.use(await MarkdownItShiki({
+          langs: [
+            'vue',
+            'js',
+            'ts',
+            'styl',
+            'css',
+            'scss',
+            'sass',
+            'swift',
+            'objc',
+            'html',
+            'json',
+            'json5',
+            'console',
+            'md',
+            'xml',
+          ],
           themes: {
             light: 'github-light',
             dark: 'github-dark',
