@@ -3,9 +3,15 @@ import { useLocalStorage } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { last, sortedOrderby } from 'zeed'
 import pkg from '../package.json'
+import OuiText from '../lib/basic/oui-text.vue'
 import { OuiButton, OuiCheckbox, OuiNotice, OuiResizeable, OuiTooltipActivator } from '@/lib'
 
 const modes = import.meta.glob('../**/(app-*|*.demo).vue', {
+  import: 'default',
+  eager: true,
+})
+
+const docs = import.meta.glob('../**/*.md', {
   import: 'default',
   eager: true,
 })
@@ -25,6 +31,10 @@ const allModes = computed(() => {
 
 const comp = computed(() => {
   return modes[mode.value]
+})
+
+const doc = computed(() => {
+  return docs[mode.value.replace(/\.demo\.vue$/, '.md')]
 })
 
 const active = ref(false)
@@ -107,20 +117,26 @@ function toggleDark() {
         <div class="oui-demo-props">
           <h1>Properties</h1>
           <div id="props" />
-        </div>
-        <OuiResizeable
-          :hide="!showProperties"
-          name="demo.state"
-          :size="400"
-          side="top"
-          :max-size="800"
-          :min-size="60"
-          color="var(--t3-fg)"
-          class="oui-demo-state"
-        >
+          <br>
           <h1>State</h1>
           <div id="state" />
-        </OuiResizeable>
+        </div>
+        <template v-if="doc">
+          <OuiResizeable
+            :hide="!showProperties"
+            name="demo.doc"
+            :size="400"
+            side="top"
+            :max-size="800"
+            :min-size="60"
+            color="var(--t3-fg)"
+            class="oui-demo-state"
+          >
+            <OuiText>
+              <component :is="doc" />
+            </OuiText>
+          </OuiResizeable>
+        </template>
       </OuiResizeable>
     </div>
   </div>
