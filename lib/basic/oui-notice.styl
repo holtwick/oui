@@ -1,0 +1,34 @@
+@require "../../stylus/index.styl";
+
+.oui-notice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  use: center;
+  text-align: center;
+  height: 100%;
+  color: var(--s2-fg);
+
+  &-body {
+    use: stack-y;
+    gap: 16;
+    max-width: min(40ch, 80%);
+  }
+
+  svg {
+    size: 1em;
+  }
+
+  &-title {
+    font-size: 32;
+    font-weight: 500;
+  }
+
+  &-icon svg {
+    size: 64;
+  }
+
+  &-message {
+    white-space: pre-line;
+  }
+}

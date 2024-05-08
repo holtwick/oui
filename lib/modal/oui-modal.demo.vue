@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiButton, OuiModal } from '@/lib'
+import { OuiButton, OuiModal, vAutofocus } from '@/lib'
 
 const state = reactive({
   show: false,
@@ -31,7 +31,12 @@ const state = reactive({
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam possimus aut omnis perspiciatis consequuntur at accusantium? Voluptas ab ex quo, omnis, quidem, officiis corporis nostrum perspiciatis ea recusandae reprehenderit fugiat!</p>
 
     <template #footer>
-      Footer
+      <OuiButton mode="secondary">
+        Cancel
+      </OuiButton>
+      <OuiButton v-autofocus mode="primary">
+        OK
+      </OuiButton>
     </template>
   </OuiModal>
   <OuiDemo :state="state" />

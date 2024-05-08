@@ -2,12 +2,50 @@ import { URL, fileURLToPath } from 'node:url'
 import process from 'node:process'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import Vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
+import MarkdownItShiki from '@shikijs/markdown-it'
+import Markdown from 'unplugin-vue-markdown/vite'
 
 const config: UserConfig = {
   plugins: [
-    vue(),
+    Vue({
+      include: [/\.vue$/, /\.md$/],
+    }),
+
+    // https://github.com/antfu/vite-plugin-md
+    // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
+    Markdown({
+      headEnabled: false,
+      async markdownItSetup(md) {
+        // https://prismjs.com/
+        // md.use(MarkdownPrism)
+
+        md.use(await MarkdownItShiki({
+          langs: [
+            'vue',
+            'js',
+            'ts',
+            'styl',
+            'css',
+            'scss',
+            'sass',
+            'swift',
+            'objc',
+            'html',
+            'json',
+            'json5',
+            'console',
+            'md',
+            'xml',
+          ],
+          themes: {
+            light: 'github-light',
+            dark: 'github-dark',
+          },
+        }))
+      },
+    }),
   ],
   resolve: {
     alias: {

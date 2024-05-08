@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import './app-text.styl'
+import { OuiText } from '@/lib'
 </script>
 
 <template>
-  <div class="_text">
+  <OuiText>
     <h1>Text</h1>
 
     <h1 class="blog-post-title">
@@ -217,5 +217,5 @@ site.write(htmlPath, $.html())
     </ol>
     <p>Paragraph Paragraph Paragraph</p>
     <pre>print(123)</pre>
-  </div>
+  </OuiText>
 </template>
