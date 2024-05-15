@@ -35,7 +35,7 @@ async function doCancel() {
   <OuiModal title="Example Dialog Mode" @close="doCancel">
     <OuiText>
       <b>Lorem ipsum</b>, dolor sit amet consectetur adipisicing elit. Deserunt delectus illum tenetur sint atque unde, voluptates facere assumenda in repellendus! Cupiditate laborum recusandae facere dicta reiciendis odio enim dolorum illum!
-      <OuiInput v-model="item.name" title="Your Name" required />
+      <OuiInput v-model="item.name" title="Your Name" required class="_focus" />
       <OuiSelect v-model="item.gender" title="Your Gender" :options="['Female', 'Male', 'Other']" />
       <OuiStars v-model="item.rating" title="Did you like Oui so far?" />
     </OuiText>

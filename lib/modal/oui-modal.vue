@@ -20,7 +20,11 @@ withDefaults(defineProps<{
   size: 'normal',
 })
 
-const emit = defineEmits(['close', 'cancel'])
+const emit = defineEmits<{
+  close: []
+  cancel: []
+  open: []
+}>()
 
 const log: LoggerInterface = Logger('oui-modal')
 
@@ -61,14 +65,20 @@ function doCancel() {
 }
 
 function doClose() {
-  emit('close', false)
+  emit('close')
   _active.value = false
   // emit('update:modelValue', false)
 }
 
 function didOpen() {
-  if (root.value)
-    root.value.querySelector('.focus')?.focus()
+  if (root.value) {
+    const el = root.value.querySelector('._focus')
+      ?? root.value.querySelector('input,button,select')
+      ?? root.value
+    el.focus()
+  }
+
+  emit('open')
 
   // useEventListener(root.value, 'touchmove', (e: any) => e.preventDefault(), true)
 }

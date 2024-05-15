@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.18.4",
+  "version": "0.18.5",
   "author": {
     "email": "dirk.holtwick@gmail.com",
     "name": "Dirk Holtwick",
@@ -76,15 +76,15 @@
     "@floating-ui/vue": "^1.0.6",
     "@vueuse/core": "^10.9.0",
     "vue": "^3.4.27",
-    "zeed": "^0.20.6"
+    "zeed": "^0.20.7"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.16.4",
+    "@antfu/eslint-config": "^2.18.0",
     "@antfu/ni": "^0.21.12",
-    "@shikijs/markdown-it": "^1.4.0",
+    "@shikijs/markdown-it": "^1.5.2",
     "@tsconfig/node18": "^18.2.4",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.11",
+    "@types/node": "^20.12.12",
     "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.6",
@@ -98,6 +98,6 @@
     "vite": "^5.2.11",
     "vite-plugin-dts": "^3.9.1",
     "vitest": "^1.6.0",
-    "vue-tsc": "^2.0.16"
+    "vue-tsc": "^2.0.17"
   }
 }

@@ -3,12 +3,15 @@ import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 withDefaults(defineProps<{
   title?: string
   required?: boolean
   id?: string
-}>(), {
-})
+}>(), {})
 
 const model = defineModel<number>({ required: true })
 </script>

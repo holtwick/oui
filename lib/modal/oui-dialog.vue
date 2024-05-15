@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { sleep } from 'zeed'
-import { vAutofocus } from '../basic/directives'
+import { ref } from 'vue'
 import OuiButton from '../basic/oui-button.vue'
 import OuiInput from '../basic/oui-input.vue'
 import OuiText from '../basic/oui-text.vue'
@@ -35,10 +33,12 @@ function doCancel() {
 }
 
 const ok = ref()
-onMounted(async () => {
-  await sleep(500)
-  ok.value?.focus()
-})
+
+// TODO handled via CSS class `_focus`
+// onMounted(async () => {
+//   await sleep(500)
+//   ok.value?.focus()
+// })
 
 const fallbackTitles: Record<string, string> = {
   alert: 'Alert',
@@ -61,7 +61,7 @@ const fallbackTitles: Record<string, string> = {
       <OuiInput
         v-if="mode === 'prompt'"
         v-model="value"
-        v-autofocus
+        class="_focus"
         @keypress.enter="doConfirm"
       />
     </OuiText>
@@ -75,7 +75,7 @@ const fallbackTitles: Record<string, string> = {
       <OuiButton
         v-if="mode === 'confirm' || mode === 'prompt'"
         ref="ok"
-        autofocus
+        class="_focus"
         @click="doConfirm"
       >
         {{ confirm ?? 'OK' }}
