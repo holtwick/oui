@@ -46,7 +46,7 @@ if (window.visualViewport != null) {
     const visibleOffsetTop = `${window.visualViewport?.offsetTop.toString()}px`
     document.documentElement.style.height = visibleHeight
     log('new height', visibleHeight, window.visualViewport)
-    rootCss.setProperty('--visible-height', visibleHeight)
+    // rootCss.setProperty('--visible-height', visibleHeight)
     // rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
     // window.scrollTo(0, 0)
   }
@@ -96,7 +96,6 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
       <div
         v-if="_active"
         ref="root"
-
         :class="{
           [name]: true,
           [$attrs.class as string]: true,

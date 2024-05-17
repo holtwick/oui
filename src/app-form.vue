@@ -93,6 +93,9 @@ import { OuiClose } from '@/lib'
         </label>
       </div>
     </div>
+    <div class="_form_section">
+      <input type="text">
+    </div>
 
     <div class="_form_section _stack_x">
       <button disabled>

@@ -78,3 +78,23 @@
     }
   }
 }
+
+body {
+  -webkit-overflow-scrolling: none;
+  overscroll-behavior: none;
+}
+
+/* https://gist.github.com/kiding/72721a0553fa93198ae2bb6eefaa3299 */
+@keyframes blink_input_opacity_to_prevent_scrolling_when_focus {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+:focus {
+  animation: blink_input_opacity_to_prevent_scrolling_when_focus 0.01s;
+}
