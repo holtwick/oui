@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useLocalStorage } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
-import { debounce, last, sortedOrderby, throttle, useDefer } from 'zeed'
+import { last, sortedOrderby } from 'zeed'
 import pkg from '../package.json'
-import OuiText from '../lib/basic/oui-text.vue'
-import { OuiButton, OuiCheckbox, OuiNotice, OuiResizeable, OuiTooltipActivator } from '@/lib'
+import OuiMobile from './oui-mobile.vue'
+import { OuiButton, OuiCheckbox, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
 
 import './app.styl'
 
@@ -19,7 +19,7 @@ const docs = import.meta.glob('../**/*.md', {
 })
 
 const mode = useLocalStorage('oui.demo.mode', './app-text.vue')
-const dark = useLocalStorage('oui.demo.dark', true)
+const dark = useLocalStorage('oui.demo.dark', false)
 
 const showProperties = useLocalStorage('oui.demo.properties', true)
 const showUI = ref(true)
@@ -48,102 +48,6 @@ onMounted(() => {
 function toggleDark() {
   document.documentElement.classList.toggle('dark')
 }
-
-onMounted(() => {
-  const app = document.querySelector('#app') as HTMLElement
-
-  // app.addEventListener('touchstart', (ev: MouseEvent) => {
-  //   console.log('move', ev.target)
-  //   ev.preventDefault()
-  //   ev.stopPropagation()
-  // })
-
-  let elementFocus: HTMLElement | undefined
-
-  // const fn = debounce(() => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: 'instant',
-  //   })
-  //   elementFocus?.scrollIntoView({
-  //     behavior: 'instant',
-  //     block: 'center',
-  //     inline: 'center',
-  //   })
-  // }, { delay: 1000 })
-
-  // window.addEventListener('scroll', (ev) => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: 'instant',
-  //   })
-
-  //   console.log('scroll', ev.target)
-  //   fn()
-  // })
-
-  // app.addEventListener('focus', (ev: FocusEvent) => {
-  //   elementFocus = ev.target as any
-  //   setTimeout(() => {
-  //     elementFocus?.scrollIntoView({
-  //       behavior: 'instant',
-  //       block: 'center',
-  //       inline: 'center',
-  //     })
-  //   }, 1000)
-  // })
-
-  // app.addEventListener('blur', () => {
-  //   elementFocus = undefined
-  // })
-
-  //   console.log('focus', document.body.scrollTop, ev.target)
-  //   // ev.preventDefault()
-  //   // ev.stopPropagation()
-  //   // window.scrollTo(0, 0)
-  //   const el = ev.target as HTMLElement
-  //   window.setTimeout(() => {
-  //     console.log('scroll', window.scrollY, document.body.scrollTop)
-  //     window.scrollTo({
-  //       top: 0,
-  //       behavior: 'instant',
-  //     })
-  //     // document.body.scrollTop = 0
-  //     // window.scrollTo(0, 0)
-  //     window.setTimeout(() => {
-  //       el?.scrollIntoView({
-  //         behavior: 'instant',
-  //         block: 'center',
-  //         inline: 'center',
-  //       })
-  //     }, 500)
-  //     // document.querySelector('sandbox')?.scrollIntoView()
-  //   }, 1000)
-  // }, {
-  //   passive: false,
-  //   capture: true,
-  // })
-
-  // app.addEventListener('touchmove', (ev: MouseEvent) => {
-  //   console.log('move', ev.target)
-  //   ev.preventDefault()
-  //   ev.stopPropagation()
-  //   window.scrollTo(0, 0)
-  // }, {
-  //   passive: false,
-  //   capture: true,
-  // })
-
-  // app.addEventListener('touchmove', (ev: MouseEvent) => {
-  //   console.log('move', ev.target)
-  //   ev.preventDefault()
-  //   ev.stopPropagation()
-  //   window.scrollTo(0, 0)
-  // }, {
-  //   passive: false,
-  //   capture: true,
-  // })
-})
 </script>
 
 <template>
@@ -237,4 +141,5 @@ onMounted(() => {
     </div>
   </div>
   <OuiTooltipActivator />
+  <OuiMobile />
 </template>

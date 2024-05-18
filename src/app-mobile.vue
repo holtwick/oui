@@ -3,6 +3,7 @@ import { useEventListener } from '@vueuse/core'
 import { onMounted, reactive } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
+
 import './app-mobile.styl'
 
 const log: LoggerInterface = Logger('app-mobile')
@@ -45,14 +46,10 @@ if (window.visualViewport != null) {
     // window.scrollTo(0, 0)
   }
 
-  function scrollHandler() {
-    info.scrollY = window.screenY
-    resizeHandler()
-  }
-
   useEventListener(window.visualViewport, 'resize', resizeHandler)
-  useEventListener(window.visualViewport, 'scroll', scrollHandler)
+  useEventListener(window.visualViewport, 'scroll', resizeHandler)
 
+  // Intercept `touchmove` where no scrolling is planned in our UI
   useEventListener(window, 'touchmove', (ev) => {
     let el = ev.target as HTMLElement | undefined | null
     info.move = el?.outerHTML.slice(0, 20)
@@ -66,20 +63,8 @@ if (window.visualViewport != null) {
     ev.preventDefault()
     ev.stopPropagation()
   }, {
-    passive: false,
-    capture: true,
-  })
-
-  useEventListener(window, 'focus', (ev: FocusEvent) => {
-    const el = ev.target as any
-    info.focus = el?.outerHTML.slice(0, 20)
-    setTimeout(() => {
-      el?.scrollIntoView({
-        behavior: 'instant',
-        block: 'center',
-        inline: 'center',
-      })
-    }, 1000)
+    passive: false, // make sure, we get those events
+    capture: true, // capture them as early as possible
   })
 
   onMounted(resizeHandler)
