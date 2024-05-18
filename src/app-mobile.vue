@@ -1,14 +1,13 @@
 <script lang="ts" setup>
+import { useEventListener } from '@vueuse/core'
+import { onMounted, reactive } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
-import { onMounted, reactive, ref } from 'vue'
-import { useEventListener } from '@vueuse/core'
-import { vNoSelection } from '../lib/basic'
 import './app-mobile.styl'
 
 const log: LoggerInterface = Logger('app-mobile')
 
-const info = reactive<any>({ })
+const info = reactive<any>({})
 
 if (window.visualViewport != null) {
   function resizeHandler() {
@@ -21,6 +20,11 @@ if (window.visualViewport != null) {
     // Adjust the height!
     document.documentElement.style.height = visibleHeight
 
+    if (document.activeElement?.matches('input,textarea,[contenteditable]'))
+      document.documentElement.classList.add('virtual-keyboard')
+    else
+      document.documentElement.classList.remove('virtual-keyboard')
+
     setTimeout(() => {
       const el = document.activeElement
       info.focus = el?.outerHTML.slice(0, 20)
@@ -29,7 +33,11 @@ if (window.visualViewport != null) {
         block: 'center',
         inline: 'center',
       })
-    }, 400)
+    },
+    // 400ms takes the virtual keyboard to show up;
+    // other values seem to have an negative effect on the layout
+    400,
+    )
 
     log('new height', visibleHeight, window.visualViewport)
     // rootCss.setProperty('--visible-height', visibleHeight)
@@ -89,7 +97,20 @@ if (window.visualViewport != null) {
           <li>
             <input type="text" value="Hallo">
             <!-- <OuiInput v-model="text" title="fasdfd" /> -->
-            {{ i }}  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus at voluptatem, optio nihil facere dolorum, porro excepturi ducimus cupiditate, odio officiis laboriosam exercitationem tempore voluptas repellat corporis ex accusamus iste!
+            {{ i }} Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus at voluptatem, optio nihil
+            facere dolorum, porro excepturi ducimus cupiditate, odio officiis laboriosam exercitationem tempore voluptas
+            repellat corporis ex accusamus iste!
+            <select>
+              <option value="1">
+                1
+              </option>
+              <option value="2">
+                2
+              </option>
+              <option value="3">
+                3
+              </option>
+            </select>
           </li>
         </template>
       </ol>
