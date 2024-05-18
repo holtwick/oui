@@ -1,0 +1,62 @@
+@require "../stylus/index.styl";
+
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+#app {
+  use: stack-y;
+  height: 100%;
+}
+
+.app-mobile {
+  use: stack-y;
+  height: 100%;
+  background: yellow;
+  // use: safe-margin;
+}
+
+main {
+  use: grow;
+  use: scroll;
+}
+
+header {
+  // border: 1px solid red;
+  background: lime;
+  padding-top: -safe-top;
+  padding-left: -safe-left;
+  padding-right: -safe-right;
+}
+
+footer {
+  // border: 1px solid red;
+  background: lime;
+  padding-bottom: -safe-bottom;
+  padding-left: -safe-left;
+  padding-right: -safe-right;
+}
+
+body {
+  /* Avoids overflow */
+  -webkit-overflow-scrolling: none;
+  overscroll-behavior: none;
+}
+
+@keyframes blink_input_opacity_to_prevent_scrolling_when_focus {
+  /* https://gist.github.com/kiding/72721a0553fa93198ae2bb6eefaa3299 */
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+input:focus, textarea:focus, [contenteditable]:focus {
+  /* Avoids scroll issues on keyboard showup */
+  animation: blink_input_opacity_to_prevent_scrolling_when_focus 0.01s;
+}
