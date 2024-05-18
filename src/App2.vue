@@ -6,6 +6,8 @@ import pkg from '../package.json'
 import OuiText from '../lib/basic/oui-text.vue'
 import { OuiButton, OuiCheckbox, OuiNotice, OuiResizeable, OuiTooltipActivator } from '@/lib'
 
+import './index.styl'
+
 const modes = import.meta.glob('../**/(app-*|*.demo).vue', {
   import: 'default',
   eager: true,
