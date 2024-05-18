@@ -21,6 +21,16 @@ if (window.visualViewport != null) {
     // Adjust the height!
     document.documentElement.style.height = visibleHeight
 
+    setTimeout(() => {
+      const el = document.activeElement
+      info.focus = el?.outerHTML.slice(0, 20)
+      el?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      })
+    }, 400)
+
     log('new height', visibleHeight, window.visualViewport)
     // rootCss.setProperty('--visible-height', visibleHeight)
     // rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
@@ -52,15 +62,17 @@ if (window.visualViewport != null) {
     capture: true,
   })
 
-  // app.addEventListener('touchmove', (ev: MouseEvent) => {
-  //   console.log('move', ev.target)
-  //   ev.preventDefault()
-  //   ev.stopPropagation()
-  //   window.scrollTo(0, 0)
-  // }, {
-  //   passive: false,
-  //   capture: true,
-  // })
+  useEventListener(window, 'focus', (ev: FocusEvent) => {
+    const el = ev.target as any
+    info.focus = el?.outerHTML.slice(0, 20)
+    setTimeout(() => {
+      el?.scrollIntoView({
+        behavior: 'instant',
+        block: 'center',
+        inline: 'center',
+      })
+    }, 1000)
+  })
 
   onMounted(resizeHandler)
 }
@@ -69,7 +81,7 @@ if (window.visualViewport != null) {
 <template>
   <div class="app-mobile">
     <header>
-      Header {{ info }}
+      Header
     </header>
     <main data-scroll="true">
       <ol>
