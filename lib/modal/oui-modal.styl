@@ -1,5 +1,9 @@
 @require "../../stylus/index.styl";
 
+body {
+  position: relative;
+}
+
 .oui-modal {
   --modal-separator: transparent;
   --modal-bg: var(--dialog-bg, var(--s2-bg));
@@ -9,10 +13,10 @@
   justify-content: center;
   overflow: hidden;
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  top: 0;
   will-change: transform;
   z-index: -z-index-overlay;
   background: var(--dialog-backdrop, rgba(0, 0, 0, 0.16));
@@ -26,8 +30,8 @@
   // Background overlay
   ._modal_overlay {
     display: flex;
-    position: absolute;
     overflow: hidden;
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
@@ -38,8 +42,8 @@
     z-index: -z-index-modal;
     will-change: transform;
     opacity: 1;
+    overflow: hidden;
     use: stack-y;
-    // z-index: -z-index-modal;
     position: relative;
     box-shadow: lg;
     background: var(--modal-bg, -gray-50);
@@ -52,11 +56,12 @@
       :has(._modal_sheet) & {
         border: inherit;
         border-radius: inherit;
-        max-height: inherit;
         position: absolute;
+        top: 0;
+        bottom: 0;
+        max-height: inherit;
         width: 100%;
-        top: 44px;
-        height: calc(100% - 44px);
+        margin-top: 44;
         border-top-left-radius: var(--dialog-radius, 8px);
         border-top-right-radius: var(--dialog-radius, 8px);
         padding-bottom: -safe-bottom;
@@ -141,12 +146,12 @@
 
   &-transition {
     &-enter-active, &-leave-active {
-      transition-property: opacity, transform, -webkit-backdrop-filter, backdrop-filter;
+      transition-property: opacity, padding-bottom, transform, -webkit-backdrop-filter, backdrop-filter;
       transition-duration: var(--modal-speed);
       transition-timing-function: ease;
 
       ._modal_container {
-        transition-property: opacity, transform, -webkit-backdrop-filter, backdrop-filter;
+        transition-property: opacity, padding-bottom, transform, -webkit-backdrop-filter, backdrop-filter;
         transition-duration: var(--modal-speed);
         transition-timing-function: ease;
         transform: translate3d(0, 0, 0);
