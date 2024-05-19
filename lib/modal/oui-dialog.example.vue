@@ -16,6 +16,8 @@ const item = reactive({
 
 const wait = ref(false)
 
+const active = ref(true)
+
 async function doConfirm() {
   wait.value = true
   await nextTick()
@@ -24,15 +26,17 @@ async function doConfirm() {
   await sleep(1000)
 
   props.done?.(cloneObject(item))
+  active.value = false
 }
 
 async function doCancel() {
   props.done?.(undefined)
+  active.value = false
 }
 </script>
 
 <template>
-  <OuiModal title="Example Dialog Mode" @close="doCancel">
+  <OuiModal v-model="active" title="Example Dialog Mode" @close="doCancel">
     <OuiText>
       <b>Lorem ipsum</b>, dolor sit amet consectetur adipisicing elit. Deserunt delectus illum tenetur sint atque unde, voluptates facere assumenda in repellendus! Cupiditate laborum recusandae facere dicta reiciendis odio enim dolorum illum!
       <OuiInput v-model="item.name" title="Your Name" required class="_focus" />

@@ -34,22 +34,6 @@ onKeyStroke('Escape', (e) => {
   }
 })
 
-// const rootCss = document.documentElement.style
-// if (window.visualViewport != null) {
-//   function resizeHandler() {
-//     const visibleHeight = `${window.visualViewport?.height.toString()}px`
-//     const visibleOffsetTop = `${window.visualViewport?.offsetTop.toString()}px`
-//     document.documentElement.style.height = visibleHeight
-//     log('new height', visibleHeight, window.visualViewport)
-//     // rootCss.setProperty('--visible-height', visibleHeight)
-//     // rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
-//     // window.scrollTo(0, 0)
-//   }
-//   useEventListener(window.visualViewport, 'resize', resizeHandler)
-//   useEventListener(window.visualViewport, 'scroll', resizeHandler)
-//   onMounted(resizeHandler)
-// }
-
 const root = ref()
 
 function doCancel() {
@@ -72,8 +56,6 @@ function didOpen() {
   }
 
   emit('open')
-
-  // useEventListener(root.value, 'touchmove', (e: any) => e.preventDefault(), true)
 }
 
 const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
@@ -101,11 +83,11 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
         role="dialog"
       >
         <div
-          class="oui-modal-overlay _modal_overlay"
+          class="_modal_overlay"
           aria-label="Close"
           @click="doCancel"
         />
-        <div v-focustrap class="oui-modal-container _modal_container">
+        <div v-focustrap class="_modal_container">
           <button
             v-if="close"
             tooltip="Close"

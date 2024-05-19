@@ -5,6 +5,7 @@ import { createApp } from 'vue'
 export function mountComponentAsApp<T>(
   component: Component,
   props: Record<string, any>,
+  delay?: number,
 ) {
   let container: HTMLElement | undefined
   let app: App | undefined
@@ -13,11 +14,18 @@ export function mountComponentAsApp<T>(
 
   /** Call this to dispose everything */
   const done = (value?: any) => {
-    app?.unmount()
-    container?.remove()
+    function remove() {
+      app?.unmount()
+      app = undefined
+      container?.remove()
+      container = undefined
+    }
+    if (delay != null && delay > 0)
+      setTimeout(remove, delay)
+    else
+      remove()
+
     resolveFn?.(value)
-    app = undefined
-    container = undefined
     resolveFn = undefined
   }
 

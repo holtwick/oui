@@ -8,7 +8,7 @@ export function useDialog<T extends Component>(component?: T) {
   let cancel: any
 
   async function showDialog<T>(props: any) {
-    const dialogApp = mountComponentAsApp<T>(component ?? OuiDialog, props)
+    const dialogApp = mountComponentAsApp<T>(component ?? OuiDialog, props, 200)
     cancel = dialogApp.cancel
 
     // This will fix focussing on iOS, because it only works onClick
@@ -19,7 +19,9 @@ export function useDialog<T extends Component>(component?: T) {
     if (el)
       el.focus()
 
-    return dialogApp.awaitDone
+    const result = dialogApp.awaitDone
+
+    return result
   }
 
   const dispose = useDispose()
@@ -58,7 +60,6 @@ export function useDialog<T extends Component>(component?: T) {
     },
     async open(this: void, props?: any) {
       return await showDialog({
-        mode: 'dialog',
         ...props,
       })
     },
