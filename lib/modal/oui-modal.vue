@@ -34,22 +34,6 @@ onKeyStroke('Escape', (e) => {
   }
 })
 
-// const rootCss = document.documentElement.style
-// if (window.visualViewport != null) {
-//   function resizeHandler() {
-//     const visibleHeight = `${window.visualViewport?.height.toString()}px`
-//     const visibleOffsetTop = `${window.visualViewport?.offsetTop.toString()}px`
-//     document.documentElement.style.height = visibleHeight
-//     log('new height', visibleHeight, window.visualViewport)
-//     // rootCss.setProperty('--visible-height', visibleHeight)
-//     // rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
-//     // window.scrollTo(0, 0)
-//   }
-//   useEventListener(window.visualViewport, 'resize', resizeHandler)
-//   useEventListener(window.visualViewport, 'scroll', resizeHandler)
-//   onMounted(resizeHandler)
-// }
-
 const root = ref()
 
 function doCancel() {

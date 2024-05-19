@@ -7,7 +7,7 @@ body {
 .oui-modal {
   --modal-separator: transparent;
   --modal-bg: var(--dialog-bg, var(--s2-bg));
-  --modal-speed: 2000ms;
+  --modal-speed: 200ms;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +50,6 @@ body {
     border: 1px solid var(--modal-separator, -gray-200);
     border-radius: var(--dialog-radius, 8px);
     max-height: 75vh;
-    -webkit-transform-style: preserve-3d;
 
     @media -media-mobile {
       :has(._modal_sheet) & {

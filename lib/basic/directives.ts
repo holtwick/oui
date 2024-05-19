@@ -49,7 +49,7 @@ export const vNoSelection = {
   },
 }
 
-/** Vue3 Directive! Set focus onMounted  */
+/** Vue3 Directive! Set focus onMounted. Use with care, causes issues for transitions.  */
 export const vAutofocus = {
   mounted: (el: HTMLElement, _binding: DirectiveBinding) => {
     log('focus', el)
