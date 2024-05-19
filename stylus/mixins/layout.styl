@@ -36,6 +36,10 @@ stack-x(space = 0) {
   if space != 0 {
     gap: space;
   }
+
+  :where(& > *) {
+    flex-shrink: 0;
+  }
 }
 
 stack-y(space = 0) {
@@ -44,6 +48,10 @@ stack-y(space = 0) {
 
   if space != 0 {
     gap: space;
+  }
+
+  :where(& > *) {
+    flex-shrink: 0;
   }
 }
 
