@@ -1,8 +1,12 @@
 <script lang="ts" setup>
 import { useEventListener } from '@vueuse/core'
 import { onMounted } from 'vue'
+import type { LoggerInterface } from 'zeed'
+import { Logger } from 'zeed'
 
 import './oui-mobile.styl'
+
+const log: LoggerInterface = Logger('oui-mobile')
 
 if (window.visualViewport != null) {
   let timer: any
@@ -23,14 +27,15 @@ if (window.visualViewport != null) {
     // With some delayscroll active/focussed element into view
     clearTimeout(timer)
     timer = setTimeout(() => {
-      // window.scrollTo(0, 0)
-
       // todo not always "smart"
-      // document.activeElement?.scrollIntoView({
-      //   behavior: 'smooth',
-      //   block: 'center',
-      //   inline: 'center',
-      // })
+      document.activeElement?.scrollIntoView({
+        // behavior: 'smooth',
+        behavior: 'instant',
+        block: 'center',
+        inline: 'center',
+      })
+
+      window.scrollTo(0, 0)
     },
     // 400ms takes the virtual keyboard to show up;
     // other values seem to have an negative effect on the layout
@@ -54,9 +59,11 @@ if (window.visualViewport != null) {
         return
       el = el.parentElement
     }
+
+    log('prevent scroll')
     // If not avoid scrolling
     ev.preventDefault()
-    ev.stopPropagation()
+    // ev.stopPropagation()
   }, {
     // make sure, we get those events
     passive: false,
