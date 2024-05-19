@@ -10,6 +10,15 @@ export function useDialog<T extends Component>(component?: T) {
   async function showDialog<T>(props: any) {
     const dialogApp = mountComponentAsApp<T>(component ?? OuiDialog, props)
     cancel = dialogApp.cancel
+
+    // This will fix focussing on iOS, because it only works onClick
+    // A workaround would also be to focus a hidden input field on click
+    // and then focus the right one, because switching focus fields
+    // also works programmatically. It might also work with setTimeout...
+    const el = document.querySelector('._focus') as HTMLElement
+    if (el)
+      el.focus()
+
     return dialogApp.awaitDone
   }
 

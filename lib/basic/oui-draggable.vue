@@ -42,7 +42,7 @@ function translateMouseEvent(e: MouseEvent): OuiDraggableEvent {
     moveX,
     moveY,
   }
-  // log('event', info)
+  log('event', info)
   return info
 }
 
@@ -53,6 +53,7 @@ function cancelEvent(e: MouseEvent) {
 }
 
 function onMouseDown(e: MouseEvent) {
+  log('down')
   const { pageX, pageY } = e
   dragging = true
   startX = pageX
@@ -65,6 +66,7 @@ function onMouseDown(e: MouseEvent) {
 }
 
 function onMouseMove(e: MouseEvent) {
+  log('move')
   if (!dragging)
     return
   emit('move', translateMouseEvent(e))
@@ -72,6 +74,7 @@ function onMouseMove(e: MouseEvent) {
 }
 
 function onMouseUp(e: MouseEvent) {
+  log('up')
   dragging = false
   emit('moveEnd', translateMouseEvent(e))
   unbindEvents()

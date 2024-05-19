@@ -31,7 +31,7 @@ const date = computed({
     return date.toISOString().slice(0, 16)
   },
   set(value) {
-    const [y, m, d, hh, mm] = value.replace(/[^\d]/gim, ' ').split(' ')
+    const [y, m, d, hh, mm] = value.replace(/\D/g, ' ').split(' ')
     const date = new Date()
     date.setFullYear(+y)
     date.setMonth(+m - 1)
