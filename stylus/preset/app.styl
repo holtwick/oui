@@ -36,8 +36,9 @@ oui-app() {
     }
 
     // assume this being an app container, usually #app
-    .app {
-      use: stack-x;
+    #app, .app {
+      use: stack-y;
+      height: 100%;
     }
 
     /* :not(button, input, optgroup, select, textarea, [contenteditable], [contenteditable] *, .ProseMirror *, .selectable *, .selectable) { */

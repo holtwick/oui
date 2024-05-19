@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import './app-utopia-grid.styl'
+import './css-utopia-grid.styl'
 </script>
 
 <template>

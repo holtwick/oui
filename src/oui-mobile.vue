@@ -23,11 +23,14 @@ if (window.visualViewport != null) {
     // With some delayscroll active/focussed element into view
     clearTimeout(timer)
     timer = setTimeout(() => {
-      document.activeElement?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center',
-      })
+      // window.scrollTo(0, 0)
+
+      // todo not always "smart"
+      // document.activeElement?.scrollIntoView({
+      //   behavior: 'smooth',
+      //   block: 'center',
+      //   inline: 'center',
+      // })
     },
     // 400ms takes the virtual keyboard to show up;
     // other values seem to have an negative effect on the layout

@@ -8,7 +8,7 @@ import { OuiButton, OuiCheckbox, OuiNotice, OuiResizeable, OuiText, OuiTooltipAc
 
 import './app.styl'
 
-const modes = import.meta.glob('../**/(app-*|*.demo).vue', {
+const modes = import.meta.glob('../**/*.demo.vue', {
   import: 'default',
   eager: true,
 })
@@ -18,7 +18,7 @@ const docs = import.meta.glob('../**/*.md', {
   eager: true,
 })
 
-const mode = useLocalStorage('oui.demo.mode', './app-text.vue')
+const mode = useLocalStorage('oui.demo.mode', '')
 const dark = useLocalStorage('oui.demo.dark', false)
 
 const showProperties = useLocalStorage('oui.demo.properties', true)
