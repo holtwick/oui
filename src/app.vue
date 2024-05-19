@@ -3,8 +3,7 @@ import { useLocalStorage } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { last, sortedOrderby } from 'zeed'
 import pkg from '../package.json'
-import OuiMobile from './oui-mobile.vue'
-import { OuiButton, OuiCheckbox, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
+import { OuiButton, OuiCheckbox, OuiMobileActivator, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
 
 import './app.styl'
 
@@ -141,5 +140,5 @@ function toggleDark() {
     </div>
   </div>
   <OuiTooltipActivator />
-  <OuiMobile />
+  <OuiMobileActivator />
 </template>
