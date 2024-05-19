@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import OuiMobile from './oui-mobile.vue'
+import { OuiMobileActivator } from '@/lib'
+
 import './app-mobile-using-oui.styl'
 </script>
 
 <template>
-  <OuiMobile />
+  <OuiMobileActivator />
   <div class="app-mobile">
     <header>
       Header
