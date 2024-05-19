@@ -1,11 +1,16 @@
 @require "../stylus/index.styl";
 
-.oui-mobile {
-  html {
-    height: 100%;
+html.oui-mobile {
+  height: 100%;
+
+  &, body {
+    /* This seems to fix overscrolling */
+    /* https://www.bram.us/2016/05/02/prevent-overscroll-bounce-in-ios-mobilesafari-pure-css/ */
+    position: fixed;
+    overflow: hidden;
   }
 
-  body, html {
+  body {
     /* https://forums.developer.apple.com/forums/thread/48088 */
     transition: height 400ms cubic-bezier(0.38, 0.7, 0.125, 1);
   }

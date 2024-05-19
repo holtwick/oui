@@ -31,7 +31,7 @@ oui-app() {
 
     body {
       // overflow hidden
-      padding: -safe-top -safe-right -safe-bottom -safe-left;
+      // padding: -safe-top -safe-right -safe-bottom -safe-left;
       font-family: var(--font-sans);
     }
 
@@ -59,18 +59,18 @@ oui-app() {
 oui-app-full() {
   if __oui_once("app-full") {
     oui-app();
-
-    body {
-      overflow: hidden;
-    }
-
-    .app, #app {
-      position: fixed;
-      // top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 100%;
-    }
+    /*
+        html, body {
+          overflow: hidden;
+        }
+    
+    
+        .app, #app {      
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        } */
   }
 }

@@ -55,8 +55,15 @@ if (window.visualViewport != null) {
     info.move = el?.outerHTML.slice(0, 20)
 
     while (el != null) {
-      if (el.dataset.scroll)
+      // log('el', el.dataset.scroll)
+      // const scroll = el.dataset.scroll
+      // if (scroll === 'true')
+      //   return
+
+      const { overflow } = window.getComputedStyle(el)
+      if (overflow.split(' ').some(o => o === 'auto' || o === 'scroll'))
         return
+
       el = el.parentElement
     }
 
