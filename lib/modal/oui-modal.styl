@@ -1,67 +1,52 @@
 @require "../../stylus/index.styl";
 
-body {
-  position: relative;
-}
-
 .oui-modal {
   --modal-separator: transparent;
   --modal-bg: var(--dialog-bg, var(--s2-bg));
+  --modal-speed: 2000ms;
+  display: flex;
   align-items: center;
-  display: none;
   justify-content: center;
   overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
+  will-change: transform;
+  z-index: -z-index-overlay;
+  background: var(--dialog-backdrop, rgba(0, 0, 0, 0.16));
+  cursor: default;
+  opacity: 1;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 
-  @media -media-desktop {
-    padding: 8;
-  }
+  // clip-path: rect(0 0 100% 100%);
 
-  @media -media-mobile {
-    :has(._modal_sheet) & {
-      padding: 0;
-    }
-  }
-
-  &:target, &._active {
+  // Background overlay
+  ._modal_overlay {
     display: flex;
-    z-index: -z-index-overlay;
-
-    // Background overlay
-    ._modal_overlay {
-      background: var(--dialog-backdrop, rgba(0, 0, 0, 0.16));
-      -webkit-backdrop-filter: blur(4px);
-      backdrop-filter: blur(4px);
-      // background: var(--dialog-backdrop, rgba(0, 0, 0, 0.75));
-      cursor: default;
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      top: 0;
-    }
-
-    ._modal_container {
-      animation: slide-down 0.2s ease 1;
-      z-index: -z-index-modal;
-    }
+    position: absolute;
+    overflow: hidden;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
   }
 
   ._modal_container {
-    use: stack-y;
-    animation: slide-down 0.2s ease 1;
     z-index: -z-index-modal;
+    will-change: transform;
+    opacity: 1;
+    use: stack-y;
+    // z-index: -z-index-modal;
     position: relative;
     box-shadow: lg;
     background: var(--modal-bg, -gray-50);
     border: 1px solid var(--modal-separator, -gray-200);
     border-radius: var(--dialog-radius, 8px);
     max-height: 75vh;
+    -webkit-transform-style: preserve-3d;
 
     @media -media-mobile {
       :has(._modal_sheet) & {
@@ -131,7 +116,6 @@ body {
     padding-x: 16;
     position: relative;
     display: block;
-    // border: 2px solid red;
   }
 
   ._modal_header + ._modal_body {
@@ -157,20 +141,26 @@ body {
 
   &-transition {
     &-enter-active, &-leave-active {
-      transition: all 200ms ease;
-      opacity: 1;
+      transition-property: opacity, transform, -webkit-backdrop-filter, backdrop-filter;
+      transition-duration: var(--modal-speed);
+      transition-timing-function: ease;
 
       ._modal_container {
-        transition: all 200ms ease;
+        transition-property: opacity, transform, -webkit-backdrop-filter, backdrop-filter;
+        transition-duration: var(--modal-speed);
+        transition-timing-function: ease;
         transform: translate3d(0, 0, 0);
       }
     }
 
     &-enter-from, &-leave-to {
       opacity: 0;
+      -webkit-backdrop-filter: blur(0);
+      backdrop-filter: blur(0);
 
       ._modal_container {
-        transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 50%, 0);
+        opacity: 0;
       }
     }
   }

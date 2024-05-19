@@ -101,11 +101,11 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
         role="dialog"
       >
         <div
-          class="oui-modal-overlay _modal_overlay"
+          class="_modal_overlay"
           aria-label="Close"
           @click="doCancel"
         />
-        <div v-focustrap class="oui-modal-container _modal_container">
+        <div v-focustrap class="_modal_container">
           <button
             v-if="close"
             tooltip="Close"
