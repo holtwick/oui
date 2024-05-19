@@ -1,0 +1,50 @@
+@require "../stylus/index.styl";
+@require "../stylus/theme.styl";
+
+:root {
+  --footer-bg: var(--t3-bg);
+}
+
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background: var(--footer-bg);
+}
+
+#app {
+  use: stack-y;
+  height: 100%;
+}
+
+.app-mobile {
+  use: stack-y;
+  height: 100%;
+  background: yellow;
+  // use: safe-margin;
+}
+
+main {
+  use: grow;
+  use: scroll;
+}
+
+header, footer {
+  min-height: 44;
+  background: var(--footer-bg);
+  padding-left: -safe-left;
+  padding-right: -safe-right;
+}
+
+header {
+  padding-top: -safe-top;
+}
+
+footer {
+  padding-bottom: -safe-bottom;
+
+  .virtual-keyboard & {
+    background: lime;
+    padding-bottom: 0;
+  }
+}

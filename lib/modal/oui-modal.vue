@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import { onKeyStroke, useEventListener } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
+import { onKeyStroke } from '@vueuse/core'
+import { ref } from 'vue'
 import { OuiClose } from '../basic'
 import { vFocustrap } from './oui-modal.focustrap'
 
@@ -26,8 +24,6 @@ const emit = defineEmits<{
   open: []
 }>()
 
-const log: LoggerInterface = Logger('oui-modal')
-
 const _active = defineModel({ default: true })
 
 onKeyStroke('Escape', (e) => {
@@ -38,24 +34,21 @@ onKeyStroke('Escape', (e) => {
   }
 })
 
-const rootCss = document.documentElement.style
-
-if (window.visualViewport != null) {
-  function resizeHandler() {
-    const visibleHeight = `${window.visualViewport?.height.toString()}px`
-    const visibleOffsetTop = `${window.visualViewport?.offsetTop.toString()}px`
-    document.documentElement.style.height = visibleHeight
-    log('new height', visibleHeight, window.visualViewport)
-    // rootCss.setProperty('--visible-height', visibleHeight)
-    // rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
-    // window.scrollTo(0, 0)
-  }
-
-  useEventListener(window.visualViewport, 'resize', resizeHandler)
-  useEventListener(window.visualViewport, 'scroll', resizeHandler)
-
-  onMounted(resizeHandler)
-}
+// const rootCss = document.documentElement.style
+// if (window.visualViewport != null) {
+//   function resizeHandler() {
+//     const visibleHeight = `${window.visualViewport?.height.toString()}px`
+//     const visibleOffsetTop = `${window.visualViewport?.offsetTop.toString()}px`
+//     document.documentElement.style.height = visibleHeight
+//     log('new height', visibleHeight, window.visualViewport)
+//     // rootCss.setProperty('--visible-height', visibleHeight)
+//     // rootCss.setProperty('--visible-offset-top', visibleOffsetTop)
+//     // window.scrollTo(0, 0)
+//   }
+//   useEventListener(window.visualViewport, 'resize', resizeHandler)
+//   useEventListener(window.visualViewport, 'scroll', resizeHandler)
+//   onMounted(resizeHandler)
+// }
 
 const root = ref()
 

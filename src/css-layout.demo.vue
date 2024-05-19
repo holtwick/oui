@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { OuiClose } from '@/lib'
 
-import './app-layout.styl'
+import './css-layout.styl'
 </script>
 
 <template>

@@ -62,7 +62,7 @@
     "build": "vite build",
     "build:demo": "BUILD_DEMO=1 vite build",
     "check": "vue-tsc --noEmit",
-    "dev": "vite",
+    "dev": "vite --host",
     "generate-pwa-assets": "pwa-assets-generator",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -97,6 +97,7 @@
     "unplugin-vue-markdown": "^0.26.2",
     "vite": "^5.2.11",
     "vite-plugin-dts": "^3.9.1",
+    "vite-plugin-qrcode": "^0.2.3",
     "vitest": "^1.6.0",
     "vue-tsc": "^2.0.19"
   }
