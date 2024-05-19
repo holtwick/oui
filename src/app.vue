@@ -3,10 +3,12 @@ import { useLocalStorage } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { last, sortedOrderby } from 'zeed'
 import pkg from '../package.json'
-import OuiText from '../lib/basic/oui-text.vue'
-import { OuiButton, OuiCheckbox, OuiNotice, OuiResizeable, OuiTooltipActivator } from '@/lib'
+import OuiMobile from './oui-mobile.vue'
+import { OuiButton, OuiCheckbox, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
 
-const modes = import.meta.glob('../**/(app-*|*.demo).vue', {
+import './app.styl'
+
+const modes = import.meta.glob('../**/*.demo.vue', {
   import: 'default',
   eager: true,
 })
@@ -16,8 +18,8 @@ const docs = import.meta.glob('../**/*.md', {
   eager: true,
 })
 
-const mode = useLocalStorage('oui.demo.mode', './app-text.vue')
-const dark = useLocalStorage('oui.demo.dark', true)
+const mode = useLocalStorage('oui.demo.mode', '')
+const dark = useLocalStorage('oui.demo.dark', false)
 
 const showProperties = useLocalStorage('oui.demo.properties', true)
 const showUI = ref(true)
@@ -25,7 +27,7 @@ const showUI = ref(true)
 const allModes = computed(() => {
   return sortedOrderby(Object.keys(modes).map(value => ({
     value,
-    title: last(value.split('/'))?.replace(/\.(demo\.vue|vue)/gim, ''),
+    title: last(value.split('/'))?.replace(/\.(demo\.vue|vue)/gi, ''),
   })), 'title')
 })
 
@@ -82,7 +84,7 @@ function toggleDark() {
       </OuiButton>
     </div>
     <div class="oui-demo-body">
-      <div class="oui-demo-sandbox" :class="{ _sidebyside: dark }">
+      <div id="sandbox" class="oui-demo-sandbox" :class="{ _sidebyside: dark }">
         <template v-if="active && comp">
           <div>
             <component :is="comp" />
@@ -139,4 +141,5 @@ function toggleDark() {
     </div>
   </div>
   <OuiTooltipActivator />
+  <OuiMobile />
 </template>

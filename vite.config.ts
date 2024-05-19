@@ -6,9 +6,12 @@ import Vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
 import MarkdownItShiki from '@shikijs/markdown-it'
 import Markdown from 'unplugin-vue-markdown/vite'
+import { qrcode } from 'vite-plugin-qrcode'
 
 const config: UserConfig = {
   plugins: [
+    qrcode(),
+
     Vue({
       include: [/\.vue$/, /\.md$/],
     }),

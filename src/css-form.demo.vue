@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import './app-form.styl'
 import { OuiClose } from '@/lib'
+
+import './css-form.styl'
 </script>
 
 <template>
@@ -92,6 +93,9 @@ import { OuiClose } from '@/lib'
           Three
         </label>
       </div>
+    </div>
+    <div class="_form_section">
+      <input type="text">
     </div>
 
     <div class="_form_section _stack_x">

@@ -2,17 +2,18 @@
 
 .oui-notice {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   use: center;
   text-align: center;
-  height: 100%;
   color: var(--s2-fg);
 
   &-body {
     use: stack-y;
     gap: 16;
-    max-width: min(40ch, 80%);
+    max-width: unquote("min(40ch, 80%)");
   }
 
   svg {
