@@ -18,11 +18,16 @@ const props = defineProps<{
 
 const value = ref(String(props.defaultValue ?? ''))
 
+const ok = ref()
+
+const active = ref(true)
+
 function doConfirm() {
   if (props.mode === 'prompt')
     props.done?.(value.value)
   else
     props.done?.(true)
+  active.value = false
 }
 
 function doCancel() {
@@ -30,15 +35,8 @@ function doCancel() {
     props.done?.(null)
   else
     props.done?.(false)
+  active.value = false
 }
-
-const ok = ref()
-
-// TODO handled via CSS class `_focus`
-// onMounted(async () => {
-//   await sleep(500)
-//   ok.value?.focus()
-// })
 
 const fallbackTitles: Record<string, string> = {
   alert: 'Alert',
@@ -49,6 +47,7 @@ const fallbackTitles: Record<string, string> = {
 
 <template>
   <OuiModal
+    v-model="active"
     :title="title ?? fallbackTitles[mode]"
     :no-sheet="mode !== 'dialog'"
     size="small"

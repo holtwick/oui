@@ -72,8 +72,6 @@ function didOpen() {
   }
 
   emit('open')
-
-  // useEventListener(root.value, 'touchmove', (e: any) => e.preventDefault(), true)
 }
 
 const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])

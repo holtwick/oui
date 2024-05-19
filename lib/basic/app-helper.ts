@@ -16,7 +16,9 @@ export function mountComponentAsApp<T>(
   const done = (value?: any) => {
     function remove() {
       app?.unmount()
+      app = undefined
       container?.remove()
+      container = undefined
     }
     if (delay != null && delay > 0)
       setTimeout(remove, delay)
@@ -24,8 +26,6 @@ export function mountComponentAsApp<T>(
       remove()
 
     resolveFn?.(value)
-    app = undefined
-    container = undefined
     resolveFn = undefined
   }
 
