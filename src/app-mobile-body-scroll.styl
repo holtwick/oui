@@ -1,0 +1,21 @@
+@require "../stylus/default-page.styl";
+@require "../stylus/theme.styl";
+
+:root {
+  --footer-bg: var(--t3-bg);
+}
+
+body, html {
+}
+
+#app {
+}
+
+/* https://bugs.webkit.org/show_bug.cgi?id=176454#c85 */
+html {
+  overscroll-behavior: none;
+}
+
+body {
+  overflow-y: scroll;
+}
