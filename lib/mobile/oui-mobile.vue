@@ -8,13 +8,20 @@ import './oui-mobile.styl'
 
 const log: LoggerInterface = Logger('oui-mobile')
 
+/**
+ * 400ms takes the virtual keyboard to show up,
+ * other values seem to have an negative effect on the layout
+ */
+const keyboardAnimationDuration = 400
+
 if (window.visualViewport != null) {
   let timer: any
   let virtualKeyboardActive = false
 
   function resizeHandler() {
     // Adjust the height!
-    document.documentElement.style.height = `${window.visualViewport?.height.toString()}px`
+    // document.documentElement.style.height = `${window.visualViewport?.height.toString()}px`
+    document.documentElement.style.setProperty('--visible-height', `${window.visualViewport?.height.toString()}px`)
 
     // Try to guess, if the virtual keyboard did show up
     // https://stackoverflow.com/questions/497094/how-do-i-find-out-which-dom-element-has-the-focus
@@ -24,7 +31,7 @@ if (window.visualViewport != null) {
     else
       document.documentElement.classList.remove('virtual-keyboard')
 
-    // With some delayscroll active/focussed element into view
+    // With some delay scroll active/focussed element into view
     clearTimeout(timer)
     timer = setTimeout(() => {
       // todo not always "smart"
@@ -36,10 +43,7 @@ if (window.visualViewport != null) {
       })
 
       window.scrollTo(0, 0)
-    },
-    // 400ms takes the virtual keyboard to show up;
-    // other values seem to have an negative effect on the layout
-    400)
+    }, keyboardAnimationDuration)
   }
 
   useEventListener(window.visualViewport, 'resize', resizeHandler)
