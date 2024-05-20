@@ -2,8 +2,6 @@
 
 html.oui-mobile {
   &, body {
-    /* This seems to fix overscrolling */
-    /* https://www.bram.us/2016/05/02/prevent-overscroll-bounce-in-ios-mobilesafari-pure-css/ */
     overflow: hidden;
     height: 100%;
   }
@@ -15,6 +13,7 @@ html.oui-mobile {
 
   & {
     /* Avoids bouncy scrolling */
+    /* https://www.bram.us/2016/05/02/prevent-overscroll-bounce-in-ios-mobilesafari-pure-css/ */
     -webkit-overflow-scrolling: none;
     overscroll-behavior: none;
   }

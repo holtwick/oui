@@ -31,8 +31,8 @@ if (window.visualViewport != null) {
       document.activeElement?.scrollIntoView({
         // behavior: 'smooth',
         behavior: 'instant',
-        block: 'center',
-        inline: 'center',
+        block: 'nearest',
+        inline: 'nearest',
       })
 
       window.scrollTo(0, 0)
