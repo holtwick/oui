@@ -7,16 +7,22 @@
   --modal-speed: 200ms;
 }
 
+/* .oui-modal-active {
+  html, body {    
+    overflow: hidden !important;
+  }
+} */
 .oui-modal {
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: absolute;
-  bottom: 0;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
+  height: var(--visible-height, 100%);
+  // bottom: 0;
   will-change: transform;
   z-index: -z-index-overlay;
   background: var(--dialog-backdrop, rgba(0, 0, 0, 0.16));

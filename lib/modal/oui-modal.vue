@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onKeyStroke } from '@vueuse/core'
-import { ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 import { OuiClose } from '../basic'
 import { vFocustrap } from './oui-modal.focustrap'
 
@@ -41,13 +41,44 @@ function doCancel() {
   doClose()
 }
 
+// you could also parse the offset from the style directly
+// if you'd prefer no having mutating variables
+let scrollOffset: any
+const scrollElement = document.scrollingElement as HTMLElement
+
+function blockScrolling() {
+  // scrollOffset = window.pageYOffset
+
+  // if (scrollElement) {
+  //   scrollElement.style.overflow = 'hidden'
+  //   scrollElement.style.position = 'fixed'
+  //   scrollElement.style.height = 'var(--visible-height, 100%)'
+  //   scrollElement.style.top = `${-scrollOffset}px`
+  // }
+}
+
+function enableScrolling() {
+  // if (scrollElement) {
+  //   scrollElement.style.removeProperty('position')
+  //   scrollElement.style.removeProperty('overflow')
+  //   scrollElement.style.removeProperty('height')
+  //   scrollElement.style.removeProperty('top')
+  // }
+
+  // window.scrollTo(0, scrollOffset)
+}
+
 function doClose() {
+  enableScrolling()
+  document.documentElement.classList.remove('oui-modal-active')
   emit('close')
   _active.value = false
   // emit('update:modelValue', false)
 }
 
 function didOpen() {
+  blockScrolling()
+  document.documentElement.classList.add('oui-modal-active')
   if (root.value) {
     const el = root.value.querySelector('._focus')
       ?? root.value.querySelector('input,button,select')
@@ -57,6 +88,8 @@ function didOpen() {
 
   emit('open')
 }
+
+onBeforeUnmount(doClose)
 
 const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
 </script>
