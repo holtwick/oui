@@ -52,7 +52,6 @@ function blockScrolling() {
   // if (scrollElement) {
   //   scrollElement.style.overflow = 'hidden'
   //   scrollElement.style.position = 'fixed'
-  //   scrollElement.style.height = 'var(--visible-height, 100%)'
   //   scrollElement.style.top = `${-scrollOffset}px`
   // }
 }
@@ -61,7 +60,6 @@ function enableScrolling() {
   // if (scrollElement) {
   //   scrollElement.style.removeProperty('position')
   //   scrollElement.style.removeProperty('overflow')
-  //   scrollElement.style.removeProperty('height')
   //   scrollElement.style.removeProperty('top')
   // }
 
@@ -114,6 +112,8 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
         :tabindex="-1"
         aria-modal="true"
         role="dialog"
+        data-noscroll="true"
+        @touchmove.stop
       >
         <div
           class="_modal_overlay"

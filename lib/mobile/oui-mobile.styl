@@ -16,9 +16,10 @@ html.oui-mobile {
   }
 
   body {
-    position: relative;
-    // overflow: hidden;
-    // height: 100%;
+    position: relative;     /*
+     overflow: hidden;
+    height: 100%;
+    */
   }
 
   &, body {
@@ -30,13 +31,12 @@ html.oui-mobile {
   & {
     /* Avoids bouncy scrolling */
     /* https://www.bram.us/2016/05/02/prevent-overscroll-bounce-in-ios-mobilesafari-pure-css/ */
-    /* -webkit-overflow-scrolling: none;
-    overscroll-behavior: none; */
+    -webkit-overflow-scrolling: none;
+    overscroll-behavior: none;
   }
 
   &, * {
     touch-action: manipulation;
-    // touch-action: pan-x pan-y; // prevent zoom https://stackoverflow.com/a/62165035/140927
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
   }

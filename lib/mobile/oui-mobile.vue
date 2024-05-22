@@ -35,22 +35,23 @@ if (useSingleton('oui-mobile')) {
       // Try to guess, if the virtual keyboard did show up
       // https://stackoverflow.com/questions/497094/how-do-i-find-out-which-dom-element-has-the-focus
       virtualKeyboardActive = document.activeElement?.matches('input,textarea,[contenteditable]') ?? false
-      if (virtualKeyboardActive)
+      if (virtualKeyboardActive) {
         document.documentElement.classList.add('virtual-keyboard')
-      else
+        // With some delay scroll active/focussed element into view
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          log('scroll into view', document.activeElement)
+          document.activeElement?.scrollIntoView({
+            // behavior: 'smooth',
+            behavior: 'instant',
+            block: 'nearest',
+            inline: 'nearest',
+          })
+        }, keyboardAnimationDuration)
+      }
+      else {
         document.documentElement.classList.remove('virtual-keyboard')
-
-      // With some delay scroll active/focussed element into view
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        log('scroll into view', document.activeElement)
-        document.activeElement?.scrollIntoView({
-        // behavior: 'smooth',
-          behavior: 'instant',
-          block: 'nearest',
-          inline: 'nearest',
-        })
-      }, keyboardAnimationDuration)
+      }
     }
 
     useEventListener(window.visualViewport, 'resize', resizeHandler)
@@ -59,15 +60,27 @@ if (useSingleton('oui-mobile')) {
     // if (props.mode === 'app') {
     // Intercept `touchmove` where no scrolling is planned in our UI
     useEventListener(window, 'touchmove', (ev) => {
+      log('touch move', ev.target)
+
       // if (virtualKeyboardActive === false)
       //   return
 
       // Figure out, if we are inside an element with custom scrolling
       let el = ev.target as HTMLElement | undefined | null
       while (el != null) {
-        const { overflow } = window.getComputedStyle(el)
-        if (overflow.split(' ').some(o => o === 'auto' || o === 'scroll'))
+        if (el.dataset.noscroll === 'true') {
+          log('exit noscroll')
+          break
+        }
+        if (el.tagName === 'BODY') {
+          log('exit body')
           return
+        }
+        const { overflow } = window.getComputedStyle(el)
+        if (overflow.split(' ').some(o => o === 'auto' || o === 'scroll')) {
+          log('exit scroll', overflow)
+          return
+        }
         el = el.parentElement
       }
 

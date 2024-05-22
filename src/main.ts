@@ -5,7 +5,7 @@ import { createApp } from 'vue'
 
 // import app from './app.vue'
 // import app from './app-mobile.vue'
-// import app from './app-mobile-using-oui.vue'
-import app from './app-mobile-body-scroll.vue'
+import app from './app-mobile-using-oui.vue'
+// import app from './app-mobile-body-scroll.vue'
 
 createApp(app).mount('#app')
