@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { nextTick } from 'vue'
 import type { OuiMenuItem } from './_types'
 
 const props = defineProps<{
@@ -17,12 +18,12 @@ async function doAction(item: OuiMenuItem) {
   if (item?.action) {
     setTimeout(() => {
       item?.action?.(item, ...(props.args ?? [])) // todo is that ok?
+      emit('done', item)
+      if (item.close !== false)
+        active.value = false
+      props.done?.()
     }, 50)
   }
-  emit('done', item)
-  if (item.close !== false)
-    active.value = false
-  props.done?.()
 }
 </script>
 
