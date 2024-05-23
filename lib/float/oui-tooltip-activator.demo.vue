@@ -29,13 +29,20 @@ Yeah!"
           <span title="Just title">
             Just title
           </span>
-        </li><li>
+        </li>
+        <li>
           <span tooltip="Just tooltip">
             Just tooltip
           </span>
-        </li><li>
+        </li>
+        <li>
           <span tooltip="Both tooltip" title="Both title">
             Both
+          </span>
+        </li>
+        <li>
+          <span tooltip="Both tooltip" aria-label="Both title">
+            Aria Label
           </span>
         </li>
       </ol>
