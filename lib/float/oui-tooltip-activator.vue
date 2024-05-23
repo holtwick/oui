@@ -9,10 +9,33 @@ defineOptions({
   inheritAttrs: false,
 })
 
+const props = defineProps<{
+  titleAsTooltip?: boolean
+}>()
+
 const active = ref<boolean>(false)
 const placement = ref<Placement>('top')
 const reference = ref()
 const text = ref('')
+
+const titleAsTooltip = props.titleAsTooltip === true
+
+function getFixTooltip(el: Element) {
+  let tooltip = el.getAttribute('tooltip') ?? ''
+  const title = el.getAttribute('title') ?? ''
+
+  // Use the title as if tooltip is missing
+  if (titleAsTooltip && tooltip.length <= 0 && title.length > 0) {
+    el.setAttribute('tooltip', title)
+    tooltip = title
+  }
+
+  // Make sure to not have a title that will be shown
+  if (title.length > 0 && tooltip.length > 0)
+    el.removeAttribute('title')
+
+  return tooltip
+}
 
 const ok = useSingleton('oui-tooltip')
 if (ok) {
@@ -32,7 +55,7 @@ if (ok) {
     // Check if we are still inside. If not, hide immediately
     let didLeave = true
     while (el instanceof Element && el.tagName !== 'BODY') {
-      const tooltip = el.getAttribute('tooltip')
+      const tooltip = getFixTooltip(el)
       if (tooltip && tooltip?.length > 0) {
         if (el.isEqualNode(reference.value as any)) {
           didLeave = false
@@ -50,7 +73,7 @@ if (ok) {
     // Show tooltip on rest with some delay
     debounceTimer = setTimeout(() => {
       while (el instanceof Element && el.tagName !== 'BODY') {
-        const tooltip = el.getAttribute('tooltip')
+        const tooltip = getFixTooltip(el)
         if (tooltip && tooltip?.length > 0) {
           reference.value = el
           text.value = tooltip?.toString()?.trim() || ''

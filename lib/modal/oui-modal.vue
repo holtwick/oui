@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onKeyStroke } from '@vueuse/core'
-import { onBeforeUnmount, ref } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import { OuiClose } from '../basic'
 import { vFocustrap } from './oui-modal.focustrap'
 
@@ -68,15 +68,17 @@ function enableScrolling() {
 
 function doClose() {
   enableScrolling()
-  document.documentElement.classList.remove('oui-modal-active')
   emit('close')
   _active.value = false
   // emit('update:modelValue', false)
 }
 
+function didClose() {
+
+}
+
 function didOpen() {
   blockScrolling()
-  document.documentElement.classList.add('oui-modal-active')
   if (root.value) {
     const el = root.value.querySelector('._focus')
       ?? root.value.querySelector('input,button,select')
@@ -86,6 +88,15 @@ function didOpen() {
 
   emit('open')
 }
+
+function triggerActiveClass(active: boolean = false) {
+  if (active)
+    document.documentElement.classList.add('oui-modal-active')
+  else
+    document.documentElement.classList.remove('oui-modal-active')
+}
+
+watch(_active, triggerActiveClass, { immediate: true })
 
 onBeforeUnmount(doClose)
 
@@ -98,13 +109,14 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
       appear
       :name="transition ?? `${name}-transition`"
       @after-enter="didOpen"
+      @after-leave="didClose"
     >
       <div
         v-if="_active"
         ref="root"
         :class="{
           [name]: true,
-          [$attrs.class as string]: true,
+          [$attrs.class as string]: !!$attrs.class,
           _active,
           _modal_sheet: !noSheet,
           _modal_has_footer: $slots.footer,

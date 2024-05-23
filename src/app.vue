@@ -139,6 +139,6 @@ function toggleDark() {
       </OuiResizeable>
     </div>
   </div>
-  <OuiTooltipActivator />
+  <OuiTooltipActivator title-as-tooltip />
   <OuiMobileActivator />
 </template>
