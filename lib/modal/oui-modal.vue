@@ -125,7 +125,6 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
         aria-modal="true"
         role="dialog"
         data-noscroll="true"
-        @touchmove.stop
       >
         <div
           class="_modal_overlay"

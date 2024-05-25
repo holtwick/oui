@@ -1,13 +1,52 @@
 @import "index.styl";
 @import "theme.styl";
 
+oui-reset();
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 body {
   font-family: var(--font);
   color: var(--fg);
   background-color: var(--bg);
 }
 
-oui-app-full();
+// assume this being an app container, usually #app
+#app, .app {
+  use: stack-y;
+  height: 100%;
+}
+
+/* :not(button, input, optgroup, select, textarea, [contenteditable], [contenteditable] *, .ProseMirror *, .selectable *, .selectable) {
+ */
+/*
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+  // border: none;
+}
+
+[contenteditable], [contenteditable] *, .ProseMirror *, .selectable *, .selectable, input, textarea {
+  user-select: text;
+  -webkit-user-select: text;
+  // border: 2px solid red;
+}
+*/
 oui-preset-layout-attrs();
 
 @import "../lib/index.styl";
