@@ -180,5 +180,4 @@ Yeah!"
       This is the popover
     </OuiFloat>
   </OuiText>
-  <OuiTooltipActivator />
 </template>

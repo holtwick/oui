@@ -15,6 +15,10 @@ const simpleMenu = useMenu([
     title: `XYZ`,
     action: self => log('action', self),
   },
+  {
+    title: `holtwick.de`,
+    url: 'https://holtwick.de/en/imprint',
+  },
 ])
 
 const menu = useMenuWithValue((item: number) => [{

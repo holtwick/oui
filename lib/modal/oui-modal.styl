@@ -1,18 +1,31 @@
 @require "../../stylus/index.styl";
 
-.oui-modal {
+:root {
+  --modal-radius: px(8);
   --modal-separator: transparent;
   --modal-bg: var(--dialog-bg, var(--s2-bg));
   --modal-speed: 200ms;
+}
+
+/* .oui-modal-active {
+  &, body {
+    touch-action: none;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+    overflow: hidden;
+  }
+} */
+.oui-modal {
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: absolute;
-  bottom: 0;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
+  height: var(--visible-height, 100%);
+  // bottom: 0;
   will-change: transform;
   z-index: -z-index-overlay;
   background: var(--dialog-backdrop, rgba(0, 0, 0, 0.16));
@@ -42,9 +55,9 @@
     use: stack-y;
     position: relative;
     box-shadow: lg;
-    background: var(--modal-bg, -gray-50);
-    border: 1px solid var(--modal-separator, -gray-200);
-    border-radius: var(--dialog-radius, 8px);
+    background: var(--modal-bg);
+    border: 1px solid var(--modal-separator);
+    border-radius: var(--modal-radius);
     max-height: 75vh;
 
     @media -media-mobile {
@@ -57,15 +70,15 @@
         max-height: inherit;
         width: 100%;
         margin-top: 44;
-        border-top-left-radius: var(--dialog-radius, 8px);
-        border-top-right-radius: var(--dialog-radius, 8px);
+        border-top-left-radius: var(--modal-radius);
+        border-top-right-radius: var(--modal-radius);
         padding-bottom: -safe-bottom;
 
         .virtual-keyboard & {
           padding-bottom: 0;
 
           ._modal_footer {
-            transition: border 400ms;
+            transition: border var(-modal-speed);
             --modal-separator: var(--t3-bg);
           }
         }
@@ -86,7 +99,7 @@
     top: 2;
     right: 2;
     background: transparent;
-    border-radius: var(--dialog-radius, 8px);
+    border-radius: var(--modal-radius);
     // z-index: 99999;
     font-size: 16;
     cursor: unquote("pointer");

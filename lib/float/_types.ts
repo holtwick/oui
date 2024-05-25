@@ -5,6 +5,7 @@ export interface OuiMenuItem {
   checked?: boolean | ((id: OuiMenuItem) => boolean | undefined)
   disabled?: boolean
   close?: boolean
+  url?: string
   // blocked?: boolean
   action?: (item: OuiMenuItem, ...args: any[]) => void
 }
