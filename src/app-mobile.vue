@@ -21,24 +21,26 @@ if (window.visualViewport != null) {
     // Adjust the height!
     document.documentElement.style.height = visibleHeight
 
-    if (document.activeElement?.matches('input,textarea,[contenteditable]'))
+    if (document.activeElement?.matches('input,textarea,[contenteditable]')) {
       document.documentElement.classList.add('virtual-keyboard')
-    else
-      document.documentElement.classList.remove('virtual-keyboard')
 
-    setTimeout(() => {
-      const el = document.activeElement
-      info.focus = el?.outerHTML.slice(0, 20)
-      el?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center',
-      })
-    },
-    // 400ms takes the virtual keyboard to show up;
-    // other values seem to have an negative effect on the layout
-    400,
-    )
+      setTimeout(() => {
+        const el = document.activeElement
+        info.focus = el?.outerHTML.slice(0, 20)
+        el?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+          inline: 'center',
+        })
+      },
+      // 400ms takes the virtual keyboard to show up;
+      // other values seem to have an negative effect on the layout
+      400,
+      )
+    }
+    else {
+      document.documentElement.classList.remove('virtual-keyboard')
+    }
 
     log('new height', visibleHeight, window.visualViewport)
     // rootCss.setProperty('--visible-height', visibleHeight)

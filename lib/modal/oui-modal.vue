@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onKeyStroke } from '@vueuse/core'
-import { ref } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import { OuiClose } from '../basic'
 import { vFocustrap } from './oui-modal.focustrap'
 
@@ -41,13 +41,44 @@ function doCancel() {
   doClose()
 }
 
+// you could also parse the offset from the style directly
+// if you'd prefer no having mutating variables
+let scrollOffset: any
+const scrollElement = document.scrollingElement as HTMLElement
+
+function blockScrolling() {
+  // scrollOffset = window.pageYOffset
+
+  // if (scrollElement) {
+  //   scrollElement.style.overflow = 'hidden'
+  //   scrollElement.style.position = 'fixed'
+  //   scrollElement.style.top = `${-scrollOffset}px`
+  // }
+}
+
+function enableScrolling() {
+  // if (scrollElement) {
+  //   scrollElement.style.removeProperty('position')
+  //   scrollElement.style.removeProperty('overflow')
+  //   scrollElement.style.removeProperty('top')
+  // }
+
+  // window.scrollTo(0, scrollOffset)
+}
+
 function doClose() {
+  enableScrolling()
   emit('close')
   _active.value = false
   // emit('update:modelValue', false)
 }
 
+function didClose() {
+
+}
+
 function didOpen() {
+  blockScrolling()
   if (root.value) {
     const el = root.value.querySelector('._focus')
       ?? root.value.querySelector('input,button,select')
@@ -58,6 +89,17 @@ function didOpen() {
   emit('open')
 }
 
+function triggerActiveClass(active: boolean = false) {
+  if (active)
+    document.documentElement.classList.add('oui-modal-active')
+  else
+    document.documentElement.classList.remove('oui-modal-active')
+}
+
+watch(_active, triggerActiveClass, { immediate: true })
+
+onBeforeUnmount(doClose)
+
 const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
 </script>
 
@@ -67,13 +109,14 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
       appear
       :name="transition ?? `${name}-transition`"
       @after-enter="didOpen"
+      @after-leave="didClose"
     >
       <div
         v-if="_active"
         ref="root"
         :class="{
           [name]: true,
-          [$attrs.class as string]: true,
+          [$attrs.class as string]: !!$attrs.class,
           _active,
           _modal_sheet: !noSheet,
           _modal_has_footer: $slots.footer,
@@ -81,6 +124,7 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
         :tabindex="-1"
         aria-modal="true"
         role="dialog"
+        data-noscroll="true"
       >
         <div
           class="_modal_overlay"

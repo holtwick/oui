@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { nextTick } from 'vue'
 import type { OuiMenuItem } from './_types'
 
 const props = defineProps<{
@@ -14,13 +15,15 @@ const emit = defineEmits<{
 const active = defineModel({ default: true })
 
 async function doAction(item: OuiMenuItem) {
-  setTimeout(() => {
-    item?.action?.(item, ...(props.args ?? [])) // todo is that ok?
-  }, 50)
-  emit('done', item)
-  if (item.close !== false)
-    active.value = false
-  props.done?.()
+  if (item?.action) {
+    setTimeout(() => {
+      item?.action?.(item, ...(props.args ?? [])) // todo is that ok?
+      emit('done', item)
+      if (item.close !== false)
+        active.value = false
+      props.done?.()
+    }, 50)
+  }
 }
 </script>
 
@@ -35,7 +38,9 @@ async function doAction(item: OuiMenuItem) {
           _menu_checked_possible: item.checked != null,
           _menu_checked: typeof item.checked === 'function' ? item.checked(item) : !!item.checked,
         }"
+        :href="item.url"
         :data-test-menu="item.title"
+        :target="item.url?.includes('://') ? '_blank' : undefined"
         @pointerup="doAction(item)"
       >
         {{ item.title }}

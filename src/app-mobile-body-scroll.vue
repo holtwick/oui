@@ -4,6 +4,14 @@ import { OuiButton, OuiMobileActivator, OuiText, useDialog } from '@/lib'
 import './app-mobile-body-scroll.styl'
 
 const { prompt } = useDialog()
+
+/* window.addEventListener('wheel', (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+}, {
+  passive: false, // make sure, we get those events
+  capture: true, // capture them as early as possible
+}) */
 </script>
 
 <template>

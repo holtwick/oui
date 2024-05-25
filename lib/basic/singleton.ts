@@ -1,4 +1,4 @@
-import { onUnmounted } from 'vue'
+import { onBeforeUnmount } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 
@@ -12,5 +12,6 @@ export function useSingleton(name: string) {
     return false
   }
   g.__ouiSingletons[name] = true
-  onUnmounted(() => g.__ouiSingletons[name] = false)
+  onBeforeUnmount(() => g.__ouiSingletons[name] = false)
+  return true
 }
