@@ -31,6 +31,7 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
   context: [row: T, pos: number, event: Event]
+  select: [row: T, pos: number, event: Event]
 }>()
 
 const modelSort = defineModel<string>('sort')
@@ -124,7 +125,7 @@ function scrollX(x: number) {
             _active: modelSelected === index,
           }"
           v-bind="rowAttrs(item, index)"
-          @click="doSelect(index)"
+          @click="doSelect(index); emit('select', item, index, $event)"
           @contextmenu.prevent="emit('context', item, index, $event)"
         >
           <template v-for="col, pos in columns" :key="col.name">
