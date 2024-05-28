@@ -1,9 +1,16 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiButton, OuiModal, OuiText, vAutofocus } from '@/lib'
+import OuiSelect from '../basic/oui-select.vue'
+import { OuiButton, OuiCheckbox, OuiDemo, OuiInput, OuiModal, OuiText } from '@/lib'
 
 const state = reactive({
+  size: 'normal',
   show: false,
+  footer: true,
+  noSheet: false,
+  close: true,
+  title: 'title',
+  header: 'header',
 })
 </script>
 
@@ -11,9 +18,15 @@ const state = reactive({
   <OuiButton @click="state.show = !state.show">
     Click to show modal
   </OuiButton>
-  <OuiModal v-model="state.show" close>
-    <template #header>
-      Header
+  <OuiModal
+    v-model="state.show"
+    :close="state.close"
+    :title="state.title"
+    :no-sheet="state.noSheet"
+    :size="state.size as any"
+  >
+    <template v-if="state.header" #header>
+      {{ state.header }}
     </template>
     <template #default>
       <OuiText>
@@ -32,7 +45,7 @@ const state = reactive({
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam possimus aut omnis perspiciatis consequuntur at accusantium? Voluptas ab ex quo, omnis, quidem, officiis corporis nostrum perspiciatis ea recusandae reprehenderit fugiat!</p>
       </OuiText>
     </template>
-    <template #footer>
+    <template v-if="state.footer" #footer>
       <OuiButton mode="secondary">
         Cancel
       </OuiButton>
@@ -41,5 +54,13 @@ const state = reactive({
       </OuiButton>
     </template>
   </OuiModal>
-  <OuiDemo :state="state" />
+  <OuiDemo :state="state">
+    <OuiCheckbox v-model="state.show" switch title="show" />
+    <OuiCheckbox v-model="state.footer" switch title="footer" />
+    <OuiCheckbox v-model="state.noSheet" switch title="noSheet" />
+    <OuiCheckbox v-model="state.close" switch title="close" />
+    <OuiInput v-model="state.title" title="title" />
+    <OuiInput v-model="state.header" title="header" />
+    <OuiSelect v-model="state.size" :options="['small', 'normal', 'large']" />
+  </OuiDemo>
 </template>

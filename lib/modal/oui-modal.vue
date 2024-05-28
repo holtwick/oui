@@ -142,16 +142,12 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
               <OuiClose />
             </slot>
           </button>
-          <header
-            v-if="title || $slots.title || $slots.header || close === true"
-            class="oui-modal-header _modal_header"
-          >
+          <header v-if="title || $slots.title || $slots.header || close === true" class="oui-modal-header _modal_header">
             <div v-if="title || $slots.title" class="oui-modal-title title _modal_title">
               <slot name="title">
                 {{ title }}
               </slot>
             </div>
-
             <slot name="header" />
           </header>
           <section class="oui-modal-body body _modal_body">

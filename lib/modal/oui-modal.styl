@@ -48,6 +48,19 @@
   }
 
   ._modal_container {
+    width: Min(52ch, 90vw);
+  }
+
+  &._modal_size_small ._modal_container {
+    width: Min(36ch, 90vw);
+  }
+
+  &._modal_size_large ._modal_container {
+    width: Min(80ch, 90vw);
+    height: Min(px(800), 90vh);
+  }
+
+  ._modal_container {
     z-index: -z-index-modal;
     will-change: transform;
     opacity: 1;
@@ -69,6 +82,7 @@
         bottom: 0;
         max-height: inherit;
         width: 100%;
+        height: initial;
         margin-top: 44;
         border-top-left-radius: var(--modal-radius);
         border-top-right-radius: var(--modal-radius);
@@ -86,12 +100,19 @@
     }
   }
 
+  ._modal_title {
+    use: stack-y;
+    font-weight: 600;
+    padding-right: 40;
+    padding-bottom: 16;
+  }
+
   ._modal_header {
     use: stack-y;
     border-bottom: 1px solid var(--modal-separator, -gray-200);
     padding: 16;
-    padding-right: 40;
-    font-weight: 600;
+    padding-bottom: 0;
+    min-height: 48;
   }
 
   ._modal_close {
@@ -138,18 +159,6 @@
   &._modal_has_footer ._modal_body {
     // todo: 4px to allow focus ring to show up correctly
     padding-bottom: 4;
-  }
-
-  ._modal_container {
-    width: Min(52ch, 90vw);
-  }
-
-  &._modal_size_small ._modal_container {
-    width: Min(36ch, 90vw);
-  }
-
-  &._modal_size_large ._modal_container {
-    width: Min(128, 90vw);
   }
 
   &-transition {
