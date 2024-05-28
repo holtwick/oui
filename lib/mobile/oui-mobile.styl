@@ -38,19 +38,19 @@ html.oui-mobile {
     -webkit-text-size-adjust: 100%;
   }
 
-  @keyframes ios_prevent_scrolling_issues {
+  @keyframes iosPreventScrollingBugIssues {
     /* https://gist.github.com/kiding/72721a0553fa93198ae2bb6eefaa3299 */
-    0% {
+    from {
       opacity: 0;
     }
 
-    100% {
+    to {
       opacity: 1;
     }
   }
 
   input:focus, textarea:focus, [contenteditable]:focus {
     /* Avoids scroll issues on keyboard showup */
-    animation: ios_prevent_scrolling_issues 0.01s;
+    animation: iosPreventScrollingBugIssues 0.01s;
   }
 }
