@@ -7,6 +7,7 @@ import './oui-form.styl'
 
 withDefaults(defineProps<{
   title?: string
+  description?: string
   required?: boolean
   id?: string
 }>(), {
@@ -46,7 +47,12 @@ const date = computed({
 </script>
 
 <template>
-  <OuiFormItem :id="id" :title="title" :required="required">
+  <OuiFormItem
+    :id="id"
+    :title="title"
+    :description="description"
+    :required="required"
+  >
     <input v-model="date" type="datetime-local" class="oui-input oui-input-datetime">
   </OuiFormItem>
 </template>

@@ -9,6 +9,7 @@ defineOptions({
 
 withDefaults(defineProps<{
   title?: string
+  description?: string
   required?: boolean
   id?: string
 }>(), {})
@@ -17,7 +18,12 @@ const model = defineModel<number>({ required: true })
 </script>
 
 <template>
-  <OuiFormItem :id="id" :title="title" :required="required">
+  <OuiFormItem
+    :id="id"
+    :title="title"
+    :description="description"
+    :required="required"
+  >
     <input
       :id="id"
       v-model="model"

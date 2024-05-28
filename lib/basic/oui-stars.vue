@@ -5,7 +5,9 @@ import OuiFormItem from './oui-form-item.vue'
 import './oui-stars.styl'
 
 withDefaults(defineProps<{
+  id?: string
   title?: string
+  description?: string
   required?: boolean
 }>(), {
 })
@@ -16,7 +18,12 @@ const hover = ref(0)
 </script>
 
 <template>
-  <OuiFormItem :title="title" :required="required">
+  <OuiFormItem
+    :id="id"
+    :title="title"
+    :description="description"
+    :required="required"
+  >
     <div class="oui-stars">
       <template v-for="i in 5" :key="i">
         <div :class="{ _active: model >= i, _hover: hover >= i }" @click="model = i" @mouseover="hover = i">

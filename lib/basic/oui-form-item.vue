@@ -1,18 +1,14 @@
 <script lang="ts" setup>
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
-
 defineProps<{
   title?: string
+  description?: string
   required?: boolean
   id?: string
 }>()
-
-const log: LoggerInterface = Logger('oui-form-item')
 </script>
 
 <template>
-  <template v-if="title">
+  <template v-if="title || $slots.description || description">
     <div class="oui-form-item">
       <label>
         <div class="oui-form-item-title">
@@ -22,6 +18,14 @@ const log: LoggerInterface = Logger('oui-form-item')
         <div class="oui-form-item-body">
           <slot />
         </div>
+        <template v-if="$slots.description || description">
+          <div class="oui-form-item-description">
+
+            <slot name="description">
+              {{ description }}
+            </slot>
+          </div>
+        </template>
       </label>
     </div>
   </template>
