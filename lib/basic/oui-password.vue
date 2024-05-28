@@ -27,6 +27,7 @@ const model = defineModel<string | undefined>({ required: true })
         type="password"
         class="oui-input"
         :placeholder="placeholder"
+        v-bind="$attrs"
       >
       <template v-if="showMeter !== false">
         <OuiInputPasswordMeter :value="model" />
