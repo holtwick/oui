@@ -114,7 +114,7 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
       <div
         v-if="_active"
         ref="root"
-        :class="{
+        class="_keyboard_aware_height" :class="{
           [name]: true,
           [$attrs.class as string]: !!$attrs.class,
           _active,

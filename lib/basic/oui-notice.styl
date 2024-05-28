@@ -9,6 +9,17 @@
   use: center;
   text-align: center;
   color: var(--s2-fg);
+  background: inherit;
+
+  &._notice_cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    padding: -safe;
+    height: var(--visible-height, 100%);
+    will-change: transform;
+  }
 
   &-body {
     use: stack-y;
