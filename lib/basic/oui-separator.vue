@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useLocalStorage } from '@vueuse/core'
 import type { OuiDraggableEvent } from './_types'
 import OuiDraggable from './oui-draggable.vue'

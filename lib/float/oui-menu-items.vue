@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { nextTick } from 'vue'
 import type { OuiMenuItem } from './_types'
 
 const props = defineProps<{

@@ -2,7 +2,7 @@
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 import { reactive } from 'vue'
-import { OuiClose, OuiDemo, OuiInput, OuiNotice, OuiTextarea } from '@/lib'
+import { OuiDemo, OuiInput, OuiNotice, OuiTextarea } from '@/lib'
 
 const state = reactive({
   title: 'Notice',
