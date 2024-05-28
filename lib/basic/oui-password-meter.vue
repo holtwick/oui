@@ -3,6 +3,10 @@ import { computed } from 'vue'
 
 import './oui-password.styl'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 const props = defineProps<{
   value?: string
 }>()
@@ -16,11 +20,11 @@ function scorePassword(pass: string) {
   let caseMix = 0
   let numCharMix = 0
 
-  const specialCharRegex = /[^A-Za-z0-9]/g
-  const lowercaseRegex = /(.*[a-z].*)/g
-  const uppercaseRegex = /(.*[A-Z].*)/g
-  const numberRegex = /(.*[0-9].*)/g
-  const repeatCharRegex = /(\w)(\1+\1+\1+\1+)/g
+  const specialCharRegex = /[^A-Z0-9]/i
+  const lowercaseRegex = /.*[a-z].*/
+  const uppercaseRegex = /.*[A-Z].*/
+  const numberRegex = /.*\d.*/
+  const repeatCharRegex = /(\w)\1\1\1\1/
 
   const hasSpecialChar = specialCharRegex.test(pass)
   const hasLowerCase = lowercaseRegex.test(pass)
@@ -31,24 +35,17 @@ function scorePassword(pass: string) {
   if (pass.length > 4) {
     if ((hasLowerCase || hasUpperCase) && hasNumber)
       numCharMix = 1
-
     if (hasUpperCase && hasLowerCase)
       caseMix = 1
-
     if ((hasLowerCase || hasUpperCase || hasNumber) && hasSpecialChar)
       specialChar = 1
-
     if (pass.length > 8)
       length = 1
-
     if (pass.length > 12 && !hasRepeatChars)
       length = 2
-
     if (pass.length > 25 && !hasRepeatChars)
       length = 3
-
     score = length + specialChar + caseMix + numCharMix
-
     if (score > 4)
       score = 4
   }

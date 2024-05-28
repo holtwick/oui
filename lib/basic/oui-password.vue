@@ -4,6 +4,10 @@ import OuiInputPasswordMeter from './oui-password-meter.vue'
 
 import './oui-password.styl'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 defineProps<{
   showMeter?: boolean
   placeholder?: string
@@ -24,7 +28,9 @@ const model = defineModel<string | undefined>({ required: true })
         class="oui-input"
         :placeholder="placeholder"
       >
-      <OuiInputPasswordMeter :value="model" />
+      <template v-if="showMeter !== false">
+        <OuiInputPasswordMeter :value="model" />
+      </template>
     </div>
   </OuiFormItem>
 </template>
