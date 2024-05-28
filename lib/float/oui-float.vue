@@ -99,7 +99,7 @@ useEventListener('pointerdown', (e) => {
 // Name
 
 const attrs = useAttrs()
-const name = computed(() => String(attrs.class || 'oui-float').split(/\s+/gim)?.[0])
+const name = computed(() => String(attrs.class || 'oui-float').split(/\s+/g)?.[0])
 
 // Click Slot
 
