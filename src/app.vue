@@ -17,7 +17,7 @@ const docs = import.meta.glob('../**/*.md', {
   eager: true,
 })
 
-const mode = useLocalStorage('oui.demo.mode', '')
+const mode = useLocalStorage('oui.demo.mode', './app.demo.vue')
 const dark = useLocalStorage('oui.demo.dark', false)
 
 const showProperties = useLocalStorage('oui.demo.properties', true)
