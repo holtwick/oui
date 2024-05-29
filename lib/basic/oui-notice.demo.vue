@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import OuiButton from './oui-button.vue'
+import OuiCheckbox from './oui-checkbox.vue'
 import { OuiDemo, OuiInput, OuiNotice, OuiText, OuiTextarea } from '@/lib'
 
 const state = reactive({
@@ -9,6 +10,10 @@ const state = reactive({
   icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
   cover: false,
   demoInput: '',
+  showNotice: true,
+  showTitle: true,
+  showIcon: true,
+  iconColor: 'red',
 })
 
 function doCover() {
@@ -18,23 +23,29 @@ function doCover() {
 </script>
 
 <template>
-  <OuiNotice :title="state.title" :cover="state.cover">
-    <template #icon>
+  <OuiNotice :title="state.showTitle ? state.title : undefined" :cover="state.cover" :style="{ '--notice-fg': state.iconColor }">
+    <template v-if="state.showIcon" #icon>
       <div v-html="state.icon" />
     </template>
-    <OuiText>
-      <p>{{ state.message }}</p>
-      <p>
-        <OuiInput v-model="state.demoInput" class="_focus" />
-      </p>
-    </OuiText>
+    <template v-if="state.showNotice" #default>
+      <OuiText>
+        <p>{{ state.message }}</p>
+        <p>
+          <OuiInput v-model="state.demoInput" class="_focus" />
+        </p>
+      </OuiText>
+    </template>
   </OuiNotice>
   <OuiDemo :state="state">
+    <OuiCheckbox v-model="state.showIcon" switch title="Show Icon" />
+    <OuiCheckbox v-model="state.showTitle" switch title="Show Title" />
+    <OuiCheckbox v-model="state.showNotice" switch title="Show Notice" />
     <OuiInput v-model="state.title" title="Title" />
     <OuiTextarea v-model="state.message" title="Message" />
     <OuiTextarea v-model="state.icon" title="Icon" />
     <OuiButton @click="doCover">
       Cover for 3s
     </OuiButton>
+    <OuiInput v-model="state.iconColor" title="iconColor" />
   </OuiDemo>
 </template>

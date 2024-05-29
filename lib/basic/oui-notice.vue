@@ -24,15 +24,15 @@ watch(root, (el) => {
     <Teleport to="body" :disabled="!cover">
       <div ref="root" v-focustrap class="oui-notice _notice_cover _keyboard_aware_height" data-noscroll="true">
         <div class="oui-notice-body">
-          <div class="oui-notice-icon">
+          <div v-if="$slots.icon" class="oui-notice-icon">
             <slot name="icon" />
           </div>
-          <div class="oui-notice-title">
+          <div v-if="$slots.title || title" class="oui-notice-title">
             <slot name="title">
               {{ title }}
             </slot>
           </div>
-          <div class="oui-notice-message">
+          <div v-if="$slots.default" class="oui-notice-message">
             <slot />
           </div>
         </div>
@@ -42,15 +42,15 @@ watch(root, (el) => {
   <template v-else>
     <div v-focustrap class="oui-notice">
       <div class="oui-notice-body">
-        <div class="oui-notice-icon">
+        <div v-if="$slots.icon" class="oui-notice-icon">
           <slot name="icon" />
         </div>
-        <div class="oui-notice-title">
+        <div v-if="$slots.title || title" class="oui-notice-title">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
-        <div class="oui-notice-message">
+        <div v-if="$slots.default" class="oui-notice-message">
           <slot />
         </div>
       </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLocalStorage } from '@vueuse/core'
+import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { last, sortedOrderby } from 'zeed'
 import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
@@ -43,9 +43,8 @@ onMounted(() => {
   active.value = true
 })
 
-function toggleDark() {
-  document.documentElement.classList.toggle('dark')
-}
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 </script>
 
 <template>
@@ -73,7 +72,7 @@ function toggleDark() {
         v{{ pkg.version }}
       </div> -->
 
-      <OuiButton @click="toggleDark" @dblclick="dark = !dark">
+      <OuiButton @click="toggleDark()" @dblclick="dark = !dark">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-moon"><path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.9 4.9 1.4 1.4" /><path d="m17.7 17.7 1.4 1.4" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.3 17.7-1.4 1.4" /><path d="m19.1 4.9-1.4 1.4" /></svg>
       </OuiButton>
 

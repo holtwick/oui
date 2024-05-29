@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import './oui-form-item.styl'
+
 defineProps<{
   title?: string
   description?: string

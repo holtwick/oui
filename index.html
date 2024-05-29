@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">    
-    <title>Oui</title>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" href="/logo.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png">
-    <link rel="manifest" href="/manifest.webmanifest"> 
-  </head>
-  <body>
-    <noscript>
-      <strong>
-        We're sorry, but this app doesn't work properly without JavaScript enabled. Please enable it to continue.
-      </strong>
-    </noscript>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, height=device-height, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+  <title>Oui</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  <script>
+  const theme = localStorage.getItem('vueuse-color-scheme')
+  if (theme === 'dark' || (theme !== 'light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches))
+    document.documentElement.classList.add('dark')
+  </script>
+
+  <style>
+    .dark {
+      background: black;
+      color: white;
+    }
+  </style>
+
+</head>
+
+<body>
+  <noscript>
+    <strong>
+      We're sorry, but this app doesn't work properly without JavaScript enabled. Please enable it to continue.
+    </strong>
+  </noscript>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
