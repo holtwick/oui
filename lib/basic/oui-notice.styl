@@ -10,6 +10,7 @@
   text-align: center;
   color: var(--s2-fg);
   background: inherit;
+  overflow: auto;
 
   &._notice_cover {
     position: fixed;
@@ -23,8 +24,7 @@
 
   &-body {
     use: stack-y;
-    gap: 16;
-    max-width: unquote("min(40ch, 80%)");
+    max-width: unquote("min(40ch, 75%)");
   }
 
   svg {
@@ -37,10 +37,24 @@
   }
 
   &-icon svg {
+    color: var(--notice-fg);
     size: 64;
   }
 
   &-message {
+    line-height: 1.45;
     white-space: pre-line;
+  }
+
+  &-icon + &-message {
+    margin-top: 24;
+  }
+
+  &-icon + &-title {
+    margin-top: 8;
+  }
+
+  &-title + &-message {
+    margin-top: 24;
   }
 }

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import './oui-form.styl'
+import './oui-input-group.styl'
 </script>
 
 <template>
