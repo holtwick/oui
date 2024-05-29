@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
+import { vFocustrap } from '../modal/oui-modal.focustrap'
+
 import './oui-notice.styl'
-import { immediate } from 'zeed'
 
 defineProps<{
   title?: string
@@ -40,7 +41,7 @@ watch(root, (el) => {
     </Teleport>
   </template>
   <template v-else>
-    <div v-focustrap class="oui-notice">
+    <div class="oui-notice">
       <div class="oui-notice-body">
         <div v-if="$slots.icon" class="oui-notice-icon">
           <slot name="icon" />
