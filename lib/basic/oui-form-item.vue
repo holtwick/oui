@@ -10,10 +10,10 @@ defineProps<{
 </script>
 
 <template>
-  <template v-if="title || $slots.description || description">
+  <template v-if="title != null || $slots.description || description">
     <div class="oui-form-item">
       <label>
-        <div class="oui-form-item-title">
+        <div v-if="title" class="oui-form-item-title">
           {{ title }}
           <span v-if="required">*</span>
         </div>
