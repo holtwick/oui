@@ -107,14 +107,15 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
   <Teleport to="body">
     <Transition
       appear
-      :name="transition ?? `${name}-transition`"
+      :xname="transition ?? `${name}-transition`"
+      name="oui-modal-transition"
       @after-enter="didOpen"
       @after-leave="didClose"
     >
       <div
         v-if="_active"
         ref="root"
-        class="_keyboard_aware_height" :class="{
+        class="oui-modal _keyboard_aware_height" :xclass="{
           [name]: true,
           [$attrs.class as string]: !!$attrs.class,
           _active,

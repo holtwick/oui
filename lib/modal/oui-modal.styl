@@ -4,7 +4,9 @@
   --modal-radius: px(8);
   --modal-separator: transparent;
   --modal-bg: var(--dialog-bg, var(--s2-bg));
-  --modal-speed: 200ms;
+  --modal-speed: 400ms;
+  --modal-blur: 2px;
+  --modal-backdrop: rgba(0, 0, 0, 0.5);
 }
 
 /* .oui-modal-active {
@@ -26,13 +28,12 @@
   top: 0;
   height: var(--visible-height, 100%);
   z-index: -z-index-overlay;
-  background: var(--dialog-backdrop, rgba(0, 0, 0, 0.16));
+  background: var(--modal-backdrop);
   cursor: default;
-  opacity: 1;
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
   will-change: transform;
   isolation: isolate;
+  backdrop-filter: blur(var(--modal-blur));
+  -webkit-backdrop-filter: blur(var(--modal-blur));
 
   // clip-path: rect(0 0 100% 100%);
 
@@ -72,6 +73,7 @@
     border: 1px solid var(--modal-separator);
     border-radius: var(--modal-radius);
     max-height: 75vh;
+    transform: translate3d(0, 0, 0);
 
     @media -media-mobile {
       :has(._modal_sheet) & {
@@ -161,29 +163,33 @@
     padding-bottom: 4;
   }
 
-  transition-property: opacity, padding-bottom, transform, -webkit-backdrop-filter, backdrop-filter;
-  transition-duration: var(--modal-speed);
-  transition-timing-function: ease;
-
-  ._modal_container {
-    transition-property: opacity, padding-bottom, transform, -webkit-backdrop-filter, backdrop-filter;
-    transition-duration: var(--modal-speed);
-    transition-timing-function: ease;
-    transform: translate3d(0, 0, 0);
-  }
-
   &-transition {
-    &-enter-to, &-leave-from {
+    &-enter-active, &-leave-active {
+      transition-property: all;
+      transition-duration: var(--modal-speed);
+      transition-timing-function: ease;
+
+      ._modal_container {
+        transition-property: opacity transform;
+        transition-duration: var(--modal-speed);
+        transition-timing-function: ease;
+      }
+    }
+
+    &-enter-active {
+      animation: oui-blur-in var(--modal-speed);
+    }
+
+    &-leave-active {
+      animation: oui-blur-out var(--modal-speed);
     }
 
     &-enter-from, &-leave-to {
-      opacity: 0;
-      -webkit-backdrop-filter: blur(0);
-      backdrop-filter: blur(0);
+      background-color: rgba(0, 0, 0, 0);
 
       ._modal_container {
-        transform: translate3d(0, 50%, 0);
         opacity: 0;
+        transform: translate3d(0, 50%, 0);
       }
     }
   }
@@ -192,5 +198,34 @@
 .oui-dialog {
   input {
     width: 100%;
+  }
+}
+
+/* Let's define an animation: */
+@keyframes oui-blur-in {
+  from {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    backdrop-filter: blur(var(--modal-blur));
+    -webkit-backdrop-filter: blur(var(--modal-blur));
+    background: var(--modal-backdrop);
+  }
+}
+
+@keyframes oui-blur-out {
+  from {
+    backdrop-filter: blur(var(--modal-blur));
+    -webkit-backdrop-filter: blur(var(--modal-blur));
+    background: var(--modal-backdrop);
+  }
+
+  to {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    background-color: rgba(0, 0, 0, 0);
   }
 }
