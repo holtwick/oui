@@ -25,13 +25,14 @@
   right: 0;
   top: 0;
   height: var(--visible-height, 100%);
-  will-change: transform;
   z-index: -z-index-overlay;
   background: var(--dialog-backdrop, rgba(0, 0, 0, 0.16));
   cursor: default;
   opacity: 1;
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+  will-change: transform;
+  isolation: isolate;
 
   // clip-path: rect(0 0 100% 100%);
 
@@ -91,7 +92,7 @@
           padding-bottom: 0;
 
           ._modal_footer {
-            transition: border var(-modal-speed);
+            transition: border var(--modal-speed);
             --modal-separator: var(--t3-bg);
           }
         }
@@ -160,18 +161,19 @@
     padding-bottom: 4;
   }
 
-  &-transition {
-    &-enter-active, &-leave-active {
-      transition-property: opacity, padding-bottom, transform, -webkit-backdrop-filter, backdrop-filter;
-      transition-duration: var(--modal-speed);
-      transition-timing-function: ease;
+  transition-property: opacity, padding-bottom, transform, -webkit-backdrop-filter, backdrop-filter;
+  transition-duration: var(--modal-speed);
+  transition-timing-function: ease;
 
-      ._modal_container {
-        transition-property: opacity, padding-bottom, transform, -webkit-backdrop-filter, backdrop-filter;
-        transition-duration: var(--modal-speed);
-        transition-timing-function: ease;
-        transform: translate3d(0, 0, 0);
-      }
+  ._modal_container {
+    transition-property: opacity, padding-bottom, transform, -webkit-backdrop-filter, backdrop-filter;
+    transition-duration: var(--modal-speed);
+    transition-timing-function: ease;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-transition {
+    &-enter-to, &-leave-from {
     }
 
     &-enter-from, &-leave-to {
