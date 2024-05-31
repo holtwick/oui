@@ -4,6 +4,10 @@ import { vFocustrap } from '../modal/oui-modal.focustrap'
 
 import './oui-notice.styl'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 defineProps<{
   title?: string
   cover?: boolean
@@ -24,7 +28,7 @@ watch(root, (el) => {
   <template v-if="cover">
     <Teleport to="body" :disabled="!cover">
       <div ref="root" v-focustrap class="oui-notice _notice_cover _keyboard_aware_height" data-noscroll="true">
-        <div class="oui-notice-body">
+        <div class="oui-notice-body" v-bind="$attrs">
           <div v-if="$slots.icon" class="oui-notice-icon">
             <slot name="icon" />
           </div>
@@ -42,7 +46,7 @@ watch(root, (el) => {
   </template>
   <template v-else>
     <div class="oui-notice">
-      <div class="oui-notice-body">
+      <div class="oui-notice-body" v-bind="$attrs">
         <div v-if="$slots.icon" class="oui-notice-icon">
           <slot name="icon" />
         </div>
