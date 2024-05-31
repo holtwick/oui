@@ -8,7 +8,7 @@ export function useDialog<T extends Component>(component?: T) {
   let cancel: any
 
   async function showDialog<T>(props: any) {
-    const dialogApp = mountComponentAsApp<T>(component ?? OuiDialog, props, 200)
+    const dialogApp = mountComponentAsApp<T>(component ?? OuiDialog, props, 400)
     cancel = dialogApp.cancel
 
     // This will fix focussing on iOS, because it only works onClick
