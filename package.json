@@ -70,6 +70,7 @@
     "preview": "vite preview",
     "start": "nr dev",
     "test": "vitest",
+    "test:ui": "vitest -browser -r .",
     "upload": "nr build:demo && rsync -rvz dist/* cy:public_html/oui.holtwick.de"
   },
   "dependencies": {
@@ -79,26 +80,30 @@
     "zeed": "^0.20.7"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.19.1",
+    "@antfu/eslint-config": "^2.20.0",
     "@antfu/ni": "^0.21.12",
-    "@shikijs/markdown-it": "^1.6.1",
+    "@shikijs/markdown-it": "^1.6.2",
+    "@testing-library/dom": "^10.1.0",
     "@tsconfig/node18": "^18.2.4",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.13",
+    "@types/node": "^20.14.0",
     "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-vue": "^5.0.5",
+    "@vitest/browser": "2.0.0-beta.7",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
+    "context": "link:@vitest/browser/context",
     "eslint": "<9",
     "only-allow": "^1.2.1",
+    "playwright": "^1.44.1",
     "stylus": "^0.63.0",
-    "tsup": "^8.0.2",
+    "tsup": "^8.1.0",
     "typescript": "^5.4.5",
     "unplugin-vue-markdown": "^0.26.2",
     "vite": "^5.2.12",
     "vite-plugin-dts": "^3.9.1",
     "vite-plugin-qrcode": "^0.2.3",
-    "vitest": "^1.6.0",
+    "vitest": "2.0.0-beta.7",
     "vue-tsc": "^2.0.19"
   }
 }
