@@ -24,7 +24,7 @@ import { OuiText } from '@/lib'
       <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu
       leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed
       posuere consectetur est at lobortis. Cras mattis consectetur purus sit
-      amet fermentum.
+      amet fermentum. <a class="oui-button" href="https://holtwick.de" target="_blank">Button Link</a>
     </p>
     <blockquote>
       <p>
