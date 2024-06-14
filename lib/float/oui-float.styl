@@ -13,10 +13,14 @@
 
   $oui-float-arrow-size = px(12);
   $oui-float-arrow-indent-factor = 0.7;
-  --float-color: inherit;
-  --float-background: transparent;
-  --float-border: none;
-  --float-shadow: none;
+
+  :where(&) {
+    --float-color: inherit;
+    --float-background: transparent;
+    --float-border: none;
+    --float-shadow: none;
+  }
+
   z-index: -z-index-popover;
 
   &._tooltip {
@@ -39,12 +43,13 @@
     min-width: 24;
   }
 
-  &._dropdown {
+  :where(&._dropdown) {
     // for selecting input values
     --float-color: var(--fg);
-    --float-background: white;
-    --float-border: 1px solid $border-color; // 0px 0px 0px 1px #000000;
-    --float-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
+    --float-background: var(--bg);
+    --float-border: 1px solid var(--t3-bg); // 0px 0px 0px 1px #000000;
+    --float-shadow: rgba(15, 15, 15, 0.2) 0 9px 24px;
+    // --float-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px;
     min-width: px(200);
     border-radius: px(4);
   }
