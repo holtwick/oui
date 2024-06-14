@@ -127,7 +127,7 @@ Yeah!"
     <p>
       TRIGGER
 
-      <OuiFloat placement="right" :offset="10" close hover>
+      <OuiFloat placement="right" :offset="10" close hover class="oui-float _dropdown">
         <template #trigger="{ active }">
           <OuiButton>OuiFloat #click {{ active }}</OuiButton>
         </template>
@@ -178,6 +178,27 @@ Yeah!"
     </OuiButton>
     <OuiFloat v-model="show4" :reference="button">
       This is the popover
+    </OuiFloat>
+
+    <br>
+
+    <OuiFloat
+      placement="bottom"
+      :offset="10"
+      close
+      hover
+      arrow
+      class="oui-float _dropdown"
+      transition="oui-float-transition"
+    >
+      <template #trigger>
+        <OuiButton>APPS</OuiButton>
+      </template>
+
+      <ol>
+        <li>App1</li>
+        <li>App2</li>
+      </ol>
     </OuiFloat>
   </OuiText>
 </template>
