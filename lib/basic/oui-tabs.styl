@@ -1,0 +1,18 @@
+@require "../../stylus/index.styl";
+
+.oui-tabs {
+  use: stack-y;
+
+  > ._nav {
+    use: stack-x;
+    gap: 8;
+
+    button {
+      cursor: pointer;
+    }
+
+    ._active {
+      font-weight: bold;
+    }
+  }
+}

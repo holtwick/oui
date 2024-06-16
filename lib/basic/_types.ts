@@ -1,7 +1,10 @@
+import type { Component } from 'vue'
+
 export interface OuiTab<K = string> {
   name: K
   title?: string
-  icon?: string
+  icon?: string | Component
+  component?: Component
 }
 
 export interface OuiTableColumn<K = string> {
