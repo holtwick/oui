@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onKeyStroke } from '@vueuse/core'
+import { onKeyStroke, useScrollLock } from '@vueuse/core'
 import { onBeforeUnmount, ref, watch } from 'vue'
 import { OuiClose } from '../basic'
 import { vFocustrap } from './oui-modal.focustrap'
@@ -25,6 +25,8 @@ const emit = defineEmits<{
 }>()
 
 const _active = defineModel({ default: true })
+
+const scrollLock = useScrollLock(window)
 
 onKeyStroke('Escape', (e) => {
   if (_active.value) {
@@ -90,6 +92,8 @@ function didOpen() {
 }
 
 function triggerActiveClass(active: boolean = false) {
+  
+  scrollLock.value = active
   if (active)
     document.documentElement.classList.add('oui-modal-active')
   else
