@@ -11,36 +11,43 @@ const log: LoggerInterface = Logger('app-mobile')
 const info = reactive<any>({})
 
 if (window.visualViewport != null) {
+  let prevVisibleHeight = ''
   function resizeHandler() {
     info.height = window.visualViewport?.height
     info.top = window.visualViewport?.offsetTop
 
     const visibleHeight = `${window.visualViewport?.height.toString()}px`
-    const visibleOffsetTop = `${window.visualViewport?.offsetTop.toString()}px`
+    // const visibleOffsetTop = `${window.visualViewport?.offsetTop.toString()}px`
 
     // Adjust the height!
     document.documentElement.style.height = visibleHeight
 
-    if (document.activeElement?.matches('input,textarea,[contenteditable]')) {
-      document.documentElement.classList.add('virtual-keyboard')
+    if (prevVisibleHeight !== visibleHeight) {
+      if (document.activeElement?.matches('input,textarea,[contenteditable]')) {
+        document.documentElement.classList.add('virtual-keyboard')
 
-      setTimeout(() => {
-        const el = document.activeElement
-        info.focus = el?.outerHTML.slice(0, 20)
-        el?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-          inline: 'center',
-        })
-      },
-      // 400ms takes the virtual keyboard to show up;
-      // other values seem to have an negative effect on the layout
-      400,
-      )
+        setTimeout(() => {
+          const el = document.activeElement
+          if (el?.matches('input,textarea,[contenteditable]')) {
+            info.focus = el?.outerHTML.slice(0, 20)
+            el?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+              inline: 'center',
+            })
+          }
+        },
+        // 400ms takes the virtual keyboard to show up;
+        // other values seem to have an negative effect on the layout
+        400,
+        )
+      }
+      else {
+        document.documentElement.classList.remove('virtual-keyboard')
+      }
     }
-    else {
-      document.documentElement.classList.remove('virtual-keyboard')
-    }
+
+    prevVisibleHeight = visibleHeight
 
     log('new height', visibleHeight, window.visualViewport)
     // rootCss.setProperty('--visible-height', visibleHeight)
