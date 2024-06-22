@@ -98,3 +98,4 @@ zerva-bin/bin.cjs
 *.tsbuildinfo
 
 _archive
+bun.lockb

@@ -4,6 +4,7 @@ import { Logger } from 'zeed'
 
 const log: LoggerInterface = Logger('singleton')
 
+/** In an app only have one Vue Component of it at all, like OuiXXXActivator */
 export function useSingleton(name: string) {
   const g = globalThis as any
   g.__ouiSingletons = g.__ouiSingletons ?? {}
@@ -14,4 +15,16 @@ export function useSingleton(name: string) {
   g.__ouiSingletons[name] = true
   onBeforeUnmount(() => g.__ouiSingletons[name] = false)
   return true
+}
+
+/** In an app can only have one object of this type */
+export function createSingleton<T>(name: string, create: () => T): T { // dispose?: UseDispose
+  const g = globalThis as any
+  g.__ouiSingletonObjects = g.__ouiSingletonObjects ?? {}
+  let value = g.__ouiSingletonObjects[name] as T | undefined
+  if (value == null) {
+    value = create()
+    g.__ouiSingletonObjects[name] = create()
+  }
+  return value
 }
