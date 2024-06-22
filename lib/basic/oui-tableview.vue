@@ -1,10 +1,11 @@
 <script lang="ts" setup generic="K extends string, T extends Record<K, any>">
-import { computed, reactive, ref, watch } from 'vue'
+import { useLocalStorage } from '@vueuse/core'
+import { computed, ref, watch } from 'vue'
 import { arraySetArrayInPlace, arraySum, parseOrderby } from 'zeed'
 import type { OuiTableColumn } from './_types'
+import { px } from './lib'
 import OuiSeparator from './oui-separator.vue'
 import OuiVirtualList from './oui-virtual-list.vue'
-import { px } from './lib'
 
 import './oui-tableview.styl'
 
@@ -40,17 +41,18 @@ const modelSelected = defineModel<number | undefined>()
 const sortName = computed(() => parseOrderby(modelSort.value).field)
 const sortAsc = computed(() => parseOrderby(modelSort.value).asc)
 
-const widths = reactive<number[]>([])
+const widthsPlain = props.columns.map(c => c.width ?? 120)
+const widths = props.name ? useLocalStorage<number[]>(`oui.tableview.${props.name}.widths`, widthsPlain) : ref(widthsPlain)
 
 watch(() => [props.data, props.fillLast], () => {
-  let values = props.columns.map(c => c.width ?? 120)
+  let values = props.columns.map((c, i) => widths.value[i] ?? c.width ?? 120)
   if (props.fillLast)
     values = values.slice(0, -1)
-  arraySetArrayInPlace(widths, values)
+  arraySetArrayInPlace(widths.value, values)
 }, { immediate: true })
 
 const tableStyle = computed(() => {
-  const values = widths.map(w => px(w ?? 120))
+  const values = widths.value.map(w => px(w ?? 120))
   if (props.fillLast)
     values.push('auto')
   return `--tableview-columns: ${values.join(' ')}`
@@ -168,7 +170,6 @@ function scrollX(x: number) {
         :min-size="columns[i].minWidth ?? 80"
         :max-size="columns[i].maxWidth ?? 300"
         :style="{ left: px(arraySum(widths.slice(0, i + 1)) - 1 - marginLeft) }"
-        :name="`oui.tableview.${name}.col.size.${i}`"
       />
     </template>
   </div>
