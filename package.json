@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.21.5",
+  "version": "0.21.6",
   "author": {
     "email": "dirk.holtwick@gmail.com",
     "name": "Dirk Holtwick",
@@ -75,16 +75,16 @@
   "dependencies": {
     "@floating-ui/vue": "^1.0.6",
     "@vueuse/core": "^10.11.0",
-    "vue": "^3.4.29",
-    "zeed": "^0.20.7"
+    "vue": "^3.4.30",
+    "zeed": "^0.21.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.1",
     "@antfu/ni": "^0.21.12",
-    "@shikijs/markdown-it": "^1.6.5",
+    "@shikijs/markdown-it": "^1.9.0",
     "@tsconfig/node18": "^18.2.4",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.8",
     "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/test-utils": "^2.4.6",
@@ -93,12 +93,12 @@
     "only-allow": "^1.2.1",
     "stylus": "^0.63.0",
     "tsup": "^8.1.0",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "unplugin-vue-markdown": "^0.26.2",
     "vite": "^5.3.1",
     "vite-plugin-dts": "^3.9.1",
     "vite-plugin-qrcode": "^0.2.3",
     "vitest": "^1.6.0",
-    "vue-tsc": "^2.0.21"
+    "vue-tsc": "^2.0.22"
   }
 }
