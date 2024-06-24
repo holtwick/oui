@@ -1,3 +1,4 @@
+<!-- eslint-disable no-alert -->
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import OuiDialogExample from './oui-dialog.example.vue'
@@ -8,19 +9,32 @@ const state = reactive({
   value: null,
 })
 
-const { alert, confirm, prompt } = useDialog()
+const dialog = useDialog()
 const { open } = useDialog(OuiDialogExample)
+
+function classicAlert() {
+  alert('Hello World')
+}
+
+function classicConfirm() {
+  confirm('Hello World')
+}
+
+function classicPrompt() {
+  prompt('Hello World')
+}
 </script>
 
 <template>
-  <div>
-    <OuiButton @click="alert('Hello World')">
+  <h2>Modern</h2>
+  <p>
+    <OuiButton @click="dialog.alert('Hello World')">
       Alert
     </OuiButton>
-    <OuiButton @click="confirm('Hello World').then(v => state.value = v as any)">
+    <OuiButton @click="dialog.confirm('Hello World').then(v => state.value = v as any)">
       Confirm
     </OuiButton>
-    <OuiButton @click="prompt('Hello World').then(v => state.value = v as any)">
+    <OuiButton @click="dialog.prompt('Hello World').then(v => state.value = v as any)">
       Prompt
     </OuiButton>
     <OuiButton @click="open().then(v => state.value = v as any)">
@@ -32,6 +46,18 @@ const { open } = useDialog(OuiDialogExample)
     <br>
 
     <pre>result = {{ state.value }}</pre>
-  </div>
+  </p>
+  <h2>Classic</h2>
+  <p>
+    <OuiButton @click="classicAlert()">
+      Alert
+    </OuiButton>
+    <OuiButton @click="classicConfirm()">
+      Confirm
+    </OuiButton>
+    <OuiButton @click="classicPrompt()">
+      Prompt
+    </OuiButton>
+  </p>
   <OuiDemo :state="state" />
 </template>
