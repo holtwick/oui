@@ -6,6 +6,7 @@ const state = reactive({
   value: 'Secr3!',
   placeholder: 'Enter Password',
   showMeter: true,
+  showVisibilty: true,
   required: false,
 })
 </script>
@@ -17,6 +18,7 @@ const state = reactive({
       title="Password"
       :placeholder="state.placeholder"
       :show-meter="state.showMeter"
+      :show-visibility="state.showVisibilty"
       :required="state.required"
     />
   </div>
@@ -24,6 +26,7 @@ const state = reactive({
     <OuiInput v-model="state.value" title="value" />
     <OuiInput v-model="state.placeholder" title="placeholder" />
     <OuiCheckbox v-model="state.showMeter" switch title="showMeter" />
+    <OuiCheckbox v-model="state.showVisibilty" switch title="showVisibilty" />
     <OuiCheckbox v-model="state.required" switch title="required" />
   </OuiDemo>
 </template>

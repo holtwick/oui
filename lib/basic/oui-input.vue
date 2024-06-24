@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type InputTypeHTMLAttribute, ref, watch } from 'vue'
+import { type InputTypeHTMLAttribute, onBeforeUnmount, ref, watch } from 'vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
@@ -17,23 +17,39 @@ const props = withDefaults(defineProps<{
   type?: InputTypeHTMLAttribute // 'text' | 'url' | 'email' | 'tel' | 'search'
   id?: string
   lazy?: boolean
+  lazyDelay?: number
 }>(), {
   type: 'text',
+  lazyDelay: 1000,
 })
 
 const model = defineModel<string | undefined>({ required: true })
 
 const value = ref('')
 
+let timeout: any
+
+function stopTimeout() {
+  clearTimeout(timeout)
+}
+
+onBeforeUnmount(stopTimeout)
+
 watch(value, (v) => {
-  if (!props.lazy)
+  if (!props.lazy) {
     model.value = v
+  }
+  else if (props.lazyDelay > 0) {
+    stopTimeout()
+    timeout = setTimeout(() => model.value = v, props.lazyDelay)
+  }
 })
 
 watch(() => model.value, v => value.value = v ?? '', { immediate: true })
 
 function lazyUpdate() {
   if (props.lazy) {
+    stopTimeout()
     model.value = value.value
   }
 }
