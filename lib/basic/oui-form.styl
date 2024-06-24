@@ -2,4 +2,25 @@
 
 .oui {
   oui-form();
+
+  &-input-container {
+    use: stack-x;
+    padding-x: 0;
+
+    input {
+      padding-x: 8;
+      width: auto;
+      use: stack-item-grow;
+    }
+
+    button {
+      cursor: pointer;
+      padding-x: 4;
+    }
+
+    svg {
+      display: block;
+      size: 20;
+    }
+  }
 }

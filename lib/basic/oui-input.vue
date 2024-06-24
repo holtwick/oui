@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type InputTypeHTMLAttribute, computed, reactive, ref, watch } from 'vue'
+import { type InputTypeHTMLAttribute, computed, reactive, ref, useSlots, watch } from 'vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
@@ -21,23 +21,16 @@ const props = withDefaults(defineProps<{
   type: 'text',
 })
 
-const model = defineModel({ required: true })
+const model = defineModel<string | undefined>({ required: true })
 
 const value = ref('')
 
-watch(
-  value,
-  (v) => {
-    if (!props.lazy)
-      model.value = value
-  },
-  { immediate: true })
+watch(value, (v) => {
+  if (!props.lazy)
+    model.value = v
+}, { immediate: true })
 
-watch(() => model.value,
-  (v) => {
-    value.value = v
-  },
-  { immediate: true })
+watch(() => model.value, v => value.value = v ?? '', { immediate: true })
 
 function lazyUpdate() {
   if (props.lazy) {
@@ -53,14 +46,30 @@ function lazyUpdate() {
     :description="description"
     :required="required"
   >
-    <input
-      :id="id"
-      v-model="value"
-      :type="type"
-      class="oui-input oui-input-string"
-      v-bind="$attrs"
-      @blur="lazyUpdate"
-      @keypress.enter="lazyUpdate"
-    >
+    <template v-if="$slots.start || $slots.end">
+      <div class="oui-input oui-input-container">
+        <slot name="start" />
+        <input
+          :id="id"
+          v-model="value"
+          :type="type"
+          v-bind="$attrs"
+          @blur="lazyUpdate"
+          @keypress.enter="lazyUpdate"
+        >
+        <slot name="end" />
+      </div>
+    </template>
+    <template v-else>
+      <input
+        :id="id"
+        v-model="value"
+        :type="type"
+        class="oui-input oui-input-string"
+        v-bind="$attrs"
+        @blur="lazyUpdate"
+        @keypress.enter="lazyUpdate"
+      >
+    </template>
   </OuiFormItem>
 </template>
