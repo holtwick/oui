@@ -38,17 +38,18 @@ function doCancel() {
   active.value = false
 }
 
-const fallbackTitles: Record<string, string> = {
-  alert: 'Alert',
-  confirm: 'Confirm',
-  prompt: 'Prompt',
-}
+//  ?? fallbackTitles[mode]
+// const fallbackTitles: Record<string, string> = {
+//   alert: 'Alert',
+//   confirm: 'Confirm',
+//   prompt: 'Prompt',
+// }
 </script>
 
 <template>
   <OuiModal
     v-model="active"
-    :title="title ?? fallbackTitles[mode]"
+    :title="title"
     :no-sheet="mode !== 'dialog'"
     size="small"
     class="oui-dialog"
