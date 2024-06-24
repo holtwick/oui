@@ -8,19 +8,21 @@
     padding-x: 0;
 
     input {
-      padding-x: 8;
-      width: auto;
       use: stack-item-grow;
+      width: auto;
+      padding-x: 8;
     }
 
     button {
       cursor: pointer;
-      padding-x: 4;
+      padding-x: 8;
     }
 
     svg {
-      display: block;
-      size: 20;
+      display: flex;
+      flex-shrink: 0;
+      flex-grow: 0;
+      size: 1em;
     }
   }
 }

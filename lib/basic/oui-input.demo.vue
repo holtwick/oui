@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 import { OuiCheckbox, OuiDemo, OuiInput, OuiSelect } from '../lib'
 
 const state = reactive({
-  value: '',
+  value: 'Hello World',
   lazy: true,
   required: false,
   title: 'Title',

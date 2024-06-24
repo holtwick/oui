@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type InputTypeHTMLAttribute, computed, reactive, ref, useSlots, watch } from 'vue'
+import { type InputTypeHTMLAttribute, ref, watch } from 'vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
@@ -28,7 +28,7 @@ const value = ref('')
 watch(value, (v) => {
   if (!props.lazy)
     model.value = v
-}, { immediate: true })
+})
 
 watch(() => model.value, v => value.value = v ?? '', { immediate: true })
 
