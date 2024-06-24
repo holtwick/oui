@@ -40,10 +40,10 @@ const state = reactive({
       </OuiText>
     </template>
     <template v-if="state.footer" #footer>
-      <OuiButton mode="secondary">
+      <OuiButton mode="secondary" @click="state.show = false">
         Cancel
       </OuiButton>
-      <OuiButton mode="primary">
+      <OuiButton mode="primary" @click="state.show = false">
         OK
       </OuiButton>
     </template>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { getTimestamp } from 'zeed'
-import { OuiDatetime, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
+import { OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 
 const state = reactive({
   value1: '',
@@ -27,4 +27,5 @@ const state = reactive({
     <OuiSelect v-model="state.select" title="Select" :options="['One', 'Two', 'Three']" />
     <OuiDatetime v-model="state.datetime" title="Date and Time" />
   </div>
+  <OuiDemo :state="state" />
 </template>
