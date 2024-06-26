@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useEventListener } from '@vueuse/core'
-import { onMounted } from 'vue'
+import { nextTick, onMounted } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 import { useSingleton } from '../basic/singleton'
@@ -25,28 +25,33 @@ if (useSingleton('oui-mobile')) {
     let timer: any
     let virtualKeyboardActive = false
 
-    function resizeHandler() {
+    async function resizeHandler() {
     // Adjust the height!
       const height = `${window.visualViewport?.height.toString()}px`
       log(`resize height=${height}`)
       // document.documentElement.style.height = `${window.visualViewport?.height.toString()}px`
       document.documentElement.style.setProperty('--visible-height', height)
 
+      await nextTick()
+
       // Try to guess, if the virtual keyboard did show up
       // https://stackoverflow.com/questions/497094/how-do-i-find-out-which-dom-element-has-the-focus
       virtualKeyboardActive = document.activeElement?.matches('input,textarea,[contenteditable]') ?? false
       if (virtualKeyboardActive) {
         document.documentElement.classList.add('virtual-keyboard')
-        // With some delay scroll active/focussed element into view
         clearTimeout(timer)
+
+        // With some delay scroll active/focussed element into view
         timer = setTimeout(() => {
-          log('scroll into view', document.activeElement)
-          document.activeElement?.scrollIntoView({
+          if (document.activeElement?.matches('input,textarea,[contenteditable]')) {
+            log('scroll into view', document.activeElement)
+            document.activeElement?.scrollIntoView({
             // behavior: 'smooth',
-            behavior: 'instant',
-            block: 'nearest',
-            inline: 'nearest',
-          })
+              behavior: 'instant',
+              block: 'nearest',
+              inline: 'nearest',
+            })
+          }
         }, keyboardAnimationDuration)
       }
       else {
