@@ -60,11 +60,12 @@ oui-text() {
     text-decoration-skip: ink edges;
   }
 
-  a[class=""], a:not([class]) {
+  a {
     color: var(--link-fg);
 
     &:hover {
       color: var(--link-fg-hover);
+      text-decoration: underline;
     }
 
     &:active {
