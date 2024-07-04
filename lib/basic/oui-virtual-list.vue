@@ -35,6 +35,7 @@ const paddingTop = ref(margin)
 let containerSize = 0
 let isScrollBusy = false
 let lastScrollX = 0
+let didUserScroll = false
 
 function handleScroll() {
   if (!root.value)
@@ -69,18 +70,13 @@ function handleScroll() {
     paddingTop.value = range[0] * rowHeight.value + margin
 
     emit('scrollX', root.value.scrollLeft)
+
+    // Scroll to end
+    if (props.scrollToEnd && !isScrollBusy && !didUserScroll) {
+      root.value.scrollTop = scrollHeight.value
+    }
   })
 }
-
-watch(data, (cData) => {
-  scrollHeight.value = cData.length * rowHeight.value
-})
-
-watch(rowHeight, (cRowHeight) => {
-  scrollHeight.value = data.value.length * cRowHeight
-})
-
-watch(() => data.value.length, handleScroll)
 
 // useOnBus('listScrollTop', () => {
 //   if (root.value)
@@ -99,6 +95,21 @@ function scrollToEnd() {
 
 watch(() => props.scrollToEnd, scrollToEnd)
 
+watch(() => data.value.length, (l) => {
+  scrollHeight.value = l * rowHeight.value
+  handleScroll()
+})
+
+watch(rowHeight, (cRowHeight) => {
+  scrollHeight.value = data.value.length * cRowHeight
+})
+
+function handleUserScroll() {
+  const bottomScroll = root.value ? root.value.scrollTop + root.value.clientHeight + 1 : 0
+  handleScroll()
+  didUserScroll = scrollHeight.value > bottomScroll
+}
+
 onMounted(() => {
   if (!root.value)
     return
@@ -113,7 +124,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="root" class="oui-virtual-list" @scroll.passive="handleScroll">
+  <div ref="root" class="oui-virtual-list" @scroll.passive="handleUserScroll">
     <div :style="`height: ${px(scrollHeight)}; padding-top: ${px(paddingTop)}`">
       <template v-for="(item, index) in data.slice(indexFirst, indexLast)" :key="indexFirst + index">
         <div :style="{ height: `${px(rowHeight)}` }">
