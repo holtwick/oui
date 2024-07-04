@@ -56,7 +56,7 @@ async function doCancel() {
           Delete
         </OuiButton>
         <div class="_space" />
-        <OuiButton :disabled="wait" mode="secondary" @click="doCancel">
+        <OuiButton :disabled="wait" mode="neutral" @click="doCancel">
           Cancel
         </OuiButton>
         <OuiButton :disabled="wait" @click="doConfirm">

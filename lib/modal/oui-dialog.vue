@@ -67,7 +67,7 @@ function doCancel() {
     </OuiText>
     <template #footer>
       <OuiButton
-        mode="secondary"
+        mode="neutral"
         @click="doCancel"
       >
         {{ cancel ?? 'Cancel' }}
