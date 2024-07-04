@@ -53,6 +53,6 @@ const date = computed({
     :description="description"
     :required="required"
   >
-    <input v-model="date" type="datetime-local" class="oui-input oui-input-datetime">
+    <input :id="id" v-model="date" type="datetime-local" class="oui-input oui-input-datetime">
   </OuiFormItem>
 </template>

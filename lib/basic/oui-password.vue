@@ -37,6 +37,7 @@ const show = ref(false)
   >
     <div class="oui-password">
       <OuiInput
+        :id="id"
         v-model="model"
         :type="show ? 'text' : 'password'"
         :placeholder="placeholder"
