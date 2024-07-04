@@ -27,7 +27,7 @@ const allOptions = computed(() => (props.options ?? []).map(v => isPrimitive(v) 
     :description="description"
     :required="required"
   >
-    <select v-model="model" v-bind="$attrs" class="oui-select">
+    <select v-bind="$attrs" :id="id" v-model="model" class="oui-select">
       <slot>
         <template v-for="[key, value] in allOptions" :key="key">
           <option :value="key">
