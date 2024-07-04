@@ -6,7 +6,7 @@ export type LogOui = LoggerInterface & {
   messages: LogMessage[]
 }
 
-export function useLog(name: string): LogOui {
+export function useLog(name?: string): LogOui {
   const messages: LogMessage[] = reactive([])
   const logger = LoggerContext()
   logger.setHandlers([

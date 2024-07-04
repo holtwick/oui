@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { useIntervalFn, useTimeoutFn } from '@vueuse/core'
+import { useIntervalFn } from '@vueuse/core'
 import { uuid } from 'zeed'
-import OuiText from './oui-text.vue'
-import { OuiLog, useLog } from '@/lib'
+import { OuiLog, OuiText, useLog } from '@/lib'
 
 const log = useLog('test')
 
