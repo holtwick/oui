@@ -6,6 +6,7 @@ export interface OuiMenuItem {
   disabled?: boolean
   close?: boolean
   url?: string
+  path?: string
   // blocked?: boolean
   action?: (item: OuiMenuItem, ...args: any[]) => void
 }
