@@ -12,12 +12,16 @@ const simpleMenu = useMenu([
   },
   {},
   {
-    title: `XYZ`,
+    title: `action XYZ`,
     action: self => log('action', self),
   },
   {
-    title: `holtwick.de`,
+    title: `url holtwick.de`,
     url: 'https://holtwick.de/en/imprint',
+  },
+  {
+    title: `path /test`,
+    path: '/test',
   },
 ])
 
