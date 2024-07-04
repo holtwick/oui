@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<{
   scrollToEnd?: boolean
   rowAttrs?: (item: T, index: number) => any // Record<string, string>
   name?: string
+  resizeable?: boolean
 }>(), {
   rowHeight: 44,
   header: true,
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<{
   selectable: true,
   fillLast: true,
   scrollToEnd: false,
+  resizeable: true,
   rowAttrs: () => ({}),
 })
 
@@ -42,7 +44,7 @@ const sortName = computed(() => parseOrderby(modelSort.value).field)
 const sortAsc = computed(() => parseOrderby(modelSort.value).asc)
 
 const widthsPlain = props.columns.map(c => c.width ?? 120)
-const widths = props.name ? useLocalStorage<number[]>(`oui.tableview.${props.name}.widths`, widthsPlain) : ref(widthsPlain)
+const widths = props.name && props.resizeable ? useLocalStorage<number[]>(`oui.tableview.${props.name}.widths`, widthsPlain) : ref(widthsPlain)
 
 watch(() => [props.data, props.fillLast], () => {
   let values = props.columns.map((c, i) => widths.value[i] ?? c.width ?? 120)
@@ -163,14 +165,16 @@ function scrollX(x: number) {
         </template>
       </div>
     </div>
-    <template v-for="w, i in widths" :key="i">
-      <OuiSeparator
-        v-model="widths[i]"
-        side="right"
-        :min-size="columns[i].minWidth ?? 80"
-        :max-size="columns[i].maxWidth ?? 300"
-        :style="{ left: px(arraySum(widths.slice(0, i + 1)) - 1 - marginLeft) }"
-      />
+    <template v-if="resizeable">
+      <template v-for="w, i in widths" :key="i">
+        <OuiSeparator
+          v-model="widths[i]"
+          side="right"
+          :min-size="columns[i].minWidth ?? 80"
+          :max-size="columns[i].maxWidth ?? 300"
+          :style="{ left: px(arraySum(widths.slice(0, i + 1)) - 1 - marginLeft) }"
+        />
+      </template>
     </template>
   </div>
 </template>

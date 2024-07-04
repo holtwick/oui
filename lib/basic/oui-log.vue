@@ -98,8 +98,8 @@ watch(() => props.log.messages.length, updateLogs)
 updateLogs()
 
 const columns: OuiTableColumn[] = [
-  { title: 'Time', name: 'time', sortable: false },
-  { title: 'Tag', name: 'tag', sortable: false },
+  { title: 'Time', name: 'time', sortable: false, width: 96, align: 'right' },
+  // { title: 'Tag', name: 'tag', sortable: false },
   { title: 'Message', name: 'message', sortable: false },
 ]
 
@@ -118,6 +118,7 @@ const columns: OuiTableColumn[] = [
     :row-attrs="(item: any) => ({ style: `background: ${item.background}` })"
     :header="false"
     :scroll-to-end="true"
+    :resizeable="false"
   >
     <template #col-time="{ item }">
       <span style="color: #888; white-space:pre">

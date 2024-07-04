@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useIntervalFn, useTimeoutFn } from '@vueuse/core'
 import { uuid } from 'zeed'
+import OuiText from './oui-text.vue'
 import { OuiLog, useLog } from '@/lib'
 
 const log = useLog('test')
@@ -18,8 +19,10 @@ useIntervalFn(() => {
 </script>
 
 <template>
-  <h2>Virtual List</h2>
-  <div>
-    <OuiLog :log="log" />
-  </div>
+  <OuiText>
+    <h2>Virtual List</h2>
+    <div>
+      <OuiLog :log="log" />
+    </div>
+  </OuiText>
 </template>
