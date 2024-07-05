@@ -29,21 +29,7 @@ async function doAction(item: OuiMenuItem) {
 <template>
   <nav class="_menu" @contextmenu.stop.prevent="">
     <template v-for="(item, i) in items" :key="i">
-      <template v-if="item.path">
-        <router-link
-          :to="item.path"
-          class="_menu_item"
-          :class="{
-            _menu_disabled: item.disabled === true,
-            _menu_checked_possible: item.checked != null,
-            _menu_checked: typeof item.checked === 'function' ? item.checked(item) : !!item.checked,
-          }"
-          :data-test-menu="item.title"
-        >
-          {{ item.title }}
-        </router-link>
-      </template>
-      <template v-else-if="item.title">
+      <template v-if="item.title">
         <a
           class="_menu_item"
           :class="{
