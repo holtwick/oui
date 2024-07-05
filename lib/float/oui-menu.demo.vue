@@ -19,10 +19,6 @@ const simpleMenu = useMenu([
     title: `url holtwick.de`,
     url: 'https://holtwick.de/en/imprint',
   },
-  {
-    title: `path /test`,
-    path: '/test',
-  },
 ])
 
 const menu = useMenuWithValue((item: number) => [{

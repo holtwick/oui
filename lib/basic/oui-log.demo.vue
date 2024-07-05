@@ -21,7 +21,7 @@ useIntervalFn(() => {
   <OuiText>
     <h2>Virtual List</h2>
     <div>
-      <OuiLog :log="log" />
+      <OuiLog :log="log" style="height: 200px;" />
     </div>
   </OuiText>
 </template>
