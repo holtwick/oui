@@ -3,6 +3,10 @@ import { computed } from 'vue'
 
 import './oui-form.styl'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 const props = withDefaults(defineProps<{
   title?: string
   switch?: boolean
@@ -36,12 +40,12 @@ const klass = computed(() => {
 <template>
   <template v-if="title || $slots.default">
     <label>
-      <input v-model="modelBool" type="checkbox" :class="klass">
+      <input v-model="modelBool" type="checkbox" :class="klass" v-bind="$attrs">
       {{ ' ' }}
       <slot>{{ title }}</slot>
     </label>
   </template>
   <template v-else>
-    <input v-model="modelBool" type="checkbox" :class="klass">
+    <input v-model="modelBool" type="checkbox" :class="klass" v-bind="$attrs">
   </template>
 </template>

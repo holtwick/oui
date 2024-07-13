@@ -1,16 +1,21 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { LogMessage } from 'zeed'
-import { Uint8ArrayToHexDump, browserSelectColorByName, formatMilliseconds, isArray, isString, logMessageFromCompact } from 'zeed'
+import { Uint8ArrayToHexDump, browserSelectColorByName, formatMilliseconds, isArray, isNotEmpty, isNotNull, isString, logMessageFromCompact } from 'zeed'
 import type { OuiTableColumn } from './_types'
 import type { LogOui } from './log'
 import OuiTableview from './oui-tableview.vue'
 
 import './oui-log.styl'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   log: LogOui
-}>()
+  showTime?: boolean
+  showTag?: boolean
+}>(), {
+  showTime: true,
+  showTag: true,
+})
 
 const selected = ref<number>()
 
@@ -43,7 +48,7 @@ function renderMessages(
   messages: any[],
   opt: RenderMessagesOptions = {},
 ): any[] {
-  return formatMessages(messages, opt)
+  return formatMessages(messages, opt) ?? '?'
 }
 
 function handlerLogInfo(msg: LogMessage) {
@@ -68,7 +73,7 @@ function handlerLogInfo(msg: LogMessage) {
 const logs = ref<any>([])
 
 function updateLogs() {
-  const ll: LogMessage[] = [...props.log.messages] ?? []
+  const ll: LogMessage[] = [...props.log.messages]
   const first = ll[0]
   const compact = isArray(first)
   let timestamp = (compact ? first[0] : first?.timestamp) ?? 0
@@ -97,11 +102,15 @@ watch(() => props.log.messages.length, updateLogs)
 
 updateLogs()
 
-const columns: OuiTableColumn[] = [
-  { title: 'Time', name: 'time', sortable: false, width: 96, align: 'right' },
-  // { title: 'Tag', name: 'tag', sortable: false },
-  { title: 'Message', name: 'message', sortable: false },
-]
+const columns = computed(() => {
+  const cols: OuiTableColumn[] = []
+  if (props.showTime)
+    cols.push({ title: 'Time', name: 'time', sortable: false, width: 96, align: 'right' })
+  if (props.showTag)
+    cols.push({ title: 'Tag', name: 'tag', sortable: false })
+  cols.push({ title: 'Message', name: 'message', sortable: false })
+  return cols
+})
 
 // const selectedItem = computed(() => list.value[selected.value ?? -1])
 </script>
