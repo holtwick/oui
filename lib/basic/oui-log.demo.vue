@@ -1,9 +1,15 @@
 <script lang="ts" setup>
 import { useIntervalFn } from '@vueuse/core'
 import { uuid } from 'zeed'
-import { OuiLog, OuiText, useLog } from '@/lib'
+import { reactive } from 'vue'
+import { OuiCheckbox, OuiDemo, OuiLog, OuiText, useLog } from '@/lib'
 
 const log = useLog('test')
+
+const state = reactive({
+  showTime: true,
+  showTag: true,
+})
 
 log('Hello World')
 log.info('Info')
@@ -21,7 +27,17 @@ useIntervalFn(() => {
   <OuiText>
     <h2>Virtual List</h2>
     <div>
-      <OuiLog :log="log" style="height: 200px;" />
+      <OuiLog
+        :key="`${state.showTag}-${state.showTime}`"
+        :log="log"
+        style="height: 200px;"
+        :show-tag="state.showTag"
+        :show-time="state.showTime"
+      />
     </div>
   </OuiText>
+  <OuiDemo :state="state">
+    <OuiCheckbox v-model="state.showTime" switch title="showTime" />
+    <OuiCheckbox v-model="state.showTag" switch title="showTag" />
+  </OuiDemo>
 </template>

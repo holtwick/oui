@@ -76,23 +76,23 @@
     "@floating-ui/vue": "^1.1.1",
     "@vueuse/core": "^10.11.0",
     "vue": "^3.4.31",
-    "zeed": "^0.21.0"
+    "zeed": "^0.22.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.2",
-    "@antfu/ni": "^0.21.12",
-    "@shikijs/markdown-it": "^1.10.1",
+    "@antfu/ni": "^0.22.0",
+    "@shikijs/markdown-it": "^1.10.3",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.9",
+    "@types/node": "^20.14.10",
     "@vitejs/plugin-vue": "^5.0.5",
     "eslint": "<9",
     "stylus": "^0.63.0",
     "tsup": "^8.1.0",
     "typescript": "<5.5",
     "unplugin-vue-markdown": "^0.26.2",
-    "vite": "^5.3.2",
+    "vite": "^5.3.3",
     "vite-plugin-dts": "^3.9.1",
     "vite-plugin-qrcode": "^0.2.3",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.2"
   }
 }
