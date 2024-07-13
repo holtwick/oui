@@ -79,12 +79,11 @@
     "zeed": "^0.22.8"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.21.2",
-    "@antfu/ni": "^0.22.0",
+    "@antfu/eslint-config": "<2.22",
+    "@antfu/ni": "<0.22.0",
     "@shikijs/markdown-it": "^1.10.3",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.10",
     "@vitejs/plugin-vue": "^5.0.5",
+    "@vitest/browser": "^2.0.2",
     "eslint": "<9",
     "stylus": "^0.63.0",
     "tsup": "^8.1.0",
