@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.21.20",
+  "version": "0.22.0",
   "author": {
     "email": "dirk.holtwick@gmail.com",
     "name": "Dirk Holtwick",
@@ -73,25 +73,25 @@
     "upload": "nr build:demo && rsync -rvz dist/* cy:public_html/oui.holtwick.de"
   },
   "dependencies": {
-    "@floating-ui/vue": "^1.1.1",
+    "@floating-ui/vue": "^1.1.2",
     "@vueuse/core": "^10.11.0",
-    "vue": "^3.4.31",
-    "zeed": "^0.22.8"
+    "vue": "^3.4.35",
+    "zeed": "^0.23.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "<2.22",
-    "@antfu/ni": "<0.22.0",
-    "@shikijs/markdown-it": "^1.10.3",
-    "@vitejs/plugin-vue": "^5.0.5",
-    "@vitest/browser": "^2.0.2",
-    "eslint": "<9",
+    "@antfu/eslint-config": "^2.24",
+    "@antfu/ni": "^0.22.0",
+    "@shikijs/markdown-it": "^1.12.1",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "@vitest/browser": "^2.0.5",
+    "eslint": "^9",
     "stylus": "^0.63.0",
-    "tsup": "^8.1.0",
+    "tsup": "^8.2.4",
     "typescript": "<5.5",
     "unplugin-vue-markdown": "^0.26.2",
-    "vite": "^5.3.3",
+    "vite": "^5.3.5",
     "vite-plugin-dts": "^3.9.1",
     "vite-plugin-qrcode": "^0.2.3",
-    "vitest": "^2.0.2"
+    "vitest": "^2.0.5"
   }
 }
