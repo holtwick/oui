@@ -24,8 +24,8 @@ let lastY = 0
 let deltaX = 0
 let deltaY = 0
 
-function translateMouseEvent(e: MouseEvent): OuiDraggableEvent {
-  const { pageX, pageY } = e
+function translateTouchEvent(e: TouchEvent): OuiDraggableEvent {
+  const { pageX, pageY } = e?.touches?.[0] ?? e
   deltaX = pageX - lastX
   deltaY = pageY - lastY
   lastX = pageX
@@ -46,37 +46,37 @@ function translateMouseEvent(e: MouseEvent): OuiDraggableEvent {
   return info
 }
 
-function cancelEvent(e: MouseEvent) {
+function cancelEvent(e: TouchEvent) {
   // log('sep cancel')
   e?.stopPropagation()
   e?.preventDefault()
 }
 
-function onMouseDown(e: MouseEvent) {
+function onMouseDown(e: TouchEvent) {
   log('down')
-  const { pageX, pageY } = e
+  const { pageX, pageY } = e?.touches?.[0] ?? e
   dragging = true
   startX = pageX
   startY = pageY
   lastX = pageX
   lastY = pageY
-  emit('moveStart', translateMouseEvent(e))
+  emit('moveStart', translateTouchEvent(e))
   bindEvents()
   return cancelEvent(e)
 }
 
-function onMouseMove(e: MouseEvent) {
-  log('move')
+function onMouseMove(e: TouchEvent) {
+  log('move', dragging, e)
   if (!dragging)
     return
-  emit('move', translateMouseEvent(e))
+  emit('move', translateTouchEvent(e))
   return cancelEvent(e)
 }
 
-function onMouseUp(e: MouseEvent) {
+function onMouseUp(e: TouchEvent) {
   log('up')
   dragging = false
-  emit('moveEnd', translateMouseEvent(e))
+  emit('moveEnd', translateTouchEvent(e))
   unbindEvents()
   return cancelEvent(e)
 }
@@ -88,7 +88,7 @@ function onDblClick() {
 const mouseOptions = { passive: false }
 
 useEventListener(el, 'mousedown', onMouseDown)
-useEventListener(el, 'touchdown', onMouseDown)
+useEventListener(el, 'touchstart', onMouseDown)
 useEventListener(el, 'dblclick', onDblClick)
 
 let docListeners: any[] = []
@@ -110,7 +110,7 @@ function unbindEvents() {
 </script>
 
 <template>
-  <div ref="el">
+  <div ref="el" data-noscroll="true">
     <slot />
   </div>
 </template>

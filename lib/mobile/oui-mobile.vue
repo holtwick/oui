@@ -75,7 +75,8 @@ if (useSingleton('oui-mobile')) {
       while (el != null) {
         if (el.dataset.noscroll === 'true') {
           log('exit noscroll')
-          break
+          return
+          // break
         }
         if (el.tagName === 'BODY') {
           log('exit body')
