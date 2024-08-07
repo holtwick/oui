@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import { onKeyStroke, useScrollLock } from '@vueuse/core'
-import { onBeforeUnmount, ref, watch } from 'vue'
+import { onKeyStroke, useScrollLock, useWindowSize } from '@vueuse/core'
+import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import type { OuiDraggableEvent } from '../basic'
 import { OuiClose } from '../basic'
+import OuiDraggable from '../basic/oui-draggable.vue'
 import { vFocustrap } from './oui-modal.focustrap'
 
 import './oui-modal.styl'
@@ -49,7 +51,7 @@ let scrollOffset: any
 const scrollElement = document.scrollingElement as HTMLElement
 
 function blockScrolling() {
-  // scrollOffset = window.pageYOffset
+  // scrollOffset = window.moveYOffset
 
   // if (scrollElement) {
   //   scrollElement.style.overflow = 'hidden'
@@ -92,7 +94,6 @@ function didOpen() {
 }
 
 function triggerActiveClass(active: boolean = false) {
-  
   scrollLock.value = active
   if (active)
     document.documentElement.classList.add('oui-modal-active')
@@ -105,6 +106,21 @@ watch(_active, triggerActiveClass, { immediate: true })
 onBeforeUnmount(doClose)
 
 const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').split(/\s+/gim)?.[0])
+
+//
+
+const { height } = useWindowSize()
+
+const dragY = ref(0)
+
+async function checkClose(e: OuiDraggableEvent) {
+  // console.log('checkclose', dragY.value, e.timeMS, height.value / 3, e)
+  if (dragY.value > (height.value / 3) || (dragY.value > 40 && e.timeMS < 500))
+    doClose()
+
+  await nextTick()
+  dragY.value = 0
+}
 </script>
 
 <template>
@@ -136,7 +152,14 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
           aria-label="Close"
           @click="doCancel"
         />
-        <div v-focustrap class="_modal_container">
+        <OuiDraggable
+          v-focustrap
+          class="_modal_container"
+          only-touch
+          :style="{ transform: `translateY(${dragY}px)` }"
+          @move="e => dragY = -e.moveY"
+          @move-end="checkClose"
+        >
           <button
             v-if="close"
             tooltip="Close"
@@ -161,7 +184,7 @@ const name = 'oui-modal' // computed(() => String(attrs.class || 'oui-modal').sp
           <footer v-if="$slots.footer" class="oui-modal-footer footer _modal_footer">
             <slot name="footer" />
           </footer>
-        </div>
+        </OuiDraggable>
       </div>
     </Transition>
   </Teleport>

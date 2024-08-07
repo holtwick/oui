@@ -1,9 +1,14 @@
 <script lang="ts" setup>
-import { useEventListener } from '@vueuse/core'
+import { timestamp, useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
+import { Logger, getTimestamp } from 'zeed'
+import { isInsideScrollable } from '../mobile/drag-util'
 import type { OuiDraggableEvent } from './_types'
+
+const props = defineProps<{
+  onlyTouch?: boolean
+}>()
 
 const emit = defineEmits<{
   moveStart: [OuiDraggableEvent]
@@ -15,6 +20,7 @@ const log: LoggerInterface = Logger('oui-draggable')
 
 const el = ref()
 
+let timeStart = 0
 let dragging = false
 let collapsed = false
 let startX = 0
@@ -23,16 +29,17 @@ let lastX = 0
 let lastY = 0
 let deltaX = 0
 let deltaY = 0
+let lastEvent: OuiDraggableEvent | undefined
 
-function translateMouseEvent(e: MouseEvent): OuiDraggableEvent {
-  const { pageX, pageY } = e
+function translateTouchEvent(e: TouchEvent): OuiDraggableEvent {
+  const { pageX, pageY } = e?.touches?.[0] ?? e
   deltaX = pageX - lastX
   deltaY = pageY - lastY
   lastX = pageX
   lastY = pageY
   const moveX = startX - pageX
   const moveY = startY - pageY
-  const info = {
+  const info: OuiDraggableEvent = {
     startX,
     startY,
     pageX,
@@ -41,42 +48,51 @@ function translateMouseEvent(e: MouseEvent): OuiDraggableEvent {
     deltaY,
     moveX,
     moveY,
+    timeMS: getTimestamp() - timeStart,
   }
   log('event', info)
+  lastEvent = info
   return info
 }
 
-function cancelEvent(e: MouseEvent) {
+function cancelEvent(e: TouchEvent) {
   // log('sep cancel')
   e?.stopPropagation()
   e?.preventDefault()
 }
 
-function onMouseDown(e: MouseEvent) {
+function onMouseDown(e: TouchEvent) {
+  if (e.target && el.value && isInsideScrollable(e.target as any, el.value))
+    return
+
   log('down')
-  const { pageX, pageY } = e
+  const { pageX, pageY } = e?.touches?.[0] ?? e
+  timeStart = getTimestamp()
   dragging = true
   startX = pageX
   startY = pageY
   lastX = pageX
   lastY = pageY
-  emit('moveStart', translateMouseEvent(e))
+  emit('moveStart', translateTouchEvent(e))
   bindEvents()
   return cancelEvent(e)
 }
 
-function onMouseMove(e: MouseEvent) {
-  log('move')
+function onMouseMove(e: TouchEvent) {
+  log('move', dragging, e)
   if (!dragging)
     return
-  emit('move', translateMouseEvent(e))
+  emit('move', translateTouchEvent(e))
   return cancelEvent(e)
 }
 
-function onMouseUp(e: MouseEvent) {
+function onMouseUp(e: TouchEvent) {
   log('up')
   dragging = false
-  emit('moveEnd', translateMouseEvent(e))
+  if (lastEvent)
+    lastEvent.timeMS = getTimestamp() - timeStart
+  emit('moveEnd', lastEvent ?? translateTouchEvent(e))
+  lastEvent = undefined
   unbindEvents()
   return cancelEvent(e)
 }
@@ -87,20 +103,28 @@ function onDblClick() {
 
 const mouseOptions = { passive: false }
 
-useEventListener(el, 'mousedown', onMouseDown)
-useEventListener(el, 'touchdown', onMouseDown)
-useEventListener(el, 'dblclick', onDblClick)
+if (!props.onlyTouch) {
+  useEventListener(el, 'mousedown', onMouseDown)
+  useEventListener(el, 'dblclick', onDblClick)
+}
+
+useEventListener(el, 'touchstart', onMouseDown)
 
 let docListeners: any[] = []
 
 // https://github.com/antoniandre/splitpanes/blob/master/src/components/splitpanes/splitpanes.vue
 function bindEvents() {
   docListeners = [
-    useEventListener(document, 'mousemove', onMouseMove, mouseOptions),
-    useEventListener(document, 'mouseup', onMouseUp),
     useEventListener(document, 'touchmove', onMouseMove, mouseOptions),
     useEventListener(document, 'touchend', onMouseUp),
   ]
+
+  if (!props.onlyTouch) {
+    docListeners.push(
+      useEventListener(document, 'mousemove', onMouseMove, mouseOptions),
+      useEventListener(document, 'mouseup', onMouseUp),
+    )
+  }
 }
 
 function unbindEvents() {
@@ -110,7 +134,7 @@ function unbindEvents() {
 </script>
 
 <template>
-  <div ref="el">
+  <div ref="el" data-noscroll="true">
     <slot />
   </div>
 </template>
