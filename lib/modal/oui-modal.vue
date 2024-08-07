@@ -115,11 +115,14 @@ const dragY = ref(0)
 
 async function checkClose(e: OuiDraggableEvent) {
   // console.log('checkclose', dragY.value, e.timeMS, height.value / 3, e)
-  if (dragY.value > (height.value / 3) || (dragY.value > 40 && e.timeMS < 500))
+  if (dragY.value > (height.value / 3) || (dragY.value > 40 && e.timeMS < 500)) {
+    dragY.value = 0
+    await nextTick()
     doClose()
-
-  await nextTick()
-  dragY.value = 0
+  }
+  else {
+    dragY.value = 0
+  }
 }
 </script>
 
@@ -156,7 +159,7 @@ async function checkClose(e: OuiDraggableEvent) {
           v-focustrap
           class="_modal_container"
           only-touch
-          :style="{ transform: `translateY(${dragY}px)` }"
+          :style="dragY > 0 ? { transform: `translateY(${dragY}px)` } : undefined"
           @move="e => dragY = -e.moveY"
           @move-end="checkClose"
         >

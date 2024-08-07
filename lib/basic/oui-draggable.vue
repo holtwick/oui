@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { timestamp, useEventListener } from '@vueuse/core'
+import { useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { Logger, getTimestamp } from 'zeed'
@@ -8,6 +8,7 @@ import type { OuiDraggableEvent } from './_types'
 
 const props = defineProps<{
   onlyTouch?: boolean
+  cancelEvents?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -56,9 +57,10 @@ function translateTouchEvent(e: TouchEvent): OuiDraggableEvent {
 }
 
 function cancelEvent(e: TouchEvent) {
-  // log('sep cancel')
-  e?.stopPropagation()
-  e?.preventDefault()
+  if (props.cancelEvents) {
+    e?.stopPropagation()
+    e?.preventDefault()
+  }
 }
 
 function onMouseDown(e: TouchEvent) {
