@@ -4,6 +4,10 @@
 
 **Just another set of UI components for Vue.js with a proper French-sounding name.**
 
+Demo at https://oui.holtwick.de. Open via QR Code on mobile:
+
+![QR Code to demo website](./qrcode.png)
+
 CSS and Styleguide:
 
 - [oui-stylus](./stylus/README.md)
