@@ -6,6 +6,7 @@ import { Logger } from 'zeed'
 import { useSingleton } from '../basic/singleton'
 
 import './oui-mobile.styl'
+import { isInsideScrollable } from './drag-util'
 
 const props = defineProps<{
   mode?: 'app' | 'body'
@@ -70,26 +71,9 @@ if (useSingleton('oui-mobile')) {
       // if (virtualKeyboardActive === false)
       //   return
 
-      // Figure out, if we are inside an element with custom scrolling
-      let el = ev.target as HTMLElement | undefined | null
-      while (el != null) {
-        if (el.dataset.noscroll === 'true') {
-          log('exit noscroll')
-          return
-          // break
-        }
-        if (el.tagName === 'BODY') {
-          log('exit body')
-          return
-        }
-        const { overflow } = window.getComputedStyle(el)
-        if (overflow.split(' ').some(o => o === 'auto' || o === 'scroll')) {
-          log('exit scroll', overflow)
-          return
-        }
-        el = el.parentElement
-      }
-
+      if (isInsideScrollable(ev.target as any))
+        return
+      
       log('prevent scroll')
       // If not avoid scrolling
       ev.preventDefault()

@@ -36,6 +36,7 @@ export interface OuiDraggableEvent {
   deltaY: number
   moveX: number
   moveY: number
+  timeMS: number
   // page: OuiDraggablePosition
   // delta: OuiDraggablePosition
   // pos: OuiDraggablePosition
