@@ -17,7 +17,7 @@ const ok = useSingleton('oui-notification')
             <div
               class="oui-notification"
               :class="{
-                '-has-action': n?.onCancel == null,
+                _has_action: n?.onCancel == null,
                 [`oui-notification-${n?.mode}`]: n?.mode,
               }"
               @click.stop="n?.onCancel == null && n.action()"
