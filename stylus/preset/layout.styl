@@ -97,3 +97,44 @@ oui-preset-layout-attrs() {
     }
   }
 }
+
+oui-preset-layout-attrs2() {
+  if __oui_once("layoutattrs2") {
+    .-x {
+      use: stack-x;
+    }
+
+    .-y {
+      use: stack-y;
+    }
+
+    .-center {
+      use: stack-item-center;
+    }
+
+    .-scroll {
+      use: stack-item-scroll;
+      contain: content;
+    }
+
+    .-grow {
+      flex: auto;
+    }
+
+    .-fix {
+      flex: 0;
+    }
+
+    .-gap {
+      gap: var(--space-s, px(8));
+    }
+
+    .-sep {
+      width: var(--space-s, px(8));
+    }
+
+    .-dots {
+      use: ellipsis;
+    }
+  }
+}
