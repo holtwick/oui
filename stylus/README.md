@@ -22,7 +22,7 @@ CSS for Vue components start with `oui-` like `oui-modal`.
 
 ### Modifiers
 
-Modifiers start with an underscore like `_active`. The idea behind this is, that you can more easily use these in Vue class bindings like `:class="{ _active }"` or `:class="[ _active ]"`, because they don't conflict with JS variable names, like `-active` would do. I also want to avoid uppercase letters, and therefore modifiers like `isActive` or `hasValue` (see Bulma).
+Modifiers start with an underscore like `_active`. The idea behind this is, that you can more easily use these in Vue class bindings like `:class="{ _active }"`, because they don't conflict with JS variable names, like `-active` would do. I also want to avoid uppercase letters, and therefore modifiers like `isActive` or `hasValue` (see Bulma).
 
 Modifiers should only be defined together with other class names, like `&._active`.
 
@@ -30,7 +30,7 @@ For widgets with inner structure this might look like this:
 
 ```html
 <div class="oui-list">
-  <div class="oui-list-item" :class="[_active]">
+  <div class="oui-list-item" :class="{ _active }">
     ...
   </div>
 </div>
@@ -304,6 +304,18 @@ Due to its design _twindy_ is already very economical with definitions. But ther
 
 1. use [Purge CSS](https://purgecss.com/) to remove unused styles
 2. apply a CSS minifier, such as [clean-css](https://github.com/jakubpawlowicz/clean-css)
+
+---
+
+## Layout Shortcuts
+
+- `-x` and `-y` set stacked layout using `display:flex` with the respective direction.
+- `-grow` lets such stack items consume the availble space. `-fix` is the counter part but usually implicit.
+- `-center` to position the content vertically and horizontally in the middle of the element.
+- `-scroll` enables vertical scrolling inside the element.
+- `-gap` leaves space between contained elements. The space is `var(--space-s, px(8))`
+- `-sep` gives the element the gap with, usefull to have explicit space.
+- `-dots` will set `text-overflow: ellipsis` correctly to show dots on text overflow.
 
 ---
 
