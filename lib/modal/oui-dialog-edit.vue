@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { OuiButton, OuiModal, OuiText, OuiWait } from 'oui-kit'
 import { nextTick, ref } from 'vue'
+import { OuiButton, OuiText, OuiWait } from '../basic'
+import OuiModal from './oui-modal.vue'
 
 defineProps<{
   title: string
