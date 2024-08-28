@@ -65,3 +65,13 @@ export function useDialog<T extends Component>(component?: T) {
     },
   }
 }
+
+export function dialogOpen<T = any>(component: Component, props?: T) {
+  const { open } = useDialog(component)
+  open(props)
+}
+
+export function useDialogOpen(component: Component) {
+  const { open } = useDialog(component)
+  return open
+}
