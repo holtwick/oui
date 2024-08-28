@@ -8,13 +8,15 @@ import { vFocustrap } from './oui-modal.focustrap'
 
 import './oui-modal.styl'
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   close?: boolean
+  allowCancel?: boolean
   title?: string
   transition?: string
   noSheet?: boolean
   size?: 'small' | 'normal' | 'large'
 }>(), {
+  allowCancel: true,
   close: false,
   noSheet: false,
   size: 'normal',
@@ -34,15 +36,18 @@ onKeyStroke('Escape', (e) => {
   if (_active.value) {
     e.preventDefault()
     e.stopPropagation()
-    _active.value = false
+    doCancel()
   }
 })
 
 const root = ref()
 
+// Only allowed if "close" is set
 function doCancel() {
-  emit('cancel')
-  doClose()
+  if (props.allowCancel === true) {
+    emit('cancel')
+    doClose()
+  }
 }
 
 // you could also parse the offset from the style directly

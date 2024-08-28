@@ -27,6 +27,13 @@ const state = reactive({
   </div>
   <div>
     <OuiCheckbox
+      v-model="state.value"
+      title="Checkbox with label"
+      description="This one has a description"
+    />
+  </div>
+  <div>
+    <OuiCheckbox
       v-model="state.intermediateValue"
       intermediate
       title="Checkbox with intermediate value"
