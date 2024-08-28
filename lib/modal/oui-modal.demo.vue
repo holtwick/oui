@@ -10,6 +10,7 @@ const state = reactive({
   close: true,
   title: 'title',
   header: 'header',
+  allowCancel: true,
 })
 </script>
 
@@ -28,6 +29,7 @@ const state = reactive({
     :title="state.title"
     :no-sheet="state.noSheet"
     :size="state.size as any"
+    :allow-cancel="state.allowCancel"
   >
     <template v-if="state.header" #header>
       {{ state.header }}
@@ -49,12 +51,51 @@ const state = reactive({
     </template>
   </OuiModal>
   <OuiDemo :state="state">
-    <OuiCheckbox v-model="state.show" switch title="show" />
-    <OuiCheckbox v-model="state.footer" switch title="footer" />
-    <OuiCheckbox v-model="state.noSheet" switch title="noSheet" />
-    <OuiCheckbox v-model="state.close" switch title="close" />
-    <OuiInput v-model="state.title" title="title" />
-    <OuiInput v-model="state.header" title="header" />
-    <OuiSelect v-model="state.size" :options="['small', 'normal', 'large']" />
+    <OuiCheckbox
+      v-model="state.show"
+      switch
+      title="show"
+      description="Actually make the dialog visible"
+    />
+    <OuiCheckbox
+      v-model="state.noSheet"
+      switch
+      title="noSheet"
+      description="Does not switch to sheet-look on mobile"
+    />
+    <OuiCheckbox
+      v-model="state.close"
+      switch
+      title="close"
+      description="Shows the close button on top right"
+    />
+    <OuiCheckbox
+      v-model="state.allowCancel"
+      switch
+      title="allowCancel"
+      description="Allows to close the dialog by clicking outside of it or pressing ESC key"
+    />
+    <OuiInput
+      v-model="state.title"
+      title="title"
+      description="Title is a bold headline on top of the dialog that does not scroll"
+    />
+    <OuiInput
+      v-model="state.header"
+      title="header"
+      description="Header is like title, but not bold. It may be used for descriptive content."
+    />
+    <OuiCheckbox
+      v-model="state.footer"
+      switch
+      title="footer"
+      description="Show the footer part for demonstration"
+    />
+    <OuiSelect
+      v-model="state.size"
+      title="size"
+      :options="['small', 'normal', 'large']"
+      description="Three size presets"
+    />
   </OuiDemo>
 </template>
