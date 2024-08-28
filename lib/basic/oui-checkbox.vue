@@ -11,6 +11,7 @@ const props = withDefaults(defineProps<{
   title?: string
   switch?: boolean
   intermediate?: boolean
+  description?: string
 }>(), {
   switch: false,
   intermediate: false,
@@ -44,6 +45,13 @@ const klass = computed(() => {
       {{ ' ' }}
       <slot>{{ title }}</slot>
     </label>
+    <template v-if="$slots.description || description">
+      <div class="oui-form-item-description">
+        <slot name="description">
+          {{ description }}
+        </slot>
+      </div>
+    </template>
   </template>
   <template v-else>
     <input v-model="modelBool" type="checkbox" :class="klass" v-bind="$attrs">
