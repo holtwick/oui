@@ -44,8 +44,8 @@ async function doCancel() {
       <OuiStars v-model="item.rating" title="Did you like Oui so far?" />
     </OuiText>
     <template #footer>
-      <div class="_stack_x _center">
-        <div v-if="wait" class="_stack_x wait">
+      <div class="-x -center">
+        <div v-if="wait" class="-x wait">
           <OuiWait />
           <div>
             &nbsp;
@@ -55,11 +55,11 @@ async function doCancel() {
         <OuiButton v-else mode="danger">
           Delete
         </OuiButton>
-        <div class="_space" />
+        <div class="-grow" />
         <OuiButton :disabled="wait" mode="neutral" @click="doCancel">
           Cancel
         </OuiButton>
-        <OuiButton :disabled="wait" @click="doConfirm">
+        <OuiButton :disabled="wait" mode="primary" @click="doConfirm">
           Save
         </OuiButton>
       </div>
