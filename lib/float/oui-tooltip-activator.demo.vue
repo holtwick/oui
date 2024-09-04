@@ -23,30 +23,29 @@ Yeah!"
 
     <p>
       Title vs. Tooltip
-
-      <ol>
-        <li>
-          <span title="Just title">
-            Just title
-          </span>
-        </li>
-        <li>
-          <span tooltip="Just tooltip">
-            Just tooltip
-          </span>
-        </li>
-        <li>
-          <span tooltip="Both tooltip" title="Both title">
-            Both
-          </span>
-        </li>
-        <li>
-          <span tooltip="Both tooltip" aria-label="Both title">
-            Aria Label
-          </span>
-        </li>
-      </ol>
     </p>
+    <ol>
+      <li>
+        <span title="Just title">
+          Just title
+        </span>
+      </li>
+      <li>
+        <span tooltip="Just tooltip">
+          Just tooltip
+        </span>
+      </li>
+      <li>
+        <span tooltip="Both tooltip" title="Both title">
+          Both
+        </span>
+      </li>
+      <li>
+        <span tooltip="Both tooltip" aria-label="Both title">
+          Aria Label
+        </span>
+      </li>
+    </ol>
   </OuiText>
 </template>
 
