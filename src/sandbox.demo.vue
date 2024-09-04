@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
 import { reactive } from 'vue'
-import { OuiButton, OuiCheckbox, OuiDemo, OuiInput, OuiModal, OuiSelect, OuiText } from '@/lib'
+import { OuiCheckbox, OuiDemo } from '@/lib'
 import './sandbox.demo.styl'
 
 const state = reactive({

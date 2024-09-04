@@ -73,7 +73,7 @@ if (useSingleton('oui-mobile')) {
 
       if (isInsideScrollable(ev.target as any))
         return
-      
+
       log('prevent scroll')
       // If not avoid scrolling
       ev.preventDefault()

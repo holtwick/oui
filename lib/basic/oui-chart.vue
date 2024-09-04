@@ -101,6 +101,13 @@ const viewBox = computed(() => `0 0 ${props.width} ${props.height}`)
 <template>
   <div class="app-events-graph _graph">
     <svg stroke-linecap="round" display="block" stroke-width="2" :viewBox="viewBox">
+      <defs>
+        <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="currentColor" stop-opacity="1" />
+          <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+
       <template v-for="x in line.hours" :key="x">
         <line :x1="x" :x2="x" y1="0" :y2="height" stroke="#ccc" stroke-width="1" />
       </template>
@@ -110,8 +117,8 @@ const viewBox = computed(() => `0 0 ${props.width} ${props.height}`)
       <line :x1="0" :x2="width" :y1="line.veryHighY" :y2="line.veryHighY" stroke="var(--state-critical)" stroke-width="1" />
 
       <path
-        :d="line.data"
-        fill="none"
+        :d="`${line.data}L${width} ${props.height}`"
+        fill="url(#lineGradient)"
         stroke="currentColor"
       />
     </svg>

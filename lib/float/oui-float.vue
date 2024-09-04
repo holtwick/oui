@@ -103,6 +103,11 @@ const name = computed(() => String(attrs.class || 'oui-float').split(/\s+/g)?.[0
 
 // Click Slot
 
+function toggle(ev: MouseEvent) {
+  active.value = !active.value
+  ev.preventDefault()
+}
+
 /* magic, we identify the first slot element and add the triggers! */
 
 const triggerSlot = ref()
@@ -110,11 +115,6 @@ const triggerSlot = ref()
 watch(triggerSlot, (s) => {
   const el = s?.nextElementSibling as HTMLElement
   slotReference.value = el
-
-  function toggle(ev: MouseEvent) {
-    active.value = !active.value
-    ev.preventDefault()
-  }
 
   el?.addEventListener('dblclick', toggle)
   el?.addEventListener('click', toggle)
