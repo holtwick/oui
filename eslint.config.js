@@ -48,6 +48,7 @@ export default antfu(
   {},
   {
     rules: {
+      'eslint-comments/no-unlimited-disable': 'off',
       'unused-imports/no-unused-vars': 'off',
       'antfu/consistent-list-newline': 'off',
       'eslint-disable-unused-imports/no-unused-imports': 'off',
