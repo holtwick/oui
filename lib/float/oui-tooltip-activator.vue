@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { Placement } from '@floating-ui/vue'
 import { useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
-import type { Placement } from '@floating-ui/vue'
 import { useSingleton } from '../basic/singleton'
 import OuiFloat from './oui-float.vue'
 

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import type { LoggerInterface } from 'zeed'
+import type { OuiDraggableEvent } from './_types'
 import { useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
-import type { LoggerInterface } from 'zeed'
-import { Logger, getTimestamp } from 'zeed'
+import { getTimestamp, Logger } from 'zeed'
 import { isInsideScrollable } from '../mobile/drag-util'
-import type { OuiDraggableEvent } from './_types'
 
 const props = defineProps<{
   onlyTouch?: boolean

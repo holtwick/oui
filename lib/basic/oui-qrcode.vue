@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { Logger } from 'zeed'
 import { useQRCode } from './qrcode'
 
 const props = defineProps<{

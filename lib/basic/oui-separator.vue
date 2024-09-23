@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
-import { useLocalStorage } from '@vueuse/core'
 import type { OuiDraggableEvent } from './_types'
-import OuiDraggable from './oui-draggable.vue'
+import { useLocalStorage } from '@vueuse/core'
+import { computed, onMounted, ref } from 'vue'
 import { px } from './lib'
+import OuiDraggable from './oui-draggable.vue'
 
 import './oui-separator.styl'
 

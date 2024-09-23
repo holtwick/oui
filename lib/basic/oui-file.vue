@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useFileDialog } from '@vueuse/core'
 import type { LoggerInterface } from 'zeed'
-import { Logger, createPromise } from 'zeed'
+import { useFileDialog } from '@vueuse/core'
+import { createPromise, Logger } from 'zeed'
 
 import './oui-form.styl'
 import './oui-file.styl'

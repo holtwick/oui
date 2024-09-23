@@ -1,14 +1,14 @@
 <!-- eslint-disable vue/return-in-computed-property -->
 <script lang="ts">
-import { type PropType, computed, defineComponent } from 'vue'
-import { type Path, objectToString } from '../util'
-import NullWrapper from './NullWrapper.vue'
-import TrueWrapper from './TrueWrapper.vue'
-import FalseWrapper from './FalseWrapper.vue'
-import NumberWrapper from './NumberWrapper.vue'
-import StringWrapper from './StringWrapper.vue'
+import { computed, defineComponent, type PropType } from 'vue'
+import { objectToString, type Path } from '../util'
 import ArrayWrapper from './ArrayWrapper.vue'
+import FalseWrapper from './FalseWrapper.vue'
+import NullWrapper from './NullWrapper.vue'
+import NumberWrapper from './NumberWrapper.vue'
 import ObjectWrapper from './ObjectWrapper.vue'
+import StringWrapper from './StringWrapper.vue'
+import TrueWrapper from './TrueWrapper.vue'
 
 const Wrapper = defineComponent({
   components: {

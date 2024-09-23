@@ -1,6 +1,6 @@
 <script lang="ts" setup generic="K extends string">
-import { computed } from 'vue'
 import type { OuiTab } from './_types'
+import { computed } from 'vue'
 
 import './oui-tabs.styl'
 

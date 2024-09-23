@@ -18,8 +18,8 @@ const root = ref()
 watch(root, (el) => {
   if (el) {
     (el.querySelector('._focus')
-    ?? el.querySelector('input,button,select')
-    ?? el).focus()
+      ?? el.querySelector('input,button,select')
+      ?? el).focus()
   }
 }, { immediate: true })
 </script>

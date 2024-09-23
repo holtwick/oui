@@ -1,5 +1,5 @@
-import { ref, watch } from 'vue'
 import type { Path } from './util'
+import { ref, watch } from 'vue'
 
 export const cache = new Set()
 

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+import { OuiButton, OuiInput, OuiSelect, OuiStars, OuiText, OuiWait } from '@/lib'
 import { nextTick, reactive, ref } from 'vue'
 import { cloneObject, sleep } from 'zeed'
 import OuiModal from './oui-modal.vue'
-import { OuiButton, OuiInput, OuiSelect, OuiStars, OuiText, OuiWait } from '@/lib'
 
 const props = defineProps<{
   done?: any

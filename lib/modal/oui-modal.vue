@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { OuiDraggableEvent } from '../basic'
 import { onKeyStroke, useScrollLock, useWindowSize } from '@vueuse/core'
 import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import type { OuiDraggableEvent } from '../basic'
 import { OuiClose } from '../basic'
 import OuiDraggable from '../basic/oui-draggable.vue'
 import { vFocustrap } from './oui-modal.focustrap'

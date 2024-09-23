@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
 import type { OuiTab } from '../lib'
+import { reactive } from 'vue'
 import { OuiClose, OuiDemo, OuiInput, OuiTabs } from '../lib'
 
 const state = reactive({

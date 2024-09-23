@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
 import type { LogMessage } from 'zeed'
-import { Uint8ArrayToHexDump, browserSelectColorByName, formatMilliseconds, isArray, isString, logMessageFromCompact } from 'zeed'
 import type { OuiTableColumn } from './_types'
 import type { LogOui } from './log'
+import { computed, ref, watch } from 'vue'
+import { browserSelectColorByName, formatMilliseconds, isArray, isString, logMessageFromCompact, Uint8ArrayToHexDump } from 'zeed'
 import OuiTableview from './oui-tableview.vue'
 
 import './oui-log.styl'

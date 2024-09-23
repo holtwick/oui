@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
-import { type UseElementHoverOptions, onKeyStroke, useElementHover, useEventListener, useFocusWithin } from '@vueuse/core'
 import type { Ref } from 'vue'
+import { arrow as arrowMiddleware, autoUpdate, flip, offset, type OffsetOptions, type Padding, type Placement, shift, size, useFloating } from '@floating-ui/vue'
+import { onKeyStroke, useElementHover, type UseElementHoverOptions, useEventListener, useFocusWithin } from '@vueuse/core'
 import { computed, ref, useAttrs, watch } from 'vue'
 
 import './oui-float.styl'

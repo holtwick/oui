@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { OuiVirtualList } from '@/lib'
 import { reactive } from 'vue'
 import { createArray, uuid } from 'zeed'
-import { OuiVirtualList } from '@/lib'
 
 const items = createArray(1000, i => ({ id: uuid() }))
 const visibleItems = reactive(items)

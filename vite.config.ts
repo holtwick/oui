@@ -1,11 +1,11 @@
-import { URL, fileURLToPath } from 'node:url'
-import process from 'node:process'
 import type { UserConfig } from 'vite'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import dts from 'vite-plugin-dts'
+import process from 'node:process'
+import { fileURLToPath, URL } from 'node:url'
 import MarkdownItShiki from '@shikijs/markdown-it'
+import Vue from '@vitejs/plugin-vue'
 import Markdown from 'unplugin-vue-markdown/vite'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 import { qrcode } from 'vite-plugin-qrcode'
 
 const config: UserConfig = {

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+import { OuiDemo, OuiInput, OuiNotice, OuiPassword, OuiText, OuiTextarea } from '@/lib'
 import { reactive } from 'vue'
 import OuiButton from './oui-button.vue'
 import OuiCheckbox from './oui-checkbox.vue'
-import { OuiDemo, OuiInput, OuiNotice, OuiPassword, OuiText, OuiTextarea } from '@/lib'
 
 const state = reactive({
   title: 'Notice',

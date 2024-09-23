@@ -12,9 +12,9 @@ export default defineComponent({
 <!-- eslint-disable import/no-duplicates -->
 <!-- eslint-disable import/first -->
 <script setup lang="ts">
+import type { Path } from '../util'
 import { computed } from 'vue'
 import { cache, useExpand } from '../hooks'
-import type { Path } from '../util'
 
 const props = withDefaults(
   defineProps<{

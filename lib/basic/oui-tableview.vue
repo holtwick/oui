@@ -1,8 +1,8 @@
 <script lang="ts" setup generic="K extends string, T extends Record<K, any>">
+import type { OuiTableColumn } from './_types'
 import { useLocalStorage } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
 import { arraySetArrayInPlace, arraySum, parseOrderby } from 'zeed'
-import type { OuiTableColumn } from './_types'
 import { px } from './lib'
 import OuiSeparator from './oui-separator.vue'
 import OuiVirtualList from './oui-virtual-list.vue'

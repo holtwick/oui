@@ -1,6 +1,6 @@
 <!-- eslint-disable no-alert -->
 <script setup lang="ts">
-import { OuiButton, OuiNotificationActivator, emitNotification, emitNotificationError, emitNotificationWarn } from '@/lib'
+import { emitNotification, emitNotificationError, emitNotificationWarn, OuiButton, OuiNotificationActivator } from '@/lib'
 
 function triggerAll() {
   // setInterval(() => {

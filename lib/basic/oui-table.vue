@@ -1,7 +1,7 @@
 <script lang="ts" setup generic="K extends string, T extends Record<K, any>">
+import type { OuiTableColumn } from './_types'
 import { computed } from 'vue'
 import { parseOrderby } from 'zeed'
-import type { OuiTableColumn } from './_types'
 
 import './oui-table.styl'
 

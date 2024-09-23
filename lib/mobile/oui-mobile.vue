@@ -1,12 +1,12 @@
 <script lang="ts" setup>
+import type { LoggerInterface } from 'zeed'
 import { useEventListener } from '@vueuse/core'
 import { nextTick, onMounted } from 'vue'
-import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 import { useSingleton } from '../basic/singleton'
 
-import './oui-mobile.styl'
 import { isInsideScrollable } from './drag-util'
+import './oui-mobile.styl'
 
 const props = defineProps<{
   mode?: 'app' | 'body'

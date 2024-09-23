@@ -7,7 +7,7 @@ Simple notofications
 
 ```vue
 <script lang="ts" setup>
-import { OuiNotificationActivator, emitNotificationInfo } from 'oui-notification'
+import { emitNotificationInfo, OuiNotificationActivator } from 'oui-notification'
 
 import 'oui-notification/css'
 

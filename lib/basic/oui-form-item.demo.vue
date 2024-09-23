@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 import { reactive } from 'vue'
 import { getTimestamp } from 'zeed'
-import { OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 
 const state = reactive({
   value1: '',

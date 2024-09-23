@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
 import { OuiButton, OuiCheckbox, OuiDemo, OuiInput, OuiModal, OuiSelect, OuiText } from '@/lib'
+import { reactive } from 'vue'
 
 const state = reactive({
   size: 'normal',

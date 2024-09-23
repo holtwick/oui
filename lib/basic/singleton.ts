@@ -1,5 +1,5 @@
-import { onBeforeUnmount } from 'vue'
 import type { LoggerInterface } from 'zeed'
+import { onBeforeUnmount } from 'vue'
 import { Logger } from 'zeed'
 
 const log: LoggerInterface = Logger('singleton')

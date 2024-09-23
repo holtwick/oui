@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
 import { OuiCheckbox, OuiDemo, OuiResizeable } from '@/lib'
+import { reactive } from 'vue'
 
 import './oui-resizeable.demo.styl'
 

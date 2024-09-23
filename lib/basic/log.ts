@@ -1,6 +1,6 @@
+import type { LoggerInterface, LogMessage } from 'zeed'
 import { reactive } from 'vue'
-import type { LogMessage, LoggerInterface } from 'zeed'
-import { LogLevelAll, LoggerContext, LoggerMemoryHandler } from 'zeed'
+import { LoggerContext, LoggerMemoryHandler, LogLevelAll } from 'zeed'
 
 export type LogOui = LoggerInterface & {
   messages: LogMessage[]

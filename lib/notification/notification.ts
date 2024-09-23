@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
-import { reactive, ref } from 'vue'
 import type { AppNotificationInfo, AppNotificationSetup } from './_types'
+import { reactive, ref } from 'vue'
 
 const LIMIT = 6
 

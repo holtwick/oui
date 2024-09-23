@@ -11,8 +11,8 @@ Vue components that float. Based on [floating-ui](https://floating-ui.com/).
 
 ```vue
 <script>
-import { ref } from 'vue'
 import { OuiFloat } from 'oui-float'
+import { ref } from 'vue'
 
 import 'oui-float/css'
 
