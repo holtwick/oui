@@ -1,23 +1,21 @@
 // MIT, https://github.com/feross/clipboard-copy/blob/master/index.js
 
+/** @deprecated use https://vueuse.org/core/useClipboard/#useclipboard */
 export function canCopy() {
   try {
-    return !!navigator.clipboard || document.queryCommandSupported('copy')
+    const w = window as any
+    return !!navigator.clipboard || document.queryCommandSupported('copy') || w.electron?.clipboard?.writeText
   }
   catch (err) {
     return false
   }
 }
 
-function makeError() {
-  return new DOMException('The request is not allowed', 'NotAllowedError')
-}
-
 async function copyClipboardApi(text: string) {
   // Use the Async Clipboard API when available. Requires a secure browsing context (i.e. HTTPS)
-  if (!navigator.clipboard)
-    throw makeError()
-  return navigator.clipboard.writeText(text)
+  if (navigator.clipboard)
+    return !!navigator.clipboard.writeText(text)
+  return false
 }
 
 async function copyExecCommand(text: string) {
@@ -51,28 +49,20 @@ async function copyExecCommand(text: string) {
     window.document.body.removeChild(span)
   }
 
-  if (!success)
-    throw makeError()
+  return success
 }
 
+/** @deprecated use https://vueuse.org/core/useClipboard/#useclipboard */
 export async function clipboardCopy(text: string) {
-  try {
-    const w = window as any
-    if (w.electron) {
-      // https://electronjs.org/docs/api/clipboard
-      await w.electron?.clipboard?.writeText(text)
-      return
-    }
+  const w = window as any
+  if (w.electron) {
+    // https://electronjs.org/docs/api/clipboard
+    await w.electron?.clipboard?.writeText(text)
+    return true
+  }
 
-    await copyClipboardApi(text)
-  }
-  catch (err: any) {
-    // ...Otherwise, use document.execCommand() fallback
-    try {
-      await copyExecCommand(text)
-    }
-    catch (err2: any) {
-      throw err2 || err || makeError()
-    }
-  }
+  if (await copyClipboardApi(text))
+    return true
+
+  return await copyExecCommand(text)
 }
