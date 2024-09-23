@@ -1,8 +1,9 @@
 export * from './_types'
 export * from './directives'
 export * from './formatters'
-export * from './log'
 export * from './qrcode'
+export * from './log'
+export * from './share'
 
 export { default as OuiButton } from './oui-button.vue'
 export { default as OuiCard } from './oui-card.vue'
