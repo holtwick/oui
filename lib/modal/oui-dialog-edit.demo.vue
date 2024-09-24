@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { OuiButton } from '@/lib'
 import OuiDialogExample from './oui-dialog-edit.example.vue'
 import { dialogOpen, useDialogOpen } from './use-dialog'
-import { OuiButton } from '@/lib'
 
 const open = useDialogOpen(OuiDialogExample)
 </script>

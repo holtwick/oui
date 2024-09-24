@@ -14,7 +14,7 @@ export default defineComponent({
 <script setup lang="ts">
 import { computed } from 'vue'
 import { cache, useExpand } from '../hooks'
-import { type Path, objectToString } from '../util'
+import { objectToString, type Path } from '../util'
 
 const props = withDefaults(
   defineProps<{

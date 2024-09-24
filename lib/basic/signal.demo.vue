@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { Ref, UnwrapRef } from 'vue'
-import { onUnmounted, ref, watch } from 'vue'
 import type { LoggerInterface, Signal } from 'zeed'
-import { Logger, useSignal } from 'zeed'
 import { OuiButton, OuiCheckbox, OuiText } from '@/lib'
+import { onUnmounted, ref, watch } from 'vue'
+import { Logger, useSignal } from 'zeed'
 
 const log: LoggerInterface = Logger('test-signal')
 

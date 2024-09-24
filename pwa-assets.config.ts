@@ -1,5 +1,5 @@
-import { defineConfig, minimalPreset as preset } from '@vite-pwa/assets-generator/config'
 import type { Preset } from '@vite-pwa/assets-generator/config'
+import { defineConfig, minimalPreset as preset } from '@vite-pwa/assets-generator/config'
 
 export const minimalPresetNoPadding: Preset = {
   transparent: {

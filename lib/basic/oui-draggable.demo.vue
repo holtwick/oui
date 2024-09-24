@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
 import type { OuiDraggableEvent } from '@/lib'
 import { OuiDemo, OuiDraggable, OuiInputNumber } from '@/lib'
+import { reactive, ref } from 'vue'
 
 const state = reactive({
   x: 100,

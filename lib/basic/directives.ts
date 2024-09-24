@@ -1,6 +1,6 @@
-import { ref } from 'vue'
 import type { DirectiveBinding } from 'vue'
 import type { LoggerInterface } from 'zeed'
+import { ref } from 'vue'
 import { Logger } from 'zeed'
 
 const log: LoggerInterface = Logger('directives')

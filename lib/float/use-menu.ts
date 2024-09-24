@@ -1,8 +1,8 @@
 import type { LoggerInterface } from 'zeed'
-import { Logger, isRecord } from 'zeed'
+import type { OuiMenuItem } from './_types'
+import { isRecord, Logger } from 'zeed'
 import { mountComponentAsApp } from '../basic/app-helper'
 import OuiMenu from './oui-menu.vue'
-import type { OuiMenuItem } from './_types'
 
 const log: LoggerInterface = Logger('use-menu')
 

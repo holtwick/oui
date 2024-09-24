@@ -12,8 +12,8 @@ Simple to use modal dialog view.
 
 ```vue
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { OuiModal } from 'oui-modal'
+import { ref } from 'vue'
 
 import 'oui-modal/css'
 

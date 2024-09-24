@@ -1,9 +1,9 @@
 <!-- eslint-disable no-alert -->
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
-import { Logger, uuid } from 'zeed'
 import { OuiButton, OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiText, useMenu, vMenu } from '@/lib'
+import { computed, ref } from 'vue'
+import { Logger, uuid } from 'zeed'
 
 import './oui-float.demo.styl'
 

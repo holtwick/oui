@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { LoggerInterface } from 'zeed'
 import { useEventListener } from '@vueuse/core'
 import { onMounted, reactive } from 'vue'
-import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
 
 import './app-mobile.styl'

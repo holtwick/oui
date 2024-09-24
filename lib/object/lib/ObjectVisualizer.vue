@@ -2,8 +2,8 @@
 <script setup lang="ts">
 // @ts-nocheck
 
-import Wrapper from './components/Wrapper.vue'
 import type { Path } from './util'
+import Wrapper from './components/Wrapper.vue'
 
 withDefaults(
   defineProps<{

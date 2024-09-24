@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type OffsetOptions, type Padding, type Placement, arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
+import { arrow as arrowMiddleware, autoUpdate, flip, offset, type OffsetOptions, type Padding, type Placement, shift, size, useFloating } from '@floating-ui/vue'
 import { onClickOutside, onKeyStroke } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
 

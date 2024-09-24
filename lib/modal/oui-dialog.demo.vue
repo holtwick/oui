@@ -1,8 +1,8 @@
 <!-- eslint-disable no-alert -->
 <script lang="ts" setup>
+import { OuiButton, OuiDemo, useDialog } from '@/lib'
 import { reactive } from 'vue'
 import OuiDialogExample from './oui-dialog.example.vue'
-import { OuiButton, OuiDemo, useDialog } from '@/lib'
 
 const state = reactive({
   show: false,

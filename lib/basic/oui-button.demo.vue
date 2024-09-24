@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
 import { OuiButton, OuiCheckbox, OuiClose, OuiDemo } from '@/lib'
+import { reactive } from 'vue'
+import image from '../../public/apple-touch-icon-180x180.png?url'
 
 const state = reactive({
   disabled: false,
@@ -63,6 +64,14 @@ const state = reactive({
 
     <OuiButton size="large">
       <OuiClose />
+    </OuiButton>
+
+    <br>
+    <br>
+
+    <OuiButton href="https://oui.holtwick.de" target="_blank">
+      <img :src="image" alt="Logo">
+      oui.holtwick.de
     </OuiButton>
   </div>
 

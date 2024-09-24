@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { OuiCheckbox, OuiDialogEdit, OuiInput, OuiPassword } from '@/lib'
 import { computed, reactive } from 'vue'
 import { cloneObject, isBoolean, isEmpty, jsonStringifySorted, objectPlain, sleep } from 'zeed'
-import { OuiCheckbox, OuiDialogEdit, OuiInput, OuiPassword } from '@/lib'
 
 const props = defineProps<{
   id?: number
