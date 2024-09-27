@@ -99,12 +99,34 @@ oui-button() {
     --button-bg: -red-700;
     --button-bg-hover: -red-800;
     --button-bg-active: -red-900;
+
+    .dark & {
+      --button-bg: -red-700;
+      --button-bg-hover: -red-800;
+      --button-bg-active: -red-900;
+    }
   }
 
   &._button_mode_neutral {
     --button-bg: var(--t3-fg);
     --button-bg-hover: var(--s2-fg);
     --button-bg-active: var(--fg);
+
+    .dark & {
+      --button-bg: var(--n0-700);
+      --button-bg-hover: var(--n0-800);
+      --button-bg-active: var(--n0-900);
+    }
+  }
+
+  --button-bg: var(--p1-600);
+  --button-bg-hover: var(--p1-700);
+  --button-bg-active: var(--p1-800);
+
+  .dark & {
+    --button-bg: var(--p1-600);
+    --button-bg-hover: var(--p1-700);
+    --button-bg-active: var(--p1-800);
   }
 
   // Colors
