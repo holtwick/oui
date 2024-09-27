@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { last, sortedOrderby } from 'zeed'
-import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
 
 import './app.styl'
 
