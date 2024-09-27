@@ -40,13 +40,13 @@ const klass = computed(() => {
 
 <template>
   <template v-if="title || $slots.default">
-    <label>
+    <label :class="{ _disabled: $attrs.disabled }">
       <input v-model="modelBool" type="checkbox" :class="klass" v-bind="$attrs">
       {{ ' ' }}
       <slot>{{ title }}</slot>
     </label>
     <template v-if="$slots.description || description">
-      <div class="oui-form-item-description">
+      <div class="oui-form-item-description" :class="{ _disabled: $attrs.disabled }">
         <slot name="description">
           {{ description }}
         </slot>
