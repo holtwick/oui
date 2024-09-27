@@ -552,7 +552,7 @@ export function useQRCode() {
         }
       }
 
-      qrSvg += '" stroke="transparent" fill="black"/>'
+      qrSvg += '" stroke="transparent" fill="currentColor"/>'
       qrSvg += '</svg>'
 
       return qrSvg
