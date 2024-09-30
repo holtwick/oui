@@ -14,7 +14,7 @@ withDefaults(defineProps<{
   id?: string
 }>(), {})
 
-const model = defineModel<number>({ required: true })
+const model = defineModel<number | undefined>({ required: true })
 </script>
 
 <template>

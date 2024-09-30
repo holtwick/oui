@@ -35,6 +35,12 @@ const date = computed({
     :description="description"
     :required="required"
   >
-    <input :id="id" v-model="date" type="date" class="oui-input oui-input-datetime">
+    <input
+      :id="id"
+      v-model="date"
+      type="date"
+      class="oui-input oui-input-datetime"
+      v-bind="$attrs"
+    >
   </OuiFormItem>
 </template>
