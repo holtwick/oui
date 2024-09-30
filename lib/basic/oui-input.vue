@@ -23,7 +23,10 @@ const props = withDefaults(defineProps<{
   lazyDelay: 1000,
 })
 
-const model = defineModel<string | undefined>({ required: true })
+const model = defineModel<string | undefined>({
+  required: props.required,
+  default: props.required ? '' : undefined,
+})
 
 const value = ref('')
 

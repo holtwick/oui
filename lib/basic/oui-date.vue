@@ -5,7 +5,7 @@ import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   title?: string
   description?: string
   required?: boolean
@@ -14,8 +14,8 @@ withDefaults(defineProps<{
 })
 
 const model = defineModel<number | undefined>({
-  required: true,
-  default: dayFromToday(),
+  required: props.required,
+  default: props.required ? dayFromToday() : undefined,
 })
 
 const date = computed({
@@ -23,7 +23,7 @@ const date = computed({
     return model.value ? dayToString(model.value) : ''
   },
   set(value) {
-    model.value = value ? dayFromString(value) as number : undefined
+    model.value = value ? dayFromString(value) as number : (props.required ? dayFromToday() : undefined)
   },
 })
 </script>
