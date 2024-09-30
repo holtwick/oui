@@ -7,17 +7,14 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   title?: string
   description?: string
   required?: boolean
   id?: string
 }>(), {})
 
-const model = defineModel<number | undefined>({
-  required: props.required,
-  default: props.required ? 0 : undefined,
-})
+const model = defineModel<number>({ required: true })
 </script>
 
 <template>
