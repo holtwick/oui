@@ -44,9 +44,8 @@ function classicPrompt() {
     <br>
     <br>
     <br>
-
-    <pre>result = {{ state.value }}</pre>
   </p>
+  <pre>result = {{ state.value }}</pre>
   <h2>Classic</h2>
   <p>
     <OuiButton @click="classicAlert()">

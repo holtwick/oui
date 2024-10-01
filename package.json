@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.23.10",
+  "version": "0.23.11",
   "author": {
     "email": "dirk.holtwick@gmail.com",
     "name": "Dirk Holtwick",
@@ -85,6 +85,7 @@
     "@vitejs/plugin-vue": "^5.1.4",
     "@vitest/browser": "^2.1.1",
     "eslint": "^9",
+    "lightningcss": "^1.27.0",
     "stylus": "^0.63.0",
     "tsup": "^8.3.0",
     "typescript": "^5.6",
