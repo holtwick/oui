@@ -52,12 +52,8 @@ oui-button-default() {
     flex: none;
   }
 
-  &:focus {
+  &:focus-visible {
     box-shadow: var(--input-shadow-focus); /* Workaround for :focus that otherwise stays after mouse click */
-
-    &:not(:focus-visible, :active) {
-      box-shadow: unquote("inherit");
-    }
   }
 
   &[disabled] {
@@ -181,11 +177,6 @@ oui-input-default() {
   &:focus, &:focus-within {
     box-shadow: var(--input-shadow-focus);
     border-color: var(--input-border-focus) !important; /* Workaround for :focus that otherwise stays after mouse click */
-
-    &:not(:focus-visible, :active) {
-      box-shadow: unquote("inherit");
-      border-color: unquote("inherit");
-    }
   }
 
   &[disabled] {
