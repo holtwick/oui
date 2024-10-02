@@ -70,7 +70,7 @@ if (!process.env.BUILD_DEMO) {
   // https://vitejs.dev/guide/build.html#library-mode
   config.build = {
     // sourcemap: false,
-    cssMinify: 'lightningcss',
+    // cssMinify: 'lightningcss',
     // cssTarget: 'es2015',
 
     lib: {
