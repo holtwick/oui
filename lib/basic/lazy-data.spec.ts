@@ -1,9 +1,13 @@
+import type { LoggerInterface } from 'zeed'
 import { describe, expect, it } from 'vitest'
-import { createArray } from 'zeed'
+import { createArray, Logger, sleep } from 'zeed'
 import { useLazyData } from './lazy-data'
+
+const log: LoggerInterface = Logger('lazy-data.spec')
 
 describe('useLazyData', () => {
   async function onFetch(offset: number, length: number) {
+    log('onFetch', offset, length)
     return createArray(length).map((_, i) => offset + i)
   }
 
@@ -48,5 +52,96 @@ describe('useLazyData', () => {
     // Assuming the data is reactive and we can access it directly for testing purposes
     expect(data.length).toBe(3)
     expect(data.every(item => item == null)).toBe(true)
+  })
+
+  it('should set visible data correctly', async () => {
+    const { setSize, setVisible, data } = useLazyData({
+      onFetch,
+      chunkSize: 2,
+      margin: 2,
+    })
+    setSize(20)
+    const r = setVisible(3, 2)
+    expect(r).toMatchInlineSnapshot(`
+      {
+        "allChunksToLoad": [
+          0,
+          1,
+          2,
+          3,
+        ],
+        "fromChunk": 0,
+        "fromIndex": 1,
+        "toChunk": 3,
+        "toIndex": 7,
+      }
+    `)
+
+    await sleep(100)
+
+    expect(data).toMatchInlineSnapshot(`
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+      ]
+    `)
+
+    const r2 = setVisible(4, 2)
+    expect(r2).toMatchInlineSnapshot(`
+      {
+        "allChunksToLoad": [
+          4,
+        ],
+        "fromChunk": 1,
+        "fromIndex": 2,
+        "toChunk": 4,
+        "toIndex": 8,
+      }
+    `)
+
+    await sleep(100)
+
+    expect(data).toMatchInlineSnapshot(`
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+      ]
+    `)
   })
 })
