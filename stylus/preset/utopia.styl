@@ -1,27 +1,19 @@
 // utopia.fyi/type/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 *//* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 *//* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,20,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
 :root {
-  --step--2-flex: unquote("clamp(0.6944rem, 0.6913rem + 0.0157vw, 0.7035rem)");
-  --step--1-flex: unquote("clamp(0.8333rem, 0.797rem + 0.1816vw, 0.9377rem)");
-  --step-0-flex: unquote("clamp(1rem, 0.913rem + 0.4348vw, 1.25rem)");
-  --step-1-flex: unquote("clamp(1.2rem, 1.0378rem + 0.8109vw, 1.6663rem)");
-  --step-2-flex: unquote("clamp(1.44rem, 1.1683rem + 1.3585vw, 2.2211rem)");
-  --step-3-flex: unquote("clamp(1.728rem, 1.2992rem + 2.1439vw, 2.9607rem)");
-  --step-4-flex: unquote("clamp(2.0736rem, 1.4221rem + 3.2575vw, 3.9467rem)");
-  --step-5-flex: unquote("clamp(2.4883rem, 1.5239rem + 4.8219vw, 5.2609rem)");
+  --step--2: unquote("clamp(0.6944rem, 0.6913rem + 0.0157vw, 0.7035rem)");
+  --step--1: unquote("clamp(0.8333rem, 0.797rem + 0.1816vw, 0.9377rem)");
+  --step-0: unquote("clamp(1rem, 0.913rem + 0.4348vw, 1.25rem)");
+  --step-1: unquote("clamp(1.2rem, 1.0378rem + 0.8109vw, 1.6663rem)");
+  --step-2: unquote("clamp(1.44rem, 1.1683rem + 1.3585vw, 2.2211rem)");
+  --step-3: unquote("clamp(1.728rem, 1.2992rem + 2.1439vw, 2.9607rem)");
+  --step-4: unquote("clamp(2.0736rem, 1.4221rem + 3.2575vw, 3.9467rem)");
+  --step-5: unquote("clamp(2.4883rem, 1.5239rem + 4.8219vw, 5.2609rem)");
 }
 
-:root {
-  --step--2: var(--step--2-flex, 0.6944rem);
-  --step--1: var(--step--1-flex, 0.8333rem);
-  --step-0: var(--step-0-flex, 1rem);
-  --step-1: var(--step-1-flex, 1.2rem);
-  --step-2: var(--step-2-flex, 1.44rem);
-  --step-3: var(--step-3-flex, 1.728rem);
-  --step-4: var(--step-4-flex, 2.0736rem);
-  --step-5: var(--step-5-flex, 2.4883rem);
-}
-
-/* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,20,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+/*
+utopia.fyi/space/calculator?c=320,16,1.2,1240,20,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
+@link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,20,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 
+*/
 :root {
   --space-3xs-flex: unquote("clamp(0.25rem, 0.2283rem + 0.1087vw, 0.3125rem)");
   --space-2xs-flex: unquote("clamp(0.5rem, 0.4565rem + 0.2174vw, 0.625rem)");
@@ -43,25 +35,47 @@
   --space-s-l-flex: unquote("clamp(1rem, 0.4783rem + 2.6087vw, 2.5rem)");
 }
 
-:root {
-  --space-3xs: var(--space-3xs-flex, 0.25rem);
-  --space-2xs: var(--space-2xs-flex, 0.5rem);
-  --space-xs: var(--space-xs-flex, 0.75rem);
-  --space-s: var(--space-s-flex, 1rem);
-  --space-m: var(--space-m-flex, 1.5rem);
-  --space-l: var(--space-l-flex, 2rem);
-  --space-xl: var(--space-xl-flex, 3rem);
-  --space-2xl: var(--space-2xl-flex, 4rem);
-  --space-3xl: var(--space-3xl-flex, 6rem);
-  --space-3xs-2xs: var(--space-3xs-2xs-flex, 0.25rem);
-  --space-2xs-xs: var(--space-2xs-xs-flex, 0.5rem);
-  --space-xs-s: var(--space-xs-s-flex, 0.75rem);
-  --space-s-m: var(--space-s-m-flex, 1rem);
-  --space-m-l: var(--space-m-l-flex, 1.5rem);
-  --space-l-xl: var(--space-l-xl-flex, 2rem);
-  --space-xl-2xl: var(--space-xl-2xl-flex, 3rem);
-  --space-2xl-3xl: var(--space-2xl-3xl-flex, 4rem);
-  --space-s-l: var(--space-s-l-flex, 1rem);
+--step--2 = 0.6944rem;
+--step--1 = 0.8333rem;
+--step-0 = 1rem;
+--step-1 = 1.2rem;
+--step-2 = 1.44rem;
+--step-3 = 1.728rem;
+--step-4 = 2.0736rem;
+--step-5 = 2.4883rem;
+
+font-size-step(value = 0) {
+  font-size: lookup("--step-" + value);
+  font-size: unquote("var(--step-" + value + ")");
+}
+
+--space-3xs = 0.25rem;
+--space-2xs = 0.5rem;
+--space-xs = 0.75rem;
+--space-s = 1rem;
+--space-m = 1.5rem;
+--space-l = 2rem;
+--space-xl = 3rem;
+--space-2xl = 4rem;
+--space-3xl = 6rem;
+--space-3xs-2xs = 0.25rem;
+--space-2xs-xs = 0.5rem;
+--space-xs-s = 0.75rem;
+--space-s-m = 1rem;
+--space-m-l = 1.5rem;
+--space-l-xl = 2rem;
+--space-xl-2xl = 3rem;
+--space-2xl-3xl = 4rem;
+--space-s-l = 1rem;
+
+gap-space(value = s) {
+  margin-right: -1 * lookup("--space-" + value);
+  margin-right: -1 * unquote("calc(-1 * var(--space-" + value + "))");
+
+  & > * {
+    margin-right: lookup("--space-" + value);
+    margin-right: unquote("var(--space-" + value + ")");
+  }
 }
 
 oui-utopia() {
