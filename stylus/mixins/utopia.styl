@@ -1,46 +1,46 @@
 
---step--2 = 0.6944rem;
---step--1 = 0.8333rem;
---step-0 = 1rem;
---step-1 = 1.2rem;
---step-2 = 1.44rem;
---step-3 = 1.728rem;
---step-4 = 2.0736rem;
---step-5 = 2.4883rem;
+$utopia-step--2 = 0.6944rem;
+$utopia-step--1 = 0.8333rem;
+$utopia-step-0 = 1rem;
+$utopia-step-1 = 1.2rem;
+$utopia-step-2 = 1.44rem;
+$utopia-step-3 = 1.728rem;
+$utopia-step-4 = 2.0736rem;
+$utopia-step-5 = 2.4883rem;
 
 font-size-step(value = 0) {
-  font-size: lookup("--step-" + value);
+  font-size: lookup("$utopia-step-" + value);
   font-size: unquote("var(--step-" + value + ")");
 }
 
---space-3xs = 0.25rem;
---space-2xs = 0.5rem;
---space-xs = 0.75rem;
---space-s = 1rem;
---space-m = 1.5rem;
---space-l = 2rem;
---space-xl = 3rem;
---space-2xl = 4rem;
---space-3xl = 6rem;
---space-3xs-2xs = 0.25rem;
---space-2xs-xs = 0.5rem;
---space-xs-s = 0.75rem;
---space-s-m = 1rem;
---space-m-l = 1.5rem;
---space-l-xl = 2rem;
---space-xl-2xl = 3rem;
---space-2xl-3xl = 4rem;
---space-s-l = 1rem;
+$utopia-space-3xs = 0.25rem;
+$utopia-space-2xs = 0.5rem;
+$utopia-space-xs = 0.75rem;
+$utopia-space-s = 1rem;
+$utopia-space-m = 1.5rem;
+$utopia-space-l = 2rem;
+$utopia-space-xl = 3rem;
+$utopia-space-2xl = 4rem;
+$utopia-space-3xl = 6rem;
+$utopia-space-3xs-2xs = 0.25rem;
+$utopia-space-2xs-xs = 0.5rem;
+$utopia-space-xs-s = 0.75rem;
+$utopia-space-s-m = 1rem;
+$utopia-space-m-l = 1.5rem;
+$utopia-space-l-xl = 2rem;
+$utopia-space-xl-2xl = 3rem;
+$utopia-space-2xl-3xl = 4rem;
+$utopia-space-s-l = 1rem;
 
 gap-space(value) {
-  if lookup("--space-" + value) {
+  if lookup("$utopia-space-" + value) {
     & > * {
-      margin-right: lookup("--space-" + value);
+      margin-right: lookup("$utopia-space-" + value);
       margin-right: unquote("var(--space-" + value + ")");
     }
   } else {
     & > * {
-      margin-right: lookup("--space-s");
+      margin-right: lookup("$utopia-space-s");
       margin-right: unquote("var(--space-s)");
     }
   }
