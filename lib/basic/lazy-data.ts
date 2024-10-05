@@ -42,17 +42,56 @@ export function useLazyData<T>(opt: Config<T>) {
 
   function setVisible(fromPos: number, toPos: number) {
     log.assert(fromPos <= toPos, 'fromPos must be less than or equal to toPos')
-    const fromChunk = Math.floor(Math.max(0, fromPos - margin) / chunkSize)
-    const toChunk = Math.floor((toPos + margin) / chunkSize) * chunkSize
-    const iterationNow = iteration
-    onFetch(fromChunk * chunkSize, ((toChunk - fromChunk) * chunkSize) + chunkSize).then((result) => {
-      if (iterationNow !== iteration)
-        return
-      for (let i = fromChunk; i <= toChunk; i++)
-        chunks[i] = ChunkStatus.Loaded
+    const fromIndex = Math.max(0, fromPos - margin)
+    const toIndex = Math.min(dataSize, toPos + margin)
+    const fromChunk = Math.floor(fromIndex / chunkSize)
+    const toChunk = Math.floor(toIndex / chunkSize)
 
-      // arraySetArrayInPlace(data, result, fromChunk * chunkSize)
-    })
+    const allChunksToLoad: number[] = []
+
+    let chunksToLoad: number[] = []
+
+    function flush() {
+      if (chunksToLoad.length === 0)
+        return
+      const loading = [...chunksToLoad]
+      allChunksToLoad.push(...loading)
+      chunksToLoad = []
+
+      const fromIndex = loading[0] * chunkSize
+      const itemCount = (loading[loading.length - 1] - loading[0] + 1) * chunkSize
+
+      onFetch(fromIndex, itemCount).then((values) => {
+        log('Loaded', fromIndex, itemCount, values)
+        loading.forEach(i => chunks[i] = ChunkStatus.Loaded)
+        for (let i = 0; i < itemCount; i++) {
+          data[fromIndex + i] = values[i] as any
+        }
+      }).catch((e) => {
+        log.error('Failed to load chunks', loading, e)
+      })
+    }
+
+    for (let i = fromChunk; i <= toChunk; i++) {
+      const chunk = chunks[i]
+      if (chunk == null) {
+        chunks[i] = ChunkStatus.Loading
+        chunksToLoad.push(i)
+      }
+      else {
+        flush()
+      }
+    }
+
+    flush()
+
+    return {
+      fromIndex,
+      toIndex,
+      fromChunk,
+      toChunk,
+      allChunksToLoad,
+    }
   }
 
   return {
