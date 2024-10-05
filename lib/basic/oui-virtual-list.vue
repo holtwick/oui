@@ -3,7 +3,7 @@
 // Which is under MIT License https://github.com/waningflow/vue3-virtual-list/blob/master/package.json#L11
 
 import { onMounted, ref, toRefs, watch } from 'vue'
-import { debounce, throttle } from 'zeed'
+import { debounce } from 'zeed'
 import { px } from './lib'
 
 import './oui-virtual-list.styl'
@@ -136,9 +136,11 @@ onMounted(() => {
     <div :style="`height: ${px(scrollHeight)}; padding-top: ${px(paddingTop)}`">
       <template v-for="(item, index) in data.slice(indexFirst, indexLast)" :key="indexFirst + index">
         <div :style="{ height: `${px(rowHeight)}` }">
-          <slot :item="item" :index="indexFirst + index">
-            Placeholder {{ index }}
-          </slot>
+          <template v-if="item">
+            <slot :item="item" :index="indexFirst + index">
+              Placeholder {{ index }}
+            </slot>
+          </template>
         </div>
       </template>
     </div>

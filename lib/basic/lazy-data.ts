@@ -1,3 +1,4 @@
+import type { Reactive } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import { reactive } from 'vue'
 import { arrayEmptyInPlace, createArray, Logger } from 'zeed'
@@ -9,6 +10,7 @@ interface Config<T> {
   chunkSize?: number
   margin?: number
   size?: number
+  data?: Reactive<T[]>
 }
 
 enum ChunkStatus {
@@ -22,7 +24,7 @@ export function useLazyData<T>(opt: Config<T>) {
 
   let iteration = 0
   let dataSize = 0
-  const data = reactive<(T | null)[]>([])
+  const data = opt.data ?? reactive<(T | null)[]>([])
   const chunks: Record<number, ChunkStatus | undefined> = {}
 
   function reload() {
@@ -40,8 +42,9 @@ export function useLazyData<T>(opt: Config<T>) {
   if (size > 0)
     setSize(size)
 
-  function setVisible(fromPos: number, toPos: number) {
-    log.assert(fromPos <= toPos, 'fromPos must be less than or equal to toPos')
+  function setVisible(fromPos: number, length: number) {
+    const toPos = fromPos + length
+    // log.assert(fromPos <= toPos, 'fromPos must be less than or equal to toPos')
     const fromIndex = Math.max(0, fromPos - margin)
     const toIndex = Math.min(dataSize, toPos + margin)
     const fromChunk = Math.floor(fromIndex / chunkSize)

@@ -61,7 +61,7 @@ describe('useLazyData', () => {
       margin: 2,
     })
     setSize(20)
-    const r = setVisible(3, 5)
+    const r = setVisible(3, 2)
     expect(r).toMatchInlineSnapshot(`
       {
         "allChunksToLoad": [
@@ -104,7 +104,7 @@ describe('useLazyData', () => {
       ]
     `)
 
-    const r2 = setVisible(4, 6)
+    const r2 = setVisible(4, 2)
     expect(r2).toMatchInlineSnapshot(`
       {
         "allChunksToLoad": [
