@@ -13,6 +13,8 @@ const state = reactive({
   fillLast: true,
   scrollToEnd: false,
   showSepHandle: false,
+  first: 0,
+  last: 0,
 })
 
 const columns: OuiTableColumn[] = [
@@ -42,7 +44,10 @@ const menu = useMenu((row: any) => [
   },
 ])
 
-const x = ref(0)
+function onVisible(offset: number, limit: number) {
+  state.first = offset
+  state.last = offset + limit
+}
 </script>
 
 <template>
@@ -61,6 +66,7 @@ const x = ref(0)
       :row-attrs="(_item, index) => index % 2 === 0 ? { style: 'background: var(--s2-bg)' } : {}"
       style="height: 80vh"
       @context="menu"
+      @visible="onVisible"
     >
       <template #col-one="{ value, col }">
         {{ col.name }} {{ value }}

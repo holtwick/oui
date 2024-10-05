@@ -35,6 +35,7 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{
   context: [row: T, pos: number, event: Event]
   select: [row: T, pos: number, event: Event]
+  visible: [offset: number, limit: number]
 }>()
 
 const modelSort = defineModel<string>('sort')
@@ -120,6 +121,7 @@ function scrollX(x: number) {
       :row-height="rowHeight"
       :scroll-to-end="scrollToEnd"
       @scroll-x="scrollX"
+      @visible="(offset, limit) => $emit('visible', offset, limit)"
     >
       <template #default="{ item, index }">
         <div

@@ -3,8 +3,8 @@
 // Which is under MIT License https://github.com/waningflow/vue3-virtual-list/blob/master/package.json#L11
 
 import { onMounted, ref, toRefs, watch } from 'vue'
+import { debounce, throttle } from 'zeed'
 import { px } from './lib'
-// import { bus, useOnBus } from '@/protocol'
 
 import './oui-virtual-list.styl'
 
@@ -13,14 +13,17 @@ const props = withDefaults(defineProps<{
   rowHeight?: number
   rowBuffer?: number
   scrollToEnd?: boolean
+  emitDelay?: number
 }>(), {
   rowHeight: 20,
   rowBuffer: 5,
   scrollToEnd: false,
+  emitDelay: 100,
 })
 
 const emit = defineEmits<{
   scrollX: [number]
+  visible: [offset: number, limit: number]
 }>()
 
 const { data, rowBuffer, rowHeight } = toRefs(props)
@@ -83,6 +86,11 @@ function handleScroll() {
 //     root.value.scrollTop = 0
 //   handleScroll()
 // })
+
+// const emitVisible = throttle(() => emit('visible', indexFirst.value, indexLast.value - indexFirst.value), { delay: props.emitDelay })
+const emitVisible = debounce(() => emit('visible', indexFirst.value, indexLast.value - indexFirst.value), { delay: props.emitDelay })
+
+watch(() => [indexFirst.value, indexLast.value], emitVisible)
 
 function scrollToEnd() {
   if (root.value) {
