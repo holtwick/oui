@@ -25,47 +25,59 @@ export function useLazyData<T>(opt: Config<T>) {
   let iteration = 0
   let dataSize = 0
   const data = opt.data ?? reactive<(T | null)[]>([])
-  const chunks: Record<number, ChunkStatus | undefined> = {}
+  let chunks: Record<number, ChunkStatus | undefined> = {}
 
-  function reload() {
+  let currentOffset = 0
+  let currentLength = 0
+
+  function setup() {
     iteration++
     arrayEmptyInPlace(data)
     const newData = createArray(dataSize) as (T | null)[]
     data.push(...newData as any)
+    chunks = {}
   }
 
   function setSize(size: number) {
     dataSize = size
-    reload()
+    setup()
   }
 
   if (size > 0)
     setSize(size)
 
   function setVisible(fromPos: number, length: number) {
+    currentOffset = fromPos
+    currentLength = length
+
     const toPos = fromPos + length
-    // log.assert(fromPos <= toPos, 'fromPos must be less than or equal to toPos')
     const fromIndex = Math.max(0, fromPos - margin)
     const toIndex = Math.min(dataSize, toPos + margin)
     const fromChunk = Math.floor(fromIndex / chunkSize)
     const toChunk = Math.floor(toIndex / chunkSize)
 
-    const allChunksToLoad: number[] = []
-
-    let chunksToLoad: number[] = []
+    let nextChunksToLoad: number[] = []
 
     function flush() {
-      if (chunksToLoad.length === 0)
+      // Make a copy of the chunks to load
+      if (nextChunksToLoad.length === 0)
         return
-      const loading = [...chunksToLoad]
-      allChunksToLoad.push(...loading)
-      chunksToLoad = []
+      const loading = [...nextChunksToLoad]
+      nextChunksToLoad = []
 
       const fromIndex = loading[0] * chunkSize
       const itemCount = (loading[loading.length - 1] - loading[0] + 1) * chunkSize
 
+      const currentIteration = iteration
+
       onFetch(fromIndex, itemCount).then((values) => {
         log('Loaded', fromIndex, itemCount, values)
+
+        // Still the same context?
+        if (iteration !== currentIteration)
+          return
+
+        // Apply the values
         loading.forEach(i => chunks[i] = ChunkStatus.Loaded)
         for (let i = 0; i < itemCount; i++) {
           data[fromIndex + i] = values[i] as any
@@ -79,7 +91,7 @@ export function useLazyData<T>(opt: Config<T>) {
       const chunk = chunks[i]
       if (chunk == null) {
         chunks[i] = ChunkStatus.Loading
-        chunksToLoad.push(i)
+        nextChunksToLoad.push(i)
       }
       else {
         flush()
@@ -87,14 +99,11 @@ export function useLazyData<T>(opt: Config<T>) {
     }
 
     flush()
+  }
 
-    return {
-      fromIndex,
-      toIndex,
-      fromChunk,
-      toChunk,
-      allChunksToLoad,
-    }
+  function reload() {
+    setup()
+    setVisible(currentOffset, currentLength)
   }
 
   return {

@@ -61,21 +61,7 @@ describe('useLazyData', () => {
       margin: 2,
     })
     setSize(20)
-    const r = setVisible(3, 2)
-    expect(r).toMatchInlineSnapshot(`
-      {
-        "allChunksToLoad": [
-          0,
-          1,
-          2,
-          3,
-        ],
-        "fromChunk": 0,
-        "fromIndex": 1,
-        "toChunk": 3,
-        "toIndex": 7,
-      }
-    `)
+    setVisible(3, 2)
 
     await sleep(100)
 
@@ -104,19 +90,7 @@ describe('useLazyData', () => {
       ]
     `)
 
-    const r2 = setVisible(4, 2)
-    expect(r2).toMatchInlineSnapshot(`
-      {
-        "allChunksToLoad": [
-          4,
-        ],
-        "fromChunk": 1,
-        "fromIndex": 2,
-        "toChunk": 4,
-        "toIndex": 8,
-      }
-    `)
-
+    setVisible(4, 2)
     await sleep(100)
 
     expect(data).toMatchInlineSnapshot(`
