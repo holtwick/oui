@@ -1,6 +1,7 @@
 export * from './_types'
 export * from './directives'
 export * from './formatters'
+export * from './lazy-data'
 export * from './log'
 export { default as OuiButton } from './oui-button.vue'
 export { default as OuiCard } from './oui-card.vue'
