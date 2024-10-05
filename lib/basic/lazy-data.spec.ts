@@ -3,12 +3,12 @@ import { createArray } from 'zeed'
 import { useLazyData } from './lazy-data'
 
 describe('useLazyData', () => {
-  async function onFetch(from: number, to: number) {
-    return createArray(to - from).map((_, i) => from + i)
+  async function onFetch(offset: number, length: number) {
+    return createArray(length).map((_, i) => offset + i)
   }
 
   it('should generate fake data', async () => {
-    const result = await onFetch(5, 10)
+    const result = await onFetch(5, 5)
     expect(result).toMatchInlineSnapshot(`
       [
         5,
