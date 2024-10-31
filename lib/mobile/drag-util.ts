@@ -11,7 +11,7 @@ export function isInsideScrollable(el?: HTMLElement | null, childOf?: HTMLElemen
     if (childOf && (!childOf?.contains(el) || childOf.isSameNode(el)))
       return false
 
-    if (el.dataset.noscroll === 'true') {
+    if (el.dataset?.noscroll === 'true') {
       log('exit noscroll')
       return true
       // break
