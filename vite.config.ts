@@ -7,6 +7,7 @@ import Markdown from 'unplugin-vue-markdown/vite'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import { qrcode } from 'vite-plugin-qrcode'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 const config: UserConfig = {
   plugins: [
@@ -15,6 +16,8 @@ const config: UserConfig = {
     Vue({
       include: [/\.vue$/, /\.md$/],
     }),
+
+    vueDevTools(),
 
     // https://github.com/antfu/vite-plugin-md
     // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
