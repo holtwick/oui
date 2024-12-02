@@ -57,6 +57,7 @@ const config: UserConfig = {
     alias: {
       '@': fileURLToPath(new URL('./lib', import.meta.url)),
     },
+    conditions: ['module', 'browser'],
   },
   // server: {
   //   port: 8080,
