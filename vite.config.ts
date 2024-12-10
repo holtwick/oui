@@ -84,7 +84,7 @@ if (!process.env.BUILD_DEMO) {
     },
     rollupOptions: {
       // preserveEntrySignatures: "strict",
-      external: 'vue', // Object.keys(pkg.dependencies),
+      external: ['vue', '@vueuse/core', 'zeed'], // Object.keys(pkg.dependencies),
     },
   }
 }
