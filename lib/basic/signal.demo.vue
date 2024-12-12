@@ -12,7 +12,7 @@ function useSignalRef<T>(signal: Signal<T>, readwrite = true): Ref<UnwrapRef<T>>
   onUnmounted(signal.on(v => signalVue.value = v as any))
   if (readwrite)
     watch(signalVue, v => signal.set(v as any))
-  return signalVue
+  return signalVue as Ref<UnwrapRef<T>>
 }
 
 // Connect
