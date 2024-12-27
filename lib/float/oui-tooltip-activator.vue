@@ -17,6 +17,7 @@ const active = ref<boolean>(false)
 const placement = ref<Placement>('top')
 const reference = ref()
 const text = ref('')
+const style = ref({})
 
 const titleAsTooltip = props.titleAsTooltip === true
 
@@ -79,6 +80,17 @@ if (ok) {
           text.value = tooltip?.toString()?.trim() || ''
           placement.value = el.getAttribute('tooltip-placement') || 'top' as any
           active.value = true
+
+          // Z-Index: Make sure to have a higher z-index than the current element
+          let zel: any = el
+          while (zel instanceof Element && zel.tagName !== 'BODY') {
+            const zIndex = window.getComputedStyle(zel).zIndex
+            if (zIndex && zIndex !== 'auto') {
+              style.value = { zIndex: zIndex + 1 }
+              break
+            }
+            zel = zel.parentElement
+          }
           return
         }
         el = el.parentElement
@@ -122,6 +134,7 @@ if (ok) {
       class="oui-float oui-tooltip _tooltip"
       transition="oui-float-transition"
       :placement="placement"
+      :style="active ? style : {}"
     >
       {{ text }}
     </OuiFloat>

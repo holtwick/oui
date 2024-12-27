@@ -57,6 +57,7 @@ const disabled = computed(() => isEmpty(item.title) || snapshot() === reference)
       title="Person"
       :update="update"
       :disabled="disabled"
+      close
       @save="doSave"
       @cancel="done"
       @delete="done"
