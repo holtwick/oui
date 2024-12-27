@@ -13,6 +13,9 @@ const props = withDefaults(defineProps<{
   maxSize: number
   color?: string
   hide?: boolean
+
+  /// This will make the component a simple div without the resizeable separator
+  static?: boolean
 }>(), {
 })
 
@@ -22,23 +25,30 @@ const style = ref()
 </script>
 
 <template>
-  <template v-if="side === 'right' || side === 'bottom'">
-    <div v-show="hide !== true" :style="style" v-bind="$attrs" class="oui-resizeable">
+  <template v-if="static">
+    <div v-bind="$attrs">
       <slot />
     </div>
   </template>
-  <OuiSeparator
-    v-show="hide !== true"
-    v-model="paneSize"
-    v-model:style-value="style"
-    :side="side"
-    :min-size="minSize"
-    :max-size="maxSize"
-    :color="color"
-  />
-  <template v-if="side === 'left' || side === 'top'">
-    <div v-show="hide !== true" :style="style" v-bind="$attrs" class="oui-resizeable">
-      <slot />
-    </div>
+  <template v-else>
+    <template v-if="side === 'right' || side === 'bottom'">
+      <div v-show="hide !== true" :style="style" v-bind="$attrs" class="oui-resizeable">
+        <slot />
+      </div>
+    </template>
+    <OuiSeparator
+      v-show="hide !== true"
+      v-model="paneSize"
+      v-model:style-value="style"
+      :side="side"
+      :min-size="minSize"
+      :max-size="maxSize"
+      :color="color"
+    />
+    <template v-if="side === 'left' || side === 'top'">
+      <div v-show="hide !== true" :style="style" v-bind="$attrs" class="oui-resizeable">
+        <slot />
+      </div>
+    </template>
   </template>
 </template>
