@@ -36,7 +36,7 @@ async function doCancel() {
 </script>
 
 <template>
-  <OuiModal v-model="active" title="Example Dialog Mode" @close="doCancel">
+  <OuiModal v-model="active" title="Example Dialog Mode" close @close="doCancel">
     <OuiText>
       <b>Lorem ipsum</b>, dolor sit amet consectetur adipisicing elit. Deserunt delectus illum tenetur sint atque unde, voluptates facere assumenda in repellendus! Cupiditate laborum recusandae facere dicta reiciendis odio enim dolorum illum!
       <OuiInput v-model="item.name" title="Your Name" required class="_focus" />
