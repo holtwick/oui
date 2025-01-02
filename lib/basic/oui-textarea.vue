@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<{
   autosize: false,
 })
 
-const model = defineModel<string>({ required: true })
+const model = defineModel<string | undefined>({ required: true })
 
 const { textarea } = props.autosize === true ? useTextareaAutosize({ input: model }) : {}
 </script>
