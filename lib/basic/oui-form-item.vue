@@ -22,7 +22,6 @@ defineProps<{
         </div>
         <template v-if="$slots.description || description">
           <div class="oui-form-item-description">
-
             <slot name="description">
               {{ description }}
             </slot>

@@ -25,4 +25,15 @@
       size: 1em;
     }
   }
+
+  /* https://vueuse.org/core/useTextareaAutosize/ */
+  &-textarea._autosize {
+    resize: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
