@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useFileDialog, useTextareaAutosize, watchThrottled } from '@vueuse/core'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
@@ -7,15 +8,19 @@ defineOptions({
   inheritAttrs: false,
 })
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   title?: string
   description?: string
   required?: boolean
   id?: string
+  autosize?: boolean
 }>(), {
+  autosize: false,
 })
 
 const model = defineModel<string>({ required: true })
+
+const { textarea } = props.autosize === true ? useTextareaAutosize({ input: model }) : {}
 </script>
 
 <template>
@@ -27,9 +32,11 @@ const model = defineModel<string>({ required: true })
   >
     <textarea
       :id="id"
+      v-bind="$attrs"
+      ref="textarea"
       v-model="model"
       class="oui-textarea"
-      v-bind="$attrs"
+      :class="{ _autosize: props.autosize }"
       rows="6"
     />
   </OuiFormItem>

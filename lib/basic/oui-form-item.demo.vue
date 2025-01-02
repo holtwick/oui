@@ -24,6 +24,7 @@ const state = reactive({
     <OuiInput v-model="state.value2" title="Value with label" description="Some description" required />
     <OuiInputNumber v-model="state.number" title="Number" />
     <OuiTextarea v-model="state.text" title="Text" />
+    <OuiTextarea v-model="state.text" title="Text (autosize)" autosize />
     <OuiPassword v-model="state.password" title="Password" />
     <OuiSelect v-model="state.select" title="Select" :options="['One', 'Two', 'Three']" />
     <OuiDate v-model="state.date" title="Date" />
