@@ -4,12 +4,13 @@ import { reactive } from 'vue'
 import { OuiClose, OuiDemo, OuiInput, OuiTabs } from '../lib'
 
 const state = reactive({
-  selected: '',
+  selected: 'one',
 })
 
 const tabs: OuiTab[] = [
   { title: 'One', name: 'one', icon: OuiClose },
   { title: 'Two', name: 'two' },
+  { title: 'Three', name: 'three' },
 ]
 </script>
 

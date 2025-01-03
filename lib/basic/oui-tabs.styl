@@ -2,6 +2,37 @@
 
 .oui-tabs {
   use: stack-y;
+  border-radius: 4;
+
+  ._nav {
+    use: stack-x;
+    position: relative;
+    background: var(--p1-bg);
+    border-radius: 4;
+
+    ._pill {
+      position: absolute;
+      height: calc(100% - 16px);
+      transition: left 0.1s, width 0.1s;
+
+      ._pill-inner {
+        width: 100%;
+        height: 100%;
+        padding: 8;
+        border-radius: 4;
+        background: var(--p1-fg);
+      }
+    }
+
+    button {
+      margin: 4;
+      padding: 4 8;
+    }
+  }
+
+  svg {
+    size: 1em;
+  }
 
   > ._nav {
     use: stack-x;
@@ -9,10 +40,23 @@
 
     button {
       cursor: pointer;
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+      font-weight: bold;
+      color: var(--t3-fg);
+
+      &:hover {
+        color: var(--p1-fg);
+      }
     }
 
     ._active {
-      font-weight: bold;
+      color: var(--bg); /* font-weight: bold; */
+
+      &:hover {
+        color: var(--bg);
+      }
     }
   }
 }
