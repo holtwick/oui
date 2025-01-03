@@ -44,9 +44,7 @@ onMounted(setActiveTab)
 <template>
   <div ref="tabsRef" class="oui-tabs">
     <nav class="oui-tabs-nav _nav">
-      <div class="_pill" :style="{ left: `${activeTabLeft}px`, width: `${activeTabWidth}px`, top: `${activeTabTop}px`, height: `${activeTabHeight}px` }">
-        <div class="_pill-inner" />
-      </div>
+      <div class="_pill" :style="{ left: `${activeTabLeft}px`, width: `${activeTabWidth}px`, top: `${activeTabTop}px`, height: `${activeTabHeight}px` }" />
       <template v-for="tab in tabs" :key="tab.name">
         <button
           ref="tabRefs"
@@ -59,7 +57,7 @@ onMounted(setActiveTab)
           {{ tab.title ?? tab.name }}
         </button>
       </template>
-      <div class="ogrow" />
+      <!-- <div class="ogrow" /> -->
     </nav>
 
     <div>
