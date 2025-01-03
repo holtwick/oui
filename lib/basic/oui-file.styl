@@ -1,28 +1,33 @@
 @require "../../stylus/index.styl";
 
 .oui-file {
-  use: stack-x;
-  gap: 8;
+  oui-input-default();
+  color: var(--fg);
+  border-style: dashed;
+  cursor: pointer;
+  width: 100%;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-user-select: none;
+  font-size: 16;
+  padding-y: 6;
 
-  img {
-    size: 64;
-    border-radius: 4;
+  > * {
+    display: inline-flex;
+    flex: none;
   }
 
-  button {
-    use: center;
-    color: var(--fg);
-    border: 1px dashed var(--s2-fg);
-    border-radius: 4;
-    padding: 8;
-    height: 64;
-    min-width: 64;
-    cursor: pointer;
+  // icon
+  svg, img {
+    size: 1em;
+  }
 
-    &:hover {
-      color: var(--p1-fg);
-      border-color: var(--p1-fg);
-      // background: var(--t3-bg);
-    }
+  ._content {
+    stack-x(8);
+  }
+
+  &:hover, &._over {
+    color: var(--p1-fg);
+    border-color: var(--input-border-hover);
   }
 }
