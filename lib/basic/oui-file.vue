@@ -44,7 +44,7 @@ async function fileToDataURI(file: File): Promise<string | undefined> {
     filename.value = file.name
     filesize.value = `${(file.size / 1024).toFixed(2)} KB`
     filetype.value = file.type
-    return `${datauri}?type=${encodeURIComponent(file.type)}&name=${encodeURIComponent(file.name)}&size=${file.size}`
+    // return `${datauri}?type=${encodeURIComponent(file.type)}&name=${encodeURIComponent(file.name)}&size=${file.size}`
   }
   return datauri
 }
