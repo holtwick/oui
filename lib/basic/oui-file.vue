@@ -105,7 +105,7 @@ function doSelect() {
           <slot name="preview" :filename="modelFilename">
             {{ modelFilename ?? t('File available', 'oui.file.placeholder') }}
           </slot>
-          <OuiClose @click="model = undefined" />
+          <OuiClose @click.stop.prevent="model = undefined" />
         </template>
       </div>
     </div>
