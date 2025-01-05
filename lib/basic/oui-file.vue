@@ -34,11 +34,12 @@ const log: LoggerInterface = Logger('oui-file')
 
 const dropZoneRef = ref<HTMLDivElement>()
 
-const filename = ref<string>()
-const filesize = ref<string>()
-const filetype = ref<string>()
+// const filename = ref<string>()
+// const filesize = ref<string>()
+// const filetype = ref<string>()
 
 const model = defineModel<string | undefined | null>({ required: true })
+const modelFilename = defineModel<string | undefined | null>('filename', { required: false })
 
 async function fileToDataURI(file: File): Promise<string | undefined> {
   const [promise, resolve] = createPromise<string | undefined> ()
@@ -49,9 +50,9 @@ async function fileToDataURI(file: File): Promise<string | undefined> {
   fileReader.readAsDataURL(file)
   const datauri = await promise
   if (datauri) {
-    filename.value = file.name
-    filesize.value = `${(file.size / 1024).toFixed(2)} KB`
-    filetype.value = file.type
+    modelFilename.value = file.name
+    // filesize.value = `${(file.size / 1024).toFixed(2)} KB`
+    // filetype.value = file.type
     // return `${datauri}?type=${encodeURIComponent(file.type)}&name=${encodeURIComponent(file.name)}&size=${file.size}`
   }
   return datauri
@@ -105,9 +106,10 @@ function doSelect() {
           <slot>{{ title ?? 'Choose file...' }}</slot>
         </template>
         <template v-else>
-          <slot name="preview" :filename="filename">
-            {{ filename ?? 'File' }} <OuiClose @click="model = undefined" />
+          <slot name="preview" :filename="modelFilename">
+            {{ filename ?? 'File' }}
           </slot>
+          <OuiClose @click="model = undefined" />
         </template>
       </div>
     </div>
