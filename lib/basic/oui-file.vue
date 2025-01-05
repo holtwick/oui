@@ -3,11 +3,11 @@ import type { LoggerInterface } from 'zeed'
 import { useDropZone, useFileDialog } from '@vueuse/core'
 import { ref } from 'vue'
 import { createPromise, Logger } from 'zeed'
+import { t } from './i18n'
 import OuiClose from './oui-close.vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-file.styl'
-import './oui-form.styl'
 
 defineOptions({
   inheritAttrs: false,
@@ -15,6 +15,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<{
   title?: string
+  titleChoose?: string
   description?: string
   accept?: string
   // multiple?: boolean
@@ -26,9 +27,9 @@ const props = withDefaults(defineProps<{
   multiple: false,
 })
 
-const emit = defineEmits<{
-  delete: []
-}>()
+// const emit = defineEmits<{
+//   delete: []
+// }>()
 
 const log: LoggerInterface = Logger('oui-file')
 
@@ -38,11 +39,11 @@ const dropZoneRef = ref<HTMLDivElement>()
 // const filesize = ref<string>()
 // const filetype = ref<string>()
 
-const model = defineModel<string | undefined | null>({ required: true })
-const modelFilename = defineModel<string | undefined | null>('filename', { required: false })
+const model = defineModel<string | undefined>({ required: true })
+const modelFilename = defineModel<string | undefined>('filename', { required: false })
 
 async function fileToDataURI(file: File): Promise<string | undefined> {
-  const [promise, resolve] = createPromise<string | undefined> ()
+  const [promise, resolve] = createPromise<string | undefined>()
   const fileReader = new FileReader()
   fileReader.addEventListener('error', resolve)
   fileReader.addEventListener('abort', resolve)
@@ -94,20 +95,15 @@ function doSelect() {
 </script>
 
 <template>
-  <OuiFormItem
-    :id="id"
-    :title="title"
-    :description="description"
-    :required="required"
-  >
+  <OuiFormItem :id="id" :title="title" :description="description" :required="required">
     <div ref="dropZoneRef" class="oui-file" :class="{ _over: isOverDropZone }" @click.prevent="doSelect">
       <div class="_content">
-        <template v-if="!model">
-          <slot>{{ title ?? 'Choose file...' }}</slot>
+        <template v-if="!model || model?.length <= 0">
+          <slot>{{ titleChoose ?? t('Choose file...', 'oui.file.choose') }}</slot>
         </template>
         <template v-else>
           <slot name="preview" :filename="modelFilename">
-            {{ filename ?? 'File' }}
+            {{ modelFilename ?? t('File available', 'oui.file.placeholder') }}
           </slot>
           <OuiClose @click="model = undefined" />
         </template>
