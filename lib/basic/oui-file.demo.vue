@@ -7,7 +7,8 @@ const state = useLocalStorage('oui.demo.file', {
   multiple: true,
   preview: true,
   accept: 'image/*',
-  title: 'Choose file...',
+  title: 'A file input',
+  titleChoose: 'Choose a file',
   filename: '',
 })
 </script>
@@ -34,11 +35,13 @@ const state = useLocalStorage('oui.demo.file', {
       v-model:filename="state.filename"
       :multiple="state.multiple"
       :title="state.title"
+      :title-choose="state.titleChoose"
       :accept="state.accept"
     />
   </div>
   <OuiDemo :state="state">
     <OuiInput v-model="state.title" title="Title" />
+    <OuiInput v-model="state.titleChoose" title="Title Choose" />
     <OuiInput v-model="state.accept" title="Accept file types (MIME)" />
     <!-- <OuiCheckbox v-model="state.multiple" switch title="Multiple files" /> -->
     <!-- <OuiCheckbox v-model="state.preview" switch title="Preview" /> -->
