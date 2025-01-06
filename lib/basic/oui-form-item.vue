@@ -6,12 +6,13 @@ defineProps<{
   description?: string
   required?: boolean
   id?: string
+  disabled?: boolean
 }>()
 </script>
 
 <template>
   <template v-if="title != null || $slots.description || description">
-    <div class="oui-form-item">
+    <div class="oui-form-item" :class="{ _disabled: disabled }">
       <label>
         <div v-if="title" class="oui-form-item-title">
           {{ title }}

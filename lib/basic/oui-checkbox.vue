@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 
 import './oui-form.styl'
+import './oui-checkbox.styl'
 
 defineOptions({
   inheritAttrs: false,
@@ -40,7 +41,7 @@ const klass = computed(() => {
 
 <template>
   <template v-if="title || $slots.default">
-    <label :class="{ _disabled: $attrs.disabled }">
+    <label class="oui-form-item-checkbox" :class="{ _disabled: $attrs.disabled }">
       <input v-model="modelBool" type="checkbox" :class="klass" v-bind="$attrs">
       {{ ' ' }}
       <slot>{{ title }}</slot>

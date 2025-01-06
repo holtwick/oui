@@ -20,11 +20,13 @@ const props = withDefaults(defineProps<{
   accept?: string
   // multiple?: boolean
   // preview?: boolean
+  disabled?: boolean
   required?: boolean
   id?: string
 }>(), {
   accept: 'image/*',
   multiple: false,
+  disabled: false,
 })
 
 // const emit = defineEmits<{
@@ -34,10 +36,6 @@ const props = withDefaults(defineProps<{
 const log: LoggerInterface = Logger('oui-file')
 
 const dropZoneRef = ref<HTMLDivElement>()
-
-// const filename = ref<string>()
-// const filesize = ref<string>()
-// const filetype = ref<string>()
 
 const model = defineModel<string | undefined>({ required: true })
 const modelFilename = defineModel<string | undefined>('filename', { required: false })
@@ -52,9 +50,6 @@ async function fileToDataURI(file: File): Promise<string | undefined> {
   const datauri = await promise
   if (datauri) {
     modelFilename.value = file.name
-    // filesize.value = `${(file.size / 1024).toFixed(2)} KB`
-    // filetype.value = file.type
-    // return `${datauri}?type=${encodeURIComponent(file.type)}&name=${encodeURIComponent(file.name)}&size=${file.size}`
   }
   return datauri
 }
@@ -79,6 +74,9 @@ const { files, open, reset, onChange } = useFileDialog({
 })
 
 onChange(async () => {
+  if (props.disabled) {
+    return
+  }
   const file = files.value?.[0]
   if (file) {
     const url = await fileToDataURI(file)
@@ -89,6 +87,9 @@ onChange(async () => {
 })
 
 function doSelect() {
+  if (props.disabled) {
+    return
+  }
   log('select')
   open()
 }
@@ -96,7 +97,7 @@ function doSelect() {
 
 <template>
   <OuiFormItem :id="id" :title="title" :description="description" :required="required">
-    <div ref="dropZoneRef" class="oui-file" :class="{ _over: isOverDropZone }" @click.prevent="doSelect">
+    <div ref="dropZoneRef" class="oui-file" :class="{ _over: isOverDropZone, _disabled: disabled }" @click.prevent="doSelect">
       <div class="_content">
         <template v-if="!model || model?.length <= 0">
           <slot>{{ titleChoose ?? t('Choose file...', 'oui.file.choose') }}</slot>
