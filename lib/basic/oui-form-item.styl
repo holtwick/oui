@@ -16,6 +16,11 @@
     font-size: 13;
     font-weight: 500;
     margin-bottom: 4;
+
+    &._disabled {
+      color: var(--s2-fg);
+      cursor: not-allowed;
+    }
   }
 
   &-description {
@@ -25,6 +30,10 @@
     margin-top: 4;
     margin-bottom: 12;
     color: var(--t3-fg);
+
+    &._disabled {
+      cursor: not-allowed;
+    }
   }
 
   .oui-select {
