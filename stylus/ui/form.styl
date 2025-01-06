@@ -23,6 +23,10 @@ oui-input-reset() {
     border-style: none;
     padding: 0;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 oui-button-default() {
@@ -373,6 +377,8 @@ oui-switch() {
   }
 
   &:disabled {
+    cursor: not-allowed;
+
     &:not(:checked) {
       &:after {
         opacity: 0.6;
