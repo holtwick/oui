@@ -2,6 +2,7 @@
 import { OuiDate, OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 import { reactive } from 'vue'
 import { dayFromToday, getTimestamp } from 'zeed'
+import OuiCheckbox from './oui-checkbox.vue'
 
 const state = reactive({
   value1: '',
@@ -12,23 +13,26 @@ const state = reactive({
   select: '',
   date: dayFromToday(),
   datetime: getTimestamp(),
+  disabled: false,
 })
 </script>
 
 <template>
   <div>
-    <OuiFormItem title="TITLE" description="DESCRIPTION" required>
+    <OuiFormItem :disabled="state.disabled" title="TITLE" description="DESCRIPTION" required>
       BODY
     </OuiFormItem>
-    <OuiInput v-model="state.value1" />
-    <OuiInput v-model="state.value2" title="Value with label" description="Some description" required />
-    <OuiInputNumber v-model="state.number" title="Number" />
-    <OuiTextarea v-model="state.text" title="Text" />
-    <OuiTextarea v-model="state.text" title="Text (autosize)" autosize />
-    <OuiPassword v-model="state.password" title="Password" />
-    <OuiSelect v-model="state.select" title="Select" :options="['One', 'Two', 'Three']" />
-    <OuiDate v-model="state.date" title="Date" />
-    <OuiDatetime v-model="state.datetime" title="Date and Time" />
+    <OuiInput v-model="state.value1" :disabled="state.disabled" />
+    <OuiInput v-model="state.value2" :disabled="state.disabled" title="Value with label" description="Some description" required />
+    <OuiInputNumber v-model="state.number" :disabled="state.disabled" title="Number" />
+    <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text" />
+    <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text (autosize)" autosize />
+    <OuiPassword v-model="state.password" :disabled="state.disabled" title="Password" />
+    <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']" />
+    <OuiDate v-model="state.date" :disabled="state.disabled" title="Date" />
+    <OuiDatetime v-model="state.datetime" :disabled="state.disabled" title="Date and Time" />
   </div>
-  <OuiDemo :state="state" />
+  <OuiDemo :state="state">
+    <OuiCheckbox v-model="state.disabled" title="Disabled" />
+  </OuiDemo>
 </template>

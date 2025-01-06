@@ -63,7 +63,7 @@ function lazyUpdate() {
     :required="required"
   >
     <template v-if="$slots.start || $slots.end">
-      <div class="oui-input oui-input-container">
+      <div class="oui-input oui-input-container" :disabled="$attrs.disabled">
         <slot name="start" />
         <input
           :id="id"
