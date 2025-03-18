@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useFileDialog, useTextareaAutosize, watchThrottled } from '@vueuse/core'
+import { useTextareaAutosize } from '@vueuse/core'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'

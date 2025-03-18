@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
 import { OuiCheckbox, OuiDemo } from '@/lib'
+import { reactive } from 'vue'
 
 import './sandbox.demo.styl'
 

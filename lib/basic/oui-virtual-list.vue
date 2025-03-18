@@ -26,6 +26,8 @@ const emit = defineEmits<{
   visible: [offset: number, limit: number]
 }>()
 
+// const log: LoggerInterface = Logger('oui-virtual-list')
+
 const { data, rowBuffer, rowHeight } = toRefs(props)
 const root = ref<HTMLElement>()
 const margin = /* props.margin ?? */ 0
@@ -41,6 +43,7 @@ let lastScrollX = 0
 let didUserScroll = false
 
 function handleScroll() {
+  // log('handleScroll', isScrollBusy)
   if (!root.value)
     return
 
@@ -55,6 +58,7 @@ function handleScroll() {
   isScrollBusy = true
 
   requestAnimationFrame(() => {
+    // log('handleScroll', 'requestAnimationFrame')
     isScrollBusy = false
     if (!root.value)
       return

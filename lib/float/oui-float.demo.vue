@@ -1,7 +1,8 @@
 <!-- eslint-disable no-alert -->
 <script setup lang="ts">
+import type { OuiMenuItem } from '@/lib'
 import type { LoggerInterface } from 'zeed'
-import { OuiButton, OuiFloat, OuiMenu, type OuiMenuItem, OuiMenuItems, OuiText, useMenu, vMenu } from '@/lib'
+import { OuiButton, OuiFloat, OuiMenu, OuiMenuItems, OuiText, useMenu, vMenu } from '@/lib'
 import { computed, ref } from 'vue'
 import { Logger, uuid } from 'zeed'
 

@@ -1,7 +1,9 @@
 <!-- eslint-disable vue/return-in-computed-property -->
 <script lang="ts">
-import { computed, defineComponent, type PropType } from 'vue'
-import { objectToString, type Path } from '../util'
+import type { PropType } from 'vue'
+import type { Path } from '../util'
+import { computed, defineComponent } from 'vue'
+import { objectToString } from '../util'
 import ArrayWrapper from './ArrayWrapper.vue'
 import FalseWrapper from './FalseWrapper.vue'
 import NullWrapper from './NullWrapper.vue'

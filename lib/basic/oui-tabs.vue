@@ -1,6 +1,5 @@
 <script lang="ts" setup generic="K extends string">
 import type { OuiTab } from './_types'
-import { useElementBounding, useElementSize } from '@vueuse/core'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import './oui-tabs.styl'
 
