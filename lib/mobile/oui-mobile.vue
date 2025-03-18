@@ -99,7 +99,7 @@ if (useSingleton('oui-mobile')) {
       log.error('init issue', err)
     }
   }
-  
+
   onMounted(() => document.documentElement.classList.add('oui-mobile'))
 }
 </script>

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { type InputTypeHTMLAttribute, onBeforeUnmount, ref, watch } from 'vue'
+import type { InputTypeHTMLAttribute } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
