@@ -7,7 +7,7 @@ import OuiMenu from './oui-menu.vue'
 const log: LoggerInterface = Logger('use-menu')
 
 type OuiMenuCreator<T = any> = (value: T, ...args: any) => OuiMenuItem[]
-type OuiMenuItemSource = (OuiMenuItem | false | undefined | null)[] | OuiMenuCreator
+type OuiMenuItemSource<T = any> = (OuiMenuItem | false | undefined | null)[] | OuiMenuCreator<T>
 
 function generateGetBoundingClientRect(x = 0, y = 0) {
   return () => ({
@@ -29,7 +29,7 @@ function isSeparator(item: any) {
  *
  * If triggered by BUTTON it will show as a drop down, else close to the mouse position.
  */
-export function useMenu(itemsSource: OuiMenuItemSource) {
+export function useMenu<T = any>(itemsSource: OuiMenuItemSource<T>) {
   let app: any
 
   // todo this would require to use it top level always
