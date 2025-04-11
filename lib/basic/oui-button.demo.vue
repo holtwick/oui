@@ -42,35 +42,35 @@ const state = reactive({
     </OuiButton>
     <br>
     <br>
-    <OuiButton size="small" :dropdown="state.dropdown">
+    <OuiButton size="small" :disabled="state.disabled" :dropdown="state.dropdown">
       Small
     </OuiButton>
 
-    <OuiButton size="normal" :dropdown="state.dropdown">
+    <OuiButton size="normal" :disabled="state.disabled" :dropdown="state.dropdown">
       Normal
     </OuiButton>
 
-    <OuiButton size="large" :dropdown="state.dropdown">
+    <OuiButton size="large" :disabled="state.disabled" :dropdown="state.dropdown">
       Large
     </OuiButton>
     <br>
     <br>
     <OuiButton size="small">
-      <OuiClose />
+      <OuiClose :disabled="state.disabled" />
     </OuiButton>
 
     <OuiButton size="normal">
-      <OuiClose />
+      <OuiClose :disabled="state.disabled" />
     </OuiButton>
 
     <OuiButton size="large">
-      <OuiClose />
+      <OuiClose :disabled="state.disabled" />
     </OuiButton>
 
     <br>
     <br>
 
-    <OuiButton href="https://oui.holtwick.de" target="_blank">
+    <OuiButton href="https://oui.holtwick.de" target="_blank" :disabled="state.disabled">
       <img :src="image" alt="Logo">
       oui.holtwick.de
     </OuiButton>
