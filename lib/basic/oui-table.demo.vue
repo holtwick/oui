@@ -26,7 +26,7 @@ const _data = [
 
 const data = computed(() => sortedOrderby(_data, state.sort))
 
-const menu = useMenu((row: any) => [
+const menu = useMenu(row => [
   {
     title: row.one ?? '-',
     // eslint-disable-next-line no-alert
