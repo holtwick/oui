@@ -55,16 +55,16 @@ const state = reactive({
     </OuiButton>
     <br>
     <br>
-    <OuiButton size="small">
-      <OuiClose :disabled="state.disabled" />
+    <OuiButton size="small" :disabled="state.disabled">
+      <OuiClose />
     </OuiButton>
 
-    <OuiButton size="normal">
-      <OuiClose :disabled="state.disabled" />
+    <OuiButton size="normal" :disabled="state.disabled">
+      <OuiClose />
     </OuiButton>
 
-    <OuiButton size="large">
-      <OuiClose :disabled="state.disabled" />
+    <OuiButton size="large" :disabled="state.disabled">
+      <OuiClose />
     </OuiButton>
 
     <br>
