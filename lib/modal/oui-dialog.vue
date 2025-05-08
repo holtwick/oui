@@ -67,13 +67,13 @@ function doCancel() {
     </OuiText>
     <template #footer>
       <OuiButton
+        v-if="mode !== 'alert'"
         mode="neutral"
         @click="doCancel"
       >
         {{ cancel ?? 'Cancel' }}
       </OuiButton>
       <OuiButton
-        v-if="mode === 'confirm' || mode === 'prompt'"
         ref="ok"
         class="_focus"
         mode="primary"
