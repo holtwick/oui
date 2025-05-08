@@ -76,6 +76,7 @@ function doCancel() {
         v-if="mode === 'confirm' || mode === 'prompt'"
         ref="ok"
         class="_focus"
+        mode="primary"
         @click="doConfirm"
       >
         {{ confirm ?? 'OK' }}
