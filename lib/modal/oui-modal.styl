@@ -75,30 +75,38 @@
     max-height: 75vh;
     transform: translate3d(0, 0, 0);
 
-    @media -media-mobile {
-      :has(._modal_sheet) & {
-        border: inherit;
-        border-radius: inherit;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        max-height: inherit;
-        width: 100%;
-        height: initial;
-        margin-top: 44;
-        border-top-left-radius: var(--modal-radius);
-        border-top-right-radius: var(--modal-radius);
-        padding-bottom: -safe-bottom;
+    modalSheet() {
+      border: inherit;
+      border-radius: inherit;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      max-height: inherit;
+      width: 100%;
+      height: initial;
+      margin-top: 44;
+      border-top-left-radius: var(--modal-radius);
+      border-top-right-radius: var(--modal-radius);
+      padding-bottom: -safe-bottom;
 
-        .virtual-keyboard & {
-          padding-bottom: 0;
+      .virtual-keyboard & {
+        padding-bottom: 0;
 
-          ._modal_footer {
-            transition: border var(--modal-speed);
-            --modal-separator: var(--t3-bg);
-          }
+        ._modal_footer {
+          transition: border var(--modal-speed);
+          --modal-separator: var(--t3-bg);
         }
       }
+    }
+
+    @media -media-mobile {
+      :has(._modal_sheet) & {
+        modalSheet();
+      }
+    }
+
+    :has(._modal_force_sheet) & {
+      modalSheet();
     }
   }
 

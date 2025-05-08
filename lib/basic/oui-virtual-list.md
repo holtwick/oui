@@ -6,7 +6,6 @@ It is used in `oui-tableview` to render the rows of the table.
 
 ## Basic usage
 
-
 ```ts
 const columns: OuiTableColumn[] = [
   { title: '#', name: 'id', sortable: false },
@@ -31,4 +30,3 @@ Then use the component:
   </template>
 </OuiVirtualList>
 ```
- 

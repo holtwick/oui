@@ -58,10 +58,12 @@ export function useDialog<T extends Component>(component?: T) {
         ...props,
       })
     },
+
+    /** Open custom dialog, will return `null` for "no result". */
     async open(this: void, props?: any) {
       return await showDialog({
         ...props,
-      })
+      }) ?? null
     },
   }
 }
