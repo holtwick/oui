@@ -5,8 +5,7 @@
 -media-lg = "(min-width: 1024px)";
 -media-xl = "(min-width: 1280px)";
 -media-xl2 = "(min-width: 1536px)";
-/* Orientation https://getbootstrap.com/docs/5.0/layout/breakpoints/#max-width */
--media-landscape = "(orientation: landscape)";
+-media-landscape = "(orientation: landscape)"; // getbootstrap.com/docs/5.0/layout/breakpoints/#max-width *//* Orientation https://getbootstrap.com/docs/5.0/layout/breakpoints/#max-width */
 -media-portrait = "(orientation: portrait)";
 -media-mobile = "screen and (max-width: 888px)";
 -media-desktop = "screen and (min-width: 888.02px)";
@@ -110,16 +109,11 @@ container() {
 -z-index-6 = 600;
 -z-index-7 = 700;
 -z-index-8 = 800;
-/* Content > Floating > Overlay > Modal > Popover > Tooltip */
--z-index-9 = 900;
-/* separator-handle, knobs */
--z-index-floating = -z-index-1;
-/* modal backgrounds */
--z-index-overlay = -z-index-2;
-/* modal, dialog, page (mobile) */
--z-index-modal = -z-index-3;
-/* menu, dropdown, popover */
--z-index-popover = -z-index-4;
+-z-index-9 = 900; /* Content > Floating > Overlay > Modal > Popover > Tooltip */
+-z-index-floating = -z-index-1; /* separator-handle, knobs */
+-z-index-overlay = -z-index-2; /* modal backgrounds */
+-z-index-modal = -z-index-3; /* modal, dialog, page (mobile) */
+-z-index-popover = -z-index-4; /* menu, dropdown, popover */
 -z-index-tooltip = -z-index-1;
 
 grid-wrapped(size = 200, gap = 16) {

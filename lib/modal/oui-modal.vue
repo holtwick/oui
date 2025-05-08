@@ -13,11 +13,13 @@ const props = withDefaults(defineProps<{
   allowCancel?: boolean
   title?: string
   transition?: string
+  forceSheet?: boolean
   noSheet?: boolean
   size?: 'small' | 'normal' | 'large'
 }>(), {
   allowCancel: true,
   close: false,
+  forceSheet: false,
   noSheet: false,
   size: 'normal',
 })
@@ -148,6 +150,7 @@ async function checkClose(e: OuiDraggableEvent) {
           [$attrs.class as string]: !!$attrs.class,
           _active,
           _modal_sheet: !noSheet,
+          _modal_force_sheet: forceSheet,
           _modal_has_footer: $slots.footer,
           [`_modal_size_${size}`]: true }"
         :tabindex="-1"

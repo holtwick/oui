@@ -1,20 +1,35 @@
 <script lang="ts" setup>
 import { OuiButton, OuiCheckbox, OuiDemo, OuiInput, OuiModal, OuiSelect, OuiText } from '@/lib'
+import { useWindowSize } from '@vueuse/core'
 import { reactive } from 'vue'
+
+import './oui-modal.demo.styl'
 
 const state = reactive({
   size: 'normal',
   show: false,
   footer: true,
+  forceSheet: false,
   noSheet: false,
   close: true,
   title: 'title',
   header: 'header',
   allowCancel: true,
 })
+
+const { width, height } = useWindowSize()
 </script>
 
 <template>
+  <p class="oui-modal-demo">
+    Window width={{ width }}, height={{ height }},
+    media=<span class="_mobile">mobile</span><span class="_desktop">desktop</span>
+  </p>
+
+  <div style="height:8px; width: 888px; position: absolute; top: 0; left: 0; background: red;">
+    <!--  -->
+  </div>
+
   <OuiButton @click="state.show = !state.show">
     Click to show modal
   </OuiButton>
@@ -28,6 +43,7 @@ const state = reactive({
     :close="state.close"
     :title="state.title"
     :no-sheet="state.noSheet"
+    :force-sheet="state.forceSheet"
     :size="state.size as any"
     :allow-cancel="state.allowCancel"
   >
@@ -62,6 +78,12 @@ const state = reactive({
       switch
       title="noSheet"
       description="Does not switch to sheet-look on mobile"
+    />
+    <OuiCheckbox
+      v-model="state.forceSheet"
+      switch
+      title="forceSheet"
+      description="Forces sheet-look on desktop"
     />
     <OuiCheckbox
       v-model="state.close"
