@@ -1,10 +1,11 @@
 import type { Ref } from 'vue'
+import type { LoggerInterface } from 'zeed'
 import type { AppNotificationInfo, AppNotificationSetup } from './_types'
 import { reactive, ref } from 'vue'
+import { Logger, uname } from 'zeed'
 
 const LIMIT = 6
-
-// const log = Logger('notification')
+const log: LoggerInterface = Logger('notification')
 
 export const notifications: Ref<AppNotificationInfo[]> = ref([])
 
@@ -14,11 +15,14 @@ export function closeNotification(id?: string) {
     notifications.value[index]?.onClose?.()
     notifications.value.splice(index, 1)
   }
+  else {
+    log.warn(`Notification with id ${id} not found for closing`)
+  }
 }
 
 export function _emitNotification(n: AppNotificationSetup): AppNotificationInfo {
   if (!n.id)
-    n.id = `oui-notification-${String(Math.random())}`
+    n.id = uname('oui-notification')
   if (!n.active)
     n.active = true
   if (!n.icon)
@@ -29,7 +33,9 @@ export function _emitNotification(n: AppNotificationSetup): AppNotificationInfo 
     n.timeout = 5 * 1000
 
   if (n.timeout > 0) {
+    log(`Notification ${n.id} will timeout after ${n.timeout}ms`)
     setTimeout(() => {
+      log(`Notification ${n.id} timed out after ${n.timeout}ms`)
       n.active = false
       closeNotification(n.id)
     }, n.timeout)

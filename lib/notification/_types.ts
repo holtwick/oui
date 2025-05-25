@@ -16,7 +16,10 @@ export interface AppNotificationSetup {
   icon?: string
   title: string
   message?: string
+
+  /// Timeout in milliseconds, `-1` means forever
   timeout?: number
+
   onAction?: () => void
   onCancel?: () => void
   onClose?: () => void
