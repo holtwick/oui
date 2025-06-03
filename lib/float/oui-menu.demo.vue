@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { LoggerInterface } from 'zeed'
-import { OuiButton, useMenu, useMenuWithValue, vMenu } from '@/lib'
 import { Logger } from 'zeed'
+import { OuiButton, useMenu, useMenuWithValue, vMenu } from '@/lib'
 
 const log: LoggerInterface = Logger('oui-menu.demo')
 

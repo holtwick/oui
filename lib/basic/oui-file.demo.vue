@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { OuiCheckbox, OuiDemo, OuiFile, OuiInput } from '@/lib'
 import { useLocalStorage } from '@vueuse/core'
+import { OuiCheckbox, OuiDemo, OuiFile, OuiInput } from '@/lib'
 
 const state = useLocalStorage('oui.demo.file', {
   value: '',

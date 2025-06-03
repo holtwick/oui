@@ -1,10 +1,10 @@
 <!-- eslint-disable no-alert -->
 <script setup lang="ts">
-import type { OuiMenuItem } from '@/lib'
 import type { LoggerInterface } from 'zeed'
-import { OuiButton, OuiFloat, OuiMenu, OuiMenuItems, OuiText, useMenu, vMenu } from '@/lib'
+import type { OuiMenuItem } from '@/lib'
 import { computed, ref } from 'vue'
 import { Logger, uuid } from 'zeed'
+import { OuiButton, OuiFloat, OuiMenu, OuiMenuItems, OuiText, useMenu, vMenu } from '@/lib'
 
 import './oui-float.demo.styl'
 

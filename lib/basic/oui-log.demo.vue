@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { OuiCheckbox, OuiDemo, OuiLog, OuiText, useLog } from '@/lib'
 import { useIntervalFn } from '@vueuse/core'
 import { reactive } from 'vue'
 import { uuid } from 'zeed'
+import { OuiCheckbox, OuiDemo, OuiLog, OuiText, useLog } from '@/lib'
 
 const log = useLog('test')
 

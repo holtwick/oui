@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { OuiButton, OuiCheckbox, OuiClose, OuiDemo } from '@/lib'
 import { reactive } from 'vue'
+import { OuiButton, OuiCheckbox, OuiClose, OuiDemo } from '@/lib'
 
 const image = '/apple-touch-icon-180x180.png'
 

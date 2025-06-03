@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { OuiTableColumn } from '@/lib'
-import { OuiCheckbox, OuiDemo, OuiTableview, useMenu } from '@/lib'
 import { computed, reactive } from 'vue'
 import { createArray, sortedOrderby, uuid } from 'zeed'
+import { OuiCheckbox, OuiDemo, OuiTableview, useMenu } from '@/lib'
 
 const state = reactive({
   sort: '',
