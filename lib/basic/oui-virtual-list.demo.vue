@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { OuiDemo, OuiInputNumber, OuiVirtualList } from '@/lib'
 import { reactive, watch } from 'vue'
 import { createArray } from 'zeed'
+import { OuiDemo, OuiInputNumber, OuiVirtualList } from '@/lib'
 import { useLazyData } from './lazy-data'
 import OuiCheckbox from './oui-checkbox.vue'
 

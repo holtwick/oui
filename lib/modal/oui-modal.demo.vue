@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { OuiButton, OuiCheckbox, OuiDemo, OuiInput, OuiModal, OuiSelect, OuiText } from '@/lib'
 import { useWindowSize } from '@vueuse/core'
 import { reactive } from 'vue'
+import { OuiButton, OuiCheckbox, OuiDemo, OuiInput, OuiModal, OuiSelect, OuiText } from '@/lib'
 
 import './oui-modal.demo.styl'
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { isPrimitive } from 'zeed'
 import OuiFormItem from './oui-form-item.vue'
 
@@ -27,14 +27,32 @@ const allOptions = computed(() => (props.options ?? []).map(v => isPrimitive(v) 
     :description="description"
     :required="required"
   >
-    <select v-bind="$attrs" :id="id" v-model="model" class="oui-select">
-      <slot>
-        <template v-for="[key, value] in allOptions" :key="key">
-          <option :value="key">
-            {{ value }}
-          </option>
-        </template>
-      </slot>
-    </select>
+    <template v-if="$slots.button">
+      <div class="oui-select-container">
+        <slot name="button">
+          {{ title }}
+        </slot>
+        <select v-bind="$attrs" :id="id" v-model="model" class="oui-select-invisible">
+          <slot>
+            <template v-for="[key, value] in allOptions" :key="key">
+              <option :value="key">
+                {{ value }}
+              </option>
+            </template>
+          </slot>
+        </select>
+      </div>
+    </template>
+    <template v-else>
+      <select v-bind="$attrs" :id="id" v-model="model" class="oui-select">
+        <slot>
+          <template v-for="[key, value] in allOptions" :key="key">
+            <option :value="key">
+              {{ value }}
+            </option>
+          </template>
+        </slot>
+      </select>
+    </template>
   </OuiFormItem>
 </template>

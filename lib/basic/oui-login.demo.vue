@@ -15,37 +15,23 @@ const state = reactive({
   showIcon: true,
   iconColor: 'red',
 })
-
-function doCover() {
-  state.cover = true
-  setTimeout(() => state.cover = false, 3000)
-}
 </script>
 
 <template>
-  <OuiNotice :title="state.showTitle ? state.title : undefined" :cover="state.cover" :style="{ '--notice-fg': state.iconColor }">
-    <template v-if="state.showIcon" #icon>
-      <div v-html="state.icon" />
-    </template>
+  <OuiNotice title="Login">
     <template v-if="state.showNotice" #default>
-      <OuiText>
-        <p>{{ state.message }}</p>
-        <p>
-          <OuiPassword v-model="state.demoInput" class="_focus" :show-meter="false" />
-        </p>
-      </OuiText>
+      <p>Welcome, please authorize.</p>
+      <p>
+        <OuiInput v-model="state.title" class="_focus" placeholder="User" name="username" />
+      </p>
+      <p>
+        <OuiPassword v-model="state.demoInput" :show-meter="false" placeholder="Password" name="password" />
+      </p>
+      <p>
+        <OuiButton :disabled="false" mode="primary">
+          Login
+        </OuiButton>
+      </p>
     </template>
   </OuiNotice>
-  <OuiDemo :state="state">
-    <OuiCheckbox v-model="state.showIcon" switch title="Show Icon" />
-    <OuiCheckbox v-model="state.showTitle" switch title="Show Title" />
-    <OuiCheckbox v-model="state.showNotice" switch title="Show Notice" />
-    <OuiInput v-model="state.title" title="Title" />
-    <OuiTextarea v-model="state.message" title="Message" />
-    <OuiTextarea v-model="state.icon" title="Icon" />
-    <OuiButton @click="doCover">
-      Cover for 3s
-    </OuiButton>
-    <OuiInput v-model="state.iconColor" title="iconColor" />
-  </OuiDemo>
 </template>

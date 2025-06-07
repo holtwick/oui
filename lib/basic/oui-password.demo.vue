@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { OuiCheckbox, OuiDemo, OuiInput, OuiPassword } from '@/lib'
 import { reactive } from 'vue'
+import { OuiCheckbox, OuiDemo, OuiInput, OuiPassword } from '@/lib'
 
 const state = reactive({
   value: 'Secr3!',
