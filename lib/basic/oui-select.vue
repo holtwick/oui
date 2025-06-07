@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { isPrimitive } from 'zeed'
+import OuiButton from './oui-button.vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
@@ -8,6 +9,7 @@ import './oui-form.styl'
 const props = withDefaults(defineProps<{
   options?: [string | number, string | number][] | (string | number)[]
   title?: string
+  button?: string
   description?: string
   required?: boolean
   id?: string
@@ -27,10 +29,10 @@ const allOptions = computed(() => (props.options ?? []).map(v => isPrimitive(v) 
     :description="description"
     :required="required"
   >
-    <template v-if="$slots.button">
+    <template v-if="$slots.button || button != null">
       <div class="oui-select-container">
         <slot name="button">
-          {{ title }}
+          <OuiButton :title="Object.fromEntries(allOptions)?.[model] || button" dropdown />
         </slot>
         <select v-bind="$attrs" :id="id" v-model="model" class="oui-select-invisible">
           <slot>
