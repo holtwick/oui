@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { dayFromToday, getTimestamp } from 'zeed'
-import { OuiDate, OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
+import { OuiButton, OuiDate, OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 import OuiCheckbox from './oui-checkbox.vue'
 
 const state = reactive({
@@ -29,6 +29,11 @@ const state = reactive({
     <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text (autosize)" autosize />
     <OuiPassword v-model="state.password" :disabled="state.disabled" title="Password" />
     <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']" />
+    <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']">
+      <template #button>
+        <OuiButton>Select: {{ state.select }}</OuiButton>
+      </template>
+    </OuiSelect>
     <OuiDate v-model="state.date" :disabled="state.disabled" title="Date" />
     <OuiDatetime v-model="state.datetime" :disabled="state.disabled" title="Date and Time" />
   </div>
