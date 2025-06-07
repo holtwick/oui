@@ -31,9 +31,12 @@ const state = reactive({
     <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']" />
     <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']">
       <template #button>
-        <OuiButton>Select: {{ state.select }}</OuiButton>
+        <OuiButton dropdown>
+          Select: {{ state.select }}
+        </OuiButton>
       </template>
     </OuiSelect>
+    <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="[[1, 'One'], [2, 'Two'], [3, 'Three']]" button="Select" />
     <OuiDate v-model="state.date" :disabled="state.disabled" title="Date" />
     <OuiDatetime v-model="state.datetime" :disabled="state.disabled" title="Date and Time" />
   </div>
