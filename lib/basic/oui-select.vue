@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<{
 
 })
 
-const model = defineModel({ required: true })
+const model = defineModel<string>({ required: true }) // todo: only string for now
 
 const allOptions = computed(() => (props.options ?? []).map(v => isPrimitive(v) ? [v, v] : v))
 </script>
