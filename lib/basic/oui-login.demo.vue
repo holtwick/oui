@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiDemo, OuiInput, OuiNotice, OuiPassword, OuiText, OuiTextarea } from '@/lib'
-import OuiButton from './oui-button.vue'
-import OuiCheckbox from './oui-checkbox.vue'
+import { OuiLogin } from '@/lib'
 
 const state = reactive({
   title: 'Notice',
@@ -18,20 +16,5 @@ const state = reactive({
 </script>
 
 <template>
-  <OuiNotice title="Login">
-    <template v-if="state.showNotice" #default>
-      <p>Welcome, please authorize.</p>
-      <p>
-        <OuiInput v-model="state.title" class="_focus" placeholder="User" name="username" />
-      </p>
-      <p>
-        <OuiPassword v-model="state.demoInput" :show-meter="false" placeholder="Password" name="password" />
-      </p>
-      <p>
-        <OuiButton :disabled="false" mode="primary">
-          Login
-        </OuiButton>
-      </p>
-    </template>
-  </OuiNotice>
+  <OuiLogin />
 </template>
