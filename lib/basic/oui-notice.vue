@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { vFocustrap } from '../modal/oui-modal.focustrap'
 
+import { vFocustrap } from '../modal/oui-modal.focustrap'
 import './oui-notice.styl'
 
 defineOptions({
@@ -16,11 +16,13 @@ defineProps<{
 const root = ref()
 
 watch(root, (el) => {
-  if (el) {
-    (el.querySelector('._focus')
-      ?? el.querySelector('input,button,select')
-      ?? el).focus()
-  }
+  setTimeout(() => {
+    if (el) {
+      (el.querySelector('._focus')
+        ?? el.querySelector('input,button,select')
+        ?? el).focus()
+    }
+  }, 0)
 }, { immediate: true })
 </script>
 
@@ -45,7 +47,7 @@ watch(root, (el) => {
     </Teleport>
   </template>
   <template v-else>
-    <div class="oui-notice">
+    <div ref="root" class="oui-notice">
       <div class="oui-notice-body" v-bind="$attrs">
         <div v-if="$slots.icon" class="oui-notice-icon">
           <slot name="icon" />

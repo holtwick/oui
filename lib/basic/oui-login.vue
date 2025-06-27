@@ -1,8 +1,11 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
-import { vFocustrap } from '../modal/oui-modal.focustrap'
+import { ref } from 'vue'
+import OuiButton from './oui-button.vue'
+import OuiInput from './oui-input.vue'
+import OuiNotice from './oui-notice.vue'
+import OuiPassword from './oui-password.vue'
 
-import './oui-notice.styl'
+import './oui-login.styl'
 
 defineOptions({
   inheritAttrs: false,
@@ -12,30 +15,31 @@ defineProps<{
   title?: string
 }>()
 
-const root = ref()
+defineEmits<{
+  (e: 'login', username: string, password: string): void
+}>()
 
-watch(root, (el) => {
-  if (el) {
-    (el.querySelector('._focus')
-      ?? el.querySelector('input,button,select')
-      ?? el).focus()
-  }
-}, { immediate: true })
+const username = ref('')
+const password = ref('')
 </script>
 
 <template>
-  <div ref="root" v-focustrap class="oui-login">
-    <p>Welcome, please authorize.</p>
-    <p>
-      <OuiInput v-model="state.title" class="_focus" placeholder="User" name="username" />
-    </p>
-    <p>
-      <OuiPassword v-model="state.demoInput" :show-meter="false" placeholder="Password" name="password" />
-    </p>
-    <div class="oui-login-container-button">
-      <OuiButton :disabled="false" mode="primary">
-        Login
-      </OuiButton>
-    </div>
-  </div>
+  <OuiNotice title="Login">
+    <template v-if="true" #default>
+      <p>Welcome, please authorize.</p>
+      <div class="oui-login">
+        <div class="oui-login-username">
+          <OuiInput v-model="username" class="_focus" placeholder="User" name="username" />
+        </div>
+        <div class="oui-login-password">
+          <OuiPassword v-model="password" :show-meter="false" placeholder="Password" name="password" />
+        </div>
+        <div class="oui-login-button">
+          <OuiButton :disabled="false" mode="primary" @click="$emit('login', username, password)">
+            Login
+          </OuiButton>
+        </div>
+      </div>
+    </template>
+  </OuiNotice>
 </template>
