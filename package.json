@@ -74,24 +74,24 @@
   },
   "dependencies": {
     "@floating-ui/vue": "^1.1.6",
-    "@vueuse/core": "^13.3.0",
-    "vue": "^3.5.16",
-    "zeed": "^0.30.2"
+    "@vueuse/core": "^13.4.0",
+    "vue": "^3.5.17",
+    "zeed": "^0.30.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.14.1",
+    "@antfu/eslint-config": "^4.16.1",
     "@antfu/ni": "^25.0.0",
-    "@shikijs/markdown-it": "^3.6.0",
-    "@vitejs/plugin-vue": "^5.2.4",
-    "@vitest/browser": "^3.2.3",
+    "@shikijs/markdown-it": "^3.7.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vitest/browser": "^3.2.4",
     "eslint": "^9.29.0",
     "stylus": "^0.64.0",
     "tsup": "^8.5.0",
     "unplugin-vue-markdown": "^28.3.1",
-    "vite": "^6.3.5",
+    "vite": "^7.0.0",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-qrcode": "^0.2.4",
-    "vite-plugin-vue-devtools": "^7.7.6",
-    "vitest": "^3.2.3"
+    "vite-plugin-vue-devtools": "^7.7.7",
+    "vitest": "^3.2.4"
   }
 }
