@@ -50,6 +50,7 @@
   "types": "./dist/lib.d.ts",
   "files": [
     "*.md",
+    "LICENSE",
     "dist/**/*",
     "lib/**/*",
     "src/**/*",

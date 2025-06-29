@@ -47,7 +47,7 @@ yarn add oui-kit
 
 📱 **Scan QR code for mobile demo:**
 
-![QR Code to demo website](./qrcode.png)
+<img src="./qrcode.png" alt="QR Code to demo website" style="max-width: 20rem">
 
 ## 🚀 Quick Start
 
@@ -125,17 +125,17 @@ function handleInfo() {
 <template>
   <div class="demo-container">
     <h2>Welcome to Oui Kit!</h2>
-    
+
     <div class="button-group">
-      <OuiButton @click="handleSuccess" variant="primary">
+      <OuiButton variant="primary" @click="handleSuccess">
         🎉 Show Success
       </OuiButton>
-      
-      <OuiButton @click="handleInfo" variant="secondary">
+
+      <OuiButton variant="secondary" @click="handleInfo">
         ℹ️ Show Info
       </OuiButton>
-      
-      <OuiButton @click="showModal = true" variant="outline">
+
+      <OuiButton variant="outline" @click="showModal = true">
         📱 Open Modal
       </OuiButton>
     </div>
@@ -154,7 +154,7 @@ function handleInfo() {
   padding: $spacing-lg
   max-width: 600px
   margin: 0 auto
-  
+
 .button-group
   display: flex
   gap: $spacing-md
@@ -184,7 +184,7 @@ $spacing-hero = 80px
   background: linear-gradient(135deg, $primary-color, $secondary-color)
   color: white
   border-radius: $border-radius-lg
-  
+
   &:hover
     transform: translateY(-2px)
     box-shadow: 0 10px 25px rgba($primary-color, 0.3)
@@ -288,12 +288,12 @@ $border-color = #404040
 ```typescript
 // Import only what you need
 import * as OuiKit from 'oui-kit'
-import { OuiButton } from 'oui-kit/button'
-import { OuiModal } from 'oui-kit/modal'
-import { useNotification } from 'oui-kit/notification'
-
 // Or import everything (not recommended for production)
 import { OuiButton, OuiModal, useNotification } from 'oui-kit'
+import { OuiButton } from 'oui-kit/button'
+import { OuiModal } from 'oui-kit/modal'
+
+import { useNotification } from 'oui-kit/notification'
 ```
 
 ## 🛠️ Development
