@@ -49,11 +49,11 @@
   "module": "./dist/lib.js",
   "types": "./dist/lib.d.ts",
   "files": [
-    "dist/*.css",
-    "dist/*.js",
-    "dist/*.ts",
-    "lib/**/*.styl",
-    "stylus/**/*.styl"
+    "*.md",
+    "dist/**/*",
+    "lib/**/*",
+    "src/**/*",
+    "stylus/**/*"
   ],
   "engines": {
     "node": ">=18.0.0"
