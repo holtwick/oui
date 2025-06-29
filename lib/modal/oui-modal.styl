@@ -61,6 +61,15 @@
     height: Min(px(800), 90vh);
   }
 
+  @media -media-desktop {
+    &._modal_size_max ._modal_container {
+      width: calc(100vw - 4rem);
+      max-width: calc(100vw - 4rem);
+      height: calc(100vh - 4rem);
+      max-height: calc(100vh - 4rem);
+    }
+  }
+
   ._modal_container {
     z-index: -z-index-modal;
     will-change: transform;

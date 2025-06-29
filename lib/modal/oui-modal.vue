@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<{
   transition?: string
   forceSheet?: boolean
   noSheet?: boolean
-  size?: 'small' | 'normal' | 'large'
+  size?: 'small' | 'normal' | 'large' | 'max'
 }>(), {
   allowCancel: true,
   close: false,
