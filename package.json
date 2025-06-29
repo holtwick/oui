@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.29.10",
+  "version": "0.30.0",
   "author": {
     "email": "dirk.holtwick@gmail.com",
     "name": "Dirk Holtwick",
@@ -49,11 +49,12 @@
   "module": "./dist/lib.js",
   "types": "./dist/lib.d.ts",
   "files": [
-    "dist/*.css",
-    "dist/*.js",
-    "dist/*.ts",
-    "lib/**/*.styl",
-    "stylus/**/*.styl"
+    "*.md",
+    "LICENSE",
+    "dist/**/*",
+    "lib/**/*",
+    "src/**/*",
+    "stylus/**/*"
   ],
   "engines": {
     "node": ">=18.0.0"
