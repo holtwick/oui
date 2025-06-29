@@ -18,33 +18,25 @@ Thank you for your interest in contributing to oui-kit! This guide will help you
 
 ### Code Style
 
-#### Indentation
+Code formatting and style rules are automatically enforced through:
 
-- Use **2 spaces** for indentation (no tabs)
-- Configure your editor to show whitespace and use consistent indentation
+- **`.editorconfig`** - Handles basic formatting (indentation, line endings, etc.)
+- **ESLint** - Enforces code quality and style rules
 
-```typescript
-// ✅ Correct
-if (condition) {
-  doSomething()
-  if (nested) {
-    doNestedThing()
-  }
-}
+Make sure your editor supports these tools and has the appropriate extensions installed:
 
-// ❌ Incorrect (4 spaces or tabs)
-if (condition) {
-  doSomething()
-}
-```
+- EditorConfig extension for your editor
+- ESLint extension for your editor
+- Configure your editor to format on save
 
-#### Variables and Properties
+#### Key Style Guidelines
 
 - **Private variables**: Start with underscore `_`
-- Use descriptive names that clearly indicate purpose
+- **Indentation**: 2 spaces (enforced by .editorconfig)
+- **Component files**: Use kebab-case for Vue components (e.g., `oui-component.vue`)
 
 ```typescript
-// ✅ Correct
+// ✅ Correct - Private variables with underscore
 class MyClass {
   private _internalState: string
   private _cachedResults: Map<string, any>
@@ -52,12 +44,6 @@ class MyClass {
   public publicMethod() {
     return this._internalState
   }
-}
-
-// ❌ Incorrect
-class MyClass {
-  private state: string // Missing underscore
-  private cache: Map<string, any> // Missing underscore
 }
 ```
 
@@ -270,12 +256,6 @@ git commit -m "Fixed bug"      # Not descriptive enough
 ### Special Cases
 
 - If only `package.json` has been updated: `chore: updated dependencies`
-
-### Branch Naming
-
-- Feature branches: `feature/description-of-feature`
-- Bug fixes: `fix/description-of-bug`
-- Chores: `chore/description-of-task`
 
 ## Code Review Guidelines
 
