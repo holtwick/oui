@@ -116,7 +116,7 @@ const { width, height } = useWindowSize()
     <OuiSelect
       v-model="state.size"
       title="size"
-      :options="['small', 'normal', 'large']"
+      :options="['small', 'normal', 'large', 'max']"
       description="Three size presets"
     />
   </OuiDemo>
