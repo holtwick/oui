@@ -1,25 +1,8 @@
 # 🎨 Oui Kit
 
-> *"Oui, c'est un kit!" ### Installation
-
-```bash
-npm install oui-kit
-# or
-pnpm add oui-kit
-# or
-yarn add oui-kit
-```
-
-**CDN Alternative:**
-
-```html
-<script src="https://unpkg.com/oui-kit@latest/dist/lib.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/oui-kit@latest/dist/lib.css">
-```
-
-## 🎯 Usage.js UI toolkit with a French touch* 🇫🇷
-
 <div align="center">
+
+🎯 *UI toolkit with a French touch* 🇫🇷
 
 **Modern • Lightweight • TypeScript-first • Accessible**
 
@@ -53,38 +36,12 @@ yarn add oui-kit
 
 Get up and running in under 2 minutes!
 
-### Installation
-
 ```bash
 npm install oui-kit
 # or
 pnpm add oui-kit
 # or
 yarn add oui-kit
-```
-
-### CDN
-
-```html
-<script src="https://unpkg.com/oui-kit@latest/dist/lib.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/oui-kit@latest/dist/lib.css">
-```
-
-### NPM Package
-
-```bash
-npm install oui-kit
-# or
-pnpm add oui-kit
-# or
-yarn add oui-kit
-```
-
-### CDN
-
-```html
-<script src="https://unpkg.com/oui-kit@latest/dist/lib.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/oui-kit@latest/dist/lib.css">
 ```
 
 ## 🎯 Usage
