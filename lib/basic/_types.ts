@@ -5,6 +5,7 @@ export interface OuiTab<K = string> {
   title?: string
   icon?: string | Component
   component?: Component
+  pillClass?: string
 }
 
 export interface OuiTableColumn<K = string> {
