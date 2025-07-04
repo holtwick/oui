@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import type { OuiSlidingPillOption, OuiTab } from '@/lib'
+import { useLocalStorage } from '@vueuse/core'
 import { ref } from 'vue'
-import { OuiSegmented, OuiTabs } from '@/lib'
+import { OuiDemo, OuiInput, OuiSegmented, OuiTabs } from '@/lib'
 
 import './oui-sliding-pill.demo.styl'
 
 // Tabs demo data
-const selectedTab = ref<string>('overview')
+const selectedTab = useLocalStorage('oui-sliding-pill-tab', 'overview')
+
 const tabs: OuiTab[] = [
   { name: 'overview', title: 'Overview', pillClass: 'pill-blue' },
   { name: 'analytics', title: 'Analytics', pillClass: 'pill-green' },
@@ -46,6 +48,10 @@ const viewOptions: OuiSlidingPillOption[] = [
       <p>Navigation component with sliding pill indicator</p>
 
       <OuiTabs v-model="selectedTab" :tabs="tabs">
+        <template #tab-overview>
+          <b>OVERVIEW</b>
+        </template>
+
         <template #overview>
           <div class="tab-content">
             <h3>Overview Content</h3>
@@ -87,7 +93,11 @@ const viewOptions: OuiSlidingPillOption[] = [
       <div class="segmented-examples">
         <div class="example">
           <label>Size Selection:</label>
-          <OuiSegmented v-model="selectedSize" :options="sizeOptions" />
+          <OuiSegmented v-model="selectedSize" :options="sizeOptions">
+            <template #option-sm>
+              <i>Custom Small</i>
+            </template>
+          </OuiSegmented>
           <span class="selection">Selected: {{ selectedSize }}</span>
         </div>
 
@@ -123,4 +133,7 @@ const viewOptions: OuiSlidingPillOption[] = [
       </div>
     </section>
   </div>
+  <OuiDemo>
+    <OuiInput v-model="selectedTab" title="Tab" />
+  </OuiDemo>
 </template>

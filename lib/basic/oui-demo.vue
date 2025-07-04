@@ -2,7 +2,7 @@
 import { OuiObject } from '@/lib'
 
 defineProps<{
-  state: any
+  state?: any
 }>()
 </script>
 
@@ -10,7 +10,9 @@ defineProps<{
   <Teleport to="#props">
     <slot />
   </Teleport>
-  <Teleport to="#state">
-    <OuiObject :value="state" />
-  </Teleport>
+  <template v-if="state">
+    <Teleport to="#state">
+      <OuiObject :value="state" />
+    </Teleport>
+  </template>
 </template>

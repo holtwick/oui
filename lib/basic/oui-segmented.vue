@@ -101,11 +101,13 @@ function handleKeydown(event: KeyboardEvent) {
       <template #default="{ options: slidingOptions, updateModelValue }">
         <template v-for="option in slidingOptions" :key="option.name">
           <button :class="{ _active: modelValue === option.name }" :disabled="disabled" role="radio" :aria-checked="modelValue === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
-            <template v-if="option.icon">
-              <component :is="option.icon" v-if="typeof option.icon !== 'string'" />
-              <span v-else v-text="option.icon" />
-            </template>
-            {{ option.title ?? option.name }}
+            <slot :name="`option-${option.name}`" v-bind="{ option }">
+              <template v-if="option.icon">
+                <component :is="option.icon" v-if="typeof option.icon !== 'string'" />
+                <span v-else v-text="option.icon" />
+              </template>
+              {{ option.title ?? option.name }}
+            </slot>
           </button>
         </template>
       </template>
