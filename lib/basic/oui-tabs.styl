@@ -15,9 +15,25 @@
     ._pill {
       position: absolute;
       height: calc(100% - 16px);
-      transition: left 0.25s, width 0.25s;
+      transition: left 0.25s, width 0.25s, background-color 0.25s, background 0.25s;
       border-radius: 4;
       background: var(--p1-fg);
+
+      &._no-animate {
+        transition: none;
+      }
+
+      &._green {
+        background: #22c55e;
+      }
+
+      &._red {
+        background: #ef4444;
+      }
+
+      &._yellow {
+        background: #eab308;
+      }
     }
 
     display: flex;

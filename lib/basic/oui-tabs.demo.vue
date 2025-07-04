@@ -8,9 +8,9 @@ const state = reactive({
 })
 
 const tabs: OuiTab[] = [
-  { title: 'One', name: 'one', icon: OuiClose },
-  { title: 'Two', name: 'two' },
-  { title: 'Three', name: 'three' },
+  { title: 'One', name: 'one', icon: OuiClose, pillClass: '_green' },
+  { title: 'Two', name: 'two', pillClass: '_red' },
+  { title: 'Three', name: 'three', pillClass: '_yellow' },
 ]
 </script>
 

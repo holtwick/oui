@@ -1,5 +1,6 @@
 <script lang="ts" setup generic="K extends string">
 import type { OuiTab } from './_types'
+import { useElementBounding, useResizeObserver } from '@vueuse/core'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import './oui-tabs.styl'
 
@@ -13,43 +14,57 @@ const modelValue = defineModel<K>({ required: false })
 const name = computed<string>(() => modelValue.value ?? props.tabs?.[0]?.name ?? 'default')
 
 const tabsRef = ref<HTMLElement>()
-const activeTabRefs = ref<HTMLElement>()
+const activeTabRef = ref<HTMLElement>()
 
-const activeTabLeft = ref(0)
-const activeTabTop = ref(0)
-const activeTabWidth = ref(0)
-const activeTabHeight = ref(0)
+const { left: activeTabLeft, top: activeTabTop, width: activeTabWidth, height: activeTabHeight } = useElementBounding(activeTabRef)
+const { left: containerLeft, top: containerTop } = useElementBounding(tabsRef)
 
-// const { x, y, width, height } = useElementBounding(activeTabRefs)
+const relativeLeft = computed(() => activeTabLeft.value - containerLeft.value)
+const relativeTop = computed(() => activeTabTop.value - containerTop.value)
 
-function setActiveTab() {
-  const activeTab = tabsRef.value?.querySelector('._active')
-  if (activeTab instanceof HTMLElement) {
-    activeTabLeft.value = activeTab.offsetLeft
-    activeTabTop.value = activeTab.offsetTop
-    activeTabWidth.value = activeTab.offsetWidth
-    activeTabHeight.value = activeTab.offsetHeight
+const shouldAnimate = ref(false)
+const isUserInteraction = ref(false)
+
+const activeTab = ref() //  computed(() => props.tabs.find(tab => tab.name === modelValue.value))
+const pillStyle = computed(() => ({
+  left: `${relativeLeft.value}px`,
+  width: `${activeTabWidth.value}px`,
+  top: `${relativeTop.value}px`,
+  height: `${activeTabHeight.value}px`,
+}))
+const pillClass = computed(() => (activeTab.value as any)?.pillClass)
+
+async function updateActiveTabRef(animated = false) {
+  activeTab.value = props.tabs.find(tab => tab.name === modelValue.value)
+  await nextTick()
+  shouldAnimate.value = animated
+  const activeTabEl = tabsRef.value?.querySelector('._active')
+  if (activeTabEl instanceof HTMLElement) {
+    activeTabRef.value = activeTabEl
   }
 }
 
 watch(modelValue, async () => {
+  isUserInteraction.value = true
+  await updateActiveTabRef(true)
+  // Reset user interaction flag after animation completes
   await nextTick()
-  setActiveTab()
+  setTimeout(() => {
+    isUserInteraction.value = false
+  }, 250)
 })
 
-onMounted(setActiveTab)
+useResizeObserver(tabsRef, () => updateActiveTabRef(isUserInteraction.value))
+
+onMounted(() => updateActiveTabRef())
 </script>
 
 <template>
   <div ref="tabsRef" class="oui-tabs">
     <nav class="oui-tabs-nav _nav">
-      <div class="_pill" :style="{ left: `${activeTabLeft}px`, width: `${activeTabWidth}px`, top: `${activeTabTop}px`, height: `${activeTabHeight}px` }" />
+      <div class="_pill" :class="[{ '_no-animate': !shouldAnimate }, pillClass]" :style="pillStyle" />
       <template v-for="tab in tabs" :key="tab.name">
-        <button
-          ref="tabRefs"
-          :class="{ _active: modelValue === tab.name }"
-          @click="modelValue = tab.name"
-        >
+        <button ref="tabRefs" :class="{ _active: modelValue === tab.name }" @click="modelValue = tab.name">
           <template v-if="tab.icon">
             <component :is="tab.icon" />
           </template>
