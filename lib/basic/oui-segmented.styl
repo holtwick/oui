@@ -36,13 +36,14 @@
   .oui-segmented-container {
     display: flex;
     width: 100%;
+    padding: 4;
+    gap: 4;
     position: relative;
   }
 
   .oui-segmented-pill {
-    background: var(--primary-color, #3182ce);
-    border-radius: 4px;
-    margin: 2px;
+    background: var(--p1-fg, #3182ce);
+    border-radius: 4;
   }
 
   button {
@@ -51,27 +52,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 0 16px;
+    border-radius: 4;
     border: none;
     background: transparent;
-    color: var(--text-color, #2d3748);
+    color: var(--fg);
     cursor: pointer;
     transition: color 200ms ease;
     flex: 1;
     min-width: 0;
 
     &:hover:not(._active) {
-      background: var(--hover-bg, #f7fafc);
+      background: var(--s2-bg, #f7fafc);
     }
 
     &._active {
       color: white;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
     }
   }
 }
