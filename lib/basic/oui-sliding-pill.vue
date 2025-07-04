@@ -36,6 +36,7 @@ const pillStyle = computed(() => ({
 const computedPillClass = computed(() => [
   '_pill',
   { '_no-animate': !shouldAnimate.value },
+  { _hidden: !activeOption.value },
   props.pillClass,
   activeOption.value?.pillClass,
 ].filter(Boolean))
