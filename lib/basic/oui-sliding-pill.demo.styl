@@ -1,0 +1,53 @@
+@require "../../stylus/index.styl";
+
+.oui-sliding-pill-demo {
+  .current-selection {
+    margin-top: 16px;
+    padding: 12px;
+    background: #edf2f7;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #2d3748;
+  }
+
+  .example {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+      font-weight: 500;
+      color: #2d3748;
+      font-size: 14px;
+    }
+
+    .selection {
+      font-size: 12px;
+      color: #718096;
+    }
+
+    .keyboard-hint {
+      font-size: 12px;
+      color: #718096;
+      font-style: italic;
+      margin-top: 4px;
+    }
+  }
+
+  // Pill color demo classes
+  .pill-blue {
+    background: #3182ce !important;
+  }
+
+  .pill-green {
+    background: #38a169 !important;
+  }
+
+  .pill-orange {
+    background: #dd6b20 !important;
+  }
+
+  .pill-purple {
+    background: #805ad5 !important;
+  }
+}

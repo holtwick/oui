@@ -3,6 +3,8 @@ import type { OuiSlidingPillOption, OuiTab } from '@/lib'
 import { ref } from 'vue'
 import { OuiSegmented, OuiTabs } from '@/lib'
 
+import './oui-sliding-pill.demo.styl'
+
 // Tabs demo data
 const selectedTab = ref<string>('overview')
 const tabs: OuiTab[] = [
@@ -36,10 +38,10 @@ const viewOptions: OuiSlidingPillOption[] = [
 </script>
 
 <template>
-  <div class="demo-container">
+  <div class="oui-sliding-pill-demo oui-text">
     <h1>Sliding Pill Components Demo</h1>
 
-    <section class="demo-section">
+    <section>
       <h2>OUI Tabs</h2>
       <p>Navigation component with sliding pill indicator</p>
 
@@ -78,7 +80,7 @@ const viewOptions: OuiSlidingPillOption[] = [
       </div>
     </section>
 
-    <section class="demo-section">
+    <section>
       <h2>OUI Segmented Controls</h2>
       <p>Input-like segmented controls for option selection</p>
 
@@ -122,87 +124,3 @@ const viewOptions: OuiSlidingPillOption[] = [
     </section>
   </div>
 </template>
-
-<style lang="stylus" scoped>
-.demo-container
-  max-width: 800px
-  margin: 0 auto
-  padding: 40px 20px
-  font-family: system-ui, -apple-system, sans-serif
-
-  h1
-    text-align: center
-    margin-bottom: 40px
-    color: #2d3748
-
-.demo-section
-  margin-bottom: 60px
-
-  h2
-    color: #2d3748
-    margin-bottom: 8px
-
-  p
-    color: #718096
-    margin-bottom: 24px
-
-.tab-content
-  padding: 24px
-  background: #f7fafc
-  border-radius: 8px
-  margin-top: 16px
-
-  h3
-    margin: 0 0 12px 0
-    color: #2d3748
-
-  p
-    margin: 0
-    color: #4a5568
-
-.current-selection
-  margin-top: 16px
-  padding: 12px
-  background: #edf2f7
-  border-radius: 6px
-  font-size: 14px
-  color: #2d3748
-
-.segmented-examples
-  display: flex
-  flex-direction: column
-  gap: 24px
-
-.example
-  display: flex
-  flex-direction: column
-  gap: 8px
-
-  label
-    font-weight: 500
-    color: #2d3748
-    font-size: 14px
-
-  .selection
-    font-size: 12px
-    color: #718096
-
-  .keyboard-hint
-    font-size: 12px
-    color: #718096
-    font-style: italic
-    margin-top: 4px
-
-// Pill color demo classes
-:global(.pill-blue)
-  background: #3182ce !important
-
-:global(.pill-green)
-  background: #38a169 !important
-
-:global(.pill-orange)
-  background: #dd6b20 !important
-
-:global(.pill-purple)
-  background: #805ad5 !important
-</style>
