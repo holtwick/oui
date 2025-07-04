@@ -1,0 +1,114 @@
+._css_vars {
+  padding: 1rem;
+  color: var(--fg);
+
+  ._controls {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--s2-bg);
+    border-radius: 4px;
+  }
+
+  ._checkbox_label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+
+    input[type="checkbox"] {
+      margin: 0;
+    }
+  }
+
+  ._variables_list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  ._variable_item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border, #e0e0e0);
+    border-radius: 4px;
+    gap: 8px;
+
+    &._has_children {
+      flex-direction: column;
+      align-items: stretch;
+
+      > ._variable_name, > ._variable_value {
+        flex: none;
+      }
+    }
+
+    &._child_item {
+      background: var(--s2-bg, #f9f9f9);
+      border-left: 3px solid var(--p1-fg);
+      margin-top: 0.25rem;
+    }
+  }
+
+  ._variable_name {
+    flex: 0 0 200px;
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: var(--fg);
+    white-space: nowrap;
+
+    ._child_item & {
+      flex: 0 0 180px;
+      font-size: 0.8rem;
+    }
+  }
+
+  ._variable_value {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+
+    code {
+      font-family: monospace;
+      font-size: 0.875rem;
+      // color: var(--s2-fg);
+      background: var(--s2-bg);
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    ._child_item & {
+      code {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  ._children {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-border, #e0e0e0);
+  }
+
+  ._color_sample {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border, #e0e0e0);
+    flex-shrink: 0;
+
+    ._child_item & {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  ._no_variables {
+    color: var(--color-text-secondary, #666);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+  }
+}
