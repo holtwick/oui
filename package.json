@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.31.3",
+  "version": "0.31.4",
   "author": {
     "email": "dirk.holtwick@gmail.com",
     "name": "Dirk Holtwick",
@@ -40,6 +40,7 @@
       "import": "./dist/lib.js"
     },
     "./css": "./dist/lib.css",
+    "./default-basic": "./stylus/default-basic.styl",
     "./default-app": "./stylus/default-app.styl",
     "./default-page": "./stylus/default-page.styl",
     "./lib": "./lib/index.styl",
