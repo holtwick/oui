@@ -1,0 +1,14 @@
+.oui-sliding-pill {
+  position: relative;
+
+  ._pill {
+    position: absolute;
+    transition: all 250ms ease-out;
+    pointer-events: none;
+    z-index: 1;
+
+    &._no-animate {
+      transition: none;
+    }
+  }
+}

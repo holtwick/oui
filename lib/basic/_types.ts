@@ -1,10 +1,8 @@
 import type { Component } from 'vue'
 
-export interface OuiTab<K = string> {
-  name: K
-  title?: string
-  icon?: string | Component
-  component?: Component
+export interface OuiTab<K extends string = string> extends OuiSlidingPillOption<K> {
+  icon?: Component | string
+  content?: any
 }
 
 export interface OuiTableColumn<K = string> {
@@ -41,4 +39,11 @@ export interface OuiDraggableEvent {
   // delta: OuiDraggablePosition
   // pos: OuiDraggablePosition
   // origin: OuiDraggablePosition
+}
+
+export interface OuiSlidingPillOption<K extends string = string> {
+  name: K
+  title?: string
+  icon?: Component | string
+  pillClass?: string
 }

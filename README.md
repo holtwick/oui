@@ -120,33 +120,6 @@ function handleInfo() {
 </style>
 ```
 
-### Theme Customization
-
-```stylus
-// Import oui-kit and customize theme
-@import 'oui-kit/stylus'
-
-// Override theme variables
-$primary-color = #6366f1
-$secondary-color = #8b5cf6
-$success-color = #10b981
-$warning-color = #f59e0b
-$error-color = #ef4444
-
-// Custom spacing
-$spacing-hero = 80px
-
-.my-awesome-app
-  padding: $spacing-hero
-  background: linear-gradient(135deg, $primary-color, $secondary-color)
-  color: white
-  border-radius: $border-radius-lg
-
-  &:hover
-    transform: translateY(-2px)
-    box-shadow: 0 10px 25px rgba($primary-color, 0.3)
-```
-
 ## 🧩 Available Components
 
 ### 🎨 UI Components
@@ -165,80 +138,6 @@ $spacing-hero = 80px
 | **useNotification** | Reactive notification system | Show success/error messages |
 | **useModal** | Modal state management | Programmatic modal control |
 | **useFloat** | Floating element positioning | Tooltips, dropdowns, menus |
-
-## 🎨 Design System
-
-### Color Palette
-
-```stylus
-// Primary Colors
-$primary-color = #007bff      // Vibrant blue
-$secondary-color = #6c757d    // Elegant gray
-$success-color = #28a745      // Fresh green
-$warning-color = #ffc107      // Golden yellow
-$error-color = #dc3545       // Clear red
-
-// Surface Colors
-$surface-color = #ffffff      // Pure white
-$surface-hover = #f8f9fa     // Light gray
-$surface-active = #e9ecef    // Medium gray
-
-// Text Colors
-$text-primary = #212529      // Dark gray
-$text-secondary = #6c757d    // Medium gray
-$text-muted = #8e9aaf        // Light gray
-```
-
-### Typography Scale
-
-```stylus
-// Font Sizes
-$font-size-xs = 0.75rem      // 12px
-$font-size-sm = 0.875rem     // 14px
-$font-size-md = 1rem         // 16px
-$font-size-lg = 1.25rem      // 20px
-$font-size-xl = 1.5rem       // 24px
-$font-size-2xl = 2rem        // 32px
-
-// Font Weights
-$font-weight-light = 300
-$font-weight-normal = 400
-$font-weight-medium = 500
-$font-weight-semibold = 600
-$font-weight-bold = 700
-```
-
-### Spacing System
-
-```stylus
-// Consistent spacing scale
-$spacing-xs = 4px           // Tiny
-$spacing-sm = 8px           // Small
-$spacing-md = 16px          // Medium
-$spacing-lg = 24px          // Large
-$spacing-xl = 32px          // Extra large
-$spacing-2xl = 48px         // Double extra large
-$spacing-3xl = 64px         // Triple extra large
-```
-
-## 🚀 Advanced Usage
-
-### Custom Theme
-
-```stylus
-// themes/dark.styl
-@import 'oui-kit/theme'
-
-// Dark theme overrides
-$surface-color = #1a1a1a
-$surface-hover = #2d2d2d
-$text-primary = #ffffff
-$text-secondary = #a1a1a1
-$border-color = #404040
-
-// Import components with custom theme
-@import 'oui-kit/stylus'
-```
 
 ### Tree Shaking
 

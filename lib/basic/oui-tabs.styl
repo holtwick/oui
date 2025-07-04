@@ -7,17 +7,22 @@
   > ._nav {
     use: stack-x;
     position: relative;
-    background: var(--p1-bg);
-    border-radius: 4;
-    padding: 4;
+    background: var(--tabs-bg, #f7fafc);
+    border-radius: 8px;
+    padding: 4px;
     gap: 4;
 
     ._pill {
-      position: absolute;
-      height: calc(100% - 16px);
-      transition: left 0.25s, width 0.25s;
-      border-radius: 4;
-      background: var(--p1-fg);
+      // position: absolute;
+      // height: calc(100% - 16px);
+      transition: left 0.25s, width 0.25s, background-color 0.25s, background 0.25s;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+      &._no-animate {
+        transition: none;
+      }
     }
 
     display: flex;
@@ -26,25 +31,31 @@
 
     button {
       use: stack-item-grow;
-      padding: 4 8;
+      padding: 8px 16px;
       cursor: pointer;
       position: relative;
-      z-index: 1;
-      white-space: nowrap;
-      font-weight: normal;
-      color: var(--t3-fg);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted, #718096);
+      transition: color 200ms ease;
+      font-weight: 500;
+      border-radius: 6px;
 
       &:hover {
-        color: var(--p1-fg);
+        color: var(--fg);
       }
     }
 
     ._active {
-      color: var(--bg);
-      font-weight: bold;
+      color: white;
 
+      // font-weight: bold;
       &:hover {
-        color: var(--bg);
+        color: white;
       }
     }
   }
