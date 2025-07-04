@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { OuiSegmentedOption, OuiSlidingPillOption, OuiTab } from '@/lib'
+import type { OuiSegmentedOption, OuiTab } from '@/lib'
 import { useLocalStorage } from '@vueuse/core'
 import { ref } from 'vue'
 import { OuiDemo, OuiInput, OuiSegmented, OuiTabs } from '@/lib'
