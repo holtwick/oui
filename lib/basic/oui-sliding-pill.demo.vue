@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { OuiSlidingPillOption, OuiTab } from '@/lib'
+import type { OuiSegmentedOption, OuiTab } from '@/lib'
 import { useLocalStorage } from '@vueuse/core'
 import { ref } from 'vue'
 import { OuiDemo, OuiInput, OuiSegmented, OuiTabs } from '@/lib'
@@ -18,21 +18,21 @@ const tabs: OuiTab[] = [
 
 // Segmented control demo data
 const selectedSize = ref<string>('md')
-const sizeOptions: OuiSlidingPillOption[] = [
+const sizeOptions: OuiSegmentedOption[] = [
   { name: 'sm', title: 'Small' },
   { name: 'md', title: 'Medium' },
   { name: 'lg', title: 'Large' },
 ]
 
 const selectedTheme = ref<string>('light')
-const themeOptions: OuiSlidingPillOption[] = [
+const themeOptions: OuiSegmentedOption[] = [
   { name: 'light', title: 'Light' },
   { name: 'dark', title: 'Dark' },
   { name: 'auto', title: 'Auto' },
 ]
 
 const selectedView = ref<string>('grid')
-const viewOptions: OuiSlidingPillOption[] = [
+const viewOptions: OuiSegmentedOption[] = [
   { name: 'list', title: 'List', icon: '📋' },
   { name: 'grid', title: 'Grid', icon: '⬜' },
   { name: 'card', title: 'Cards', icon: '🃏' },

@@ -1,5 +1,5 @@
 <script lang="ts" setup generic="K extends string">
-import type { OuiSlidingPillOption } from './_types'
+import type { OuiSegmentedOption } from './_types'
 import { computed, onMounted, ref } from 'vue'
 import { t } from '@/basic/i18n'
 import OuiSlidingPill from './oui-sliding-pill.vue'
@@ -7,7 +7,7 @@ import OuiSlidingPill from './oui-sliding-pill.vue'
 import './oui-segmented.styl'
 
 const props = defineProps<{
-  options: OuiSlidingPillOption<K>[]
+  options: OuiSegmentedOption<K>[]
   className?: string
   placeholder?: string
   disabled?: boolean
