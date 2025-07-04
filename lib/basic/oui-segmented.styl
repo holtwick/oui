@@ -1,4 +1,4 @@
-@import "../stylus";
+@require "../../stylus/index.styl";
 
 .oui-segmented {
   position: relative;
@@ -60,6 +60,7 @@
     transition: color 200ms ease;
     flex: 1;
     min-width: 0;
+    gap: 8;
 
     &:hover:not(._active) {
       background: var(--s2-bg, #f7fafc);
