@@ -1,8 +1,17 @@
 import type { Component } from 'vue'
 
-export interface OuiTab<K extends string = string> extends OuiSlidingPillOption<K> {
+export interface OuiSlidingPillOption<K extends string = string> {
+  name: K
+  title?: string
   icon?: Component | string
+  pillClass?: string
+}
+
+export interface OuiTab<K extends string = string> extends OuiSlidingPillOption<K> {
   content?: any
+}
+
+export interface OuiSegmentedOption<K extends string = string> extends OuiSlidingPillOption<K> {
 }
 
 export interface OuiTableColumn<K = string> {
@@ -39,11 +48,4 @@ export interface OuiDraggableEvent {
   // delta: OuiDraggablePosition
   // pos: OuiDraggablePosition
   // origin: OuiDraggablePosition
-}
-
-export interface OuiSlidingPillOption<K extends string = string> {
-  name: K
-  title?: string
-  icon?: Component | string
-  pillClass?: string
 }
