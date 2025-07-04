@@ -40,6 +40,7 @@
       "import": "./dist/lib.js"
     },
     "./css": "./dist/lib.css",
+    "./default-basic": "./stylus/default-basic.styl",
     "./default-app": "./stylus/default-app.styl",
     "./default-page": "./stylus/default-page.styl",
     "./lib": "./lib/index.styl",
