@@ -41,30 +41,30 @@ For widgets with inner structure this might look like this:
 ```css
 :root {
   /* Neutral colors */
-  --n0-50: $gray-50;
-  --n0-100: $gray-100;
-  --n0-200: $gray-200;
-  --n0-300: $gray-300;
-  --n0-400: $gray-400;
-  --n0-500: $gray-500;
-  --n0-600: $gray-600;
-  --n0-700: $gray-700;
-  --n0-800: $gray-800;
-  --n0-900: $gray-900;
-  --n0-950: $gray-950;
+  --n0-50: #f5f6f6;
+  --n0-100: #e6e7e7;
+  --n0-200: #d0d1d1;
+  --n0-300: #aeb0b2;
+  --n0-400: #7d8082;
+  --n0-500: #6b6e6f;
+  --n0-600: #5b5d5f;
+  --n0-700: #4e4f50;
+  --n0-800: #444546;
+  --n0-900: #3c3d3d;
+  --n0-950: #252527;
 
   /* Brand / primary colors */
-  --p1-50: $primary-50;   /* light */
-  --p1-100: $primary-100;
-  --p1-200: $primary-200;
-  --p1-300: $primary-300;
-  --p1-400: $primary-400;
-  --p1-500: $primary-500; /* signal color */
-  --p1-600: $primary-600;
-  --p1-700: $primary-700;
-  --p1-800: $primary-800;
-  --p1-900: $primary-900;
-  --p1-950: $primary-950; /* dark */
+  --p1-50: #f3f7fc;
+  --p1-100: #e7eff7;
+  --p1-200: #c9dbee;
+  --p1-300: #9abedf;
+  --p1-400: #639ccd;
+  --p1-500: #4385be;
+  --p1-600: #2e659b;
+  --p1-700: #27527d;
+  --p1-800: #234569;
+  --p1-900: #223c58;
+  --p1-950: #17273a;
 }
 ```
 
@@ -137,21 +137,8 @@ Tailwind indeed offers maximum flexibility with attractive results. But it ignor
 
 To get the best of both worlds, I have written Stylus mix ins inspired by Tailwind using the incredibly powerful yet elegant [Stylus CSS preprocessor](https://stylus-lang.com/), which should make the code clearer.
 
-## Get started
-
-First _twindy_ can be easily installed via npm:
-
-```shell
-npm i oui-stylus
-```
-
-We now create a stylus file, e.g. 'mystormy.styl' with the content:
-
-```stylus
-@require "oui-stylus"
-```
-
 ## Units
+
 We introduce the special unit `rex` (a mix of `rem` and `px`). `1rem` is usually equivalent to `16px`, but it can vary between different environments. Still it is easier for most developers think in `px`. To get the best of both worlds and a UI that scales correctly for the environment you can now use `rex(value)` to have the pseudo pixel size being translated to `rem` values.
 
 The shortcuts for `padding` and `margin` automatically convert pure numbers without any specified unit to `rex`. Such that in the following example we would get horizontal margins if `0.5rem`:

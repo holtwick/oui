@@ -4,6 +4,7 @@ import { computed, onMounted, ref } from 'vue'
 import { t } from '@/basic/i18n'
 import OuiSlidingPill from './oui-sliding-pill.vue'
 
+import './oui-form.styl'
 import './oui-segmented.styl'
 
 const props = defineProps<{

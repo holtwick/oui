@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue'
 import { Logger } from 'zeed'
 import { t } from '@/basic/i18n'
 
-import './css-vars.styl'
+import './css-vars.demo.styl'
 
 const log: LoggerInterface = Logger('css-vars.demo')
 
