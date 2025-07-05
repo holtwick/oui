@@ -2,7 +2,7 @@
 import type { OuiSegmentedOption, OuiTab } from '@/lib'
 import { useLocalStorage } from '@vueuse/core'
 import { reactive, ref } from 'vue'
-import { OuiSelect, OuiDemo, OuiInput, OuiSegmented, OuiTabs } from '@/lib'
+import { OuiDemo, OuiInput, OuiSegmented, OuiSelect, OuiTabs } from '@/lib'
 
 import './oui-slider.demo.styl'
 
@@ -16,8 +16,8 @@ const tabs: OuiTab[] = [
   { name: 'users', title: 'Users', sliderClass: 'pill-purple' },
 ]
 
-// Segmented control demo data 
-const sizeOptions: OuiSegmentedOption[] = [  
+// Segmented control demo data
+const sizeOptions: OuiSegmentedOption[] = [
   { name: 'md', title: 'Medium' },
   { name: 'lg', title: 'Large' },
 ]
@@ -37,7 +37,7 @@ const viewOptions: OuiSegmentedOption[] = [
 ]
 
 const state = reactive({
-  size: 'md'
+  size: 'md',
 })
 </script>
 
@@ -97,7 +97,7 @@ const state = reactive({
           <label>Size Selection:</label>
           <OuiSegmented v-model="state.size" :options="sizeOptions" :size="state.size as any">
             <template #option-md>
-             ⚛️ <i>Custom Medium</i>
+              ⚛️ <i>Custom Medium</i>
             </template>
           </OuiSegmented>
           <span class="selection">Selected: {{ state.size }}</span>

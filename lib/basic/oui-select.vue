@@ -1,12 +1,12 @@
 <script lang="ts" setup>
+import type { OuiSegmentedOption } from './_types'
 import { computed } from 'vue'
 import { isPrimitive } from 'zeed'
 import OuiButton from './oui-button.vue'
 import OuiFormItem from './oui-form-item.vue'
-import OuiSegmented from './oui-segmented.vue'
 
+import OuiSegmented from './oui-segmented.vue'
 import './oui-form.styl'
-import { OuiSegmentedOption } from './_types'
 
 const props = withDefaults(defineProps<{
   options?: [string | number, string | number][] | (string | number)[]
