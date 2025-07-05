@@ -32,6 +32,10 @@ const log: LoggerInterface = Logger('oui-mobile')
  */
 const keyboardAnimationDuration = 400
 
+function isActive() {
+  return document.documentElement.classList.contains('oui-mobile')
+}
+
 if (useSingleton('oui-mobile') && isMobile()) {
   log('init')
 
@@ -40,8 +44,10 @@ if (useSingleton('oui-mobile') && isMobile()) {
     let virtualKeyboardActive = false
 
     async function resizeHandler() {
+      if (!isActive())
+        return
       try {
-      // Adjust the height!
+        // Adjust the height!
         const height = `${window.visualViewport?.height.toString()}px`
         log(`resize height=${height}`)
         // document.documentElement.style.height = `${window.visualViewport?.height.toString()}px`
@@ -85,6 +91,9 @@ if (useSingleton('oui-mobile') && isMobile()) {
       // if (props.mode === 'app') {
       // Intercept `touchmove` where no scrolling is planned in our UI
       useEventListener(window, 'touchmove', (ev) => {
+        if (!isActive())
+          return
+
         log('touch move', ev.target)
 
         // if (virtualKeyboardActive === false)
@@ -112,7 +121,11 @@ if (useSingleton('oui-mobile') && isMobile()) {
     }
   }
 
-  onMounted(() => document.documentElement.classList.add('oui-mobile'))
+  onMounted(() => {
+    document.documentElement.classList.add('oui-mobile')
+    document.documentElement.classList.add('oui-mobile-supported')
+  })
+  // document.documentElement.classList.add('oui-mobile')
 }
 </script>
 
