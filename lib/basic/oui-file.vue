@@ -55,9 +55,9 @@ async function fileToDataURI(file: File): Promise<string | undefined> {
 }
 
 async function onDrop(files: File[] | null) {
-  if (props.disabled) 
+  if (props.disabled)
     return
-  
+
   const file = files?.[0]
   if (file) {
     model.value = await fileToDataURI(file)
@@ -77,9 +77,9 @@ const { files, open, reset, onChange } = useFileDialog({
 })
 
 onChange(async () => {
-if (props.disabled) 
+  if (props.disabled)
     return
-  
+
   const file = files.value?.[0]
   if (file) {
     const url = await fileToDataURI(file)
@@ -90,7 +90,7 @@ if (props.disabled)
 })
 
 function doSelect() {
-  if (props.disabled) 
+  if (props.disabled)
     return
   log('select')
   open()
@@ -104,9 +104,9 @@ function onKeydown(event: KeyboardEvent) {
 }
 
 function doClear() {
-  if (props.disabled) 
+  if (props.disabled)
     return
-  
+
   model.value = undefined
   modelFilename.value = undefined
 }

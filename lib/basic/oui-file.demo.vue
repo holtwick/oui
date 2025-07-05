@@ -28,7 +28,7 @@ const state = useLocalStorage('oui.demo.file', {
       Upload an image
       <template #preview="{ filename }">
         <img :src="state.value" alt="Preview" height="100">
-        {{ filename }}        
+        {{ filename }}
       </template>
     </OuiFile>
 
