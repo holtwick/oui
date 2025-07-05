@@ -1,7 +1,7 @@
 <script lang="ts" setup generic="K extends string">
 import type { OuiTab } from './_types'
 import { computed } from 'vue'
-import OuiSlidingPill from './oui-sliding-pill.vue'
+import OuiSlidingPill from './oui-slider.vue'
 import './oui-tabs.styl'
 
 const props = defineProps<{

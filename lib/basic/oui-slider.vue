@@ -1,12 +1,12 @@
 <script lang="ts" setup generic="K extends string">
-import type { OuiSlidingPillOption } from './_types'
+import type { OuiSliderOption } from './_types'
 import { useElementBounding, useResizeObserver } from '@vueuse/core'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
-import './oui-sliding-pill.styl'
+import './oui-slider.styl'
 
 const props = defineProps<{
-  options: OuiSlidingPillOption<K>[]
+  options: OuiSliderOption<K>[]
   className?: string
   pillClass?: string
 }>()
@@ -25,7 +25,7 @@ const relativeTop = computed(() => activeItemTop.value - containerTop.value)
 const shouldAnimate = ref(false)
 const isUserInteraction = ref(false)
 
-const activeOption = ref<OuiSlidingPillOption<K>>()
+const activeOption = ref<OuiSliderOption<K>>()
 const pillStyle = computed(() => ({
   left: `${relativeLeft.value}px`,
   width: `${activeItemWidth.value}px`,
@@ -38,7 +38,7 @@ const computedPillClass = computed(() => [
   { '_no-animate': !shouldAnimate.value },
   { _hidden: !activeOption.value },
   props.pillClass,
-  activeOption.value?.pillClass,
+  activeOption.value?.sliderClass,
 ].filter(Boolean))
 
 async function updateActiveItemRef(animated = false) {
@@ -74,7 +74,7 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="containerRef" class="oui-sliding-pill" :class="className">
+  <div ref="containerRef" class="oui-slider" :class="className">
     <div :class="computedPillClass" :style="pillStyle" />
     <slot
       :options="options"

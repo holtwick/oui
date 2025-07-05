@@ -2,7 +2,7 @@
 import type { OuiSegmentedOption } from './_types'
 import { computed, onMounted, ref } from 'vue'
 import { t } from '@/basic/i18n'
-import OuiSlidingPill from './oui-sliding-pill.vue'
+import OuiSlidingPill from './oui-slider.vue'
 
 import './oui-form.styl'
 import './oui-segmented.styl'

@@ -4,16 +4,16 @@ import { useLocalStorage } from '@vueuse/core'
 import { reactive, ref } from 'vue'
 import { OuiSelect, OuiDemo, OuiInput, OuiSegmented, OuiTabs } from '@/lib'
 
-import './oui-sliding-pill.demo.styl'
+import './oui-slider.demo.styl'
 
 // Tabs demo data
-const selectedTab = useLocalStorage('oui-sliding-pill-tab', 'overview')
+const selectedTab = useLocalStorage('oui-slider-tab', 'overview')
 
 const tabs: OuiTab[] = [
-  { name: 'overview', title: 'Overview', pillClass: 'pill-blue' },
-  { name: 'analytics', title: 'Analytics', pillClass: 'pill-green' },
-  { name: 'settings', title: 'Settings', pillClass: 'pill-orange' },
-  { name: 'users', title: 'Users', pillClass: 'pill-purple' },
+  { name: 'overview', title: 'Overview', sliderClass: 'pill-blue' },
+  { name: 'analytics', title: 'Analytics', sliderClass: 'pill-green' },
+  { name: 'settings', title: 'Settings', sliderClass: 'pill-orange' },
+  { name: 'users', title: 'Users', sliderClass: 'pill-purple' },
 ]
 
 // Segmented control demo data 
@@ -42,7 +42,7 @@ const state = reactive({
 </script>
 
 <template>
-  <div class="oui-sliding-pill-demo oui-text">
+  <div class="oui-slider-demo oui-text">
     <h1>Sliding Pill Components Demo</h1>
 
     <section>
