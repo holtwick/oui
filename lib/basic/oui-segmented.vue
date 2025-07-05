@@ -2,7 +2,7 @@
 import type { OuiSegmentedOption } from './_types'
 import { computed, onMounted, ref } from 'vue'
 import { t } from '@/basic/i18n'
-import OuiSlidingPill from './oui-slider.vue'
+import OuiSlider from './oui-slider.vue'
 
 import './oui-form.styl'
 import './oui-segmented.styl'
@@ -99,8 +99,8 @@ const disabledConform = computed(() => {
 </script>
 
 <template>
-  <div ref="containerRef" class="oui-input oui-input-container" :class="computedClass" tabindex="0" role="radiogroup" :disabled="disabledConform" @keydown="handleKeydown">
-    <OuiSlidingPill v-model="modelValue" :options="options" class="oui-segmented-container" pill-class="oui-segmented-pill">
+  <div ref="containerRef" class="oui-input oui-segmented" :class="computedClass" tabindex="0" role="radiogroup" :disabled="disabledConform" @keydown="handleKeydown">
+    <OuiSlider v-model="modelValue" :options="options" class="oui-segmented-container" slider-class="oui-segmented-slider">
       <template #default="{ options: slidingOptions, updateModelValue }">
         <template v-for="option in slidingOptions" :key="option.name">
           <button :class="{ _active: modelValue === option.name }" :disabled="disabledConform" role="radio" :aria-checked="modelValue === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
@@ -114,6 +114,6 @@ const disabledConform = computed(() => {
           </button>
         </template>
       </template>
-    </OuiSlidingPill>
+    </OuiSlider>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <script lang="ts" setup generic="K extends string">
 import type { OuiTab } from './_types'
 import { computed } from 'vue'
-import OuiSlidingPill from './oui-slider.vue'
+import OuiSlider from './oui-slider.vue'
 import './oui-tabs.styl'
 
 const props = defineProps<{
@@ -16,7 +16,7 @@ const name = computed<string>(() => modelValue.value ?? props.tabs?.[0]?.name ??
 
 <template>
   <div class="oui-tabs">
-    <OuiSlidingPill
+    <OuiSlider
       v-model="modelValue"
       :options="tabs"
       class="oui-tabs-nav _nav"
@@ -33,7 +33,7 @@ const name = computed<string>(() => modelValue.value ?? props.tabs?.[0]?.name ??
           </button>
         </template>
       </template>
-    </OuiSlidingPill>
+    </OuiSlider>
 
     <div>
       <slot :key="name" :name="name">

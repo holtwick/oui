@@ -8,7 +8,7 @@ import './oui-slider.styl'
 const props = defineProps<{
   options: OuiSliderOption<K>[]
   className?: string
-  pillClass?: string
+  sliderClass?: string
 }>()
 
 const modelValue = defineModel<K>({ required: false })
@@ -26,18 +26,18 @@ const shouldAnimate = ref(false)
 const isUserInteraction = ref(false)
 
 const activeOption = ref<OuiSliderOption<K>>()
-const pillStyle = computed(() => ({
+const sliderStyle = computed(() => ({
   left: `${relativeLeft.value}px`,
   width: `${activeItemWidth.value}px`,
   top: `${relativeTop.value}px`,
   height: `${activeItemHeight.value}px`,
 }))
 
-const computedPillClass = computed(() => [
-  '_pill',
+const computedSliderClass = computed(() => [
+  '_slider',
   { '_no-animate': !shouldAnimate.value },
   { _hidden: !activeOption.value },
-  props.pillClass,
+  props.sliderClass,
   activeOption.value?.sliderClass,
 ].filter(Boolean))
 
@@ -75,7 +75,7 @@ defineExpose({
 
 <template>
   <div ref="containerRef" class="oui-slider" :class="className">
-    <div :class="computedPillClass" :style="pillStyle" />
+    <div :class="computedSliderClass" :style="sliderStyle" />
     <slot
       :options="options"
       :model-value="modelValue"

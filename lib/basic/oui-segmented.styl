@@ -3,11 +3,9 @@
 .oui-segmented {
   position: relative;
   display: inline-flex;
-  border: 1px solid var(--border-color, #e1e5e9);
-  border-radius: 6px;
-  background: var(--bg-color, white);
   overflow: hidden;
   outline: none;
+  padding: 0;
 
   &._error {
     border-color: var(--error-color, #e53e3e);
@@ -36,7 +34,7 @@
     position: relative;
   }
 
-  .oui-segmented-pill {
+  .oui-segmented-slider {
     background: var(--p1-fg, #3182ce);
     border-radius: 4;
   }
@@ -56,6 +54,7 @@
     white-space: nowrap;
     flex: 1;
     min-width: 0;
+    padding-x: 8;
     gap: 8;
 
     &:hover:not(._active) {
