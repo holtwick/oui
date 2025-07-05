@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { last, sortedOrderby } from 'zeed'
 import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiSelect, OuiText, OuiTooltipActivator } from '@/lib'
 
@@ -16,7 +16,16 @@ const docs = import.meta.glob('../**/*.md', {
   eager: true,
 })
 
-const mode = useLocalStorage('oui.demo.mode', './app.demo.vue')
+// Get initial mode from hash or fallback to localStorage
+function getModeFromHash(): string {
+  const hash = location.hash.slice(1)
+  if (hash && Object.keys(modes).includes(hash)) {
+    return hash
+  }
+  return ''
+}
+
+const mode = ref(getModeFromHash() || useLocalStorage('oui.demo.mode', './app.demo.vue').value)
 const dark = useLocalStorage('oui.demo.dark', false)
 
 const showProperties = useLocalStorage('oui.demo.properties', true)
@@ -40,8 +49,29 @@ const doc = computed(() => {
 
 const active = ref(false)
 
+// Watch for hash changes and update mode
+function handleHashChange() {
+  const hash = location.hash.slice(1)
+  if (hash && Object.keys(modes).includes(hash)) {
+    mode.value = hash
+  }
+}
+
+// Watch mode changes and update hash
+watch(mode, (newMode) => {
+  if (newMode && location.hash !== `#${newMode}`) {
+    location.hash = newMode
+  }
+}, { immediate: true })
+
 onMounted(() => {
   active.value = true
+  window.addEventListener('hashchange', handleHashChange)
+})
+
+// Clean up event listener when component unmounts
+onUnmounted(() => {
+  window.removeEventListener('hashchange', handleHashChange)
 })
 
 const isDark = useDark()
