@@ -4,8 +4,8 @@ import { useEventListener } from '@vueuse/core'
 import { nextTick, onMounted } from 'vue'
 import { Logger } from 'zeed'
 import { useSingleton } from '../basic/singleton'
-
 import { isInsideScrollable } from './drag-util'
+
 import './oui-mobile.styl'
 
 const props = defineProps<{
