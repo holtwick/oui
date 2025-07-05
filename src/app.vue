@@ -47,11 +47,17 @@ onMounted(() => {
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
-function openInVSCode() {
-  if (mode.value) {
-    const filePath = mode.value.replace('../', '/Users/dirk/work/github-oui/')
-    window.open(`vscode://file${filePath}`)
+function openInVSCode(filePath?: string) {
+  const targetFile = filePath || mode.value
+  if (targetFile) {
+    const absolutePath = targetFile.replace('../', '/Users/dirk/work/github-oui/')
+    location.assign(`vscode://file${absolutePath}`)
+    // window.open(`vscode://file${absolutePath}`)
   }
+}
+
+function openCurrentInVSCode() {
+  openInVSCode(mode.value)
 }
 </script>
 
@@ -102,7 +108,7 @@ function openInVSCode() {
         </svg>
       </OuiButton>
 
-      <OuiButton v-if="mode" @click="openInVSCode">
+      <OuiButton v-if="mode" @click="openCurrentInVSCode">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link">
           <path d="M15 3h6v6" />
           <path d="M10 14 21 3" />
@@ -121,9 +127,18 @@ function openInVSCode() {
       <OuiResizeable :hide="!showSidebar" name="demo.sidebar" :size="250" side="right" :max-size="400" :min-size="200" color="var(--t3-fg)" class="oui-demo-navigation">
         <div class="oui-demo-nav-content">
           <div class="oui-demo-nav-list">
-            <button v-for="({ value, title }) in allModes" :key="value" :class="{ active: mode === value }" class="oui-demo-nav-item" @click="mode = value">
-              {{ title }}
-            </button>
+            <div v-for="({ value, title }) in allModes" :key="value" :class="{ active: mode === value }" class="oui-demo-nav-item">
+              <button class="oui-demo-nav-button" @click="mode = value">
+                {{ title }}
+              </button>
+              <button class="oui-demo-nav-open" title="Open in VSCode" @click="openInVSCode(value)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </OuiResizeable>
