@@ -17,6 +17,7 @@ withDefaults(defineProps<{
   title?: string
   description?: string
   required?: boolean
+  disabled?: boolean
   id?: string
 }>(), {
   showVisibility: true,
@@ -42,6 +43,7 @@ const show = ref(false)
         :type="show ? 'text' : 'password'"
         :placeholder="placeholder"
         v-bind="$attrs"
+        :disabled="disabled"
       >
         <template #end>
           <template v-if="showVisibility">
