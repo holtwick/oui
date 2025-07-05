@@ -16,8 +16,8 @@ const modelValue = defineModel<K>({ required: false })
 const containerRef = ref<HTMLElement>()
 const activeItemRef = ref<HTMLElement>()
 
-const { left: activeItemLeft, top: activeItemTop, width: activeItemWidth, height: activeItemHeight } = useElementBounding(activeItemRef)
-const { left: containerLeft, top: containerTop } = useElementBounding(containerRef)
+const { update: updateActive, left: activeItemLeft, top: activeItemTop, width: activeItemWidth, height: activeItemHeight } = useElementBounding(activeItemRef)
+const { update: updateContainer, left: containerLeft, top: containerTop } = useElementBounding(containerRef)
 
 const relativeLeft = computed(() => activeItemLeft.value - containerLeft.value)
 const relativeTop = computed(() => activeItemTop.value - containerTop.value)
@@ -42,6 +42,9 @@ const computedPillClass = computed(() => [
 ].filter(Boolean))
 
 async function updateActiveItemRef(animated = false) {
+  updateActive()
+  updateContainer()
+
   activeOption.value = props.options.find(option => option.name === modelValue.value)
   await nextTick()
   shouldAnimate.value = animated

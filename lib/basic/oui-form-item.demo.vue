@@ -3,10 +3,12 @@ import { reactive } from 'vue'
 import { dayFromToday, getTimestamp } from 'zeed'
 import { OuiButton, OuiDate, OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 import OuiCheckbox from './oui-checkbox.vue'
+import OuiInputColor from './oui-input-color.vue'
 
 const state = reactive({
   value1: '',
   value2: '',
+  color: '#ff0000',
   number: 42,
   text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis velit, distinctio adipisci culpa, numquam impedit hic consequuntur unde illo illum sunt aliquid aut beatae natus? Repellendus vel laborum doloribus tempore?',
   password: 'Secr3!',
@@ -22,6 +24,7 @@ const state = reactive({
     <OuiFormItem :disabled="state.disabled" title="TITLE" description="DESCRIPTION" required>
       BODY
     </OuiFormItem>
+    <OuiInputColor v-model="state.color" :disabled="state.disabled" title="Color" />
     <OuiInput v-model="state.value1" :disabled="state.disabled" />
     <OuiInput v-model="state.value2" :disabled="state.disabled" title="Value with label" description="Some description" required />
     <OuiInputNumber v-model="state.number" :disabled="state.disabled" title="Number" />

@@ -24,6 +24,10 @@ const props = withDefaults(defineProps<{
   lazyDelay: 1000,
 })
 
+const emit = defineEmits<{
+  update: [value: string | undefined | null]
+}>()
+
 const model = defineModel<string | undefined>({ required: true })
 
 const value = ref('')
@@ -54,39 +58,29 @@ function lazyUpdate() {
     model.value = value.value
   }
 }
+
+function doUpdate(event: KeyboardEvent) {
+  if (event.key === 'Escape') {
+    value.value = model.value ?? ''
+  }
+  emit('update', value.value)
+  if (event.key === 'Enter') {
+    lazyUpdate()
+  }
+}
 </script>
 
 <template>
-  <OuiFormItem
-    :id="id"
-    :title="title"
-    :description="description"
-    :required="required"
-  >
+  <OuiFormItem :id="id" :title="title" :description="description" :required="required">
     <template v-if="$slots.start || $slots.end">
       <div class="oui-input oui-input-container" :disabled="$attrs.disabled">
         <slot name="start" />
-        <input
-          :id="id"
-          v-model="value"
-          :type="type"
-          v-bind="$attrs"
-          @blur="lazyUpdate"
-          @keypress.enter="lazyUpdate"
-        >
+        <input :id="id" v-model="value" :type="type" v-bind="$attrs" @keypress="doUpdate" @blur="lazyUpdate">
         <slot name="end" />
       </div>
     </template>
     <template v-else>
-      <input
-        :id="id"
-        v-model="value"
-        :type="type"
-        class="oui-input oui-input-string"
-        v-bind="$attrs"
-        @blur="lazyUpdate"
-        @keypress.enter="lazyUpdate"
-      >
+      <input :id="id" v-model="value" :type="type" class="oui-input oui-input-string" v-bind="$attrs" @keypress="doUpdate" @blur="lazyUpdate">
     </template>
   </OuiFormItem>
 </template>
