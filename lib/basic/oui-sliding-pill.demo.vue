@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { OuiSegmentedOption, OuiTab } from '@/lib'
 import { useLocalStorage } from '@vueuse/core'
-import { ref } from 'vue'
-import { OuiDemo, OuiInput, OuiSegmented, OuiTabs } from '@/lib'
+import { reactive, ref } from 'vue'
+import { OuiSelect, OuiDemo, OuiInput, OuiSegmented, OuiTabs } from '@/lib'
 
 import './oui-sliding-pill.demo.styl'
 
@@ -16,10 +16,8 @@ const tabs: OuiTab[] = [
   { name: 'users', title: 'Users', pillClass: 'pill-purple' },
 ]
 
-// Segmented control demo data
-const selectedSize = ref<string>('md')
-const sizeOptions: OuiSegmentedOption[] = [
-  { name: 'sm', title: 'Small' },
+// Segmented control demo data 
+const sizeOptions: OuiSegmentedOption[] = [  
   { name: 'md', title: 'Medium' },
   { name: 'lg', title: 'Large' },
 ]
@@ -37,6 +35,10 @@ const viewOptions: OuiSegmentedOption[] = [
   { name: 'grid', title: 'Grid', icon: '⬜' },
   { name: 'card', title: 'Cards', icon: '🃏' },
 ]
+
+const state = reactive({
+  size: 'md'
+})
 </script>
 
 <template>
@@ -93,12 +95,12 @@ const viewOptions: OuiSegmentedOption[] = [
       <div class="segmented-examples">
         <div class="example">
           <label>Size Selection:</label>
-          <OuiSegmented v-model="selectedSize" :options="sizeOptions">
-            <template #option-sm>
-              <i>Custom Small</i>
+          <OuiSegmented v-model="state.size" :options="sizeOptions" :size="state.size as any">
+            <template #option-md>
+             ⚛️ <i>Custom Medium</i>
             </template>
           </OuiSegmented>
-          <span class="selection">Selected: {{ selectedSize }}</span>
+          <span class="selection">Selected: {{ state.size }}</span>
         </div>
 
         <div class="example">
@@ -109,7 +111,7 @@ const viewOptions: OuiSegmentedOption[] = [
 
         <div class="example">
           <label>View Mode (with icons):</label>
-          <OuiSegmented v-model="selectedView" :options="viewOptions" size="sm" />
+          <OuiSegmented v-model="selectedView" :options="viewOptions" size="md" />
           <span class="selection">Selected: {{ selectedView }}</span>
         </div>
 
@@ -128,12 +130,13 @@ const viewOptions: OuiSegmentedOption[] = [
 
         <div class="example">
           <label>Error State:</label>
-          <OuiSegmented v-model="selectedSize" :options="sizeOptions" error />
+          <OuiSegmented v-model="state.size" :options="sizeOptions" error />
         </div>
       </div>
     </section>
   </div>
   <OuiDemo>
     <OuiInput v-model="selectedTab" title="Tab" />
+    <OuiSelect v-model="state.size" :options="['md', 'lg']" title="Size" />
   </OuiDemo>
 </template>

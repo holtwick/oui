@@ -11,9 +11,9 @@ const props = defineProps<{
   options: OuiSegmentedOption<K>[]
   className?: string
   placeholder?: string
-   disabled?: boolean
+  disabled?: boolean
   error?: boolean
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'md' | 'lg'
 }>()
 
 const modelValue = defineModel<K>({ required: false })
@@ -30,8 +30,8 @@ onMounted(() => {
 const computedClass = computed(() => [
   'oui-segmented',
   props.className,
-  { 
-    _error: props.error, 
+  {
+    _error: props.error,
     [`_size-${props.size || 'md'}`]: true,
   },
 ])
