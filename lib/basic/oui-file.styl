@@ -1,16 +1,12 @@
 @require "../../stylus/index.styl";
 
 .oui-file {
-  oui-input-default();
-  color: var(--fg);
-  border-style: dashed;
+  border-style: dashed !important;
   cursor: pointer;
-  width: 100%;
   vertical-align: middle;
   user-select: none;
   -webkit-user-select: none;
   font-size: 16;
-  padding-y: 6;
 
   > * {
     display: inline-flex;
@@ -23,7 +19,20 @@
   }
 
   ._content {
-    stack-x(8);
+    use: stack-x;
+    width: 100%;
+    gap: 8;
+    padding-y: 6;
+    padding-x: 8;
+  }
+
+  ._message {
+    use: stack-x;
+    use: grow;
+    gap: 8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &:hover, &._over {

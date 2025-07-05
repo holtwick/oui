@@ -55,6 +55,9 @@ async function fileToDataURI(file: File): Promise<string | undefined> {
 }
 
 async function onDrop(files: File[] | null) {
+  if (props.disabled) 
+    return
+  
   const file = files?.[0]
   if (file) {
     model.value = await fileToDataURI(file)
@@ -74,9 +77,9 @@ const { files, open, reset, onChange } = useFileDialog({
 })
 
 onChange(async () => {
-  if (props.disabled) {
+if (props.disabled) 
     return
-  }
+  
   const file = files.value?.[0]
   if (file) {
     const url = await fileToDataURI(file)
@@ -87,26 +90,44 @@ onChange(async () => {
 })
 
 function doSelect() {
-  if (props.disabled) {
+  if (props.disabled) 
     return
-  }
   log('select')
   open()
+}
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    doSelect()
+  }
+}
+
+function doClear() {
+  if (props.disabled) 
+    return
+  
+  model.value = undefined
+  modelFilename.value = undefined
 }
 </script>
 
 <template>
   <OuiFormItem :id="id" :title="title" :description="description" :required="required">
-    <div ref="dropZoneRef" class="oui-file" :class="{ _over: isOverDropZone, _disabled: disabled }" @click.prevent="doSelect">
+    <div ref="dropZoneRef" class="oui-input oui-input-container oui-file" :disabled="disabled ? true : undefined" :class="{ _over: isOverDropZone }" :tabindex="disabled ? -1 : 0" @click.prevent="doSelect" @keydown="onKeydown">
       <div class="_content">
         <template v-if="!model || model?.length <= 0">
-          <slot>{{ titleChoose ?? t('Choose file...', 'oui.file.choose') }}</slot>
+          <div class="_message">
+            <slot>{{ titleChoose ?? t('Choose file...', 'oui.file.choose') }}</slot>
+          </div>
         </template>
         <template v-else>
-          <slot name="preview" :filename="modelFilename">
-            {{ modelFilename ?? t('File available', 'oui.file.placeholder') }}
-          </slot>
-          <OuiClose @click.stop.prevent="model = undefined" />
+          <div class="_message">
+            <slot name="preview" :filename="modelFilename">
+              {{ modelFilename ?? t('File available', 'oui.file.placeholder') }}
+            </slot>
+          </div>
+          <OuiClose v-if="!disabled" @click.stop.prevent="model = undefined" />
         </template>
       </div>
     </div>

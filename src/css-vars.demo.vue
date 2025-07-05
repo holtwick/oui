@@ -178,7 +178,7 @@ function updateGrouping() {
         >
         {{ t('Group by reference', 'oui.cssVars.groupByReference') }}
       </label>
-      
+
       <label class="_checkbox_label">
         <input
           v-model="showPrivateOnly"
@@ -187,7 +187,7 @@ function updateGrouping() {
         >
         {{ t('Show private variables only', 'oui.cssVars.showPrivateOnly') }}
       </label>
-      
+
       <label class="_checkbox_label">
         <input
           v-model="showRootOnly"
