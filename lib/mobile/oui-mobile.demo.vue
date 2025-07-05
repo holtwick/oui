@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import OuiInput from '../basic/oui-input.vue'
 import OuiText from '../basic/oui-text.vue'
 </script>
 
@@ -15,7 +14,25 @@ import OuiText from '../basic/oui-text.vue'
     </p>
     <ul>
       <li>
+        <a href="#../lib/modal/oui-modal.demo.vue">Modal and scroll</a>
+      </li>
+      <li>
         <a href="#../lib/basic/oui-login.demo.vue">Login Demo</a>
+      </li>
+      <li>
+        <a href="#../lib/basic/oui-notice.demo.vue">Notice</a>
+      </li>
+      <li>
+        <a href="#./css-form.demo.vue">CSS Form</a>
+      </li>
+      <li>
+        <a href="#../lib/modal/oui-dialog.demo.vue">Dialogs</a>
+      </li>
+      <li>
+        <a href="#../lib/modal/oui-dialog-edit.demo.vue">Edit dialogs</a>
+      </li>
+      <li>
+        <a href="#../lib/basic/oui-form-item.demo.vue">Form items</a>
       </li>
     </ul>
   </OuiText>
