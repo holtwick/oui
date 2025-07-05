@@ -12,6 +12,18 @@ const props = defineProps<{
   mode?: 'app' | 'body'
 }>()
 
+function isIOS(): boolean {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent)
+}
+
+function isAndroid(): boolean {
+  return /Android/.test(navigator.userAgent)
+}
+
+function isMobile(): boolean {
+  return isIOS() || isAndroid() || /Mobile|Tablet/.test(navigator.userAgent)
+}
+
 const log: LoggerInterface = Logger('oui-mobile')
 
 /**
@@ -20,7 +32,7 @@ const log: LoggerInterface = Logger('oui-mobile')
  */
 const keyboardAnimationDuration = 400
 
-if (useSingleton('oui-mobile')) {
+if (useSingleton('oui-mobile') && isMobile()) {
   log('init')
 
   if (window.visualViewport != null) {
