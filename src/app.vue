@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { last, sortedOrderby } from 'zeed'
-import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
+import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiSelect, OuiText, OuiTooltipActivator } from '@/lib'
 
 import './app.styl'
 
@@ -16,12 +16,21 @@ const docs = import.meta.glob('../**/*.md', {
   eager: true,
 })
 
-const mode = useLocalStorage('oui.demo.mode', './app.demo.vue')
+// Get initial mode from hash or fallback to localStorage
+function getModeFromHash(): string {
+  const hash = location.hash.slice(1)
+  if (hash && Object.keys(modes).includes(hash)) {
+    return hash
+  }
+  return ''
+}
+
+const mode = ref(getModeFromHash() || useLocalStorage('oui.demo.mode', './app.demo.vue').value)
 const dark = useLocalStorage('oui.demo.dark', false)
 
 const showProperties = useLocalStorage('oui.demo.properties', true)
 const showSidebar = useLocalStorage('oui.demo.sidebar', true)
-const showUI = ref(true)
+const showUI = useLocalStorage('oui.demo.ui', true)
 
 const allModes = computed(() => {
   return sortedOrderby(Object.keys(modes).map(value => ({
@@ -40,12 +49,46 @@ const doc = computed(() => {
 
 const active = ref(false)
 
+// Watch for hash changes and update mode
+function handleHashChange() {
+  const hash = location.hash.slice(1)
+  if (hash && Object.keys(modes).includes(hash)) {
+    mode.value = hash
+  }
+}
+
+// Watch mode changes and update hash
+watch(mode, (newMode) => {
+  if (newMode && location.hash !== `#${newMode}`) {
+    location.hash = newMode
+  }
+}, { immediate: true })
+
 onMounted(() => {
   active.value = true
+  window.addEventListener('hashchange', handleHashChange)
+})
+
+// Clean up event listener when component unmounts
+onUnmounted(() => {
+  window.removeEventListener('hashchange', handleHashChange)
 })
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+
+function openInVSCode(filePath?: string) {
+  const targetFile = filePath || mode.value
+  if (targetFile) {
+    const absolutePath = targetFile.replace('../', '/Users/dirk/work/github-oui/')
+    location.assign(`vscode://file${absolutePath}`)
+    // window.open(`vscode://file${absolutePath}`)
+  }
+}
+
+function openCurrentInVSCode() {
+  openInVSCode(mode.value)
+}
 </script>
 
 <template>
@@ -57,15 +100,13 @@ const toggleDark = useToggle(isDark)
           <path d="M9 3v18" />
         </svg>
       </OuiButton>
-      <template v-if="!showUI">
-        <select v-model="mode" class="oui-select">
-          <template v-for="({ value, title }) in allModes" :key="value">
-            <option :value="value">
-              {{ title }}
-            </option>
-          </template>
-        </select>
-      </template>
+      <OuiSelect v-model="mode">
+        <template v-for="({ value, title }) in allModes" :key="value">
+          <option :value="value">
+            {{ title }}
+          </option>
+        </template>
+      </OuiSelect>
 
       <!-- <div class="_space" />
 
@@ -95,6 +136,14 @@ const toggleDark = useToggle(isDark)
         </svg>
       </OuiButton>
 
+      <OuiButton v-if="mode" @click="openCurrentInVSCode">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link">
+          <path d="M15 3h6v6" />
+          <path d="M10 14 21 3" />
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        </svg>
+      </OuiButton>
+
       <OuiButton @click="showProperties = !showProperties">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-right">
           <rect width="18" height="18" x="3" y="3" rx="2" />
@@ -106,9 +155,18 @@ const toggleDark = useToggle(isDark)
       <OuiResizeable :hide="!showSidebar" name="demo.sidebar" :size="250" side="right" :max-size="400" :min-size="200" color="var(--t3-fg)" class="oui-demo-navigation">
         <div class="oui-demo-nav-content">
           <div class="oui-demo-nav-list">
-            <button v-for="({ value, title }) in allModes" :key="value" :class="{ active: mode === value }" class="oui-demo-nav-item" @click="mode = value">
-              {{ title }}
-            </button>
+            <div v-for="({ value, title }) in allModes" :key="value" :class="{ active: mode === value }" class="oui-demo-nav-item">
+              <button class="oui-demo-nav-button" @click="mode = value">
+                {{ title }}
+              </button>
+              <button class="oui-demo-nav-open" title="Open in VSCode" @click="openInVSCode(value)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </OuiResizeable>

@@ -29,7 +29,8 @@ oui-input-reset() {
   }
 }
 
-oui-button-default() {
+// A simple button template
+oui-button() {
   oui-input-reset();
   stack-x(8);
   stack-item-center();   /*
@@ -42,7 +43,8 @@ oui-button-default() {
     // }
   */
   display: inline-flex;
-  // height: var(--button-height, var(--input-height, px(32)));
+  height: var(--input-height, px(32));
+  min-width: var(--input-height, px(32));
   // padding: calc(((var(--button-height, var(--input-height, px(32))) - 16) / 2));
   max-width: 100%;
   pointer-events: initial;
@@ -71,11 +73,7 @@ oui-button-default() {
   svg, img {
     size: 1em;
   }
-}
 
-// A simple button template
-oui-button() {
-  oui-button-default();
   border-radius: var(--button-radius, var(--input-radius));
 
   &:hover:not([disabled]) {
@@ -128,8 +126,7 @@ oui-button() {
 
   background: var(--button-bg);
   border: 1px solid var(--button-border, transparent);
-  // Sizes
-  padding: 8;
+  padding: 7px;
 
   &._button_size_small {
     padding: 4;
