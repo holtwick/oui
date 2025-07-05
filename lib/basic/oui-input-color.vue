@@ -143,7 +143,7 @@ watch(model, (value) => {
 </script>
 
 <template>
-  <OuiInput v-model="tempValue" :lazy="props.lazy" :disanled="disabled" @blur="doBlur" @input="onInput">
+  <OuiInput v-model="tempValue" :lazy="props.lazy" :disabled="disabled" @blur="doBlur" @input="onInput">
     <template #start>
       <div class="oui-input-color" :style="{ '--color-value': normalizedColor }">
         <input ref="colorInput" :value="normalizedColor" type="color" tabindex="-1" @input="onColorPickerChange">

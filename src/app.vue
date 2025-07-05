@@ -80,7 +80,9 @@ const toggleDark = useToggle(isDark)
 function openInVSCode(filePath?: string) {
   const targetFile = filePath || mode.value
   if (targetFile) {
-    const absolutePath = targetFile.replace('../', '/Users/dirk/work/github-oui/')
+    const absolutePath = targetFile
+      .replace('../', '/Users/dirk/work/github-oui/')
+      .replace('./', '/Users/dirk/work/github-oui/src/')
     location.assign(`vscode://file${absolutePath}`)
     // window.open(`vscode://file${absolutePath}`)
   }

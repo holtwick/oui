@@ -14,10 +14,13 @@ interface CSSVariable {
   isColor: boolean
   children?: CSSVariable[]
   referencedVar?: string
+  isRootLevel: boolean
 }
 
 const cssVariables = ref<CSSVariable[]>([])
 const groupByReference = ref(false)
+const showPrivateOnly = ref(false)
+const showRootOnly = ref(false)
 
 function isColorValue(value: string): boolean {
   // Check if the value looks like a color (hex, rgb, hsl, color names, etc.)
@@ -32,7 +35,22 @@ function extractReferencedVar(value: string): string | undefined {
 
 function getAllCSSVariables(): CSSVariable[] {
   const variables: CSSVariable[] = []
+  const rootVariables = new Set<string>()
   const allStyles = document.styleSheets
+
+  // First, identify root-level variables
+  try {
+    const rootStyles = getComputedStyle(document.documentElement)
+    for (let i = 0; i < rootStyles.length; i++) {
+      const property = rootStyles[i]
+      if (property.startsWith('--')) {
+        rootVariables.add(property)
+      }
+    }
+  }
+  catch (e) {
+    log.error('Error getting root CSS variables', e)
+  }
 
   try {
     for (let i = 0; i < allStyles.length; i++) {
@@ -52,6 +70,7 @@ function getAllCSSVariables(): CSSVariable[] {
                     value: value.trim(),
                     isColor: isColorValue(value),
                     referencedVar: extractReferencedVar(value),
+                    isRootLevel: rootVariables.has(property),
                   })
                 }
               }
@@ -77,6 +96,7 @@ function getAllCSSVariables(): CSSVariable[] {
             value: value.trim(),
             isColor: isColorValue(value),
             referencedVar: extractReferencedVar(value),
+            isRootLevel: true,
           })
         }
       }
@@ -122,13 +142,26 @@ function groupVariablesByReference(variables: CSSVariable[]): CSSVariable[] {
   return grouped.sort((a, b) => a.name.localeCompare(b.name))
 }
 
+function filterVariables(variables: CSSVariable[]): CSSVariable[] {
+  if (showPrivateOnly.value) {
+    return variables.filter(variable => !variable.isRootLevel)
+  }
+  if (showRootOnly.value) {
+    return variables.filter(variable => variable.isRootLevel)
+  }
+  return variables
+}
+
 onMounted(() => {
-  cssVariables.value = getAllCSSVariables()
+  const allVars = getAllCSSVariables()
+  const filteredVars = filterVariables(allVars)
+  cssVariables.value = groupVariablesByReference(filteredVars)
 })
 
 function updateGrouping() {
   const allVars = getAllCSSVariables()
-  cssVariables.value = groupVariablesByReference(allVars)
+  const filteredVars = filterVariables(allVars)
+  cssVariables.value = groupVariablesByReference(filteredVars)
 }
 </script>
 
@@ -144,6 +177,24 @@ function updateGrouping() {
           @change="updateGrouping"
         >
         {{ t('Group by reference', 'oui.cssVars.groupByReference') }}
+      </label>
+
+      <label class="_checkbox_label">
+        <input
+          v-model="showPrivateOnly"
+          type="checkbox"
+          @change="updateGrouping"
+        >
+        {{ t('Show private variables only', 'oui.cssVars.showPrivateOnly') }}
+      </label>
+
+      <label class="_checkbox_label">
+        <input
+          v-model="showRootOnly"
+          type="checkbox"
+          @change="updateGrouping"
+        >
+        {{ t('Show root variables only', 'oui.cssVars.showRootOnly') }}
       </label>
     </div>
 

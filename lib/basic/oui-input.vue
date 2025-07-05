@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
   id?: string
   lazy?: boolean
   lazyDelay?: number
+  disabled?: boolean
 }>(), {
   type: 'text',
   lazyDelay: 1000,
@@ -73,14 +74,14 @@ function doUpdate(event: KeyboardEvent) {
 <template>
   <OuiFormItem :id="id" :title="title" :description="description" :required="required">
     <template v-if="$slots.start || $slots.end">
-      <div class="oui-input oui-input-container" :disabled="$attrs.disabled">
+      <div class="oui-input oui-input-container" :disabled="disabled ? true : undefined">
         <slot name="start" />
-        <input :id="id" v-model="value" :type="type" v-bind="$attrs" @keypress="doUpdate" @blur="lazyUpdate">
+        <input :id="id" v-model="value" :type="type" v-bind="$attrs" :disabled="disabled ? true : undefined" @keypress="doUpdate" @blur="lazyUpdate">
         <slot name="end" />
       </div>
     </template>
     <template v-else>
-      <input :id="id" v-model="value" :type="type" class="oui-input oui-input-string" v-bind="$attrs" @keypress="doUpdate" @blur="lazyUpdate">
+      <input :id="id" v-model="value" :type="type" class="oui-input oui-input-string" :disabled="disabled ? true : undefined" v-bind="$attrs" @keypress="doUpdate" @blur="lazyUpdate">
     </template>
   </OuiFormItem>
 </template>

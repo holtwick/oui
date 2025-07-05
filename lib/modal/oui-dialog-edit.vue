@@ -57,10 +57,10 @@ async function doDelete() {
           </slot>
         </template>
         <div class="-grow" />
-        <OuiButton :disabled="wait" mode="neutral" @click="doCancel">
+        <OuiButton :disabled="wait ? true : undefined" mode="neutral" @click="doCancel">
           Cancel
         </OuiButton>
-        <OuiButton :disabled="wait || disabled" mode="primary" @click="doSave">
+        <OuiButton :disabled="(wait || disabled) ? true : undefined" mode="primary" @click="doSave">
           <template v-if="update">
             Update
           </template>

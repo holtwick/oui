@@ -31,7 +31,7 @@ withDefaults(defineProps<{
     <slot>{{ title }}</slot>
   </a>
   <button
-    v-else :disabled="disabled" class="oui-button" :class="[
+    v-else :disabled="disabled ? true : undefined" class="oui-button" :class="[
       mode && `_button_mode_${mode}`,
       size && `_button_size_${size}`,
       dropdown && `_button_dropdown`,

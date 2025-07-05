@@ -35,7 +35,7 @@ const password = ref('')
           <OuiPassword v-model="password" :show-meter="false" placeholder="Password" name="password" />
         </div>
         <div class="oui-login-button">
-          <OuiButton :disabled="false" mode="primary" @click="$emit('login', username, password)">
+          <OuiButton mode="primary" @click="$emit('login', username, password)">
             Login
           </OuiButton>
         </div>
