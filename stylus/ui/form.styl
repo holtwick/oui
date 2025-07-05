@@ -1,7 +1,5 @@
 @require "../mixins";
 
-input-height = 32;
-
 oui-input-reset() {
   appearance: none;
   -webkit-appearance: none;
@@ -154,11 +152,11 @@ oui-input-default() {
   oui-input-reset();
   padding-x: 8;
   // min-height: var(--button-height, var(--input-height, px(32)));
-  min-height: input-height;
+  min-height: var(--input-height, px(32));
   border-radius: var(--input-radius);
   border: 1px solid var(--input-border);
   color: var(--input-fg);
-  background: var(--input-bg);
+  background: var(--input-bg, var(--input-bg-default, var(--t3-bg)));
   max-width: 100%;
 
   &:hover {
@@ -190,7 +188,7 @@ oui-input-textarea() {
 
 oui-input-textarea-grow() {
   overflow: hidden !important;
-  height: input-height;
+  height: var(--input-height, px(32));
   resize: none;
 }
 

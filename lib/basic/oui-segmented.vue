@@ -2,7 +2,7 @@
 import type { OuiSegmentedOption } from './_types'
 import { computed, onMounted, ref } from 'vue'
 import { t } from '@/basic/i18n'
-import OuiSlidingPill from './oui-sliding-pill.vue'
+import OuiSlider from './oui-slider.vue'
 
 import './oui-form.styl'
 import './oui-segmented.styl'
@@ -13,7 +13,7 @@ const props = defineProps<{
   placeholder?: string
   disabled?: boolean
   error?: boolean
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'md' | 'lg'
 }>()
 
 const modelValue = defineModel<K>({ required: false })
@@ -31,9 +31,7 @@ const computedClass = computed(() => [
   'oui-segmented',
   props.className,
   {
-    // _disabled: props.disabled,
     _error: props.error,
-    // _focused: isFocused.value,
     [`_size-${props.size || 'md'}`]: true,
   },
 ])
@@ -94,14 +92,18 @@ function handleKeydown(event: KeyboardEvent) {
     modelValue.value = props.options[newIndex].name
   }
 }
+
+const disabledConform = computed(() => {
+  return props.disabled ? true : undefined
+})
 </script>
 
 <template>
-  <div ref="containerRef" class="oui-input oui-input-container" :class="computedClass" tabindex="0" role="radiogroup" :aria-disabled="disabled" :disabled="disabled" @keydown="handleKeydown">
-    <OuiSlidingPill v-model="modelValue" :options="options" class="oui-segmented-container" pill-class="oui-segmented-pill">
+  <div ref="containerRef" class="oui-input oui-segmented" :class="computedClass" tabindex="0" role="radiogroup" :disabled="disabledConform" @keydown="handleKeydown">
+    <OuiSlider v-model="modelValue" :options="options" class="oui-segmented-container" slider-class="oui-segmented-slider">
       <template #default="{ options: slidingOptions, updateModelValue }">
         <template v-for="option in slidingOptions" :key="option.name">
-          <button :class="{ _active: modelValue === option.name }" :disabled="disabled" role="radio" :aria-checked="modelValue === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
+          <button :class="{ _active: modelValue === option.name }" :disabled="disabledConform" role="radio" :aria-checked="modelValue === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
             <slot :name="`option-${option.name}`" v-bind="{ option }">
               <template v-if="option.icon">
                 <component :is="option.icon" v-if="typeof option.icon !== 'string'" />
@@ -112,6 +114,6 @@ function handleKeydown(event: KeyboardEvent) {
           </button>
         </template>
       </template>
-    </OuiSlidingPill>
+    </OuiSlider>
   </div>
 </template>

@@ -1,25 +1,23 @@
 <script lang="ts" setup>
 import type { OuiSegmentedOption, OuiTab } from '@/lib'
 import { useLocalStorage } from '@vueuse/core'
-import { ref } from 'vue'
-import { OuiDemo, OuiInput, OuiSegmented, OuiTabs } from '@/lib'
+import { reactive, ref } from 'vue'
+import { OuiDemo, OuiInput, OuiSegmented, OuiSelect, OuiTabs } from '@/lib'
 
-import './oui-sliding-pill.demo.styl'
+import './oui-slider.demo.styl'
 
 // Tabs demo data
-const selectedTab = useLocalStorage('oui-sliding-pill-tab', 'overview')
+const selectedTab = useLocalStorage('oui-slider-tab', 'overview')
 
 const tabs: OuiTab[] = [
-  { name: 'overview', title: 'Overview', pillClass: 'pill-blue' },
-  { name: 'analytics', title: 'Analytics', pillClass: 'pill-green' },
-  { name: 'settings', title: 'Settings', pillClass: 'pill-orange' },
-  { name: 'users', title: 'Users', pillClass: 'pill-purple' },
+  { name: 'overview', title: 'Overview', sliderClass: 'pill-blue' },
+  { name: 'analytics', title: 'Analytics', sliderClass: 'pill-green' },
+  { name: 'settings', title: 'Settings', sliderClass: 'pill-orange' },
+  { name: 'users', title: 'Users', sliderClass: 'pill-purple' },
 ]
 
 // Segmented control demo data
-const selectedSize = ref<string>('md')
 const sizeOptions: OuiSegmentedOption[] = [
-  { name: 'sm', title: 'Small' },
   { name: 'md', title: 'Medium' },
   { name: 'lg', title: 'Large' },
 ]
@@ -37,10 +35,14 @@ const viewOptions: OuiSegmentedOption[] = [
   { name: 'grid', title: 'Grid', icon: '⬜' },
   { name: 'card', title: 'Cards', icon: '🃏' },
 ]
+
+const state = reactive({
+  size: 'md',
+})
 </script>
 
 <template>
-  <div class="oui-sliding-pill-demo oui-text">
+  <div class="oui-slider-demo oui-text">
     <h1>Sliding Pill Components Demo</h1>
 
     <section>
@@ -93,12 +95,12 @@ const viewOptions: OuiSegmentedOption[] = [
       <div class="segmented-examples">
         <div class="example">
           <label>Size Selection:</label>
-          <OuiSegmented v-model="selectedSize" :options="sizeOptions">
-            <template #option-sm>
-              <i>Custom Small</i>
+          <OuiSegmented v-model="state.size" :options="sizeOptions" :size="state.size as any">
+            <template #option-md>
+              ⚛️ <i>Custom Medium</i>
             </template>
           </OuiSegmented>
-          <span class="selection">Selected: {{ selectedSize }}</span>
+          <span class="selection">Selected: {{ state.size }}</span>
         </div>
 
         <div class="example">
@@ -109,7 +111,7 @@ const viewOptions: OuiSegmentedOption[] = [
 
         <div class="example">
           <label>View Mode (with icons):</label>
-          <OuiSegmented v-model="selectedView" :options="viewOptions" size="sm" />
+          <OuiSegmented v-model="selectedView" :options="viewOptions" size="md" />
           <span class="selection">Selected: {{ selectedView }}</span>
         </div>
 
@@ -128,12 +130,13 @@ const viewOptions: OuiSegmentedOption[] = [
 
         <div class="example">
           <label>Error State:</label>
-          <OuiSegmented v-model="selectedSize" :options="sizeOptions" error />
+          <OuiSegmented v-model="state.size" :options="sizeOptions" error />
         </div>
       </div>
     </section>
   </div>
   <OuiDemo>
     <OuiInput v-model="selectedTab" title="Tab" />
+    <OuiSelect v-model="state.size" segmented :options="['md', 'lg']" title="Size" />
   </OuiDemo>
 </template>
