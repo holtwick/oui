@@ -1,0 +1,153 @@
+<script lang="ts" setup>
+import type { LoggerInterface } from 'zeed'
+import { computed, onUnmounted, ref, watch } from 'vue'
+import { Logger } from 'zeed'
+import OuiInput from './oui-input.vue'
+
+import './oui-input-color.styl'
+
+// defineOptions({
+//   inheritAttrs: false,
+// })
+
+const props = defineProps<{
+  lazy?: boolean
+  disabled?: boolean
+}>()
+
+const log: LoggerInterface = Logger('oui-input-color')
+
+const model = defineModel({ required: true, default: '' })
+const colorInput = ref()
+const tempValue = ref<string>(model.value)
+const colorTestElement = ref<HTMLElement>()
+
+function rgbToHex(rgb: string): string {
+  // Parse rgb/rgba color to hex
+  const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)/)
+  if (!match)
+    return rgb
+
+  const r = Number.parseInt(match[1])
+  const g = Number.parseInt(match[2])
+  const b = Number.parseInt(match[3])
+
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`
+}
+
+const normalizedColor = computed(() => {
+  const parsed = parseColor(tempValue.value)
+  if (!parsed)
+    return '#aaaaaa' // Default color if parsing fails
+  return parsed
+})
+
+function parseColor(colorString: string): string | null {
+  if (!colorString?.trim())
+    return null
+
+  // Create a temporary element if it doesn't exist
+  if (!colorTestElement.value) {
+    colorTestElement.value = document.createElement('div')
+    colorTestElement.value.style.display = 'none'
+    colorTestElement.value.style.position = 'absolute'
+    colorTestElement.value.style.left = '-9999px'
+    document.body.appendChild(colorTestElement.value)
+  }
+
+  // Clear any previous color
+  colorTestElement.value.style.color = 'rgba(0, 0, 0, 0.5)'
+
+  try {
+    // Try to set the color
+    colorTestElement.value.style.color = colorString.trim()
+
+    // Get the computed color (this will be in rgb/rgba format)
+    const computedColor = window.getComputedStyle(colorTestElement.value).color
+
+    console.log('Computed color:', computedColor)
+
+    // If the color was invalid, it will be empty or transparent
+    if (!computedColor || computedColor === 'rgba(0, 0, 0, 0)' || computedColor === 'rgba(0, 0, 0, 0.5)' || computedColor === 'transparent') {
+      return null
+    }
+
+    return rgbToHex(computedColor)
+  }
+  catch (error) {
+    log('Error parsing color:', error)
+    return null
+  }
+}
+
+function updateModelValue() {
+  if (props.lazy)
+    return // Don't update immediately in lazy mode
+
+  // Validate the color before emitting
+  const trimmed = tempValue.value?.trim()
+  if (!trimmed) {
+    model.value = ''
+    return
+  }
+
+  const parsed = parseColor(trimmed)
+  if (parsed) {
+    model.value = trimmed
+  }
+  else {
+    console.log('Invalid color format:', trimmed)
+  }
+}
+
+function onInput() {
+  updateModelValue()
+}
+
+function doBlur() {
+  // Normalize color to hex format on blur
+  const trimmed = tempValue.value?.trim()
+  if (!trimmed) {
+    model.value = ''
+    return
+  }
+
+  const parsed = parseColor(trimmed)
+  if (parsed) {
+    tempValue.value = parsed
+    model.value = parsed
+  }
+  else {
+    console.log('Invalid color format:', trimmed)
+    // Reset to previous valid value
+    tempValue.value = model.value = ''
+  }
+}
+
+function onColorPickerChange(event: Event) {
+  const target = event.target as HTMLInputElement
+  tempValue.value = target.value
+  updateModelValue()
+}
+
+// Cleanup the test element when component is unmounted
+onUnmounted(() => {
+  if (colorTestElement.value && colorTestElement.value.parentNode) {
+    colorTestElement.value.parentNode.removeChild(colorTestElement.value)
+  }
+})
+
+watch(model, (value) => {
+  tempValue.value = value ?? ''
+})
+</script>
+
+<template>
+  <OuiInput v-model="tempValue" :lazy="props.lazy" :disanled="disabled" @blur="doBlur" @input="onInput">
+    <template #start>
+      <div class="oui-input-color">
+        <input ref="colorInput" :value="normalizedColor" type="color" tabindex="-1" @input="onColorPickerChange">
+      </div>
+    </template>
+  </OuiInput>
+</template>
