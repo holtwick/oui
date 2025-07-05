@@ -65,7 +65,7 @@ function parseColor(colorString: string): string | null {
     // Get the computed color (this will be in rgb/rgba format)
     const computedColor = window.getComputedStyle(colorTestElement.value).color
 
-    console.log('Computed color:', computedColor)
+    log('Computed color:', computedColor)
 
     // If the color was invalid, it will be empty or transparent
     if (!computedColor || computedColor === 'rgba(0, 0, 0, 0)' || computedColor === 'rgba(0, 0, 0, 0.5)' || computedColor === 'transparent') {
@@ -96,7 +96,7 @@ function updateModelValue() {
     model.value = trimmed
   }
   else {
-    console.log('Invalid color format:', trimmed)
+    log('Invalid color format:', trimmed)
   }
 }
 
@@ -118,7 +118,7 @@ function doBlur() {
     model.value = parsed
   }
   else {
-    console.log('Invalid color format:', trimmed)
+    log('Invalid color format:', trimmed)
     // Reset to previous valid value
     tempValue.value = model.value = ''
   }
@@ -145,7 +145,7 @@ watch(model, (value) => {
 <template>
   <OuiInput v-model="tempValue" :lazy="props.lazy" :disanled="disabled" @blur="doBlur" @input="onInput">
     <template #start>
-      <div class="oui-input-color">
+      <div class="oui-input-color" :style="{ '--color-value': normalizedColor }">
         <input ref="colorInput" :value="normalizedColor" type="color" tabindex="-1" @input="onColorPickerChange">
       </div>
     </template>
