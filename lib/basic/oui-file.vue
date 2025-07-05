@@ -8,6 +8,7 @@ import OuiClose from './oui-close.vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-file.styl'
+import { U } from 'vitest/dist/chunks/environment.d.cL3nLXbE.js'
 
 defineOptions({
   inheritAttrs: false,
@@ -17,12 +18,22 @@ const props = withDefaults(defineProps<{
   title?: string
   titleChoose?: string
   description?: string
+
   accept?: string
   // multiple?: boolean
   // preview?: boolean
+
   disabled?: boolean
   required?: boolean
   id?: string
+
+  openFileDialog?: (options: {
+    accept?: string
+    multiple?: boolean
+  }) => Promise<undefined | {
+    dataUri: string
+    filename: string
+  }>
 }>(), {
   accept: 'image/*',
   multiple: false,
@@ -34,6 +45,7 @@ const props = withDefaults(defineProps<{
 // }>()
 
 const log: LoggerInterface = Logger('oui-file')
+
 
 const dropZoneRef = ref<HTMLDivElement>()
 
@@ -89,11 +101,19 @@ onChange(async () => {
   }
 })
 
-function doSelect() {
+async function doSelect() {
   if (props.disabled)
     return
-  log('select')
-  open()
+
+  if (props.openFileDialog) {
+    const response = await props.openFileDialog({ accept: props.accept, multiple: false })
+    if (response) {
+      model.value = response.dataUri
+      modelFilename.value = response.filename
+    }
+  } else {
+    open()
+  }
 }
 
 function onKeydown(event: KeyboardEvent) {
@@ -127,7 +147,7 @@ function doClear() {
               {{ modelFilename ?? t('File available', 'oui.file.placeholder') }}
             </slot>
           </div>
-          <OuiClose v-if="!disabled" @click.stop.prevent="model = undefined" />
+          <OuiClose v-if="!disabled" @click.stop.prevent="doClear" />
         </template>
       </div>
     </div>
