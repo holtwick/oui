@@ -1,0 +1,64 @@
+@require "../../stylus/index.styl";
+
+.oui-items {
+  --menu-background: -gray-100; // ButtonFace;
+  --menu-border: 1px solid -gray-400; // ButtonShadow;
+  --menu-radius: px(4);
+  --item-color: -gray-900; // ButtonText;
+  --item-background: none;
+  --item-hover-color: HighlightText;
+  --item-hover-background: Highlight;
+  --item-active-color: black;
+  --item-active-background: white;
+  --item-separator-color: -gray-300;
+  use: stack-y;
+  cursor: unquote("default"); // trick to fix Stylus issue
+  min-width: 12ch;
+  list-style: none;
+  // font-weight: 500;
+  max-height: 50vh;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  user-select: none;
+  -webkit-user-select: none;
+
+  > * {
+    display: block;
+    width: 100%;
+  }
+
+  &-item {
+    color: var(--item-color);
+    background: var(--item-background);
+    list-style: none;
+    border-radius: px(2);
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--item-hover-color);
+      background: var(--item-hover-background);
+    }
+
+    &.-active, &:active, &.-selected {
+      color: var(--item-hover-color);
+      background: var(--item-hover-background);
+    }
+
+    display: flex;
+    padding: px(4) px(8);
+  }
+
+  .-separator {
+    display: flex;
+    height: px(1);
+    max-height: px(1);
+    min-height: 1px;
+    border: none;
+    padding: 0;
+    margin-top: px(4);
+    margin-bottom: px(4);
+    // opacity: 0.5; // todo
+    background: var(--item-separator-color);
+  }
+}
