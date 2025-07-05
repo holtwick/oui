@@ -101,6 +101,11 @@
     use: stack-y;
   }
 
+  &-nav-open {
+    padding-y: 4;
+    opacity: 0;
+  }
+
   &-nav-item {
     use: stack-x;
     width: 100%;
@@ -116,12 +121,16 @@
     &:hover {
       background: var(--s2-bg);
       color: var(--s2-fg);
+
+      .oui-demo-nav-open {
+        opacity: 1;
+      }
     }
 
     &.active {
       background: var(--p1-fg);
-      color: var(--p1-bg);
-      font-weight: 500;
+      color: white;
+      font-weight: 600;
     }
   }
 
@@ -129,10 +138,7 @@
     use: grow;
     padding-y: 4;
     text-align: left;
-  }
-
-  &-nav-open {
-    padding-y: 4;
+    font-weight: inherit;
   }
 
   &-sidebar-toggle {
