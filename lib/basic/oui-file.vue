@@ -8,7 +8,6 @@ import OuiClose from './oui-close.vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-file.styl'
-import { U } from 'vitest/dist/chunks/environment.d.cL3nLXbE.js'
 
 defineOptions({
   inheritAttrs: false,
@@ -45,7 +44,6 @@ const props = withDefaults(defineProps<{
 // }>()
 
 const log: LoggerInterface = Logger('oui-file')
-
 
 const dropZoneRef = ref<HTMLDivElement>()
 
@@ -111,7 +109,8 @@ async function doSelect() {
       model.value = response.dataUri
       modelFilename.value = response.filename
     }
-  } else {
+  }
+  else {
     open()
   }
 }
