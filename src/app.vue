@@ -2,7 +2,7 @@
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { last, sortedOrderby } from 'zeed'
-import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiText, OuiTooltipActivator } from '@/lib'
+import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiSelect, OuiText, OuiTooltipActivator } from '@/lib'
 
 import './app.styl'
 
@@ -21,7 +21,7 @@ const dark = useLocalStorage('oui.demo.dark', false)
 
 const showProperties = useLocalStorage('oui.demo.properties', true)
 const showSidebar = useLocalStorage('oui.demo.sidebar', true)
-const showUI = ref(true)
+const showUI = useLocalStorage('oui.demo.ui', true)
 
 const allModes = computed(() => {
   return sortedOrderby(Object.keys(modes).map(value => ({
@@ -70,15 +70,13 @@ function openCurrentInVSCode() {
           <path d="M9 3v18" />
         </svg>
       </OuiButton>
-      <template v-if="!showUI">
-        <select v-model="mode" class="oui-select">
-          <template v-for="({ value, title }) in allModes" :key="value">
-            <option :value="value">
-              {{ title }}
-            </option>
-          </template>
-        </select>
-      </template>
+      <OuiSelect v-model="mode">
+        <template v-for="({ value, title }) in allModes" :key="value">
+          <option :value="value">
+            {{ title }}
+          </option>
+        </template>
+      </OuiSelect>
 
       <!-- <div class="_space" />
 

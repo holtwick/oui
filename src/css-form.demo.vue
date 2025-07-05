@@ -14,6 +14,17 @@ import './css-form.styl'
     <div class="_form_section _stack_x">
       <input type="text">
       <button>Hello</button>
+      <select>
+        <option value="de">
+          Germany
+        </option>
+        <option value="at">
+          Austria
+        </option>
+        <option value="ch">
+          Switzerland
+        </option>
+      </select>
     </div>
 
     <div class="_form_section _stack_x">
