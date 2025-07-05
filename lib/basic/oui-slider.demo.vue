@@ -137,6 +137,6 @@ const state = reactive({
   </div>
   <OuiDemo>
     <OuiInput v-model="selectedTab" title="Tab" />
-    <OuiSelect v-model="state.size" :options="['md', 'lg']" title="Size" />
+    <OuiSelect v-model="state.size" segmented :options="['md', 'lg']" title="Size" />
   </OuiDemo>
 </template>
