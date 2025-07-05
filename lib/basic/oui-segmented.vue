@@ -11,7 +11,7 @@ const props = defineProps<{
   options: OuiSegmentedOption<K>[]
   className?: string
   placeholder?: string
-  disabled?: boolean
+   disabled?: boolean
   error?: boolean
   size?: 'sm' | 'md' | 'lg'
 }>()
@@ -30,10 +30,8 @@ onMounted(() => {
 const computedClass = computed(() => [
   'oui-segmented',
   props.className,
-  {
-    // _disabled: props.disabled,
-    _error: props.error,
-    // _focused: isFocused.value,
+  { 
+    _error: props.error, 
     [`_size-${props.size || 'md'}`]: true,
   },
 ])
@@ -94,14 +92,18 @@ function handleKeydown(event: KeyboardEvent) {
     modelValue.value = props.options[newIndex].name
   }
 }
+
+const disabledConform = computed(() => {
+  return props.disabled ? true : undefined
+})
 </script>
 
 <template>
-  <div ref="containerRef" class="oui-input oui-input-container" :class="computedClass" tabindex="0" role="radiogroup" :aria-disabled="disabled" :disabled="disabled" @keydown="handleKeydown">
+  <div ref="containerRef" class="oui-input oui-input-container" :class="computedClass" tabindex="0" role="radiogroup" :disabled="disabledConform" @keydown="handleKeydown">
     <OuiSlidingPill v-model="modelValue" :options="options" class="oui-segmented-container" pill-class="oui-segmented-pill">
       <template #default="{ options: slidingOptions, updateModelValue }">
         <template v-for="option in slidingOptions" :key="option.name">
-          <button :class="{ _active: modelValue === option.name }" :disabled="disabled" role="radio" :aria-checked="modelValue === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
+          <button :class="{ _active: modelValue === option.name }" :disabled="disabledConform" role="radio" :aria-checked="modelValue === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
             <slot :name="`option-${option.name}`" v-bind="{ option }">
               <template v-if="option.icon">
                 <component :is="option.icon" v-if="typeof option.icon !== 'string'" />

@@ -70,4 +70,17 @@
       color: white;
     }
   }
+
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: var(--t3-bg);
+
+    > * {
+      opacity: 0.6;
+    }
+
+    button {
+      cursor: not-allowed;
+    }
+  }
 }
