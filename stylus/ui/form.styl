@@ -312,7 +312,7 @@ oui-checkbox() {
   width: control-boolean-height;
 
   &:after {
-    opacity: var(--o, 0);
+    opacity: var(--_checkbox-opacity, 0);
     width: rex(5);
     height: rex(9);
     border: rex(2) solid var(--active-inner);
@@ -320,17 +320,17 @@ oui-checkbox() {
     border-left: 0;
     left: rex(5);
     top: rex(2);
-    transform: rotate(var(--r, 20deg));
+    transform: rotate(var(--_checkbox-rotation, 20deg));
   }
 
   &:checked {
-    --o: 1;
-    --r: 43deg;
+    --_checkbox-opacity: 1;
+    --_checkbox-rotation: 43deg;
   }
 
   &._checkbox_intermediate {
-    --o: 1;
-    --r: 90deg;
+    --_checkbox-opacity: 1;
+    --_checkbox-rotation: 90deg;
 
     &:after {
       top: 1;
@@ -353,13 +353,13 @@ oui-switch() {
     border-radius: 50%;
     width: control-boolean-height - control-boolean-margin * 2 - px(2);
     height: control-boolean-height - control-boolean-margin * 2 - px(2); // height -margin - border
-    background: var(--ab, var(--border));
-    transform: translateX(var(--x, 0));
+    background: var(--_checkbox-switch-active-bg, var(--border));
+    transform: translateX(var(--_checkbox-switch-x, 0));
   }
 
   &:checked {
-    --ab: var(--active-inner);
-    --x: control-boolean-width - control-boolean-height - control-boolean-margin;
+    --_checkbox-switch-active-bg: var(--active-inner);
+    --_checkbox-switch-x: control-boolean-width - control-boolean-height - control-boolean-margin;
   }
 
   &:disabled {
