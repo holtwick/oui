@@ -11,7 +11,7 @@ const props = defineProps<{
   sliderClass?: string
 }>()
 
-const modelValue = defineModel<K>({ required: false })
+const model = defineModel<K>({ required: false })
 
 const containerRef = ref<HTMLElement>()
 const activeItemRef = ref<HTMLElement>()
@@ -45,7 +45,7 @@ async function updateActiveItemRef(animated = false) {
   updateActive()
   updateContainer()
 
-  activeOption.value = props.options.find(option => option.name === modelValue.value)
+  activeOption.value = props.options.find(option => option.name === model.value)
   await nextTick()
   shouldAnimate.value = animated
 
@@ -55,7 +55,7 @@ async function updateActiveItemRef(animated = false) {
   }
 }
 
-watch(modelValue, async () => {
+watch(model, async () => {
   isUserInteraction.value = true
   await updateActiveItemRef(true)
   await nextTick()
@@ -78,9 +78,9 @@ defineExpose({
     <div :class="computedSliderClass" :style="sliderStyle" />
     <slot
       :options="options"
-      :model-value="modelValue"
+      :model-value="model"
       :active-option="activeOption"
-      :update-model-value="(value: K) => modelValue = value"
+      :update-model-value="(value: K) => model = value"
     />
   </div>
 </template>

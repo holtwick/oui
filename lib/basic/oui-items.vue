@@ -13,38 +13,32 @@
  * Used in: oui-completion, oui-tag-input, oui-combobox
  */
 
-import type { LoggerInterface } from 'zeed'
 import type { OuiMenuItem } from '../float/_types'
 import { ref, watch } from 'vue'
-import { Logger } from 'zeed'
 
 import './oui-items.styl'
 
 const props = defineProps<{
   items: any[]
-  modelValue?: number
 }>()
 
-const emit = defineEmits(['action', 'update:modelValue'])
+const emit = defineEmits(['action'])
 
-const log: LoggerInterface = Logger('oui-items')
+const model = defineModel<number>({ required: true })
 
 const container = ref<HTMLElement>()
 
-watch(() => props.modelValue, scrollToSelected, { immediate: true })
+watch(model, scrollToSelected, { immediate: true })
 
 function doSelect(index: number) {
-  log('doSelect', index)
-  emit('update:modelValue', index)
+  model.value = index
 }
 
 function doAction(item: OuiMenuItem, index: number) {
-  log('doAction', index, item)
   emit('action', item, index)
 }
 
-function scrollToSelected(selected: number = props.modelValue ?? 0) {
-  log('scrollToSelected', selected)
+function scrollToSelected(selected: number = model.value ?? 0) {
   const divItem = container.value?.querySelectorAll('.oui-items-item')[selected]
   if (divItem) {
     divItem.scrollIntoView({
@@ -59,19 +53,11 @@ function scrollToSelected(selected: number = props.modelValue ?? 0) {
 <template>
   <div ref="container" class="oui-items">
     <div
-      v-for="(item, index) in items"
-      :key="item.id"
-      :data-id="item.id"
-      :data-index="index"
-      class="oui-items-item"
-      :class="{
-        '-selected': modelValue != null && modelValue === index,
-        '-active': modelValue != null && modelValue === index,
+      v-for="(item, index) in items" :key="item.id" :data-id="item.id" :data-index="index" class="oui-items-item" :class="{
+        '-selected': model != null && model === index,
+        '-active': model != null && model === index,
         [item.class]: item.class,
-      }"
-      @pointerdown="doSelect(index)"
-      @click="doAction(item, index)"
-      @keydown.enter="doAction(item, index)"
+      }" @pointerdown="doSelect(index)" @click="doAction(item, index)" @keydown.enter="doAction(item, index)"
     >
       <slot :item="item" :index="index">
         {{ index }}. {{ item }}

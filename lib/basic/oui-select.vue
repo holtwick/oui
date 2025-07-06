@@ -4,8 +4,8 @@ import { computed } from 'vue'
 import { isPrimitive } from 'zeed'
 import OuiButton from './oui-button.vue'
 import OuiFormItem from './oui-form-item.vue'
-
 import OuiSegmented from './oui-segmented.vue'
+
 import './oui-form.styl'
 
 const props = withDefaults(defineProps<{
@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<{
 
 })
 
-const model = defineModel<string>({ required: true }) // todo: only string for now
+const model = defineModel<string | undefined>({ required: true }) // todo: only string for now
 
 const allOptions = computed(() => (props.options ?? []).map(v => isPrimitive(v) ? [v, v] : v))
 
@@ -40,7 +40,7 @@ const segmentedOptions = computed<OuiSegmentedOption[]>(() => {
     <template v-else-if="$slots.button || button != null">
       <div class="oui-select-container">
         <slot name="button">
-          <OuiButton :title="Object.fromEntries(allOptions)?.[model] || button" dropdown />
+          <OuiButton :title="Object.fromEntries(allOptions)?.[model ?? -1] || button" dropdown />
         </slot>
         <select v-bind="$attrs" :id="id" v-model="model" class="oui-select-invisible">
           <slot>

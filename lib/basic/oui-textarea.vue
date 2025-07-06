@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { useTextareaAutosize } from '@vueuse/core'
-import OuiFormItem from './oui-form-item.vue'
+import { ref } from 'vue'
 
+import OuiFormItem from './oui-form-item.vue'
 import './oui-form.styl'
 
 defineOptions({
@@ -20,7 +21,7 @@ const props = withDefaults(defineProps<{
 
 const model = defineModel<string | undefined>({ required: true })
 
-const { textarea } = props.autosize === true ? useTextareaAutosize({ input: model as any }) : {}
+const { textarea } = props.autosize === true ? useTextareaAutosize({ input: model as any }) : { textarea: ref<HTMLTextAreaElement | null>(null) }
 </script>
 
 <template>

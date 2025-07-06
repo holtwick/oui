@@ -9,7 +9,6 @@ import './oui-separator.styl'
 
 const props = withDefaults(defineProps<{
   side: 'top' | 'left' | 'right' | 'bottom'
-  modelValue: number
   minSize: number
   maxSize: number
   absolute?: boolean
@@ -19,9 +18,9 @@ const props = withDefaults(defineProps<{
   absolute: false,
 })
 
-const emit = defineEmits(['update:modelValue'])
+const model = defineModel<number>({ required: true })
 
-const modelSize = props.name ? useLocalStorage(`oui.separator.${props.name}`, props.modelValue) : ref(props.modelValue)
+const modelSize = props.name ? useLocalStorage(`oui.separator.${props.name}`, model.value) : ref(model.value)
 // const modelSize = defineModel<number>({ required: true })
 
 const _active = ref(false)
@@ -39,7 +38,7 @@ function updateStyle() {
 
 function setSize(value: number) {
   modelSize.value = Math.max(props.minSize, Math.min(props.maxSize, value))
-  emit('update:modelValue', modelSize.value)
+  model.value = modelSize.value
   updateStyle()
 }
 

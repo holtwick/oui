@@ -49,3 +49,22 @@ export interface OuiDraggableEvent {
   // pos: OuiDraggablePosition
   // origin: OuiDraggablePosition
 }
+
+export interface OuiSelectItem {
+  id: string | number
+
+  /** Title to be presented */
+  title: string
+
+  /** Text to be considered in search */
+  search?: string
+
+  /** Perform this action on selection */
+  action?: (title: string) => void
+
+  /** Is not automatically selected, if other possible selections are available */
+  skipSelection?: boolean
+
+  /** HTML/CSS class of item */
+  class?: string
+}

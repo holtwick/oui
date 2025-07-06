@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { LoggerInterface } from 'zeed'
-import { computed, reactive } from 'vue'
+import { reactive } from 'vue'
 import { dayFromToday, Logger, uuid } from 'zeed'
 import { OuiCombobox } from '@/lib'
 
@@ -52,49 +52,6 @@ const values = reactive<any>({
   items,
 })
 
-// function doAction(ev: any) {
-//   alert(ev)
-// }
-
-function doMoveSelection(delta: number) {
-  values.selected = Math.max(
-    0,
-    Math.min(items.length - 1, values.selected + delta),
-  )
-  // doSelect(false)
-  // nextTick(() => input.value.select())
-}
-
-// Completion
-
-const filteredItems = computed<any[]>(() => {
-  const value = values.filter.trim()
-  if (!value)
-    return items
-  log('calc candidates', value)
-  const lvalue = value.toLowerCase()
-  let exactMatch = false
-  // let currentTags = props.modelValue || []
-  // @ts-expect-error todo
-  const items2: Tags[] = items.filter((item) => {
-    // if (!currentTags.includes(item.id)) {
-    if (value) {
-      const title = item.title.toString().toLowerCase()
-      if (item.title === lvalue)
-        exactMatch = true
-
-      return title.includes(lvalue)
-    }
-    return true
-    // }
-    // return false
-  })
-  if (value && !exactMatch)
-    items2.push({ action: 'create', value })
-
-  return items2
-})
-
 // const items = createArray(20, (i) => {
 //   const id = uuid()
 //   return { id, title:`${i}. ${id}`}
@@ -113,12 +70,6 @@ function doAddItem(title: string) {
 
 <template>
   <div class="app-test page-prose">
-    <h1>
-      <AppLink test>
-        Test Input Completion
-      </AppLink>
-    </h1>
-
     <blockquote>
       See also: <a href="./test-ui-menu">Menu</a>,
       <a href="./test-ui-popover">Popover</a>
@@ -197,83 +148,6 @@ function doAddItem(title: string) {
 
       Raw: <code>{{ values.percent }}</code>
     </div>
-
-    <div title="Combobox - Amount and Currency">
-      <AppInputAmount
-        v-model="values.amount" v-model:currency="values.currency" currency-editable :items="[
-          { value: 1, currency: 'EUR' },
-          { value: 2, currency: 'EUR' },
-          { value: 3, currency: 'USD' },
-        ]"
-      />
-
-      Raw: <code>{{ values.amount }} {{ values.currency }}</code>
-    </div>
-
-    <div title="Tags">
-      <TwTag-input v-model="values.tags" :items="values.items">
-        <template #item="{ item }">
-          {{ item.title }}
-        </template>
-      </TwTag-input>
-    </div>
-
-    <!-- <div v-if="0" title="Items">
-      <div>
-        <TwButton @click="doMoveSelection(-1)">
-          Up
-        </TwButton>
-        <TwButton @click="doMoveSelection(+1)">
-          Down
-        </TwButton>
-        {{ values.selected }}
-      </div>
-      <TwItems
-        v-model="values.selected"
-        :items="values.items"
-        @click="doAction"
-      >
-        <template #header>
-          HEADER
-        </template>
-        <template #default="{ item }">
-          {{ item.title }}
-        </template>
-        <template #footer>
-          FOOTER
-        </template>
-      </TwItems>
-    </div> -->
-
-    <!-- <template v-if="0">
-      <div v-if="0" title="Calendar">
-        <TwCalendar v-model="values.calendar" />
-      </div>
-
-      <div title="Day">
-        <TwDay v-model="values.day" />
-      </div>
-
-      <div title="Completion">
-        <OuiCompletion
-          v-model="values.combobox"
-          :min-size="120"
-          :items="values.items"
-          class="tw-tag-input"
-          placeholder="[Placeholder]"
-        >
-          <template #before>
-            [Before]
-          </template>
-          <template #after>
-            [After]
-          </template>
-          <template #item="{ item }">
-            [Item]{{ item.title }}
-          </template>
-        </OuiCompletion>
-      </div>
-    </template> -->
 
     <div title="Debug">
       <div style="height: 150vh; background: #eee">

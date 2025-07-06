@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { dayFromToday, getTimestamp } from 'zeed'
-import { OuiButton, OuiDate, OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
-import OuiCheckbox from './oui-checkbox.vue'
-import OuiInputColor from './oui-input-color.vue'
+import { OuiButton, OuiCheckbox, OuiCombobox, OuiDate, OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputColor, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 
 const state = reactive({
   value1: '',
@@ -31,6 +29,9 @@ const state = reactive({
     <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text" />
     <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text (autosize)" autosize />
     <OuiPassword v-model="state.password" :disabled="state.disabled" title="Password" />
+    <OuiCombobox v-model="state.select" :disabled="state.disabled" title="Combobox" :items="['One', 'Two', 'Three']" clearable />
+    <OuiCombobox v-model="state.select" :disabled="state.disabled" title="Combobox" :items="['One', 'Two', 'Three']" />
+    <OuiSelect v-model="state.select" segmented :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']" />
     <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']" />
     <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']">
       <template #button>

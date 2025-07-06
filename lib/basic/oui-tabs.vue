@@ -9,21 +9,21 @@ const props = defineProps<{
   className?: string
 }>()
 
-const modelValue = defineModel<K>({ required: false })
+const model = defineModel<K>({ required: false })
 
-const name = computed<string>(() => modelValue.value ?? props.tabs?.[0]?.name ?? 'default')
+const name = computed<string>(() => model.value ?? props.tabs?.[0]?.name ?? 'default')
 </script>
 
 <template>
   <div class="oui-tabs">
     <OuiSlider
-      v-model="modelValue"
+      v-model="model"
       :options="tabs"
       class="oui-tabs-nav _nav"
     >
       <template #default="{ options, updateModelValue }">
         <template v-for="tab in options" :key="tab.name">
-          <button :class="{ _active: modelValue === tab.name }" @click="updateModelValue(tab.name)">
+          <button :class="{ _active: model === tab.name }" @click="updateModelValue(tab.name)">
             <slot :name="`tab-${tab.name}`" v-bind="{ tab }">
               <template v-if="tab.icon">
                 <component :is="tab.icon" />
