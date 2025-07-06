@@ -1,0 +1,103 @@
+@require "../../stylus/index.styl";
+
+.oui-combobox-popover-content {
+  use: scroll;
+  margin-y: 4;
+  padding-x: 8;
+  padding-y: 4;
+
+  .oui-items {
+    overflow: initial !important;
+    overflow-x: initial !important;
+    overflow-y: initial !important;
+  }
+}
+
+.oui-combobox {
+  use: stack-x;
+  oui-input-default();
+  width: 20ch;
+  display: inline-flex;
+  position: relative;
+
+  svg {
+    size: 0.8em;
+  }
+
+  &:hover &-after {
+    color: var(--s2-fg);
+  }
+
+  &-after {
+    use: center;
+    color: transparent;
+    padding-x: 8;
+
+    &:hover {
+      color: var(--p1-fg) !important;
+    }
+  }
+
+  &-clearable {
+    use: center;
+    color: var(--s2-fg);
+    padding-x: 8;
+
+    &:hover {
+      color: inherit !important;
+    }
+  }
+
+  &-after-button {
+    border-left: var(--input-border);
+    use: center;
+    color: var(--s2-fg);
+    padding-x: 8;
+
+    &:hover {
+      color: var(--p1-fg) !important;
+    }
+  }
+
+  &-select-icon {
+    oui-select-icon();
+    // background-color: transparent;
+  }
+
+  &-clear-icon {
+    oui-select-icon();
+    // background-color: transparent;
+  }
+
+  &-item-add {
+    font-weight: 600;
+  }
+
+  &-item-preview {
+    // color: var(--s2-fg);
+    font-style: italic;
+    // font-weight: 600;
+  }
+
+  &-preview {
+    position: absolute;
+    color: #eee;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  &-input {
+    use: grow;
+    // min-width: auto;
+    // max-width: auto;
+    width: 1px;
+    background: transparent;
+    height: var(--input-height-inner);
+
+    &[disabled] {
+      opacity: 0.6;
+      cursor: unquote("not-allowed");
+    }
+  }
+}
