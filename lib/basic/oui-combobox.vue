@@ -178,7 +178,7 @@ function updateInputValue() {
   if (props.formatValue)
     inputValue.value = props.formatValue(model.value) ?? ''
   else
-    inputValue.value = (props?.items as any).find((item: OuiSelectItem) => item.id === model.value)?.title ?? ''
+    inputValue.value = sourceItems.value.find((item: OuiSelectItem) => item.id === model.value)?.title ?? ''
 }
 
 /** If model value changes update the represented value */
