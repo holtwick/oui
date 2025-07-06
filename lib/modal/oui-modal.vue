@@ -5,9 +5,9 @@ import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useDispose } from 'zeed'
 import { OuiClose } from '../basic'
 import OuiDraggable from '../basic/oui-draggable.vue'
-import { onEnterFree } from './focus'
-
+import { isEnterPressed, onEnterFree } from './focus'
 import { vFocustrap } from './oui-modal.focustrap'
+
 import './oui-modal.styl'
 
 const props = withDefaults(defineProps<{
@@ -158,7 +158,7 @@ async function checkClose(e: OuiDraggableEvent) {
       >
         <div class="_modal_overlay" aria-label="Close" @click="doCancel" />
         <OuiDraggable v-focustrap class="_modal_container" only-touch :style="dragY > 0 ? { transform: `translateY(${dragY}px)` } : undefined" @move="e => dragY = -e.moveY" @move-end="checkClose">
-          <div tabindex="0" class="_focus_fake" style="outline: none; position: absolute;" />
+          <div v-if="isEnterPressed" tabindex="0" class="_focus_fake" style="outline: none; position: absolute;" />
           <button v-if="close" tooltip="Close" class="oui-modal-close _modal_close" @click="doCancel">
             <slot name="close">
               <OuiClose />

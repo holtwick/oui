@@ -1,8 +1,8 @@
 import type { DisposerFunction } from 'zeed'
+import { ref } from 'vue'
 import { arrayRemoveElement } from 'zeed'
 
-let isEnterPressed = false
-
+export const isEnterPressed = ref(false)
 const hooks: (() => void)[] = []
 
 /**
@@ -11,7 +11,7 @@ const hooks: (() => void)[] = []
  * If enter is not pressed, the function will be called when enter is released.
  */
 export function onEnterFree(onEnter: () => void, onFail: () => void): DisposerFunction | undefined {
-  if (isEnterPressed) {
+  if (isEnterPressed.value) {
     hooks.push(onEnter)
     onFail()
     return () => arrayRemoveElement(hooks, onEnter)
@@ -21,13 +21,13 @@ export function onEnterFree(onEnter: () => void, onFail: () => void): DisposerFu
 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
-    isEnterPressed = true
+    isEnterPressed.value = true
   }
 })
 
 window.addEventListener('keyup', (e) => {
   if (e.key === 'Enter') {
-    isEnterPressed = false
+    isEnterPressed.value = false
   }
   while (hooks.length > 0) {
     const hook = hooks.shift()
