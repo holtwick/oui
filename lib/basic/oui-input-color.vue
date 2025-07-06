@@ -120,7 +120,4 @@ watch(tempValue, (value) => {
       </div>
     </template>
   </OuiInput>
-  <div>
-    {{ counter }} {{ model }} {{ tempValue }} {{ normalizedColor }}
-  </div>
 </template>
