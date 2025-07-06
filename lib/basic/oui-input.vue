@@ -22,7 +22,8 @@ const props = withDefaults(defineProps<{
   disabled?: boolean
 }>(), {
   type: 'text',
-  lazyDelay: 1000,
+  lazy: false,
+  lazyDelay: 5000,
 })
 
 const emit = defineEmits<{
@@ -31,7 +32,7 @@ const emit = defineEmits<{
 
 const model = defineModel<string | undefined>({ required: true })
 
-const value = ref('')
+const tempValue = ref('')
 
 let timeout: any
 
@@ -41,7 +42,7 @@ function stopTimeout() {
 
 onBeforeUnmount(stopTimeout)
 
-watch(value, (v) => {
+watch(tempValue, (v) => {
   if (!props.lazy) {
     model.value = v
   }
@@ -51,20 +52,20 @@ watch(value, (v) => {
   }
 })
 
-watch(() => model.value, v => value.value = v ?? '', { immediate: true })
+watch(() => model.value, v => tempValue.value = v ?? '', { immediate: true })
 
 function lazyUpdate() {
   if (props.lazy) {
     stopTimeout()
-    model.value = value.value
+    model.value = tempValue.value
   }
 }
 
 function doUpdate(event: KeyboardEvent) {
   if (event.key === 'Escape') {
-    value.value = model.value ?? ''
+    tempValue.value = model.value ?? ''
   }
-  emit('update', value.value)
+  emit('update', tempValue.value)
   if (event.key === 'Enter') {
     lazyUpdate()
   }
@@ -76,12 +77,12 @@ function doUpdate(event: KeyboardEvent) {
     <template v-if="$slots.start || $slots.end">
       <div class="oui-input oui-input-container" :disabled="disabled ? true : undefined">
         <slot name="start" />
-        <input :id="id" v-model="value" :type="type" v-bind="$attrs" :disabled="disabled ? true : undefined" @keypress="doUpdate" @blur="lazyUpdate">
+        <input :id="id" v-model="tempValue" :type="type" v-bind="$attrs" :disabled="disabled ? true : undefined" @keypress="doUpdate" @blur="lazyUpdate">
         <slot name="end" />
       </div>
     </template>
     <template v-else>
-      <input :id="id" v-model="value" :type="type" class="oui-input oui-input-string" :disabled="disabled ? true : undefined" v-bind="$attrs" @keypress="doUpdate" @blur="lazyUpdate">
+      <input :id="id" v-model="tempValue" :type="type" class="oui-input oui-input-string" :disabled="disabled ? true : undefined" v-bind="$attrs" @keypress="doUpdate" @blur="lazyUpdate">
     </template>
   </OuiFormItem>
 </template>

@@ -14,6 +14,8 @@ const state = reactive({
   date: dayFromToday(),
   datetime: getTimestamp(),
   disabled: false,
+  lazy: false,
+  lazyDelay: 5000,
 })
 </script>
 
@@ -22,15 +24,16 @@ const state = reactive({
     <OuiFormItem :disabled="state.disabled" title="TITLE" description="DESCRIPTION" required>
       BODY
     </OuiFormItem>
-    <OuiInputColor v-model="state.color" :disabled="state.disabled" title="Color" />
-    <OuiInput v-model="state.value1" :disabled="state.disabled" />
-    <OuiInput v-model="state.value2" :disabled="state.disabled" title="Value with label" description="Some description" required />
-    <OuiInputNumber v-model="state.number" :disabled="state.disabled" title="Number" />
-    <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text" />
-    <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text (autosize)" autosize />
-    <OuiPassword v-model="state.password" :disabled="state.disabled" title="Password" />
-    <OuiCombobox v-model="state.select" :disabled="state.disabled" title="Combobox" :items="['One', 'Two', 'Three']" clearable />
-    <OuiCombobox v-model="state.select" :disabled="state.disabled" title="Combobox" :items="['One', 'Two', 'Three']" />
+    <OuiInputColor v-model="state.color" :disabled="state.disabled" title="Color" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiInputColor v-model="state.color" :disabled="state.disabled" title="Color (echo)" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiInput v-model="state.value1" :disabled="state.disabled" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiInput v-model="state.value2" :disabled="state.disabled" title="Value with label" description="Some description" required :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiInputNumber v-model="state.number" :disabled="state.disabled" title="Number" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiTextarea v-model="state.text" :disabled="state.disabled" title="Text (autosize)" autosize :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiPassword v-model="state.password" :disabled="state.disabled" title="Password" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiCombobox v-model="state.select" :disabled="state.disabled" title="Combobox" :items="['One', 'Two', 'Three']" clearable :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiCombobox v-model="state.select" :disabled="state.disabled" title="Combobox" :items="['One', 'Two', 'Three']" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
     <OuiSelect v-model="state.select" segmented :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']" />
     <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']" />
     <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="['One', 'Two', 'Three']">
@@ -41,10 +44,12 @@ const state = reactive({
       </template>
     </OuiSelect>
     <OuiSelect v-model="state.select" :disabled="state.disabled" title="Select" :options="[[1, 'One'], [2, 'Two'], [3, 'Three']]" button="Select" />
-    <OuiDate v-model="state.date" :disabled="state.disabled" title="Date" />
-    <OuiDatetime v-model="state.datetime" :disabled="state.disabled" title="Date and Time" />
+    <OuiDate v-model="state.date" :disabled="state.disabled" title="Date" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
+    <OuiDatetime v-model="state.datetime" :disabled="state.disabled" title="Date and Time" :lazy="state.lazy" :lazy-delay="state.lazyDelay" />
   </div>
   <OuiDemo :state="state">
-    <OuiCheckbox v-model="state.disabled" title="Disabled" />
+    <OuiCheckbox v-model="state.disabled" switch title="Disabled" />
+    <OuiCheckbox v-model="state.lazy" switch title="Lazy" />
+    <OuiInputNumber v-model="state.lazyDelay" title="Lazy Delay (ms)" />
   </OuiDemo>
 </template>
