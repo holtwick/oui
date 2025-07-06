@@ -17,9 +17,9 @@ const props = defineProps<{
 
 const log: LoggerInterface = Logger('oui-input-color')
 
-const model = defineModel({ required: true, default: '' })
+const model = defineModel<string | undefined>({ required: true, default: '' })
 const colorInput = ref()
-const tempValue = ref<string>(model.value)
+const tempValue = ref<string>(model.value ?? '')
 const colorTestElement = ref<HTMLElement>()
 
 function rgbToHex(rgb: string): string {
@@ -42,9 +42,9 @@ const normalizedColor = computed(() => {
   return parsed
 })
 
-function parseColor(colorString: string): string | null {
+function parseColor(colorString: string): string | undefined {
   if (!colorString?.trim())
-    return null
+    return
 
   // Create a temporary element if it doesn't exist
   if (!colorTestElement.value) {
@@ -69,65 +69,25 @@ function parseColor(colorString: string): string | null {
 
     // If the color was invalid, it will be empty or transparent
     if (!computedColor || computedColor === 'rgba(0, 0, 0, 0)' || computedColor === 'rgba(0, 0, 0, 0.5)' || computedColor === 'transparent') {
-      return null
+      return
     }
 
     return rgbToHex(computedColor)
   }
   catch (error) {
     log('Error parsing color:', error)
-    return null
   }
 }
 
-function updateModelValue() {
-  if (props.lazy)
-    return // Don't update immediately in lazy mode
-
-  // Validate the color before emitting
-  const trimmed = tempValue.value?.trim()
-  if (!trimmed) {
-    model.value = ''
-    return
-  }
-
-  const parsed = parseColor(trimmed)
-  if (parsed) {
-    model.value = trimmed
-  }
-  else {
-    log('Invalid color format:', trimmed)
-  }
-}
-
-function onInput() {
-  updateModelValue()
-}
-
-function doBlur() {
-  // Normalize color to hex format on blur
-  const trimmed = tempValue.value?.trim()
-  if (!trimmed) {
-    model.value = ''
-    return
-  }
-
-  const parsed = parseColor(trimmed)
-  if (parsed) {
-    tempValue.value = parsed
-    model.value = parsed
-  }
-  else {
-    log('Invalid color format:', trimmed)
-    // Reset to previous valid value
-    tempValue.value = model.value = ''
-  }
+function finalizeModelValue() {
+  model.value = parseColor(tempValue.value)
+  tempValue.value = model.value ?? ''
 }
 
 function onColorPickerChange(event: Event) {
   const target = event.target as HTMLInputElement
   tempValue.value = target.value
-  updateModelValue()
+  finalizeModelValue()
 }
 
 // Cleanup the test element when component is unmounted
@@ -137,17 +97,30 @@ onUnmounted(() => {
   }
 })
 
+const focus = ref(false)
+
 watch(model, (value) => {
+  if (focus.value)
+    return
   tempValue.value = value ?? ''
+})
+
+watch(tempValue, (value) => {
+  if (props.lazy)
+    return
+  model.value = parseColor(value)
 })
 </script>
 
 <template>
-  <OuiInput v-model="tempValue" :lazy="props.lazy" :disabled="disabled" @blur="doBlur" @input="onInput">
+  <OuiInput v-model="tempValue" :lazy="false" :disabled="disabled" class="oui-input-color-container" @keypress.enter="finalizeModelValue" @blur="focus = false; finalizeModelValue()" @focus="focus = true">
     <template #start>
       <div class="oui-input-color" :style="{ '--color-value': normalizedColor }">
         <input ref="colorInput" :value="normalizedColor" type="color" tabindex="-1" @input="onColorPickerChange">
       </div>
     </template>
   </OuiInput>
+  <div>
+    {{ counter }} {{ model }} {{ tempValue }} {{ normalizedColor }}
+  </div>
 </template>

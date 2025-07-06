@@ -5,9 +5,7 @@ import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
 
-defineOptions({
-  inheritAttrs: false,
-})
+defineOptions({ inheritAttrs: false })
 
 // type InputTypeHTMLAttribute = 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | (string & {});
 
@@ -22,7 +20,7 @@ const props = withDefaults(defineProps<{
   disabled?: boolean
 }>(), {
   type: 'text',
-  lazyDelay: 1000,
+  lazyDelay: 5000,
 })
 
 const emit = defineEmits<{
