@@ -16,14 +16,14 @@ const props = defineProps<{
   size?: 'md' | 'lg'
 }>()
 
-const modelValue = defineModel<K>({ required: false })
+const model = defineModel<K>({ required: false })
 
 const containerRef = ref<HTMLElement>()
 
 // Ensure we have a default value if none is set
 onMounted(() => {
-  if (!modelValue.value && props.options.length > 0) {
-    modelValue.value = props.options[0].name
+  if (!model.value && props.options.length > 0) {
+    model.value = props.options[0].name
   }
 })
 
@@ -37,7 +37,7 @@ const computedClass = computed(() => [
 ])
 
 const activeOption = computed(() =>
-  props.options.find(option => option.name === modelValue.value),
+  props.options.find(option => option.name === model.value),
 )
 
 const displayValue = computed(() =>
@@ -48,7 +48,7 @@ function handleKeydown(event: KeyboardEvent) {
   if (props.disabled)
     return
 
-  const currentIndex = modelValue.value ? props.options.findIndex(option => option.name === modelValue.value) : -1
+  const currentIndex = model.value ? props.options.findIndex(option => option.name === model.value) : -1
   let newIndex = currentIndex
 
   switch (event.key) {
@@ -89,7 +89,7 @@ function handleKeydown(event: KeyboardEvent) {
   }
 
   if (newIndex !== currentIndex && newIndex >= 0 && newIndex < props.options.length) {
-    modelValue.value = props.options[newIndex].name
+    model.value = props.options[newIndex].name
   }
 }
 
@@ -100,10 +100,10 @@ const disabledConform = computed(() => {
 
 <template>
   <div ref="containerRef" class="oui-input oui-segmented" :class="computedClass" tabindex="0" role="radiogroup" :disabled="disabledConform" @keydown="handleKeydown">
-    <OuiSlider v-model="modelValue" :options="options" class="oui-segmented-container" slider-class="oui-segmented-slider">
+    <OuiSlider v-model="model" :options="options" class="oui-segmented-container" slider-class="oui-segmented-slider">
       <template #default="{ options: slidingOptions, updateModelValue }">
         <template v-for="option in slidingOptions" :key="option.name">
-          <button :class="{ _active: modelValue === option.name }" :disabled="disabledConform" role="radio" :aria-checked="modelValue === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
+          <button :class="{ _active: model === option.name }" :disabled="disabledConform" role="radio" :aria-checked="model === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
             <slot :name="`option-${option.name}`" v-bind="{ option }">
               <template v-if="option.icon">
                 <component :is="option.icon" v-if="typeof option.icon !== 'string'" />

@@ -1,24 +1,28 @@
 <script lang="ts" setup>
 import type { LoggerInterface } from 'zeed'
+import type { OuiSelectItem } from './_types'
 import { computed, ref, watch } from 'vue'
 import { isNumber, isString, Logger, promisify, uuid } from 'zeed'
 import OuiFloat from '../float/oui-float.vue'
 import { t } from './i18n'
 import OuiClose from './oui-close.vue'
+import OuiFormItem from './oui-form-item.vue'
 import OuiItems from './oui-items.vue'
 
 import './oui-combobox.styl'
+
+interface OuiSelectFilterItem extends OuiSelectItem { }
 
 const props = withDefaults(
   defineProps<{
     /** HTML `id` attribute of input element */
     id?: string
+    title?: string
+    description?: string
+    required?: boolean
 
     /** Suggestions */
-    items: any[] // (string | number | Item | any)[]
-
-    /** Simple value, usually the value of `id` */
-    modelValue?: any // string | number | any
+    items: (OuiSelectFilterItem | string | number)[] // (string | number | Item | any)[]
 
     /** HTML input field placeholder */
     placeholder?: string
@@ -31,8 +35,6 @@ const props = withDefaults(
     clearable?: boolean
 
     disabled?: boolean
-
-    clearOnSelection?: boolean
 
     //
 
@@ -58,39 +60,19 @@ const props = withDefaults(
     selectIcon: false,
     // openOnFocus: true,
     clearable: false,
-    clearOnSelection: false,
     addItemFooter: false,
     disabled: false,
   },
 )
 
 const emit = defineEmits([
-  'update:modelValue',
   'change',
   'deleteLast',
 ])
+
 const log: LoggerInterface = Logger('oui-combobox')
 
-interface Item {
-  id: string | number
-
-  /** Title to be presented */
-  title: string
-
-  /** Text to be considered in search */
-  search?: string
-
-  /** Perform this action on selection */
-  action?: (title: string) => void
-
-  /** Is not automatically selected, if other possible selections are available */
-  skipSelection?: boolean
-
-  /** HTML/CSS class of item */
-  class?: string
-}
-
-interface FilterItem extends Item { }
+const model = defineModel({ required: true })
 
 const target = ref()
 const input = ref()
@@ -100,11 +82,24 @@ const showPopover = ref(false)
 const inputValue = ref<string>('')
 const applyFilter = ref(false)
 
+const sourceItems = computed<OuiSelectItem[]>(() => {
+  return Object.values(props.items ?? []).map((item) => {
+    if (isString(item) || isNumber(item)) {
+      const title = props.formatValue?.(item as any) ?? String(item)
+      return {
+        id: String(item),
+        title,
+      }
+    }
+    return item
+  })
+})
+
 // todo: sort weight like: the smaller indexOf, the better
 // todo: use fuzzy search?
 // todo: highlight matches?
-const filteredItems = computed<FilterItem[]>(() => {
-  let items = Object.values(props.items ?? []).map((item) => {
+const filteredItems = computed<OuiSelectFilterItem[]>(() => {
+  let items = Object.values(sourceItems.value).map((item) => {
     if (isString(item) || isNumber(item)) {
       const title = props.formatValue?.(item as any) ?? ''
       return {
@@ -142,7 +137,7 @@ const filteredItems = computed<FilterItem[]>(() => {
 
     if (value && !exactMatch) {
       if (props.addItemAction) {
-        const addItem = {
+        const addItem: any = {
           action: () => {
             if (props.addItemAction) {
               promisify(props.addItemAction(value)).then(id =>
@@ -174,28 +169,28 @@ const filteredItems = computed<FilterItem[]>(() => {
     }
   }
 
-  return items as FilterItem[]
+  return items as OuiSelectFilterItem[]
 })
 
 function updateInputValue() {
-  log('did change value', props.modelValue)
+  log('did change value', model.value)
 
   if (props.formatValue)
-    inputValue.value = props.formatValue(props.modelValue) ?? ''
+    inputValue.value = props.formatValue(model.value) ?? ''
   else
-    inputValue.value = (props?.items as any).find((item: Item) => item.id === props.modelValue)?.title ?? ''
+    inputValue.value = sourceItems.value.find((item: OuiSelectItem) => item.id === model.value)?.title ?? ''
 }
 
 /** If model value changes update the represented value */
-watch(() => props.modelValue, updateInputValue, { immediate: true })
+watch(model, updateInputValue, { immediate: true })
 
 function setModelValue(value: string | number | undefined) {
   log('set modelValue', value)
   emit('change', value)
-  if (props.modelValue !== value)
-    emit('update:modelValue', value)
-  if (props.clearOnSelection === true)
-    inputValue.value = ''
+  if (model.value !== value) {
+    model.value = value
+  }
+  updateInputValue()
 }
 
 function doMove(delta: number, e?: KeyboardEvent) {
@@ -218,9 +213,14 @@ function doSelectItemByClickOnList(item: any) {
 }
 
 function doSelect(closePopover: boolean = true) {
-  log('doSelect')
+  log('doSelect', selected.value, filteredItems.value[selected.value])
   const item = filteredItems.value[selected.value]
-  if (item.action)
+  if (!item) {
+    log('doSelect: no item selected', selected.value, filteredItems.value)
+    setModelValue(undefined)
+    return
+  }
+  if (item?.action)
     item.action(inputValue.value)
   else
     setModelValue(item.id)
@@ -276,77 +276,84 @@ function doFocus() {
   showPopover.value = true
   input.value.select()
   queueMicrotask(() => {
-    selected.value = filteredItems.value.findIndex(item => item.id === props.modelValue)
+    selected.value = filteredItems.value.findIndex(item => item.id === model.value)
   })
 }
 </script>
 
 <template>
-  <div
-    ref="target"
-    class="oui-input-container oui-combobox"
-    :class="{ '-focus': focus }"
-    @click="input.focus()"
+  <OuiFormItem
+    :id="id"
+    :title="title"
+    :description="description"
+    :required="required"
   >
-    <slot name="before" />
-    <input
-      :id="id"
-      ref="input"
-      v-model="inputValue"
-      autocomplete="off"
-      :placeholder="placeholder"
-      class="oui-combobox-input"
-      :disabled="disabled"
-      @focus="doFocus"
-      @blur="doBlur"
-      @input="doInput"
-      @keydown.down="doMove(+1, $event)"
-      @keydown.up="doMove(-1, $event)"
-      @keydown.esc="doClear"
-      @keydown.enter="doSelect(true)"
-      @keydown.backspace="doDeleteLast"
-    >
     <div
-      v-if="clearable && (modelValue || inputValue)"
-      class="oui-combobox-clearable"
-      @click="setModelValue(undefined)"
+      ref="target"
+      class="oui-input-container oui-combobox"
+      :class="{ '-focus': focus }"
+      @click="input.focus()"
     >
-      <OuiClose />
-    </div>
-    <div v-if="selectIcon" class="oui-combobox-select-icon" />
-    <slot name="after" class="completion-after" />
-    <OuiFloat
-      v-model="showPopover"
-      :reference="target"
-      placement="bottom-start"
-      theme="dropdown"
-      :offset="4"
-      class="oui-float _dropdown combobox-dropdown"
-    >
-      <div class="oui-combobox-popover-content">
-        <slot name="header" />
-        <slot v-if="filteredItems.length <= 0" name="empty">
-          <div class="oui-items-item">
-            {{ t('ui.combobox.empty') }}
-          </div>
-        </slot>
-        <OuiItems
-          v-else
-          v-slot="{ item }"
-          v-model="selected"
-          :items="filteredItems"
-          @pointerdown="focus = false"
-          @pointerup="showPopover = false"
-          @action="doSelectItemByClickOnList"
-        >
-          <slot name="item" :item="(item as Item | FilterItem)">
-            {{ item.title }}&nbsp;
-          </slot>
-        </OuiItems>
-        <slot />
-        <slot name="footer" />
-        <div class="oui-combobox-popover-content-spacer" />
+      <slot name="before" />
+      <input
+        :id="id"
+        ref="input"
+        v-model="inputValue"
+        autocomplete="off"
+        :placeholder="placeholder"
+        class="oui-combobox-input"
+        :disabled="disabled"
+        @focus="doFocus"
+        @blur="doBlur"
+        @input="doInput"
+        @keydown.down="doMove(+1, $event)"
+        @keydown.up="doMove(-1, $event)"
+        @keydown.esc="doClear"
+        @keydown.enter="doSelect(true)"
+        @keydown.backspace="doDeleteLast"
+      >
+      <div
+        v-if="clearable && (model || inputValue)"
+        class="oui-combobox-clearable"
+        @click="setModelValue(undefined)"
+      >
+        <OuiClose />
       </div>
-    </OuiFloat>
-  </div>
+      <div v-if="selectIcon" class="oui-combobox-select-icon" />
+      <slot name="after" class="completion-after" />
+      <OuiFloat
+        v-model="showPopover"
+        :reference="target"
+        placement="bottom-start"
+        theme="dropdown"
+        :offset="4"
+        class="oui-float _dropdown combobox-dropdown"
+      >
+        <div class="oui-combobox-popover-content">
+          <slot name="header" />
+          <slot v-if="filteredItems.length <= 0" name="empty">
+            <div class="oui-items-item">
+              {{ t('ui.combobox.empty') }}
+            </div>
+          </slot>
+          <OuiItems
+            v-else
+            v-slot="{ item }"
+            v-model="selected"
+            :items="filteredItems"
+            @pointerdown="focus = false"
+            @pointerup="showPopover = false"
+            @action="doSelectItemByClickOnList"
+          >
+            <slot name="item" :item="(item as OuiSelectItem | OuiSelectFilterItem)">
+              {{ item.title }}&nbsp;
+            </slot>
+          </OuiItems>
+          <slot />
+          <slot name="footer" />
+          <div class="oui-combobox-popover-content-spacer" />
+        </div>
+      </OuiFloat>
+    </div>
+  </OuiFormItem>
 </template>
