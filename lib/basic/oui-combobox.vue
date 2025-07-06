@@ -292,6 +292,7 @@ function doFocus() {
       ref="target"
       class="oui-input-container oui-combobox"
       :class="{ '-focus': focus }"
+      v-bind="$attrs"
       @click="input.focus()"
     >
       <slot name="before" />

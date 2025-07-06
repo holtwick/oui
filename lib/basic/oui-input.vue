@@ -15,8 +15,8 @@ const props = withDefaults(defineProps<{
   title?: string
   description?: string
   required?: boolean
-  type?: InputTypeHTMLAttribute // 'text' | 'url' | 'email' | 'tel' | 'search'
   id?: string
+  type?: InputTypeHTMLAttribute // 'text' | 'url' | 'email' | 'tel' | 'search'
   lazy?: boolean
   lazyDelay?: number
   disabled?: boolean
