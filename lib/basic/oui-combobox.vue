@@ -11,7 +11,9 @@ import OuiItems from './oui-items.vue'
 
 import './oui-combobox.styl'
 
-interface OuiSelectFilterItem extends OuiSelectItem { }
+defineOptions({
+  inheritAttrs: false,
+})
 
 const props = withDefaults(
   defineProps<{
@@ -69,6 +71,8 @@ const emit = defineEmits([
   'change',
   'deleteLast',
 ])
+
+interface OuiSelectFilterItem extends OuiSelectItem { }
 
 const log: LoggerInterface = Logger('oui-combobox')
 
