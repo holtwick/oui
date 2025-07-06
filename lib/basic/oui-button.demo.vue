@@ -16,7 +16,7 @@ const state = reactive({
     <br>
     <br>
     <OuiButton :disabled="state.disabled">
-      Slot
+      Slot <b>Bold</b>
     </OuiButton>
     <br>
     <br>
