@@ -1,11 +1,15 @@
 import type { Component } from 'vue'
 import { useDispose } from 'zeed'
 import { mountComponentAsApp } from '../basic/app-helper'
+import { onEnterFree } from './focus'
 import OuiDialog from './oui-dialog.vue'
 
 /** Environment for JS dialog replacements */
 export function useDialog<T extends Component>(component?: T) {
   let cancel: any
+
+  const dispose = useDispose()
+  dispose.add(() => cancel?.())
 
   async function showDialog<T>(props: any) {
     const dialogApp = mountComponentAsApp<T>(component ?? OuiDialog, props, 400)
@@ -15,17 +19,21 @@ export function useDialog<T extends Component>(component?: T) {
     // A workaround would also be to focus a hidden input field on click
     // and then focus the right one, because switching focus fields
     // also works programmatically. It might also work with setTimeout...
-    const el = document.querySelector('._focus') as HTMLElement
-    if (el)
-      el.focus()
+
+    dispose.add(onEnterFree(() => {
+      const el = document.querySelector('._focus') as HTMLElement
+      if (el)
+        el.focus()
+    }, () => {
+      const el = document.querySelector('._focus_fake') as HTMLElement
+      if (el)
+        el.focus()
+    }))
 
     const result = dialogApp.awaitDone
 
     return result
   }
-
-  const dispose = useDispose()
-  dispose.add(() => cancel?.())
 
   // todo this is called outside of setup!
   // onBeforeUnmount(dispose)
