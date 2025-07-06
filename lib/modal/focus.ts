@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { arrayRemoveElement } from 'zeed'
 
 export const isEnterPressed = ref(false)
+
 const hooks: (() => void)[] = []
 
 /**
@@ -19,18 +20,20 @@ export function onEnterFree(onEnter: () => void, onFail: () => void): DisposerFu
   onEnter()
 }
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    isEnterPressed.value = true
-  }
-})
+if (typeof window !== 'undefined') {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      isEnterPressed.value = true
+    }
+  })
 
-window.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter') {
-    isEnterPressed.value = false
-  }
-  while (hooks.length > 0) {
-    const hook = hooks.shift()
-    hook?.()
-  }
-})
+  window.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      isEnterPressed.value = false
+    }
+    while (hooks.length > 0) {
+      const hook = hooks.shift()
+      hook?.()
+    }
+  })
+}
