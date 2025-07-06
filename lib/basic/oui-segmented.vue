@@ -2,14 +2,18 @@
 import type { OuiSegmentedOption } from './_types'
 import { computed, onMounted, ref } from 'vue'
 import { t } from '@/basic/i18n'
+import OuiFormItem from './oui-form-item.vue'
 import OuiSlider from './oui-slider.vue'
 
 import './oui-form.styl'
 import './oui-segmented.styl'
 
 const props = defineProps<{
+  title?: string
+  description?: string
+  required?: boolean
+  id?: string
   options: OuiSegmentedOption<K>[]
-  className?: string
   placeholder?: string
   disabled?: boolean
   error?: boolean
@@ -29,7 +33,6 @@ onMounted(() => {
 
 const computedClass = computed(() => [
   'oui-segmented',
-  props.className,
   {
     _error: props.error,
     [`_size-${props.size || 'md'}`]: true,
@@ -99,21 +102,23 @@ const disabledConform = computed(() => {
 </script>
 
 <template>
-  <div ref="containerRef" class="oui-input oui-segmented" :class="computedClass" tabindex="0" role="radiogroup" :disabled="disabledConform" @keydown="handleKeydown">
-    <OuiSlider v-model="model" :options="options" class="oui-segmented-container" slider-class="oui-segmented-slider">
-      <template #default="{ options: slidingOptions, updateModelValue }">
-        <template v-for="option in slidingOptions" :key="option.name">
-          <button :class="{ _active: model === option.name }" :disabled="disabledConform" role="radio" :aria-checked="model === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
-            <slot :name="`option-${option.name}`" v-bind="{ option }">
-              <template v-if="option.icon">
-                <component :is="option.icon" v-if="typeof option.icon !== 'string'" />
-                <span v-else v-text="option.icon" />
-              </template>
-              {{ option.title ?? option.name }}
-            </slot>
-          </button>
+  <OuiFormItem :id="id" :title="title" :description="description" :required="required">
+    <div ref="containerRef" class="oui-input oui-segmented" :class="computedClass" tabindex="0" role="radiogroup" :disabled="disabledConform" v-bind="$attrs" @keydown="handleKeydown">
+      <OuiSlider v-model="model" :options="options" class="oui-segmented-container" slider-class="oui-segmented-slider">
+        <template #default="{ options: slidingOptions, updateModelValue }">
+          <template v-for="option in slidingOptions" :key="option.name">
+            <button :class="{ _active: model === option.name }" :disabled="disabledConform" role="radio" :aria-checked="model === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
+              <slot :name="`option-${option.name}`" v-bind="{ option }">
+                <template v-if="option.icon">
+                  <component :is="option.icon" v-if="typeof option.icon !== 'string'" />
+                  <span v-else v-text="option.icon" />
+                </template>
+                {{ option.title ?? option.name }}
+              </slot>
+            </button>
+          </template>
         </template>
-      </template>
-    </OuiSlider>
-  </div>
+      </OuiSlider>
+    </div>
+  </OuiFormItem>
 </template>
