@@ -5,17 +5,15 @@
 
   label {
     display: block;
-
-    span {
-      color: -red-600;
-    }
   }
 
   &-title {
     display: block;
     font-size: 13;
     font-weight: 500;
-    margin-bottom: 4;
+    padding-left: 0;
+    margin-bottom: 3;
+    color: var(--s2-fg);
 
     &._disabled {
       color: var(--s2-fg);
@@ -26,10 +24,11 @@
   &-description {
     display: block;
     font-size: 13;
-    font-weight: 500;
+    font-weight: 400;
     margin-top: 4;
-    margin-bottom: 12;
+    margin-bottom: 16;
     color: var(--t3-fg);
+    padding-left: 0;
 
     &._disabled {
       cursor: not-allowed;
@@ -45,10 +44,9 @@
   }
 }
 
-.oui-input-string, .oui-select, .oui-password {
+/* .oui-input-string, .oui-select, .oui-password {
   height: fit-content;
-}
-
+} */
 .oui-select-container {
   position: relative;
   display: inline-flex;
