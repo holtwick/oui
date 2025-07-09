@@ -1,0 +1,42 @@
+@require "../../stylus/index.styl";
+
+.oui-debug {
+  position: fixed;
+  width: 1rem;
+  height: 1rem;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: rgba(255, 0, 0, 0.33);
+  overflow: hidden;
+  border: 0.5rem rgba(255, 0, 0, 0.33) solid;
+  z-index: 99999;
+  border-radius: 2rem;
+  color: transparent;
+  white-space: pre-wrap;
+  font-family: var(--font-mono, monospace);
+
+  .oui-debug-content {
+    display: none;
+    padding: 1rem;
+  }
+
+  &:hover, &:active, &._active, &:focus {
+    border-radius: 4px;
+    padding: 1rem;
+    outline: none;
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    bottom: 1rem;
+    right: 1rem;
+    overflow: auto;
+    background: white;
+    border-color: red;
+    color: black;
+
+    .oui-debug-content {
+      display: block;
+    }
+  }
+}
