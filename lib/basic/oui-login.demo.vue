@@ -16,5 +16,5 @@ const state = reactive({
 </script>
 
 <template>
-  <OuiLogin />
+  <OuiLogin :message="state.message" />
 </template>

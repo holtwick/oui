@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { t } from '@/basic/i18n'
 import OuiButton from './oui-button.vue'
 import OuiInput from './oui-input.vue'
 import OuiNotice from './oui-notice.vue'
@@ -24,9 +25,9 @@ const password = ref('')
 </script>
 
 <template>
-  <OuiNotice title="Login">
+  <OuiNotice :title="title ?? t('Login', 'oui.login.title')">
     <template v-if="true" #default>
-      <p>Welcome, please authorize.</p>
+      <p>{{ t('Welcome, please authorize.', 'oui.login.description') }}</p>
       <div class="oui-login">
         <div class="oui-login-username">
           <OuiInput v-model="username" class="_focus" placeholder="User" name="username" />

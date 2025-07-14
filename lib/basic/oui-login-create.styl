@@ -1,0 +1,26 @@
+@import "../stylus/index";
+
+.oui-login-create {
+  use: stack-y;
+  gap: 8;
+  padding: 16px;
+
+  &-username, &-password, &-confirm {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    width: 100%;
+  }
+
+  &-error {
+    color: $color-error;
+    font-size: $font-size-sm;
+    padding-left: $spacing-xs;
+  }
+
+  &-button {
+    margin-top: $spacing-sm;
+    display: flex;
+    justify-content: center;
+  }
+}
