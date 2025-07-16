@@ -30,7 +30,15 @@ async function doAction(item: OuiMenuItem) {
   <nav class="_menu" @contextmenu.stop.prevent="">
     <template v-for="(item, i) in items" :key="i">
       <template v-if="item.title">
+        <div
+          v-if="item.header"
+          class="_menu_header"
+          :data-test-menu="item.title"
+        >
+          {{ item.title }}
+        </div>
         <a
+          v-else
           class="_menu_item"
           :class="{
             _menu_disabled: item.disabled === true,

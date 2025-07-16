@@ -8,12 +8,14 @@ const log: LoggerInterface = Logger('oui-menu.demo')
 type x = typeof OuiClose
 
 const simpleMenu = useMenu([
+  { title: 'CONTACT', header: true },
   {
     title: `ABC`,
     action: self => log('action', self),
     icon: OuiClose,
   },
   {},
+  { title: 'CONTACT', header: true },
   {
     title: `action XYZ`,
     action: self => log('action', self),
