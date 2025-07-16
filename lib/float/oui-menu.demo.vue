@@ -5,8 +5,6 @@ import { OuiButton, OuiClose, useMenu, useMenuWithValue, vMenu } from '@/lib'
 
 const log: LoggerInterface = Logger('oui-menu.demo')
 
-type x = typeof OuiClose
-
 const simpleMenu = useMenu([
   { title: 'CONTACT', header: true },
   {
@@ -15,7 +13,30 @@ const simpleMenu = useMenu([
     icon: OuiClose,
   },
   {},
-  { title: 'CONTACT', header: true },
+  { title: 'SUBMENU EXAMPLE', header: true },
+  {
+    title: 'File',
+    submenu: [
+      { title: 'New', action: self => log('New file', self) },
+      { title: 'Open', action: self => log('Open file', self) },
+      {},
+      { title: 'Save', action: self => log('Save file', self) },
+      { title: 'Save As...', action: self => log('Save as file', self) },
+    ],
+  },
+  {
+    title: 'Edit',
+    submenu: [
+      { title: 'Undo', action: self => log('Undo', self) },
+      { title: 'Redo', action: self => log('Redo', self) },
+      {},
+      { title: 'Cut', action: self => log('Cut', self) },
+      { title: 'Copy', action: self => log('Copy', self) },
+      { title: 'Paste', action: self => log('Paste', self) },
+    ],
+  },
+  {},
+  { title: 'REGULAR ITEMS', header: true },
   {
     title: `action XYZ`,
     action: self => log('action', self),

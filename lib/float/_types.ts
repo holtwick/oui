@@ -11,4 +11,5 @@ export interface OuiMenuItem {
   url?: string
   action?: (item: OuiMenuItem, ...args: any[]) => void
   header?: boolean
+  submenu?: OuiMenuItem[]
 }
