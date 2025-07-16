@@ -40,6 +40,8 @@
   user-select: none;
 
   ._menu_item {
+    use: stack-x;
+    gap: 4;
     color: var(--item-fg);
     background: var(--item-bg);
     list-style: none;
@@ -87,5 +89,13 @@
     margin-top: px(4);
     margin-bottom: px(4);
     background: var(--item-separator);
+  }
+
+  svg {
+    display: inline-block;
+    flex-shrink: 0;
+    flex-grow: 0;
+    size: 1em;
+    transform: translateY(1px);
   }
 }

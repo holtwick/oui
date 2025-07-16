@@ -42,6 +42,9 @@ async function doAction(item: OuiMenuItem) {
           :target="item.url?.includes('://') ? '_blank' : undefined"
           @pointerup="doAction(item)"
         >
+          <template v-if="item.icon">
+            <component :is="item.icon" class="_menu_icon" />
+          </template>
           {{ item.title }}
         </a>
       </template>

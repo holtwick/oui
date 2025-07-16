@@ -1,14 +1,17 @@
 <script lang="ts" setup>
 import type { LoggerInterface } from 'zeed'
 import { Logger } from 'zeed'
-import { OuiButton, useMenu, useMenuWithValue, vMenu } from '@/lib'
+import { OuiButton, OuiClose, useMenu, useMenuWithValue, vMenu } from '@/lib'
 
 const log: LoggerInterface = Logger('oui-menu.demo')
+
+type x = typeof OuiClose
 
 const simpleMenu = useMenu([
   {
     title: `ABC`,
     action: self => log('action', self),
+    icon: OuiClose,
   },
   {},
   {
