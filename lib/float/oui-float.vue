@@ -3,7 +3,7 @@ import type { OffsetOptions, Padding, Placement } from '@floating-ui/vue'
 import type { UseElementHoverOptions } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { arrow as arrowMiddleware, autoUpdate, flip, offset, shift, size, useFloating } from '@floating-ui/vue'
-import { onKeyStroke, useElementHover, useEventListener, useFocusWithin, useTimeoutFn } from '@vueuse/core'
+import { onKeyStroke, useElementHover, useEventListener, useFocusWithin } from '@vueuse/core'
 import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 
 import './oui-float.styl'
