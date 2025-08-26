@@ -41,6 +41,7 @@ function getFixTooltip(el: Element) {
 const ok = useSingleton('oui-tooltip')
 if (ok) {
   let ignore = false
+  let touchedElement: Element | null = null
 
   const delay = 600
   let debounceTimer: any = 0
@@ -66,8 +67,11 @@ if (ok) {
       el = el.parentElement
     }
 
-    if (didLeave)
+    if (didLeave) {
       active.value = false
+      // Clear touched element when leaving
+      touchedElement = null
+    }
 
     el = ev.target as any
 
@@ -76,6 +80,11 @@ if (ok) {
       while (el instanceof Element && el.tagName !== 'BODY') {
         const tooltip = getFixTooltip(el)
         if (tooltip && tooltip?.length > 0) {
+          // Don't show tooltip for touched element until it's been left
+          if (touchedElement && el.isEqualNode(touchedElement)) {
+            return
+          }
+
           reference.value = el
           text.value = tooltip?.toString()?.trim() || ''
           placement.value = el.getAttribute('tooltip-placement') || 'top' as any
@@ -103,6 +112,16 @@ if (ok) {
   function onTouchDown(ev: Event) {
     active.value = false
     ignore = true
+    // Remember the touched element
+    let el: Element | null = ev.target as any
+    while (el instanceof Element && el.tagName !== 'BODY') {
+      const tooltip = getFixTooltip(el)
+      if (tooltip && tooltip?.length > 0) {
+        touchedElement = el
+        break
+      }
+      el = el.parentElement
+    }
   }
 
   function onTouchUp(ev: Event) {
