@@ -46,7 +46,7 @@ if (ok) {
   let debounceTimer: any = 0
 
   function onTooltipHover(ev: Event) {
-  // log("onTooltipHover", ignore, ev)
+    // log("onTooltipHover", ignore, ev)
     if (ignore)
       return
 
@@ -106,21 +106,22 @@ if (ok) {
   }
 
   function onTouchUp(ev: Event) {
+    active.value = false
     ignore = false
   }
 
   const useCapture = false
 
-  useEventListener(window, 'mouseover', onTooltipHover, useCapture)
+  useEventListener(window, 'pointerover', onTooltipHover, useCapture)
 
-  // These are for handling touch events. Since mouseover comes AFTER touch events
-  // we use `mouseup` to finish the touch exception. We cannot generally set
+  // These are for handling touch events. Since pointerover comes AFTER touch events
+  // we use `pointerup` to finish the touch exception. We cannot generally set
   // ignore on first touch, because these days devices may have mixed input
   // useEventListener(window, "touchstart", onTouchDown, useCapture)
-  useEventListener(window, 'mousedown', onTouchDown, useCapture)
-  useEventListener(window, 'mouseup', onTouchUp, useCapture)
+  useEventListener(window, 'pointerdown', onTouchDown, useCapture)
+  useEventListener(window, 'pointerup', onTouchUp, useCapture)
 
-// useEventListener(window, "focus", onTooltipHover, useCapture)
+  // useEventListener(window, "focus", onTooltipHover, useCapture)
 }
 </script>
 
