@@ -11,7 +11,7 @@ const modes = import.meta.glob('../**/*.demo.vue', {
   eager: true,
 })
 
-const docs = import.meta.glob('../**/*.md', {
+const docs = import.meta.glob(['../lib/**/*.md', '../src/**/*.md'], {
   import: 'default',
   eager: true,
 })
