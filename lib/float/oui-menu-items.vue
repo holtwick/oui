@@ -106,9 +106,8 @@ function hideAllSubmenus() {
             :href="item.url"
             :data-test-menu="item.title"
             :target="item.url?.includes('://') ? '_blank' : undefined"
-            @click.prevent.stop="log.info('click on item', item.title); item.submenu ? toggleSubmenu(i) : doAction(item)"
-            @mousedown.prevent.stop="log.info('mousedown on item', item.title)"
-            @mouseup.prevent.stop="log.info('mouseup on item', item.title); item.submenu ? toggleSubmenu(i) : doAction(item)"
+            @click.prevent.stop="log.info('click on item', item.title); item.disabled ? undefined : (item.submenu ? toggleSubmenu(i) : doAction(item))"
+            @contextmenu.prevent.stop="log.info('click on item', item.title); item.disabled ? undefined : (item.submenu ? toggleSubmenu(i) : doAction(item))"
             @mouseenter="log.info('mouseenter', item.title); item.submenu ? showSubmenu(i) : hideAllSubmenus()"
           >
             <template v-if="item.icon">
