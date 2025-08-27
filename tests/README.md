@@ -4,7 +4,7 @@ This project uses [Playwright](https://playwright.dev/) for end-to-end testing o
 
 ## Test Architecture
 
-The testing setup has been streamlined to focus on **core component testing** with `demo-final.spec.ts`:
+The testing setup has been streamlined to focus on **core component testing** with `general.spec.ts`:
 
 - **5 Core Components**: Tests the most important UI components (button, input, modal, slider, chart)
 - **Visual Regression**: Screenshots and comparison testing across browsers
@@ -27,11 +27,11 @@ Testing key demo components directly provides several advantages:
 tests/
 ├── README.md                           # This documentation
 └── e2e/
-    ├── demo-final.spec.ts             # Main test file (35 tests)
-    └── demo-final.spec.ts-snapshots/  # Visual regression baselines
+    ├── general.spec.ts             # Main test file (35 tests)
+    └── general.spec.ts-snapshots/  # Visual regression baselines
 ```
 
-### Main Test File: `demo-final.spec.ts`
+### Main Test File: `general.spec.ts`
 
 This file contains all the core tests:
 - **Visual Regression Tests**: Screenshots of 5 core components across all browsers
