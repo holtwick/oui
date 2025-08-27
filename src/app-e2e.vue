@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LoggerInterface } from 'zeed'
 import { useDark } from '@vueuse/core'
-import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { Logger } from 'zeed'
 import { OuiMobileActivator, OuiTooltipActivator } from '@/lib'
 
