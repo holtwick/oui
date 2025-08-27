@@ -4,6 +4,11 @@ import { setPageAndWait } from './helpers'
 const demoComponents = [
   'oui-button',
   'oui-input',
+  'oui-object',
+  'oui-form-item',
+  'oui-notice',
+  'oui-slider',
+  'css-form',
 ]
 
 test.describe('Demo Component Visual Tests', () => {
@@ -29,11 +34,17 @@ test.describe('Demo Component Visual Tests', () => {
         const pngFileName = `${demoName}-${dark ? 'dark' : 'light'}.png`
         if (demoMainVisible) {
           // Take screenshot of the demo main content area
-          await expect(demoMain).toHaveScreenshot(pngFileName, { animations: 'disabled' })
+          await expect(demoMain).toHaveScreenshot(pngFileName, {
+            animations: 'disabled',
+            fullPage: true,
+          })
         }
         else {
           // Fallback to full app screenshot
-          await expect(app).toHaveScreenshot(pngFileName, { animations: 'disabled' })
+          await expect(app).toHaveScreenshot(pngFileName, {
+            animations: 'disabled',
+            fullPage: true,
+          })
         }
       })
     }
