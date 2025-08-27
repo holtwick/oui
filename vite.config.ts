@@ -26,9 +26,9 @@ const config: UserConfig = {
       // Exclude test and report directories to prevent conflicts
       exclude: [
         '**/tests/**',
-        '**/test-results/**', 
+        '**/test-results/**',
         '**/playwright-report/**',
-        '**/node_modules/**'
+        '**/node_modules/**',
       ],
       async markdownItSetup(md) {
         // https://prismjs.com/

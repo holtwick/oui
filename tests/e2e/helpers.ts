@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test'
+import type { Page } from '@playwright/test'
 
 /**
  * Helper utilities for OUI component testing
@@ -34,7 +34,8 @@ export async function toggleDemoProperty(page: Page, propertyName: string, check
   const checkbox = page.locator(`[title="${propertyName}"]`)
   if (checked) {
     await checkbox.check()
-  } else {
+  }
+  else {
     await checkbox.uncheck()
   }
 }
@@ -69,7 +70,7 @@ export async function testAccessibility(page: Page) {
  */
 export async function testResponsive(page: Page, callback: (width: number) => Promise<void>) {
   const breakpoints = [320, 768, 1024, 1440] // Mobile, tablet, desktop, large desktop
-  
+
   for (const width of breakpoints) {
     await page.setViewportSize({ width, height: 800 })
     await page.waitForTimeout(100) // Allow for layout changes

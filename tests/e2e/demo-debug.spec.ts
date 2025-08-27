@@ -1,4 +1,8 @@
-import { test, expect } from '@playwright/test'
+import type { LoggerInterface } from 'zeed'
+import { test } from '@playwright/test'
+import { Logger } from 'zeed'
+
+const log: LoggerInterface = Logger('demo-debug.spec')
 
 /**
  * Debug test to understand demo component DOM structure
@@ -6,66 +10,66 @@ import { test, expect } from '@playwright/test'
 
 test('debug button demo DOM structure', async ({ page }) => {
   await page.goto('/#./lib/basic/oui-button.demo.vue')
-  console.log('=== Navigated to URL')
-  
+  log('=== Navigated to URL')
+
   // Wait longer for JavaScript to initialize
   await page.waitForLoadState('networkidle')
-  console.log('=== Network idle reached')
-  
+  log('=== Network idle reached')
+
   // Wait for Vue app to actually mount - look for specific Vue elements
   await page.waitForSelector('#app > *', { timeout: 30000 })
-  console.log('=== App has content')
-  
+  log('=== App has content')
+
   // Additional wait for demo content
   await page.waitForTimeout(3000)
-  console.log('=== Additional timeout complete')
-  
+  log('=== Additional timeout complete')
+
   // Check again what elements exist
   const appDiv = await page.locator('#app').isVisible()
-  console.log('=== #app visible:', appDiv)
-  
+  log('=== #app visible:', appDiv)
+
   const appHasChildren = await page.locator('#app > *').count()
-  console.log('=== #app children count:', appHasChildren)
-  
-  const mainElement = await page.locator('main').isVisible() 
-  console.log('=== main visible:', mainElement)
-  
+  log('=== #app children count:', appHasChildren)
+
+  const mainElement = await page.locator('main').isVisible()
+  log('=== main visible:', mainElement)
+
   const buttons = await page.locator('button').count()
-  console.log('=== button count:', buttons)
-  
+  log('=== button count:', buttons)
+
   const inputs = await page.locator('input').count()
-  console.log('=== input count:', inputs)
-  
+  log('=== input count:', inputs)
+
   // Check for Vue-specific elements
   const vueElements = await page.locator('[data-v-], .oui-').count()
-  console.log('=== Vue elements count:', vueElements)
-  
+  log('=== Vue elements count:', vueElements)
+
   // Get page title to verify it loaded
   const title = await page.title()
-  console.log('=== Page title:', title)
-  
+  log('=== Page title:', title)
+
   // Check if JS errors occurred
   const consoleMessages: string[] = []
   page.on('console', msg => consoleMessages.push(msg.text()))
-  page.on('pageerror', error => console.log('=== PAGE ERROR:', error.message))
-  
+  page.on('pageerror', error => log('=== PAGE ERROR:', error.message))
+
   // Trigger any pending JS by scrolling
   await page.evaluate(() => window.scrollTo(0, 100))
   await page.waitForTimeout(1000)
-  
+
   // Take a screenshot for visual debugging
   await page.screenshot({ path: 'debug-demo-after-wait.png', fullPage: true })
-  
+
   // Get HTML again after waiting
   const finalHtml = await page.locator('#app').innerHTML()
-  console.log('=== Final #app HTML preview:', finalHtml.substring(0, 500))
-  
+  log('=== Final #app HTML preview:', finalHtml.substring(0, 500))
+
   // Check if any JavaScript is actually running
-  const windowVue = await page.evaluate(() => window.Vue !== undefined)
-  console.log('=== Vue available on window:', windowVue)
-  
-  console.log('=== Console messages count:', consoleMessages.length)
+  const windowVue = await page.evaluate(() => (window as any).Vue !== undefined)
+  log('=== Vue available on window:', windowVue)
+
+  log('=== Console messages count:', consoleMessages.length)
   if (consoleMessages.length > 0) {
-    console.log('=== First few console messages:', consoleMessages.slice(0, 3))
+    log('=== First few console messages:', consoleMessages.slice(0, 3))
   }
 })

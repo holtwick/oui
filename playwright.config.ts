@@ -27,7 +27,7 @@ export default defineConfig({
 
     /* Collect screenshots on failure */
     screenshot: 'only-on-failure',
-    
+
     /* Increase expect timeouts for visual tests */
     actionTimeout: 10000,
   },

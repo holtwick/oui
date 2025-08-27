@@ -57,7 +57,7 @@ pnpm test:all
 Tests are organized in `/tests/e2e/` with the following structure:
 
 - `basic-components.spec.ts` - Tests for basic UI components (Button, Input, Checkbox)
-- `modal-components.spec.ts` - Tests for modal and dialog functionality  
+- `modal-components.spec.ts` - Tests for modal and dialog functionality
 - `float-components.spec.ts` - Tests for floating elements (tooltips, menus)
 - `component-integration.spec.ts` - Comprehensive integration tests
 - `visual-regression.spec.ts` - Screenshot/visual comparison tests
@@ -78,7 +78,7 @@ Tests are organized in `/tests/e2e/` with the following structure:
 
 ### Test Types
 - **Functional Testing** - Component behavior and interactions
-- **Visual Testing** - Screenshot comparisons for UI consistency  
+- **Visual Testing** - Screenshot comparisons for UI consistency
 - **Responsive Testing** - Mobile and desktop layouts
 - **Accessibility Testing** - Keyboard navigation, focus management
 - **Integration Testing** - Component interactions and workflows
@@ -97,13 +97,13 @@ Tests are configured in `playwright.config.ts`:
 
 ### Basic Test Structure
 ```typescript
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import { navigateToDemo, toggleDemoProperty } from './helpers'
 
 test.describe('Component Name', () => {
   test('should do something', async ({ page }) => {
     await navigateToDemo(page, 'ComponentName')
-    
+
     // Test component functionality
     await expect(page.locator('selector')).toBeVisible()
   })
