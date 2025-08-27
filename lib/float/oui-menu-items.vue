@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 import type { LoggerInterface } from 'zeed'
 import type { OuiMenuItem } from './_types'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Logger } from 'zeed'
 import OuiFloat from './oui-float.vue'
 
@@ -20,10 +20,34 @@ const log: LoggerInterface = Logger('oui-menu-items')
 
 const active = defineModel({ default: true })
 
-const submenuActive = ref<{ [key: number]: boolean }>({})
-const submenuRefs = ref<{ [key: number]: Ref<HTMLElement> }>({})
+const submenuActive = ref<Record<number, boolean>>({})
+const submenuRefs = ref<Record<number, Ref<HTMLElement>>>({})
 
-async function doAction(item: OuiMenuItem) {
+// Computed property for better performance
+const checkedItems = computed(() => {
+  return props.items.map((item) => {
+    if (typeof item.checked === 'function') {
+      return item.checked(item)
+    }
+    return !!item.checked
+  })
+})
+
+function handleItemAction(item: OuiMenuItem, index: number) {
+  if (item.disabled) {
+    log.info('item is disabled, ignoring action')
+    return
+  }
+
+  if (item.submenu) {
+    toggleSubmenu(index)
+  }
+  else {
+    doAction(item)
+  }
+}
+
+function doAction(item: OuiMenuItem) {
   log.info('doAction called', item)
 
   if (item?.action) {
@@ -47,7 +71,6 @@ async function doAction(item: OuiMenuItem) {
 
 function onSubmenuDone(item: OuiMenuItem) {
   log.info('onSubmenuDone called', { item, title: item?.title })
-  // Forward the done event from submenu to parent
   emit('done', item)
   if (item.close !== false) {
     active.value = false
@@ -56,9 +79,9 @@ function onSubmenuDone(item: OuiMenuItem) {
 }
 
 function setSubmenuRef(index: number) {
-  return (el: any) => {
+  return (el: HTMLElement | null) => {
     if (el) {
-      submenuRefs.value[index] = el
+      submenuRefs.value[index] = el as any
     }
   }
 }
@@ -69,20 +92,21 @@ function toggleSubmenu(index: number) {
 }
 
 function showSubmenu(index: number) {
-  // Close all other submenus
-  Object.keys(submenuActive.value).forEach((key) => {
-    if (Number(key) !== index) {
-      submenuActive.value[Number(key)] = false
+  // Close all other submenus efficiently
+  for (const key in submenuActive.value) {
+    const numKey = Number(key)
+    if (numKey !== index) {
+      submenuActive.value[numKey] = false
     }
-  })
+  }
   submenuActive.value[index] = true
 }
 
 function hideAllSubmenus() {
   log.info('hideAllSubmenus called')
-  Object.keys(submenuActive.value).forEach((key) => {
+  for (const key in submenuActive.value) {
     submenuActive.value[Number(key)] = false
-  })
+  }
 }
 </script>
 
@@ -95,19 +119,19 @@ function hideAllSubmenus() {
         </div>
         <template v-else>
           <a
-            :ref="item.submenu ? setSubmenuRef(i) : undefined"
+            :ref="(item.submenu ? setSubmenuRef(i) : undefined) as any"
             class="_menu_item"
             :class="{
               _menu_disabled: item.disabled === true,
               _menu_checked_possible: item.checked != null,
-              _menu_checked: typeof item.checked === 'function' ? item.checked(item) : !!item.checked,
-              _menu_submenu: item.submenu,
+              _menu_checked: checkedItems[i],
+              _menu_submenu: !!item.submenu,
             }"
             :href="item.url"
             :data-test-menu="item.title"
             :target="item.url?.includes('://') ? '_blank' : undefined"
-            @click.prevent.stop="log.info('click on item', item.title); item.disabled ? undefined : (item.submenu ? toggleSubmenu(i) : doAction(item))"
-            @contextmenu.prevent.stop="log.info('click on item', item.title); item.disabled ? undefined : (item.submenu ? toggleSubmenu(i) : doAction(item))"
+            @click.prevent.stop="log.info('click on item', item.title); handleItemAction(item, i)"
+            @contextmenu.prevent.stop="log.info('contextmenu on item', item.title); handleItemAction(item, i)"
             @mouseenter="log.info('mouseenter', item.title); item.submenu ? showSubmenu(i) : hideAllSubmenus()"
           >
             <template v-if="item.icon">
