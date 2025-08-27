@@ -19,34 +19,17 @@ html, body {
   overflow: hidden;
 }
 
-body {
+html {
   font-family: var(--font);
   color: var(--fg);
   background-color: var(--bg);
 }
 
-// assume this being an app container, usually #app
 #app, .app {
   use: stack-y;
   height: 100%;
 }
 
-/* :not(button, input, optgroup, select, textarea, [contenteditable], [contenteditable] *, .ProseMirror *, .selectable *, .selectable) {
- */
-/*
-* {
-  user-select: none;
-  -webkit-user-select: none;
-  cursor: default;
-  // border: none;
-}
-
-[contenteditable], [contenteditable] *, .ProseMirror *, .selectable *, .selectable, input, textarea {
-  user-select: text;
-  -webkit-user-select: text;
-  // border: 2px solid red;
-}
-*/
 oui-preset-layout-attrs();
 oui-preset-layout-attrs2();
 

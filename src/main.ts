@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
+import { valueToBoolean } from 'zeed'
 
-// import('./app-mobile.vue').then(app => createApp(app.default).mount('#app'))
-// import('./app.vue').then(app => createApp(app.default).mount('#app'))
+const isE2E = valueToBoolean(import.meta.env.APP_E2E, false)
 
-import app from './app.vue'
-// import app from './app-mobile.vue'
-// import app from './app-mobile-using-oui.vue'
-// import app from './app-mobile-body-scroll.vue'
-
-createApp(app).mount('#app')
+if (isE2E) {
+  import('./app-e2e.vue').then(app => createApp(app.default).mount('#app'))
+}
+else {
+  import('./app.vue').then(app => createApp(app.default).mount('#app'))
+}

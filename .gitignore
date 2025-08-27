@@ -99,3 +99,6 @@ zerva-bin/bin.cjs
 
 _archive
 bun.lockb
+
+playwright-report
+test-results

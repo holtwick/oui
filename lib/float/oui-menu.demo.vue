@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { LoggerInterface } from 'zeed'
-import { Logger } from 'zeed'
-import { OuiButton, OuiClose, useMenu, useMenuWithValue, vMenu } from '@/lib'
+import { OuiButton, OuiClose, OuiLog, useLog, useMenu, useMenuWithValue, vMenu } from '@/lib'
+import OuiText from '../basic/oui-text.vue'
 
-const log: LoggerInterface = Logger('oui-menu.demo')
+// const log: LoggerInterface = Logger('oui-menu.demo')
+const log = useLog('menu-events')
 
 const simpleMenu = useMenu([
   { title: 'CONTACT', header: true },
@@ -56,7 +56,7 @@ const menu = useMenuWithValue((item: number) => [{
 </script>
 
 <template>
-  <div>
+  <OuiText>
     <h1>v-menu</h1>
     <OuiButton ref="button" v-menu="simpleMenu">
       Click me
@@ -71,5 +71,8 @@ const menu = useMenuWithValue((item: number) => [{
       Click 2
     </OuiButton>
     <p>You may click with right or left mouse key.</p>
-  </div>
+
+    <h1>Menu Events</h1>
+    <OuiLog :log="log" />
+  </OuiText>
 </template>

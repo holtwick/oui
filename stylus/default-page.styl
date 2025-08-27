@@ -1,7 +1,7 @@
 @import "index.styl";
 @import "theme.styl";
 
-oui-fix();
+oui-reset();
 
 html {
   text-rendering: optimizeLegibility;
@@ -12,10 +12,13 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+html {
   font-family: var(--font);
   color: var(--fg);
   background-color: var(--bg);
+}
+
+body {
   padding: 0;
   margin: 32;
 }
