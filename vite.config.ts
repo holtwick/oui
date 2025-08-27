@@ -8,8 +8,12 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import { qrcode } from 'vite-plugin-qrcode'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import { valueToBoolean } from 'zeed'
+
+const isE2E = valueToBoolean(process.env.APP_E2E, false)
 
 const config: UserConfig = {
+  envPrefix: ['APP_', 'VITE_'],
   plugins: [
     qrcode(),
 
@@ -17,7 +21,7 @@ const config: UserConfig = {
       include: [/\.vue$/, /\.md$/],
     }),
 
-    vueDevTools(),
+    !isE2E && vueDevTools(),
 
     // https://github.com/antfu/vite-plugin-md
     // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite

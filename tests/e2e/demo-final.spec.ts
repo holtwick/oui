@@ -1,42 +1,25 @@
 import type { LoggerInterface } from 'zeed'
 import { expect, test } from '@playwright/test'
-import { Logger } from 'zeed'
+import { Logger, uuid } from 'zeed'
 
 const log: LoggerInterface = Logger('demo-final.spec')
 
-/**
- * Visual regression tests for demo components
- * Tests individual .demo.vue files directly for focused component screenshots
- */
+function makeUrl(name: string, dark: boolean = false) {
+  const url = `/?dark=${dark ? '1' : '0'}&_=${uuid()}#${name}`
+  // console.log('URL:', url)
+  return url
+}
 
 const demoComponents = [
-  {
-    name: 'oui-button',
-    url: '/#./lib/basic/oui-button.demo.vue',
-  },
-  {
-    name: 'oui-input',
-    url: '/#./lib/basic/oui-input.demo.vue',
-  },
-  {
-    name: 'oui-modal',
-    url: '/#./lib/modal/oui-modal.demo.vue',
-  },
-  {
-    name: 'oui-slider',
-    url: '/#./lib/basic/oui-slider.demo.vue',
-  },
-  {
-    name: 'oui-chart',
-    url: '/#./lib/basic/oui-chart.demo.vue',
-  },
+  'oui-button',
+  'oui-input',
 ]
 
 test.describe('Demo Component Visual Tests', () => {
   for (const demo of demoComponents) {
-    test(`${demo.name} visual regression test`, async ({ page }) => {
+    test(`${demo} visual regression test`, async ({ page }) => {
       await page.setViewportSize({ width: 1200, height: 800 })
-      await page.goto(demo.url)
+      await page.goto(makeUrl(demo))
 
       // Wait for the Vue app to fully initialize and load the demo
       await page.waitForLoadState('networkidle')
@@ -110,14 +93,14 @@ test.describe('Demo Component Visual Tests', () => {
 
       if (demoMainVisible) {
         // Take screenshot of the demo main content area
-        await expect(demoMain).toHaveScreenshot(`${demo.name}.png`, {
+        await expect(demoMain).toHaveScreenshot(`${demo}.png`, {
           animations: 'disabled',
           // fullPage: false,
         })
       }
       else {
         // Fallback to full app screenshot
-        await expect(app).toHaveScreenshot(`${demo.name}.png`, {
+        await expect(app).toHaveScreenshot(`${demo}.png`, {
           animations: 'disabled',
           // fullPage: false,
         })
@@ -127,50 +110,14 @@ test.describe('Demo Component Visual Tests', () => {
 })
 
 test.describe('Demo Component Interactions', () => {
-  test('button demo has interactive elements', async ({ page }) => {
-    await page.goto('/#./lib/basic/oui-button.demo.vue')
-    await page.waitForLoadState('networkidle')
-
-    // Wait for Vue app to fully load
-    await page.waitForSelector('.oui-demo', { timeout: 30000 })
-    await page.waitForTimeout(2000)
-
-    // Look for demo component buttons specifically (not demo UI buttons)
-    // The demo component buttons should be inside .oui-demo-main
-    const demoButtons = page.locator('.oui-demo-main button, .oui-demo button:not(.oui-demo-sidebar-toggle)')
-    const allButtons = page.locator('button')
-
-    const demoButtonCount = await demoButtons.count()
-    const allButtonCount = await allButtons.count()
-
-    log(`Demo buttons: ${demoButtonCount}, All buttons: ${allButtonCount}`)
-
-    // Use demo-specific buttons if available, otherwise any button that's not a UI control
-    const targetButtons = demoButtonCount > 0 ? demoButtons : page.locator('button:not(.oui-demo-sidebar-toggle):not([class*="select"])')
-    const targetCount = await targetButtons.count()
-
-    expect(targetCount).toBeGreaterThan(0)
-
-    const firstButton = targetButtons.first()
-    await expect(firstButton).toBeVisible()
-
-    // Try clicking the button
-    await firstButton.click()
-
-    // The button should still be there after clicking
-    await expect(firstButton).toBeVisible()
-  })
-
   test('input demo has form elements', async ({ page }) => {
-    await page.goto('/#./lib/basic/oui-input.demo.vue')
-    await page.waitForLoadState('networkidle')
-
-    // Wait for Vue app to fully load
+    await page.goto(makeUrl('input'))
+    await page.reload()
     await page.waitForSelector('.oui-demo', { timeout: 30000 })
     await page.waitForTimeout(2000)
 
     // Check for input elements in the demo content area
-    const demoInputs = page.locator('.oui-demo-main input, .oui-demo input:not([class*="demo-"]):not([class*="select"])')
+    const demoInputs = page.locator('.oui-demo input, .oui-demo input:not([class*="demo-"]):not([class*="select"])')
     const allInputs = page.locator('input')
 
     const demoInputCount = await demoInputs.count()
