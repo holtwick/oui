@@ -1,4 +1,4 @@
-import type { Page, Locator } from '@playwright/test'
+import type { Locator, Page } from '@playwright/test'
 
 /**
  * Standard screenshot options for consistent visual testing
@@ -7,13 +7,13 @@ import type { Page, Locator } from '@playwright/test'
 export const SCREENSHOT_OPTIONS = {
   // Disable animations for consistent screenshots
   animations: 'disabled' as const,
-  
+
   // Wait for fonts to load
   fullPage: false,
-  
+
   // Clip to avoid scrollbars and browser chrome
   clip: undefined,
-  
+
   // Force consistent scale
   scale: 'device' as const,
 } as const
@@ -22,9 +22,9 @@ export const SCREENSHOT_OPTIONS = {
  * Take a screenshot of a specific component or element
  */
 export async function takeComponentScreenshot(
-  locator: Locator, 
+  locator: Locator,
   name: string,
-  options: Parameters<Locator['screenshot']>[0] = {}
+  options: Parameters<Locator['screenshot']>[0] = {},
 ) {
   return locator.screenshot({
     ...SCREENSHOT_OPTIONS,
@@ -38,11 +38,11 @@ export async function takeComponentScreenshot(
 export async function takePageScreenshot(
   page: Page,
   name: string,
-  options: Parameters<Page['screenshot']>[0] = {}
+  options: Parameters<Page['screenshot']>[0] = {},
 ) {
   // Wait for page to be fully loaded
   await page.waitForLoadState('networkidle')
-  
+
   // Hide scrollbars for consistent screenshots
   await page.addStyleTag({
     content: `
@@ -53,9 +53,9 @@ export async function takePageScreenshot(
       *::-webkit-scrollbar {
         display: none !important;
       }
-    `
+    `,
   })
-  
+
   return page.screenshot({
     ...SCREENSHOT_OPTIONS,
     fullPage: true,
@@ -70,10 +70,10 @@ export async function takePageScreenshot(
 export async function preparePageForScreenshot(page: Page) {
   // Wait for all network requests to complete
   await page.waitForLoadState('networkidle')
-  
+
   // Wait for fonts to load
   await page.waitForTimeout(500)
-  
+
   // Disable animations globally
   await page.addStyleTag({
     content: `
@@ -83,9 +83,9 @@ export async function preparePageForScreenshot(page: Page) {
         transition-duration: 0s !important;
         transition-delay: 0s !important;
       }
-    `
+    `,
   })
-  
+
   // Hide scrollbars
   await page.addStyleTag({
     content: `
@@ -96,9 +96,9 @@ export async function preparePageForScreenshot(page: Page) {
       *::-webkit-scrollbar {
         display: none !important;
       }
-    `
+    `,
   })
-  
+
   // Wait a bit more for any remaining layout shifts
   await page.waitForTimeout(300)
 }
@@ -109,16 +109,16 @@ export async function preparePageForScreenshot(page: Page) {
 export const EXPECT_SCREENSHOT_OPTIONS = {
   // Allow small differences due to font rendering
   threshold: 0.2,
-  
+
   // Use pixel-based comparison for more accurate results
   mode: 'pixel' as const,
-  
+
   // Disable animations
   animations: 'disabled' as const,
-  
+
   // Clip to avoid edge inconsistencies
   clip: undefined,
-  
+
   // Force consistent scale
   scale: 'device' as const,
 } as const
@@ -129,13 +129,13 @@ export const EXPECT_SCREENSHOT_OPTIONS = {
 export async function expectScreenshot(
   locatorOrPage: Locator | Page,
   name: string,
-  options: any = {}
+  options: any = {},
 ) {
   if ('screenshot' in locatorOrPage) {
     // It's a page
     await preparePageForScreenshot(locatorOrPage as Page)
   }
-  
+
   return (locatorOrPage as any).toHaveScreenshot(name, {
     ...EXPECT_SCREENSHOT_OPTIONS,
     ...options,

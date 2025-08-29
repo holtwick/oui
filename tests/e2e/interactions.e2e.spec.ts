@@ -58,33 +58,33 @@ test.describe('Demo Component Interactions', () => {
 
       // First enable clearable via the demo controls
       const clearableToggle = page.locator('input[type="checkbox"]').filter({ hasText: /clearable/i }).first()
-      
+
       if (await clearableToggle.count() > 0) {
         await clearableToggle.check()
-        
+
         // Give it a moment for the UI to update
         await page.waitForTimeout(500)
       }
 
       // Find the main input that should now be clearable
       const input = page.locator('.oui-input-string').first()
-      
+
       // Fill the input with some text
       await input.fill('Test text for clearing')
       await expect(input).toHaveValue('Test text for clearing')
 
       // Look for the clear button
       const clearButton = page.locator('.oui-input-clearable')
-      
+
       // The clear button should appear when there's text
       await expect(clearButton).toBeVisible()
-      
+
       // Click the clear button
       await clearButton.click()
-      
+
       // Verify the input is cleared
       await expect(input).toHaveValue('')
-      
+
       // Verify clear button is no longer visible (since input is empty)
       await expect(clearButton).not.toBeVisible()
     })
@@ -94,14 +94,14 @@ test.describe('Demo Component Interactions', () => {
 
       // Look for input container with slots (the one that shows START and END)
       const inputWithSlots = page.locator('.oui-input-container').filter({ hasText: /START.*END/i })
-      
+
       if (await inputWithSlots.count() > 0) {
         await expect(inputWithSlots).toBeVisible()
-        
+
         // Check that START and END slot content is visible
         await expect(inputWithSlots).toContainText('START')
         await expect(inputWithSlots).toContainText('END')
-        
+
         // Test input functionality within the container
         const slotInput = inputWithSlots.locator('input')
         await slotInput.fill('Slot test')
@@ -114,11 +114,11 @@ test.describe('Demo Component Interactions', () => {
 
       const input = page.locator('.oui-input-string').first()
       await input.focus()
-      
+
       // Test typing
       await input.fill('Test keyboard value')
       await expect(input).toHaveValue('Test keyboard value')
-      
+
       // Test Enter key - should not change the value but may trigger events
       await input.press('Enter')
       await expect(input).toHaveValue('Test keyboard value')
@@ -132,17 +132,17 @@ test.describe('Demo Component Interactions', () => {
 
       if (await typeSelector.count() > 0) {
         const input = page.locator('.oui-input-string').first()
-        
+
         // Test different input types
         await typeSelector.selectOption('email')
         await expect(input).toHaveAttribute('type', 'email')
-        
+
         await typeSelector.selectOption('url')
         await expect(input).toHaveAttribute('type', 'url')
-        
+
         await typeSelector.selectOption('tel')
         await expect(input).toHaveAttribute('type', 'tel')
-        
+
         // Return to text type
         await typeSelector.selectOption('text')
         await expect(input).toHaveAttribute('type', 'text')

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { setPageAndWait } from './helpers'
-import { screenshotOptions, preparePageForScreenshot, waitForAnimations } from './screenshot-helpers'
+import { preparePageForScreenshot, screenshotOptions, waitForAnimations } from './screenshot-helpers'
 
 const demoComponents = [
   'oui-button',
@@ -18,12 +18,12 @@ test.describe('Demo Component Visual Tests', () => {
       test(`${demoName} dark=${dark} visual regression test`, async ({ page }) => {
         // Set consistent viewport (this will override the global setting for specific needs)
         await page.setViewportSize({ width: 1200, height: 800 })
-        
+
         await setPageAndWait(page, demoName, dark)
 
         // Prepare page for consistent screenshots
         await preparePageForScreenshot(page)
-        
+
         // Wait for animations to complete
         await waitForAnimations(page)
 
@@ -39,14 +39,14 @@ test.describe('Demo Component Visual Tests', () => {
           await expect(demoMain).toHaveScreenshot(pngFileName, {
             ...screenshotOptions,
             fullPage: false, // Don't use fullPage for locator screenshots
-          })
+          } as any)
         }
         else {
           // Fallback to full app screenshot
           await expect(app).toHaveScreenshot(pngFileName, {
             ...screenshotOptions,
             fullPage: false, // Keep consistent with locator approach
-          })
+          } as any)
         }
       })
     }

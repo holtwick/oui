@@ -1,4 +1,5 @@
-import type { Page, PageScreenshotOptions, LocatorScreenshotOptions } from '@playwright/test'
+import type { Page } from '@playwright/test'
+import { expect } from '@playwright/test'
 
 /**
  * Standard screenshot options for consistent visual testing
@@ -35,12 +36,12 @@ export async function waitForAnimations(page: Page, timeout = 1000) {
   // Wait for CSS transitions and animations to complete
   await page.waitForFunction(() => {
     const animations = document.getAnimations()
-    return animations.every(animation => 
-      animation.playState === 'finished' || 
-      animation.playState === 'idle'
+    return animations.every(animation =>
+      animation.playState === 'finished'
+      || animation.playState === 'idle',
     )
   }, { timeout })
-  
+
   // Additional wait for any remaining visual changes
   await page.waitForTimeout(300)
 }
@@ -48,14 +49,14 @@ export async function waitForAnimations(page: Page, timeout = 1000) {
 /**
  * Prepare page for consistent screenshots by:
  * - Hiding scrollbars
- * - Disabling hover effects temporarily  
+ * - Disabling hover effects temporarily
  * - Ensuring consistent font rendering
  * - Handling browser-specific differences
  */
 export async function preparePageForScreenshot(page: Page) {
   // Get browser name for specific adjustments
   const browserName = page.context().browser()?.browserType().name() || 'unknown'
-  
+
   await page.addStyleTag({
     content: `
       /* Hide scrollbars for consistent screenshots across browsers */
@@ -81,19 +82,23 @@ export async function preparePageForScreenshot(page: Page) {
       }
       
       /* Browser-specific font rendering consistency */
-      ${browserName === 'firefox' ? `
+      ${browserName === 'firefox'
+        ? `
         * {
           -moz-osx-font-smoothing: grayscale;
           text-rendering: geometricPrecision;
         }
-      ` : ''}
+      `
+        : ''}
       
-      ${browserName === 'webkit' ? `
+      ${browserName === 'webkit'
+        ? `
         * {
           -webkit-font-smoothing: subpixel-antialiased;
           text-rendering: geometricPrecision;
         }
-      ` : ''}
+      `
+        : ''}
       
       /* Disable cursor for consistent screenshots */
       * { cursor: none !important; }
@@ -108,15 +113,15 @@ export async function preparePageForScreenshot(page: Page) {
         -ms-user-select: none;
         user-select: none;
       }
-    `
+    `,
   })
-  
+
   // Browser-specific preparations
   if (browserName === 'firefox') {
     // Firefox sometimes needs extra time for font loading
     await page.waitForTimeout(200)
   }
-  
+
   if (browserName === 'webkit') {
     // WebKit/Safari specific preparations
     await page.evaluate(() => {
@@ -130,28 +135,29 @@ export async function preparePageForScreenshot(page: Page) {
  * Take a screenshot with consistent options and preparation
  */
 export async function takeConsistentScreenshot(
-  locatorOrPage: Page | any, 
-  name: string, 
-  options: any = {}
+  locatorOrPage: Page | any,
+  name: string,
+  options: any = {},
 ) {
   const page = 'locator' in locatorOrPage ? locatorOrPage.page() : locatorOrPage
-  
+
   // Prepare page for screenshot
   await preparePageForScreenshot(page)
-  
+
   // Wait for animations to complete
   await waitForAnimations(page)
-  
+
   // Take screenshot with consistent options
   const finalOptions = {
     ...screenshotOptions,
     ...options,
   }
-  
+
   if ('toHaveScreenshot' in locatorOrPage) {
     // This is a locator
     return await locatorOrPage.toHaveScreenshot(name, finalOptions)
-  } else {
+  }
+  else {
     // This is a page
     return await expect(locatorOrPage).toHaveScreenshot(name, finalOptions)
   }

@@ -10,10 +10,10 @@ This project is configured for consistent screenshot/visual regression testing a
 use: {
   // Fixed viewport ensures consistent layout
   viewport: { width: 1280, height: 720 },
-  
+
   // Force device scale factor to 1 to avoid HiDPI/Retina differences
   deviceScaleFactor: 1,
-  
+
   // Disable mobile features for consistent desktop testing
   isMobile: false,
   hasTouch: false,
@@ -79,15 +79,15 @@ ENV NODE_ENV=test
 ```typescript
 import { expect, test } from '@playwright/test'
 import { setPageAndWait } from './helpers'
-import { screenshotOptions, preparePageForScreenshot, waitForAnimations } from './screenshot-helpers'
+import { preparePageForScreenshot, screenshotOptions, waitForAnimations } from './screenshot-helpers'
 
 test('visual regression test', async ({ page }) => {
   await setPageAndWait(page, 'component-name', false)
-  
+
   // Prepare for consistent screenshot
   await preparePageForScreenshot(page)
   await waitForAnimations(page)
-  
+
   // Take screenshot with consistent options
   const element = page.locator('.component')
   await expect(element).toHaveScreenshot('component.png', screenshotOptions)
@@ -108,7 +108,7 @@ pnpm playwright test general.e2e.spec.ts --update-snapshots
 
 ### Common Causes:
 1. **Different OS font rendering** - solved by `--force-color-profile=srgb` and font CSS
-2. **HiDPI/Retina displays** - solved by `--force-device-scale-factor=1`  
+2. **HiDPI/Retina displays** - solved by `--force-device-scale-factor=1`
 3. **Browser zoom** - solved by fixed `deviceScaleFactor: 1`
 4. **Screen resolution differences** - solved by fixed `viewport` size
 5. **Animations/transitions** - solved by `animations: 'disabled'` and animation waiting
@@ -137,7 +137,7 @@ pnpm playwright test general.e2e.spec.ts --update-snapshots
 ```
 tests/e2e/
 ├── screenshot-helpers.ts     # Utilities for consistent screenshots
-├── helpers.ts               # Page navigation and setup helpers  
+├── helpers.ts               # Page navigation and setup helpers
 ├── general.e2e.spec.ts     # Visual regression tests
 └── interactions.e2e.spec.ts # Interaction tests
 ```

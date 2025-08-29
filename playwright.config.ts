@@ -58,7 +58,7 @@ export default defineConfig({
       threshold: 0.2,
       mode: 'pixel',
     },
-  },
+  } as any,
 
   /* Configure projects for major browsers */
   projects: [

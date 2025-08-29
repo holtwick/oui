@@ -7,17 +7,17 @@ test.describe('OuiInput Browser Tests', () => {
 
     // Toggle the clearable option on
     const clearableToggle = page.locator('label').filter({ hasText: /clearable/i }).locator('input[type="checkbox"]').first()
-    
+
     if (await clearableToggle.count() > 0) {
       await clearableToggle.check()
-      
+
       // Give it a moment for the UI to update
       await page.waitForTimeout(500)
     }
 
     // Find the main input that should now be clearable
     const input = page.locator('.oui-input-string').first()
-    
+
     // Add some text to make sure we can test clearing
     await input.fill('Test value')
     await expect(input).toHaveValue('Test value')

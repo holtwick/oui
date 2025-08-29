@@ -47,7 +47,7 @@ Our `screenshot-helpers.ts` includes browser-specific CSS:
 // Chromium/WebKit scrollbar hiding
 ::-webkit-scrollbar { width: 0px; background: transparent; }
 
-// Firefox scrollbar hiding  
+// Firefox scrollbar hiding
 * { scrollbar-width: none; -ms-overflow-style: none; }
 
 // Browser-specific font rendering
@@ -57,7 +57,7 @@ Our `screenshot-helpers.ts` includes browser-specific CSS:
   text-rendering: geometricPrecision;
 }
 
-/* WebKit */  
+/* WebKit */
 * {
   -webkit-font-smoothing: subpixel-antialiased;
   text-rendering: geometricPrecision;
@@ -94,20 +94,20 @@ Our `screenshot-helpers.ts` includes CSS that:
 Each browser engine renders content slightly differently:
 
 - **Chromium**: Uses Blink rendering engine with extensive configuration options
-- **Firefox**: Uses Gecko rendering engine with Firefox-specific preferences  
+- **Firefox**: Uses Gecko rendering engine with Firefox-specific preferences
 - **WebKit**: Uses WebKit rendering engine with limited configuration but CSS consistency
 
 ### High DPI / Retina Displays (All Browsers)
-- **Chromium**: `--force-device-scale-factor=1` 
+- **Chromium**: `--force-device-scale-factor=1`
 - **Firefox**: `layout.css.devPixelsPerPx: '1.0'`
 - **WebKit**: `deviceScaleFactor: 1` (CSS-based normalization)
 
 ### Font Rendering Consistency
 - **Chromium**: Uses `antialiased` font smoothing
-- **Firefox**: Uses `grayscale` font smoothing + `geometricPrecision` 
+- **Firefox**: Uses `grayscale` font smoothing + `geometricPrecision`
 - **WebKit**: Uses `subpixel-antialiased` + `geometricPrecision`
 
-### Color Profile Consistency  
+### Color Profile Consistency
 - **Chromium**: `--force-color-profile=srgb`
 - **Firefox**: `gfx.color_management.mode: 2` (sRGB)
 - **WebKit**: Relies on system color profile (limited control)
@@ -118,7 +118,7 @@ Each browser engine renders content slightly differently:
 - **Chromium**: Launch args disable background throttling
 - **WebKit**: JavaScript-based smooth scrolling disabling
 
-### Different Screen Resolutions  
+### Different Screen Resolutions
 - Fixed `viewport: { width: 1280, height: 720 }` ensures consistent render area
 - Screenshots are taken of this fixed viewport, not the physical screen
 
