@@ -26,6 +26,21 @@
     }
   }
 
+  &-input-clearable {
+    use: center;
+    color: var(--s2-fg);
+    padding-x: 8;
+    cursor: pointer;
+
+    &:hover {
+      color: inherit !important;
+    }
+
+    svg {
+      size: 0.8em;
+    }
+  }
+
   /* https://vueuse.org/core/useTextareaAutosize/ */
   &-textarea._autosize {
     resize: none;

@@ -8,6 +8,7 @@ const state = reactive({
   required: false,
   title: 'Title',
   type: 'text',
+  clearable: false,
 })
 
 const options = [
@@ -32,7 +33,8 @@ const options = [
   'text',
   'time',
   'url',
-  'week']
+  'week',
+]
 </script>
 
 <template>
@@ -43,6 +45,18 @@ const options = [
       :required="state.required"
       :title="state.title"
       :type="state.type"
+      :clearable="state.clearable"
+    />
+  </div>
+
+  <div>
+    <OuiInput
+      v-model="state.value"
+      :lazy="state.lazy"
+      :required="state.required"
+      :title="state.title"
+      :type="state.type"
+      clearable
     />
   </div>
 
@@ -68,6 +82,7 @@ const options = [
     <OuiInput v-model="state.title" title="title" />
     <OuiCheckbox v-model="state.lazy" switch title="lazy" />
     <OuiCheckbox v-model="state.required" switch title="required" />
+    <OuiCheckbox v-model="state.clearable" switch title="clearable" />
     <OuiSelect v-model="state.type" title="type" :options="options" />
   </OuiDemo>
 </template>

@@ -13,6 +13,10 @@ import { valueToBoolean } from 'zeed'
 const isE2E = valueToBoolean(process.env.APP_E2E, false)
 
 const config: UserConfig = {
+  server: {
+    port: isE2E ? 5174 : undefined,
+    strictPort: isE2E,
+  },
   envPrefix: ['APP_', 'VITE_'],
   plugins: [
     qrcode(),

@@ -39,8 +39,7 @@ if (window.visualViewport != null) {
         },
         // 400ms takes the virtual keyboard to show up;
         // other values seem to have an negative effect on the layout
-        400,
-        )
+        400)
       }
       else {
         document.documentElement.classList.remove('virtual-keyboard')

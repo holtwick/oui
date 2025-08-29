@@ -58,16 +58,16 @@ const menu = useMenuWithValue((item: number) => [{
 <template>
   <OuiText>
     <h1>v-menu</h1>
-    <OuiButton ref="button" v-menu="simpleMenu">
+    <OuiButton v-menu="simpleMenu">
       Click me
     </OuiButton>
     <p>You may click with right or left mouse key.</p>
 
     <h1>useMenuWithValue</h1>
-    <OuiButton ref="button" v-menu="menu(1)">
+    <OuiButton v-menu="menu(1)">
       Click 1
     </OuiButton>
-    <OuiButton ref="button" v-menu="menu(2)">
+    <OuiButton v-menu="menu(2)">
       Click 2
     </OuiButton>
     <p>You may click with right or left mouse key.</p>

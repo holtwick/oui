@@ -74,7 +74,7 @@ onClickOutside(floating, e => doClose())
 </script>
 
 <template>
-  <component :is="$slots.float" ref="xxx" class="gfajkhdss" />
+  <component :is="$slots.float" class="gfajkhdss" />
   <button
     ref="slotReference"
     v-bind="$attrs"
