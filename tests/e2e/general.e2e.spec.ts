@@ -37,14 +37,14 @@ test.describe('Demo Component Visual Tests', () => {
           await expect(demoMain).toHaveScreenshot(pngFileName, {
             animations: 'disabled',
             fullPage: true,
-          })
+          } as any)
         }
         else {
           // Fallback to full app screenshot
           await expect(app).toHaveScreenshot(pngFileName, {
             animations: 'disabled',
             fullPage: true,
-          })
+          } as any)
         }
       })
     }
