@@ -33,7 +33,8 @@ const options = [
   'text',
   'time',
   'url',
-  'week']
+  'week',
+]
 </script>
 
 <template>

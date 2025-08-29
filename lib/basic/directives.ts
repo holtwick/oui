@@ -43,8 +43,7 @@ export const vNoSelection = {
     log.warn('v-no-selection, use with care! causes issues on draggable!')
     if (!el.draggable) {
       el.addEventListener('pointermove', (ev: MouseEvent) =>
-        ev.preventDefault(),
-      )
+        ev.preventDefault())
     }
   },
 }
