@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { InputTypeHTMLAttribute } from 'vue'
 import { onBeforeUnmount, ref, watch } from 'vue'
+import OuiClose from './oui-close.vue'
 import OuiFormItem from './oui-form-item.vue'
 
 import './oui-form.styl'
@@ -20,10 +21,12 @@ const props = withDefaults(defineProps<{
   lazy?: boolean
   lazyDelay?: number
   disabled?: boolean
+  clearable?: boolean
 }>(), {
   type: 'text',
   lazy: false,
   lazyDelay: 5000,
+  clearable: false,
 })
 
 const emit = defineEmits<{
@@ -70,15 +73,30 @@ function doUpdate(event: KeyboardEvent) {
     lazyUpdate()
   }
 }
+
+function doClear() {
+  if (props.disabled)
+    return
+
+  tempValue.value = ''
+  model.value = ''
+}
 </script>
 
 <template>
   <OuiFormItem :id="id" :title="title" :description="description" :required="required">
-    <template v-if="$slots.start || $slots.end">
+    <template v-if="$slots.start || $slots.end || (clearable && (model || tempValue))">
       <div class="oui-input oui-input-container" :disabled="disabled ? true : undefined">
         <slot name="start" />
         <input :id="id" v-model="tempValue" :type="type" v-bind="$attrs" :disabled="disabled ? true : undefined" @keypress="doUpdate" @blur="lazyUpdate">
         <slot name="end" />
+        <div
+          v-if="clearable && (model || tempValue)"
+          class="oui-input-clearable"
+          @click.stop.prevent="doClear"
+        >
+          <OuiClose />
+        </div>
       </div>
     </template>
     <template v-else>
