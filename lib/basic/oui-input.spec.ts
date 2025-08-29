@@ -52,7 +52,7 @@ describe('ouiInput', () => {
   })
 
   it('clears value when clear button is clicked', async () => {
-    const wrapper = mount(OuiInput, {
+    const wrapper:any = mount(OuiInput, {
       props: {
         'modelValue': 'test',
         'clearable': true,
