@@ -57,7 +57,7 @@ describe('ouiInput', () => {
         'modelValue': 'test',
         'clearable': true,
         'onUpdate:modelValue': (value: string) => wrapper.setProps({ modelValue: value }),
-      },
+      } as any,
     })
 
     const clearButton = wrapper.find('.oui-input-clearable')
