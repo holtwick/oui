@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { setPageAndWait } from './helpers'
+import { screenshotOptions, preparePageForScreenshot, waitForAnimations } from './screenshot-helpers'
 
 const demoComponents = [
   'oui-button',
@@ -15,15 +16,16 @@ test.describe('Demo Component Visual Tests', () => {
   for (const dark of [false, true]) {
     for (const demoName of demoComponents) {
       test(`${demoName} dark=${dark} visual regression test`, async ({ page }) => {
+        // Set consistent viewport (this will override the global setting for specific needs)
         await page.setViewportSize({ width: 1200, height: 800 })
+        
         await setPageAndWait(page, demoName, dark)
 
-        // Wait for the Vue app to fully initialize and load the demo
-        // await page.waitForLoadState('networkidle')
-
-        // Wait for the oui-demo structure to be present (more reliable than generic selectors)
-        // await page.waitForSelector('.oui-demo', { timeout: 45000 })
-        // await page.waitForTimeout(1000) // Additional time for content to stabilize
+        // Prepare page for consistent screenshots
+        await preparePageForScreenshot(page)
+        
+        // Wait for animations to complete
+        await waitForAnimations(page)
 
         // Look for the demo main content area first, then fallback
         const demoMain = page.locator('.oui-demo')
@@ -35,16 +37,16 @@ test.describe('Demo Component Visual Tests', () => {
         if (demoMainVisible) {
           // Take screenshot of the demo main content area
           await expect(demoMain).toHaveScreenshot(pngFileName, {
-            animations: 'disabled',
-            fullPage: true,
-          } as any)
+            ...screenshotOptions,
+            fullPage: false, // Don't use fullPage for locator screenshots
+          })
         }
         else {
           // Fallback to full app screenshot
           await expect(app).toHaveScreenshot(pngFileName, {
-            animations: 'disabled',
-            fullPage: true,
-          } as any)
+            ...screenshotOptions,
+            fullPage: false, // Keep consistent with locator approach
+          })
         }
       })
     }
