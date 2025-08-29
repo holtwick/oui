@@ -1,55 +1,28 @@
 import { expect, test } from '@playwright/test'
+import { setPageAndWait } from '../../tests/e2e/helpers'
 
 test.describe('OuiInput Browser Tests', () => {
   test('clearable input functionality with isolated component', async ({ page }) => {
-    // Create a simple HTML page with our component
-    await page.setContent(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <script type="module" src="/lib/basic/oui-input.vue"></script>
-        <link rel="stylesheet" href="/lib/basic/oui-form.styl">
-      </head>
-      <body>
-        <div id="app">
-          <oui-input 
-            v-model="value" 
-            clearable="true"
-            title="Test Input"
-            placeholder="Type something..."
-          ></oui-input>
-        </div>
-        
-        <script type="module">
-          import { createApp, ref } from 'vue'
-          import OuiInput from '/lib/basic/oui-input.vue'
-          
-          const app = createApp({
-            components: { OuiInput },
-            setup() {
-              const value = ref('Initial value')
-              return { value }
-            }
-          })
-          
-          app.mount('#app')
-        </script>
-      </body>
-      </html>
-    `)
+    await setPageAndWait(page, 'oui-input.demo', false)
 
-    // Wait for Vue to initialize
-    await page.waitForTimeout(1000)
+    // Toggle the clearable option on
+    const clearableToggle = page.locator('label').filter({ hasText: /clearable/i }).locator('input[type="checkbox"]').first()
+    
+    if (await clearableToggle.count() > 0) {
+      await clearableToggle.check()
+      
+      // Give it a moment for the UI to update
+      await page.waitForTimeout(500)
+    }
 
-    // Find the input
-    const input = page.locator('input')
-    await expect(input).toBeVisible()
+    // Find the main input that should now be clearable
+    const input = page.locator('.oui-input-string').first()
+    
+    // Add some text to make sure we can test clearing
+    await input.fill('Test value')
+    await expect(input).toHaveValue('Test value')
 
-    // Check initial value
-    await expect(input).toHaveValue('Initial value')
-
-    // The clear button should be visible since there's an initial value
+    // The clear button should be visible since there's a value
     const clearButton = page.locator('.oui-input-clearable')
     await expect(clearButton).toBeVisible()
 
@@ -70,48 +43,6 @@ test.describe('OuiInput Browser Tests', () => {
     await expect(clearButton).toBeVisible()
   })
 
-  test('input without clearable prop should not show clear button', async ({ page }) => {
-    await page.setContent(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-      </head>
-      <body>
-        <div id="app">
-          <oui-input 
-            v-model="value" 
-            title="Test Input"
-          ></oui-input>
-        </div>
-        
-        <script type="module">
-          import { createApp, ref } from 'vue'
-          import OuiInput from '/lib/basic/oui-input.vue'
-          
-          const app = createApp({
-            components: { OuiInput },
-            setup() {
-              const value = ref('Some value')
-              return { value }
-            }
-          })
-          
-          app.mount('#app')
-        </script>
-      </body>
-      </html>
-    `)
-
-    await page.waitForTimeout(1000)
-
-    // Clear button should not exist
-    const clearButton = page.locator('.oui-input-clearable')
-    await expect(clearButton).not.toBeVisible()
-
-    // But input should still work normally
-    const input = page.locator('input')
-    await expect(input).toBeVisible()
-    await expect(input).toHaveValue('Some value')
-  })
+  // Note: Test for clearable disabled case is covered in the main interactions.e2e.spec.ts
+  // This isolated test focuses on the positive clearable functionality test
 })
