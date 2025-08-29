@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { dayFromToday, getTimestamp } from 'zeed'
+import { dayFromParts } from 'zeed'
 import { OuiButton, OuiCheckbox, OuiCombobox, OuiDate, OuiDatetime, OuiDemo, OuiFormItem, OuiInput, OuiInputColor, OuiInputNumber, OuiPassword, OuiSelect, OuiTextarea } from '@/lib'
 
 const state = reactive({
@@ -11,8 +11,8 @@ const state = reactive({
   text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis velit, distinctio adipisci culpa, numquam impedit hic consequuntur unde illo illum sunt aliquid aut beatae natus? Repellendus vel laborum doloribus tempore?',
   password: 'Secr3!',
   select: '',
-  date: dayFromToday(),
-  datetime: getTimestamp(),
+  date: dayFromParts(2025, 12, 24),
+  datetime: 1766595600000,
   disabled: false,
   lazy: false,
   lazyDelay: 5000,

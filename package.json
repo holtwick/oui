@@ -87,7 +87,7 @@
     "test:e2e:update:firefox": "playwright test --update-snapshots --project=firefox",
     "test:e2e:update:webkit": "playwright test --update-snapshots --project=webkit",
     "test:e2e:consistency": "node tests/e2e/check-consistency.js",
-    "test:release": "nr lint:fix && nr check && vitest --run",
+    "test:release": "nr lint:fix && nr check && vitest --run && nr test:e2e && nr upload",
     "test:all": "nr test:release && nr test:e2e",
     "post:release": "nr upload",
     "upload": "nr build:demo && rsync -rvz dist/* cy:public_html/oui.holtwick.de"
