@@ -87,14 +87,14 @@
     "test:e2e:update:firefox": "playwright test --update-snapshots --project=firefox",
     "test:e2e:update:webkit": "playwright test --update-snapshots --project=webkit",
     "test:e2e:consistency": "node tests/e2e/check-consistency.js",
-    "test:release": "nr lint:fix && nr check && vitest --run && nr test:e2e && nr upload",
+    "test:release": "nr lint:fix && nr check && vitest --run && nr test:e2e",
     "test:all": "nr test:release && nr test:e2e",
     "post:release": "nr upload",
     "upload": "nr build:demo && rsync -rvz dist/* cy:public_html/oui.holtwick.de"
   },
   "dependencies": {
     "@floating-ui/vue": "^1.1.9",
-    "@vueuse/core": "^13.7.0",
+    "@vueuse/core": "^13.8.0",
     "vue": "^3.5.20",
     "zeed": "^1.0.1"
   },
@@ -102,7 +102,7 @@
     "@antfu/eslint-config": "^5.2.1",
     "@antfu/ni": "^25.0.0",
     "@playwright/test": "^1.55.0",
-    "@shikijs/markdown-it": "^3.11.0",
+    "@shikijs/markdown-it": "^3.12.0",
     "@types/glob": "^9.0.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitest/browser": "^3.2.4",
