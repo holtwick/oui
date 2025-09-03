@@ -48,6 +48,11 @@ export function _emitNotification(n: AppNotificationSetup): AppNotificationInfo 
     closeNotification(ni.id)
   }
 
+  ni.action2 = () => {
+    ni.onAction2?.()
+    closeNotification(ni.id)
+  }
+
   ni.close = () => {
     ni.onCancel?.()
     closeNotification(ni.id)

@@ -42,11 +42,14 @@ const ok = useSingleton('oui-notification')
                 <div v-if="n.message" class="oui-notification-message">
                   {{ n.message }}
                 </div>
-                <div v-if="n.onCancel" class="oui-notification-feedback">
+                <div v-if="n.onCancel || n.onAction2" class="oui-notification-feedback">
                   <button @click="n.close()">
                     {{ n.cancelLabel ?? 'Cancel' }}
                   </button>
-                  <button @click="n.action()">
+                  <button v-if="n.onAction2" @click="n.action2()">
+                    {{ n.actionLabel2 ?? (n.actionLabel ?? 'OK') }}
+                  </button>
+                  <button v-else @click="n.action()">
                     {{ n.actionLabel ?? 'OK' }}
                   </button>
                 </div>

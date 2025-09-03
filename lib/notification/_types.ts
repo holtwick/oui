@@ -21,9 +21,11 @@ export interface AppNotificationSetup {
   timeout?: number
 
   onAction?: () => void
+  onAction2?: () => void
   onCancel?: () => void
   onClose?: () => void
   actionLabel?: string
+  actionLabel2?: string
   cancelLabel?: string
 }
 
@@ -35,4 +37,5 @@ export interface AppNotificationInfo extends AppNotificationSetup {
   timeout: number
   close: () => void
   action: () => void
+  action2: () => void
 }
