@@ -4,40 +4,47 @@ import { useLocalStorage } from '@vueuse/core'
 import { reactive, ref } from 'vue'
 import { OuiDemo, OuiInput, OuiSegmented, OuiSelect, OuiTabs } from '@/lib'
 
+import OuiCheckbox from './oui-checkbox.vue'
 import './oui-slider.demo.styl'
 
 // Tabs demo data
 const selectedTab = useLocalStorage('oui-slider-tab', 'overview')
 
 const tabs: OuiTab[] = [
-  { name: 'overview', title: 'Overview', sliderClass: 'pill-blue' },
-  { name: 'analytics', title: 'Analytics', sliderClass: 'pill-green' },
-  { name: 'settings', title: 'Settings', sliderClass: 'pill-orange' },
-  { name: 'users', title: 'Users', sliderClass: 'pill-purple' },
+  { value: 'overview', title: 'Overview', sliderClass: 'pill-blue' },
+  { value: 'analytics', title: 'Analytics', sliderClass: 'pill-green' },
+  { value: 'settings', title: 'Settings', sliderClass: 'pill-orange' },
+  { value: 'users', title: 'Users', sliderClass: 'pill-purple' },
 ]
 
 // Segmented control demo data
 const sizeOptions: OuiSegmentedOption[] = [
-  { name: 'md', title: 'Medium' },
-  { name: 'lg', title: 'Large' },
+  { value: 'md', title: 'Medium' },
+  { value: 'lg', title: 'Large' },
+]
+
+const boolOptions: OuiSegmentedOption<any>[] = [
+  { value: false, title: 'Off' },
+  { value: true, title: 'On' },
 ]
 
 const selectedTheme = ref<string>('light')
 const themeOptions: OuiSegmentedOption[] = [
-  { name: 'light', title: 'Light' },
-  { name: 'dark', title: 'Dark' },
-  { name: 'auto', title: 'Auto' },
+  { value: 'light', title: 'Light' },
+  { value: 'dark', title: 'Dark' },
+  { value: 'auto', title: 'Auto' },
 ]
 
 const selectedView = ref<string>('grid')
 const viewOptions: OuiSegmentedOption[] = [
-  { name: 'list', title: 'List', icon: '📋' },
-  { name: 'grid', title: 'Grid', icon: '⬜' },
-  { name: 'card', title: 'Cards', icon: '🃏' },
+  { value: 'list', title: 'List', icon: '📋' },
+  { value: 'grid', title: 'Grid', icon: '⬜' },
+  { value: 'card', title: 'Cards', icon: '🃏' },
 ]
 
 const state = reactive({
   size: 'md',
+  bool: true,
 })
 </script>
 
@@ -131,6 +138,12 @@ const state = reactive({
         <div class="example">
           <label>Error State:</label>
           <OuiSegmented v-model="state.size" :options="sizeOptions" error />
+        </div>
+
+        <div class="example">
+          <label>Switch:</label>
+          <OuiSegmented v-model="state.bool" :options="boolOptions" error />
+          <OuiCheckbox v-model="state.bool" title="Checkbox linked to segmented control" />
         </div>
       </div>
     </section>

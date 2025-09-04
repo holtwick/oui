@@ -24,12 +24,13 @@ const props = withDefaults(defineProps<{
 const slots = useSlots()
 
 const slotText = computed(() => {
-  const defaultSlot = slots.default?.()
+  const defaultSlot = slots.default?.({})
+
   if (!defaultSlot || defaultSlot.length === 0)
     return ''
 
   // Extract text content from slot
-  const textContent = defaultSlot.map((vnode) => {
+  const textContent = defaultSlot.map((vnode: any) => {
     if (typeof vnode.children === 'string') {
       return vnode.children
     }

@@ -1,7 +1,7 @@
 import type { Component } from 'vue'
 
-export interface OuiSliderOption<K extends string = string> {
-  name: K
+export interface OuiSliderOption<K> {
+  value: K
   title?: string
   icon?: Component | string
   sliderClass?: string
@@ -11,7 +11,7 @@ export interface OuiTab<K extends string = string> extends OuiSliderOption<K> {
   content?: any
 }
 
-export interface OuiSegmentedOption<K extends string = string> extends OuiSliderOption<K> {
+export interface OuiSegmentedOption<K = any> extends OuiSliderOption<K> {
 }
 
 export interface OuiTableColumn<K = string> {

@@ -26,7 +26,7 @@ const allOptions = computed(() => (props.options ?? []).map(v => isPrimitive(v) 
 
 const segmentedOptions = computed<OuiSegmentedOption[]>(() => {
   return allOptions.value.map(([name, title]) => ({
-    name: String(name),
+    value: String(name),
     title: String(title),
   }))
 })
