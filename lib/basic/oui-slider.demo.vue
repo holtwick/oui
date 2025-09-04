@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { OuiSegmentedOption, OuiTab } from '@/lib'
+import type { OuiSegmentedOptions, OuiTab } from '@/lib'
 import { useLocalStorage } from '@vueuse/core'
 import { reactive, ref } from 'vue'
 import { OuiDemo, OuiInput, OuiSegmented, OuiSelect, OuiTabs } from '@/lib'
-
 import OuiCheckbox from './oui-checkbox.vue'
+
 import './oui-slider.demo.styl'
 
 // Tabs demo data
@@ -18,25 +18,25 @@ const tabs: OuiTab[] = [
 ]
 
 // Segmented control demo data
-const sizeOptions: OuiSegmentedOption[] = [
+const sizeOptions: OuiSegmentedOptions = [
   { value: 'md', title: 'Medium' },
   { value: 'lg', title: 'Large' },
 ]
 
-const boolOptions: OuiSegmentedOption<any>[] = [
+const boolOptions: OuiSegmentedOptions = [
   { value: false, title: 'Off' },
   { value: true, title: 'On' },
 ]
 
 const selectedTheme = ref<string>('light')
-const themeOptions: OuiSegmentedOption[] = [
+const themeOptions: OuiSegmentedOptions = [
   { value: 'light', title: 'Light' },
   { value: 'dark', title: 'Dark' },
   { value: 'auto', title: 'Auto' },
 ]
 
 const selectedView = ref<string>('grid')
-const viewOptions: OuiSegmentedOption[] = [
+const viewOptions: OuiSegmentedOptions = [
   { value: 'list', title: 'List', icon: '📋' },
   { value: 'grid', title: 'Grid', icon: '⬜' },
   { value: 'card', title: 'Cards', icon: '🃏' },
