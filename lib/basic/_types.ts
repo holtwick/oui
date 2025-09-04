@@ -14,6 +14,8 @@ export interface OuiTab<K extends string = string> extends OuiSliderOption<K> {
 export interface OuiSegmentedOption<K = any> extends OuiSliderOption<K> {
 }
 
+export type OuiSegmentedOptions<K = any> = OuiSegmentedOption<K>[]
+
 export interface OuiTableColumn<K = string> {
   name: K
   title?: string

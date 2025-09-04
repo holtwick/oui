@@ -1,4 +1,4 @@
-<script lang="ts" setup generic="K extends string">
+<script lang="ts" setup generic="K">
 import type { OuiSliderOption } from './_types'
 import { useElementBounding, useResizeObserver } from '@vueuse/core'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
