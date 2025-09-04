@@ -17,7 +17,7 @@ const props = defineProps<{
   placeholder?: string
   disabled?: boolean
   error?: boolean
-  size?: 'md' | 'lg'
+  size?: 'md' | 'lg' | 'xl'
 }>()
 
 const model = defineModel<K>({ required: false })
@@ -25,11 +25,11 @@ const model = defineModel<K>({ required: false })
 const containerRef = ref<HTMLElement>()
 
 // Ensure we have a default value if none is set
-onMounted(() => {
-  if (!model.value && props.options.length > 0) {
-    model.value = props.options[0].value
-  }
-})
+// onMounted(() => {
+//   if (!model.value && props.options.length > 0) {
+//     model.value = props.options[0].value
+//   }
+// })
 
 const computedClass = computed(() => [
   'oui-segmented',

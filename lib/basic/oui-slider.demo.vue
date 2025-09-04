@@ -45,6 +45,7 @@ const viewOptions: OuiSegmentedOptions = [
 const state = reactive({
   size: 'md',
   bool: true,
+  satisfaction: '',
 })
 </script>
 
@@ -142,8 +143,23 @@ const state = reactive({
 
         <div class="example">
           <label>Switch:</label>
-          <OuiSegmented v-model="state.bool" :options="boolOptions" error />
+          <OuiSegmented v-model="state.bool" :options="boolOptions" />
           <OuiCheckbox v-model="state.bool" title="Checkbox linked to segmented control" />
+        </div>
+
+        <div class="example">
+          <label>Emoji Rating:</label>
+          <OuiSegmented
+            v-mode="state.satisfaction"
+            size="xl"
+            :options="[
+              { title: '😡', value: '😡' },
+              { title: '😕', value: '😕' },
+              { title: '😐', value: '😐' },
+              { title: '🙂', value: '🙂' },
+              { title: '😄', value: '😄' },
+            ]"
+          />
         </div>
       </div>
     </section>
@@ -151,5 +167,6 @@ const state = reactive({
   <OuiDemo>
     <OuiInput v-model="selectedTab" title="Tab" />
     <OuiSelect v-model="state.size" segmented :options="['md', 'lg']" title="Size" />
+    <OuiInput v-model="state.satisfaction" title="Satisfaction" />
   </OuiDemo>
 </template>
