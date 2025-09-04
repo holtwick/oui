@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import './oui-form-item.styl'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 defineProps<{
   title?: string
   description?: string
@@ -19,7 +23,7 @@ defineProps<{
           <span v-if="required">*</span>
         </div>
         <div class="oui-form-item-body">
-          <slot />
+          <slot v-bind="$attrs" />
         </div>
         <template v-if="$slots.description || description">
           <div class="oui-form-item-description">
@@ -32,6 +36,6 @@ defineProps<{
     </div>
   </template>
   <template v-else>
-    <slot />
+    <slot v-bind="$attrs" />
   </template>
 </template>
