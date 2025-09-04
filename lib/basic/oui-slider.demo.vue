@@ -150,7 +150,7 @@ const state = reactive({
         <div class="example">
           <label>Emoji Rating:</label>
           <OuiSegmented
-            v-mode="state.satisfaction"
+            v-model="state.satisfaction"
             size="xl"
             :options="[
               { title: '😡', value: '😡' },
