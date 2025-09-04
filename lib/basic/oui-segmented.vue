@@ -1,6 +1,6 @@
 <script lang="ts" setup generic="K">
 import type { OuiSegmentedOptions } from './_types'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { t } from '@/basic/i18n'
 import OuiFormItem from './oui-form-item.vue'
 import OuiSlider from './oui-slider.vue'
