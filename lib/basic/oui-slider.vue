@@ -45,7 +45,7 @@ async function updateActiveItemRef(animated = false) {
   updateActive()
   updateContainer()
 
-  activeOption.value = props.options.find(option => option.name === model.value)
+  activeOption.value = props.options.find(option => option.value === model.value)
   await nextTick()
   shouldAnimate.value = animated
 

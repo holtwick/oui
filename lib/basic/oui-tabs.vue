@@ -11,7 +11,7 @@ const props = defineProps<{
 
 const model = defineModel<K>({ required: false })
 
-const name = computed<string>(() => model.value ?? props.tabs?.[0]?.name ?? 'default')
+const name = computed<string>(() => model.value ?? props.tabs?.[0]?.value ?? 'default')
 </script>
 
 <template>
@@ -23,12 +23,12 @@ const name = computed<string>(() => model.value ?? props.tabs?.[0]?.name ?? 'def
     >
       <template #default="{ options, updateModelValue }">
         <template v-for="tab in options" :key="tab.name">
-          <button :class="{ _active: model === tab.name }" @click="updateModelValue(tab.name)">
-            <slot :name="`tab-${tab.name}`" v-bind="{ tab }">
+          <button :class="{ _active: model === tab.value }" @click="updateModelValue(tab.value)">
+            <slot :name="`tab-${tab.value}`" v-bind="{ tab }">
               <template v-if="tab.icon">
                 <component :is="tab.icon" />
               </template>
-              {{ tab.title ?? tab.name }}
+              {{ tab.title ?? tab.value }}
             </slot>
           </button>
         </template>

@@ -27,7 +27,7 @@ const containerRef = ref<HTMLElement>()
 // Ensure we have a default value if none is set
 onMounted(() => {
   if (!model.value && props.options.length > 0) {
-    model.value = props.options[0].name
+    model.value = props.options[0].value
   }
 })
 
@@ -40,18 +40,18 @@ const computedClass = computed(() => [
 ])
 
 const activeOption = computed(() =>
-  props.options.find(option => option.name === model.value),
+  props.options.find(option => option.value === model.value),
 )
 
 const displayValue = computed(() =>
-  activeOption.value?.title || activeOption.value?.name || props.placeholder || t('Select option', 'oui.segmented.placeholder'),
+  activeOption.value?.title || activeOption.value?.value || props.placeholder || t('Select option', 'oui.segmented.placeholder'),
 )
 
 function handleKeydown(event: KeyboardEvent) {
   if (props.disabled)
     return
 
-  const currentIndex = model.value ? props.options.findIndex(option => option.name === model.value) : -1
+  const currentIndex = model.value ? props.options.findIndex(option => option.value === model.value) : -1
   let newIndex = currentIndex
 
   switch (event.key) {
@@ -92,7 +92,7 @@ function handleKeydown(event: KeyboardEvent) {
   }
 
   if (newIndex !== currentIndex && newIndex >= 0 && newIndex < props.options.length) {
-    model.value = props.options[newIndex].name
+    model.value = props.options[newIndex].value
   }
 }
 
@@ -106,14 +106,14 @@ const disabledConform = computed(() => {
     <div ref="containerRef" class="oui-input oui-segmented" :class="computedClass" tabindex="0" role="radiogroup" :disabled="disabledConform" v-bind="$attrs" @keydown="handleKeydown">
       <OuiSlider v-model="model" :options="options" class="oui-segmented-container" slider-class="oui-segmented-slider">
         <template #default="{ options: slidingOptions, updateModelValue }">
-          <template v-for="option in slidingOptions" :key="option.name">
-            <button :class="{ _active: model === option.name }" :disabled="disabledConform" role="radio" :aria-checked="model === option.name" :aria-label="option.title || option.name" tabindex="-1" @click="updateModelValue(option.name)">
-              <slot :name="`option-${option.name}`" v-bind="{ option }">
+          <template v-for="option in slidingOptions" :key="option.value">
+            <button :class="{ _active: model === option.value }" :disabled="disabledConform" role="radio" :aria-checked="model === option.value" :aria-label="option.title || option.value" tabindex="-1" @click="updateModelValue(option.value)">
+              <slot :name="`option-${option.value}`" v-bind="{ option }">
                 <template v-if="option.icon">
                   <component :is="option.icon" v-if="typeof option.icon !== 'string'" />
                   <span v-else v-text="option.icon" />
                 </template>
-                {{ option.title ?? option.name }}
+                {{ option.title ?? option.value }}
               </slot>
             </button>
           </template>
