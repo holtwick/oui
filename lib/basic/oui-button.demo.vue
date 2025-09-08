@@ -32,6 +32,9 @@ const state = reactive({
     <OuiButton :disabled="state.disabled" mode="primary">
       Primary
     </OuiButton>
+    <OuiButton :disabled="state.disabled" mode="outline">
+      Outline
+    </OuiButton>
     <OuiButton :disabled="state.disabled" mode="ghost">
       Ghost
     </OuiButton>

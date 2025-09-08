@@ -139,6 +139,19 @@ oui-button() {
     }
   }
 
+  &._button_mode_outline {
+    --button-border: var(--input-border);
+    --button-fg: var(--fg);
+    --button-bg: transparent;
+    --button-bg-hover: var(--s2-bg);
+    --button-bg-active: var(--t3-bg);
+    font-weight: inherit;
+
+    &, &:hover, &:active {
+      font-weight: inherit;
+    }
+  }
+
   // Colors
   &, &:hover, &:active {
     color: var(--button-fg);

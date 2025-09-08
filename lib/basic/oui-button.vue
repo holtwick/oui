@@ -5,7 +5,7 @@ import './oui-form.styl'
 
 const props = withDefaults(defineProps<{
   title?: string
-  mode?: 'primary' | 'danger' | 'neutral' | 'success' | 'ghost'
+  mode?: 'primary' | 'danger' | 'neutral' | 'success' | 'ghost' | 'outline'
   size?: 'small' | 'normal' | 'large'
   dropdown?: boolean
   outline?: boolean
@@ -41,25 +41,20 @@ const slotText = computed(() => {
 })
 
 const buttonTitle = computed(() => (props.title || slotText.value || '').trim())
+
+const klass = computed(() => ([
+  'oui-button',
+  props.mode && `_button_mode_${props.mode}`,
+  props.size && `_button_size_${props.size}`,
+  props.dropdown && `_button_dropdown`,
+].filter(Boolean)))
 </script>
 
 <template>
-  <a
-    v-if="href && !disabled" :href="href" :target="target" class="oui-button" :class="[
-      mode && `_button_mode_${mode}`,
-      size && `_button_size_${size}`,
-      dropdown && `_button_dropdown`,
-    ]" role="button" :aria-label="buttonTitle" :aria-disabled="disabled"
-  >
+  <a v-if="href && !disabled" :href="href" :target="target" :class="klass" role="button" :aria-label="buttonTitle" :aria-disabled="disabled">
     <slot>{{ title }}</slot>
   </a>
-  <button
-    v-else :disabled="disabled ? true : undefined" class="oui-button" :class="[
-      mode && `_button_mode_${mode}`,
-      size && `_button_size_${size}`,
-      dropdown && `_button_dropdown`,
-    ]" :aria-label="buttonTitle" :aria-disabled="disabled"
-  >
+  <button v-else :disabled="disabled ? true : undefined" :class="klass" :aria-label="buttonTitle" :aria-disabled="disabled">
     <slot>{{ title }}</slot>
   </button>
 </template>
