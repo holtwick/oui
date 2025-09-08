@@ -103,6 +103,18 @@ oui-button() {
     }
   }
 
+  &._button_mode_success {
+    --button-bg: -green-700;
+    --button-bg-hover: -green-800;
+    --button-bg-active: -green-900;
+
+    .dark & {
+      --button-bg: -green-700;
+      --button-bg-hover: -green-800;
+      --button-bg-active: -green-900;
+    }
+  }
+
   &._button_mode_neutral {
     --button-bg: var(--n0-700);
     --button-bg-hover: var(--n0-900);
@@ -112,6 +124,18 @@ oui-button() {
       --button-bg: var(--n0-700);
       --button-bg-hover: var(--n0-800);
       --button-bg-active: var(--n0-900);
+    }
+  }
+
+  &._button_mode_ghost {
+    --button-fg: var(--fg);
+    --button-bg: transparent;
+    --button-bg-hover: var(--s2-bg);
+    --button-bg-active: var(--t3-bg);
+    font-weight: inherit;
+
+    &, &:hover, &:active {
+      font-weight: inherit;
     }
   }
 

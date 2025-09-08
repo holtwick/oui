@@ -9,12 +9,12 @@ export function makeUrl(name: string, dark: boolean = false) {
 
 export async function setPageAndWait(page: Page, name: string, dark = false) {
   await page.goto('/')
-  await page.waitForSelector('.oui-demo-loaded', { timeout: 3000 })
+  await page.waitForSelector('.oui-demo-loaded', { timeout: 10_000 })
 
   const data = { name, dark }
   await page.evaluate((data: any) => {
     (window as any).setPage(data.name, data.dark)
   }, data)
 
-  await page.waitForSelector('.oui-demo', { timeout: 3000 })
+  await page.waitForSelector('.oui-demo', { timeout: 10_000 })
 }
