@@ -1,5 +1,5 @@
 import type { Component } from 'vue'
-import { func, useDispose } from 'zeed'
+import { useDispose } from 'zeed'
 import { mountComponentAsApp } from '../basic/app-helper'
 import { onEnterFree } from './focus'
 import OuiDialog from './oui-dialog.vue'
