@@ -1,5 +1,5 @@
 import type { Component } from 'vue'
-import { useDispose } from 'zeed'
+import { func, useDispose } from 'zeed'
 import { mountComponentAsApp } from '../basic/app-helper'
 import { onEnterFree } from './focus'
 import OuiDialog from './oui-dialog.vue'
@@ -84,4 +84,32 @@ export function dialogOpen<T = any>(component: Component, props?: T) {
 export function useDialogOpen(component: Component) {
   const { open } = useDialog(component)
   return open
+}
+
+let dialogDefault: ReturnType<typeof useDialog> | null = null
+
+function getDialogDefault() {
+  if (!dialogDefault)
+    dialogDefault = useDialog()
+  return dialogDefault
+}
+
+export function ouiAlert(message: string) {
+  const { alert } = getDialogDefault()
+  return alert(message)
+}
+
+export function ouiConfirm(message: string) {
+  const { confirm } = getDialogDefault()
+  return confirm(message)
+}
+
+export function ouiPrompt(message: string, dft?: string) {
+  const { prompt } = getDialogDefault()
+  return prompt(message, dft)
+}
+
+export function ouiDialog(props: any) {
+  const { dialog } = getDialogDefault()
+  return dialog(props)
 }

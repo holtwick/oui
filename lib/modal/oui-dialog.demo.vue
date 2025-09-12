@@ -1,7 +1,7 @@
 <!-- eslint-disable no-alert -->
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { OuiButton, OuiCard, OuiDemo, useDialog } from '@/lib'
+import { ouiAlert, OuiButton, OuiCard, ouiConfirm, OuiDemo, ouiPrompt, useDialog } from '@/lib'
 import OuiDialogExample from './oui-dialog.example.vue'
 
 const state = reactive({
@@ -57,6 +57,22 @@ function classicPrompt() {
       </OuiButton>
       <OuiButton @click="open().then(v => state.value = v as any)">
         Custom
+      </OuiButton>
+    </p>
+
+    <hr>
+
+    <h2>Oui Default replacements</h2>
+    <p>Async re-implementations of the classic dialogs.</p>
+    <p>
+      <OuiButton @click="ouiAlert('Hello World')">
+        Alert
+      </OuiButton>
+      <OuiButton @click="ouiConfirm('Hello World').then(v => state.value = v as any)">
+        Confirm
+      </OuiButton>
+      <OuiButton @click="ouiPrompt('Hello World').then(v => state.value = v as any)">
+        Prompt
       </OuiButton>
     </p>
 
