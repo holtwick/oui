@@ -81,8 +81,6 @@ const config: UserConfig = {
 }
 
 if (!process.env.BUILD_DEMO) {
-  config.publicDir = false // Don't serve or copy public folder for library builds
-
   config.plugins?.push(
     dts({
       rollupTypes: false, // Generate separate .d.ts files for better tree-shaking
