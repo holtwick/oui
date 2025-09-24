@@ -108,15 +108,15 @@ function handleInfo() {
 @import 'oui-kit/stylus'
 
 .demo-container
-  padding: $spacing-lg
+  padding: -spacing-lg
   max-width: 600px
   margin: 0 auto
 
 .button-group
   display: flex
-  gap: $spacing-md
+  gap: -spacing-md
   flex-wrap: wrap
-  margin-top: $spacing-md
+  margin-top: -spacing-md
 </style>
 ```
 

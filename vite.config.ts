@@ -81,9 +81,12 @@ const config: UserConfig = {
 }
 
 if (!process.env.BUILD_DEMO) {
+  config.publicDir = false // Don't serve or copy public folder for library builds
+
   config.plugins?.push(
     dts({
-      rollupTypes: true,
+      rollupTypes: false, // Generate separate .d.ts files for better tree-shaking
+      include: ['lib/**/*'], // Only generate types for library code, not demo/src code
     }),
   )
 
@@ -102,6 +105,12 @@ if (!process.env.BUILD_DEMO) {
       // preserveEntrySignatures: "strict",
       external: ['vue', '@vueuse/core', 'zeed'], // Object.keys(pkg.dependencies),
     },
+  }
+}
+else {
+  // Demo build - use separate output directory
+  config.build = {
+    outDir: 'www',
   }
 }
 
