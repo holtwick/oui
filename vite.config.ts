@@ -11,6 +11,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import { valueToBoolean } from 'zeed'
 
 const isE2E = valueToBoolean(process.env.APP_E2E, false)
+const BUILD_LIB = valueToBoolean(process.env.BUILD_LIB, false)
 
 const config: UserConfig = {
   server: {
@@ -80,7 +81,9 @@ const config: UserConfig = {
   // },
 }
 
-if (!process.env.BUILD_DEMO) {
+if (BUILD_LIB) {
+  config.publicDir = false // Don't serve or copy public folder for library builds
+
   config.plugins?.push(
     dts({
       rollupTypes: false, // Generate separate .d.ts files for better tree-shaking
