@@ -64,8 +64,8 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "vite build",
-    "build:demo": "BUILD_DEMO=1 vite build",
+    "build": "BUILD_LIB=1 vite build",
+    "build:demo": "vite build",
     "check": "vue-tsc --noEmit",
     "dev": "vite --host --open",
     "dev:e2e": "APP_E2E=1 vite",
