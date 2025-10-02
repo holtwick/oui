@@ -35,9 +35,15 @@ const state = reactive({
     <OuiCheckbox
       v-model="state.value"
       :disabled="state.disabled"
-      title="Checkbox with label"
+      title="Checkbox with label and console log on click"
       description="This one has a description"
+      @change="() => console.log(`Clicked! ${state.value}`)"
     />
+  </div>
+  <div>
+    <label>
+      <input v-model="state.value" type="checkbox" @change="() => console.log(`Clicked! ${state.value}`)"> Regular checkbox bound to same value
+    </label>
   </div>
   <div>
     <OuiCheckbox

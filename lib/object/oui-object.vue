@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ObjectVisualizer from './lib/ObjectVisualizer.vue'
+import ObjectVisualizer from './lib/index.vue'
 
 import './oui-object.styl'
 
