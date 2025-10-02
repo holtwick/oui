@@ -4,7 +4,9 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  components: {},
+  components: {
+    Wrapper: () => import('./Wrapper.vue'),
+  },
   inheritAttrs: false,
 })
 </script>
@@ -74,7 +76,7 @@ cache.add(props.data)
     <template v-if="isCircular">
       <span v-if="isExpanding" class="value">
         <template v-for="key of keys" :key="key">
-          <wrapper
+          <Wrapper
             class="value"
             :name="key"
             :path="[...path, key]"
@@ -92,7 +94,7 @@ cache.add(props.data)
     <template v-else>
       <span v-show="isExpanding" class="value">
         <template v-for="key of keys" :key="key">
-          <wrapper
+          <Wrapper
             class="value"
             :name="key"
             :path="[...path, key]"

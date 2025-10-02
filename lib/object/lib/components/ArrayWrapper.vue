@@ -4,7 +4,9 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  components: {},
+  components: {
+    Wrapper: () => import('./Wrapper.vue'),
+  },
   inheritAttrs: false,
 })
 </script>
@@ -85,7 +87,7 @@ const isCompact = computed(() => props.data.length > 0 && props.data.every(obj =
       <template v-if="isCircular">
         <span v-if="isExpanding" class="value">
           <template v-for="key of keys" :key="key">
-            <wrapper
+            <Wrapper
               :name="key"
               :path="[...path, key]"
               :data="lookup(key)"
@@ -102,7 +104,7 @@ const isCompact = computed(() => props.data.length > 0 && props.data.every(obj =
       <template v-else>
         <span v-if="isExpanding" class="value">
           <template v-for="key of keys" :key="key">
-            <wrapper
+            <Wrapper
               :name="key"
               :path="[...path, key]"
               :data="lookup(key)"
