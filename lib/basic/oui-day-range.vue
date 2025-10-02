@@ -2,8 +2,7 @@
 import type { DayValue } from 'zeed'
 import type { PeriodType } from './oui-day-range.lib'
 import { OuiButton, OuiFloat } from 'oui-kit'
-import { DatePicker } from 'v-calendar'
-import { computed, nextTick, ref } from 'vue'
+import { computed, defineAsyncComponent, nextTick, ref } from 'vue'
 import { dayFromDate, dayFromString, dayOffset, dayToDate, dayToString } from 'zeed'
 import { dayRangeMonth, dayRangePeriod, dayRangeWeek, dayRangeYear, firstDayOfWeek, today } from './oui-day-range.lib'
 import OuiFormItem from './oui-form-item.vue'
@@ -21,6 +20,8 @@ withDefaults(defineProps<{
   required?: boolean
   id?: string
 }>(), {})
+
+const DatePicker = defineAsyncComponent(async () => (await import('v-calendar')).DatePicker)
 
 const startDay = defineModel<DayValue>('startDay', { required: true })
 const endDay = defineModel<DayValue>('endDay', { required: true })

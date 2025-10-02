@@ -118,6 +118,7 @@
     "stylus": "^0.64.0",
     "tsup": "^8.5.0",
     "unplugin-vue-markdown": "^29.2.0",
+    "v-calendar": "^3.1.2",
     "vite": "^7.1.8",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-qrcode": "^0.3.0",

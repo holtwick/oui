@@ -9,6 +9,7 @@ import dts from 'vite-plugin-dts'
 import { qrcode } from 'vite-plugin-qrcode'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { valueToBoolean } from 'zeed'
+import pkg from './package.json'
 
 const isE2E = valueToBoolean(process.env.APP_E2E, false)
 const BUILD_LIB = valueToBoolean(process.env.BUILD_LIB, false)
@@ -104,7 +105,12 @@ if (BUILD_LIB) {
     },
     rollupOptions: {
       // preserveEntrySignatures: "strict",
-      external: ['vue', '@vueuse/core', 'zeed'], // Object.keys(pkg.dependencies),
+      external: [
+        'vue',
+        '@vueuse/core',
+        'zeed',
+        ...Object.keys(pkg.optionalDependencies),
+      ],
     },
   }
 }
