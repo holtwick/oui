@@ -102,6 +102,9 @@
     "vue": "^3.5.22",
     "zeed": "^1.0.15"
   },
+  "optionalDependencies": {
+    "v-calendar": "^3.1.2"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
     "@antfu/ni": "^26.1.0",
@@ -115,7 +118,7 @@
     "stylus": "^0.64.0",
     "tsup": "^8.5.0",
     "unplugin-vue-markdown": "^29.2.0",
-    "vite": "^7.1.7",
+    "vite": "^7.1.8",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-qrcode": "^0.3.0",
     "vite-plugin-vue-devtools": "^8.0.2",

@@ -1,0 +1,25 @@
+@require "../../stylus/index.styl";
+
+.oui-day-range {
+  ._daterange {
+    use: stack-x;
+  }
+}
+
+.oui-day-range-teleport {
+  use: stack-x;
+  background: var(--bg);
+  border: 1px solid var(--s2-fg);
+  border-radius: 4;
+  padding: 8;
+
+  ._picker_presets {
+    use: scroll;
+
+    button {
+      width: 200;
+      text-align: left;
+      margin: 0;
+    }
+  }
+}
