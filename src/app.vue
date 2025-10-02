@@ -4,6 +4,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { last, sortedOrderby } from 'zeed'
 import { OuiButton, OuiMobileActivator, OuiNotice, OuiResizeable, OuiSelect, OuiText, OuiTooltipActivator } from '@/lib'
 
+import 'v-calendar/style.css'
 import './app.styl'
 
 const modes = import.meta.glob('../**/*.demo.vue', {

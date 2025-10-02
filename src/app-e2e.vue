@@ -5,6 +5,7 @@ import { nextTick, ref } from 'vue'
 import { Logger } from 'zeed'
 import { OuiMobileActivator, OuiTooltipActivator } from '@/lib'
 
+import 'v-calendar/style.css'
 import './app-e2e.styl'
 
 const log: LoggerInterface = Logger('app-e2e')
