@@ -1,7 +1,7 @@
 {
   "name": "oui-kit",
   "type": "module",
-  "version": "0.34.11",
+  "version": "0.34.12",
   "author": {
     "email": "dirk.holtwick@gmail.com",
     "name": "Dirk Holtwick",
@@ -102,8 +102,7 @@
     "v-calendar": "^3.1.2",
     "vue": "^3.5.22"
   },
-  "optionalDependencies": {
-  },
+  "optionalDependencies": {},
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
     "@antfu/ni": "^26.1.0",
