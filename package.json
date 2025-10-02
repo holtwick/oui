@@ -99,11 +99,10 @@
   "dependencies": {
     "@floating-ui/vue": "^1.1.9",
     "@vueuse/core": "^13.9.0",
-    "vue": "^3.5.22",
-    "zeed": "^1.0.15"
+    "v-calendar": "^3.1.2",
+    "vue": "^3.5.22"
   },
   "optionalDependencies": {
-    "v-calendar": "^3.1.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
@@ -118,7 +117,6 @@
     "stylus": "^0.64.0",
     "tsup": "^8.5.0",
     "unplugin-vue-markdown": "^29.2.0",
-    "v-calendar": "^3.1.2",
     "vite": "^7.1.8",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-qrcode": "^0.3.0",
