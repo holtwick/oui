@@ -1,23 +1,13 @@
-<!-- eslint-disable import/no-duplicates -->
-<!-- eslint-disable import/first -->
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import type { Path } from './util'
+import { computed } from 'vue'
+import { cache, useExpand } from './hooks'
+import { objectToString } from './util'
+import Wrapper from './wrapper.vue'
 
-export default defineComponent({
-  components: {
-    Wrapper: () => import('./Wrapper.vue'),
-  },
+defineOptions({
   inheritAttrs: false,
 })
-</script>
-
-<!-- eslint-disable import/no-duplicates -->
-<!-- eslint-disable import/first -->
-<script setup lang="ts">
-import type { Path } from '../util'
-import { computed } from 'vue'
-import { cache, useExpand } from '../hooks'
-import { objectToString } from '../util'
 
 const props = withDefaults(
   defineProps<{
@@ -25,9 +15,9 @@ const props = withDefaults(
     data: unknown[]
     name: string
     expandOnCreatedAndUpdated: (path: Path) => boolean
-    getKeys: (object: unknown[], path: Path) => string[]
-    role: string
-    ariaLevel: number
+    getKeys: (object: Record<PropertyKey, unknown> | unknown[], path: Path) => string[]
+    role?: string
+    level: number
     collapseSignal?: boolean
     expandSignal?: boolean
   }>(),
@@ -56,7 +46,7 @@ const isCompact = computed(() => props.data.length > 0 && props.data.every(obj =
     class="array"
     :role="role"
     :aria-expanded="isExpanding"
-    :aria-level="ariaLevel"
+    :level="level"
     @click.self="handleClick"
   >
     <span class="indicator" @click="handleClick">{{
@@ -77,46 +67,26 @@ const isCompact = computed(() => props.data.length > 0 && props.data.every(obj =
     </span>
     <template v-else>
       <span class="preview" @click="handleClick">
-        <!-- {{ keys.length <= 0 ? '[]' : isExpanding ? `Array(${data.length})` : '[...]' }} -->
         <template v-if="keys.length <= 0">[]</template>
         <template v-else-if="!isExpanding">
           [...] <span class="count">({{ data.length }})</span>
         </template>
       </span>
 
-      <template v-if="isCircular">
-        <span v-if="isExpanding" class="value">
-          <template v-for="key of keys" :key="key">
-            <Wrapper
-              :name="key"
-              :path="[...path, key]"
-              :data="lookup(key)"
-              :expand-signal="innerExpandSignal"
-              :collapse-signal="innerCollapseSignal"
-              :expand-on-created-and-updated="() => false"
-              :get-keys="getKeys"
-              :aria-level="ariaLevel"
-            />
-          </template>
-        </span>
-      </template>
-
-      <template v-else>
-        <span v-if="isExpanding" class="value">
-          <template v-for="key of keys" :key="key">
-            <Wrapper
-              :name="key"
-              :path="[...path, key]"
-              :data="lookup(key)"
-              :expand-signal="innerExpandSignal"
-              :collapse-signal="innerCollapseSignal"
-              :expand-on-created-and-updated="expandOnCreatedAndUpdated"
-              :get-keys="getKeys"
-              :aria-level="ariaLevel"
-            />
-          </template>
-        </span>
-      </template>
+      <span v-if="isExpanding" class="value">
+        <template v-for="key of keys" :key="key">
+          <Wrapper
+            :name="key"
+            :path="[...path, key]"
+            :data="lookup(key)"
+            :expand-signal="innerExpandSignal"
+            :collapse-signal="innerCollapseSignal"
+            :expand-on-created-and-updated="isCircular ? () => false : expandOnCreatedAndUpdated"
+            :get-keys="getKeys"
+            :level="level"
+          />
+        </template>
+      </span>
     </template>
   </span>
 </template>

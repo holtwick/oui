@@ -1,9 +1,6 @@
-<!-- eslint-disable ts/ban-ts-comment -->
 <script setup lang="ts">
-// @ts-nocheck
-
 import type { Path } from './util'
-import Wrapper from './components/Wrapper.vue'
+import Wrapper from './wrapper.vue'
 
 withDefaults(
   defineProps<{
@@ -18,7 +15,7 @@ withDefaults(
   {
     rootName: '',
     expandOnCreatedAndUpdated: () => false,
-    getKeys: (object: Record<PropertyKey, unknown> | unknown[], path: Path) =>
+    getKeys: (object: Record<PropertyKey, unknown> | unknown[]) =>
       Object.keys(object),
   },
 )
@@ -32,7 +29,7 @@ withDefaults(
       :expand-on-created-and-updated="expandOnCreatedAndUpdated"
       :get-keys="getKeys"
       :path="[]"
-      :aria-level="0"
+      :level="0"
     />
   </section>
 </template>
