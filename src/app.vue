@@ -207,7 +207,7 @@ function openCurrentInVSCode() {
         </div>
         <template v-if="doc">
           <OuiResizeable :hide="!showProperties" name="demo.doc" :size="400" side="top" :max-size="800" :min-size="60" color="var(--t3-fg)" class="oui-demo-state">
-            <OuiText>
+            <OuiText class="oui-demo-markdown">
               <component :is="doc" />
             </OuiText>
           </OuiResizeable>
