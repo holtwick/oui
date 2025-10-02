@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { DayValue } from 'zeed'
 import type { PeriodType } from './oui-day-range.lib'
-import { OuiButton, OuiFloat } from 'oui-kit'
 import { computed, defineAsyncComponent, nextTick, ref } from 'vue'
 import { dayFromDate, dayFromString, dayOffset, dayToDate, dayToString } from 'zeed'
+import OuiFloat from '../float/oui-float.vue'
+import OuiButton from './oui-button.vue'
 import { dayRangeMonth, dayRangePeriod, dayRangeWeek, dayRangeYear, firstDayOfWeek, today } from './oui-day-range.lib'
 import OuiFormItem from './oui-form-item.vue'
 
-import 'v-calendar/style.css'
 import './oui-day-range.styl'
 
 defineOptions({
