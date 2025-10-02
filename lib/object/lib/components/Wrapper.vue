@@ -1,9 +1,20 @@
 <!-- eslint-disable vue/return-in-computed-property -->
 <script setup lang="ts">
-import type { PropType } from 'vue'
+import type { Component, PropType } from 'vue'
 import type { Path } from '../util'
-import { computed } from 'vue'
+import { computed, getCurrentInstance } from 'vue'
 import { objectToString } from '../util'
+import ArrayWrapper from './ArrayWrapper.vue'
+import FalseWrapper from './FalseWrapper.vue'
+import NullWrapper from './NullWrapper.vue'
+import NumberWrapper from './NumberWrapper.vue'
+import ObjectWrapper from './ObjectWrapper.vue'
+import StringWrapper from './StringWrapper.vue'
+import TrueWrapper from './TrueWrapper.vue'
+
+defineOptions({
+  inheritAttrs: false,
+})
 
 const props = defineProps({
   path: {
@@ -44,22 +55,40 @@ const props = defineProps({
   },
 })
 
+const componentMap: Record<string, Component> = {
+  'null-wrapper': NullWrapper,
+  'true-wrapper': TrueWrapper,
+  'false-wrapper': FalseWrapper,
+  'number-wrapper': NumberWrapper,
+  'string-wrapper': StringWrapper,
+  'array-wrapper': ArrayWrapper,
+  'object-wrapper': ObjectWrapper,
+}
+
 const type = computed(() => objectToString(props.data))
 const is = computed(() => {
+  let componentName: string | undefined
   switch (type.value) {
     case 'Null':
-      return 'null-wrapper'
+      componentName = 'null-wrapper'
+      break
     case 'Boolean':
-      return props.data ? 'true-wrapper' : 'false-wrapper'
+      componentName = props.data ? 'true-wrapper' : 'false-wrapper'
+      break
     case 'Number':
-      return 'number-wrapper'
+      componentName = 'number-wrapper'
+      break
     case 'String':
-      return 'string-wrapper'
+      componentName = 'string-wrapper'
+      break
     case 'Array':
-      return 'array-wrapper'
+      componentName = 'array-wrapper'
+      break
     case 'Object':
-      return 'object-wrapper'
+      componentName = 'object-wrapper'
+      break
   }
+  return componentName ? componentMap[componentName] : undefined
 })
 const role = computed(() => {
   if (props.ariaLevel === 0) {
@@ -83,6 +112,14 @@ const attrs = computed(() => {
   }
   return attrs
 })
+
+// Register circular component references
+const instance = getCurrentInstance()
+if (instance) {
+  const components = instance.appContext.components
+  ;(ArrayWrapper.components as any).Wrapper = instance.type
+  ;(ObjectWrapper.components as any).Wrapper = instance.type
+}
 </script>
 
 <template>
