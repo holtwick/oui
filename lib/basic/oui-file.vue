@@ -133,6 +133,16 @@ function doClear() {
 
 <template>
   <OuiFormItem :id="id" :title="title" :description="description" :required="required">
+    <!-- Conditionally pass the title slot -->
+    <template v-if="$slots.title" #title>
+      <slot name="title" />
+    </template>
+
+    <!-- Conditionally pass the description slot -->
+    <template v-if="$slots.description" #description>
+      <slot name="description" />
+    </template>
+
     <div ref="dropZoneRef" class="oui-input oui-input-container oui-file" :disabled="disabled ? true : undefined" :class="{ _over: isOverDropZone }" :tabindex="disabled ? -1 : 0" @click.prevent="doSelect" @keydown="onKeydown">
       <div class="_content">
         <template v-if="!model || model?.length <= 0">

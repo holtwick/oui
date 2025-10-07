@@ -23,6 +23,11 @@ const state = reactive({
           <em>Some</em> description <a href="#">Link</a>
         </template>
       </OuiCheckbox>
+      <OuiInput v-model="state.text" label="Text input" title="Sample" required>
+        <template #description>
+          <em>Some</em> description <a href="#">Link</a>
+        </template>
+      </OuiInput>
     </OuiCard>
 
     <OuiCard title="Collapsible Card (Initially Collapsed, then persisted)" collapsible :collapsed="true" name="demo-card-1">

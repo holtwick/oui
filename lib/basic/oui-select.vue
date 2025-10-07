@@ -34,6 +34,16 @@ const segmentedOptions = computed<OuiSegmentedOption[]>(() => {
 
 <template>
   <OuiFormItem :id="id" :title="title" :description="description" :required="required">
+    <!-- Conditionally pass the title slot -->
+    <template v-if="$slots.title" #title>
+      <slot name="title" />
+    </template>
+
+    <!-- Conditionally pass the description slot -->
+    <template v-if="$slots.description" #description>
+      <slot name="description" />
+    </template>
+
     <template v-if="segmented">
       <OuiSegmented v-bind="$attrs" :id="id" v-model="model" :options="segmentedOptions" />
     </template>

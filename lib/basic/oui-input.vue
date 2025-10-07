@@ -85,6 +85,16 @@ function doClear() {
 
 <template>
   <OuiFormItem :id="id" :title="title" :description="description" :required="required">
+    <!-- Conditionally pass the title slot -->
+    <template v-if="$slots.title" #title>
+      <slot name="title" />
+    </template>
+
+    <!-- Conditionally pass the description slot -->
+    <template v-if="$slots.description" #description>
+      <slot name="description" />
+    </template>
+
     <template v-if="$slots.start || $slots.end || (clearable && (model || tempValue))">
       <div class="oui-input oui-input-container" :disabled="disabled ? true : undefined">
         <slot name="start" />
