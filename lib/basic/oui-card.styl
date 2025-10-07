@@ -8,16 +8,53 @@
 
   &-header {
     font-weight: 600;
-    margin-bottom: 12;
     margin: 16;
     margin-bottom: 0;
+
+    &.is-clickable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+
+    &-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  &.is-collapsed &-header {
+    margin-bottom: 12;
+  }
+
+  &-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    font-size: 0.75em;
+    line-height: 1;
+    width: 1.2em;
+    height: 1.2em;
+    flex-shrink: 0;
+
+    &.is-collapsed {
+      transform: rotate(-90deg);
+    }
   }
 
   &-body {
     margin: 16;
-  }
-
-  &-header + &-body {
     margin-top: 12;
+    transition: opacity 0.2s ease;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
   }
 }

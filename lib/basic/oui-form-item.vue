@@ -15,13 +15,16 @@ defineProps<{
 </script>
 
 <template>
-  <template v-if="title != null || $slots.description || description">
+  <template v-if="title != null || $slots.title || $slots.description || description">
     <div class="oui-form-item" :class="{ _disabled: disabled }">
       <label>
-        <div v-if="title" class="oui-form-item-title">
-          {{ title }}
-          <span v-if="required">*</span>
-        </div>
+        <template v-if="$slots.title || title">
+          <div class="oui-form-item-title">
+            <slot name="title">
+              {{ title }} <span v-if="required">*</span>
+            </slot>
+          </div>
+        </template>
         <div class="oui-form-item-body">
           <slot v-bind="$attrs" />
         </div>
