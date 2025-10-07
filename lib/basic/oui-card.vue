@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useLocalStorage } from '@vueuse/core'
 import { ref } from 'vue'
 
 const props = defineProps<{
@@ -6,10 +7,13 @@ const props = defineProps<{
   collapsible?: boolean
   collapsed?: boolean
   hideArrow?: boolean
+  persistStateKey?: string
 }>()
 
 // const isCollapsed = defineModel({ required: false, default: false })
-const isCollapsed = ref(props.collapsed ?? false)
+const isCollapsed = props.persistStateKey
+  ? useLocalStorage(`oui.card.collapsed.${props.persistStateKey}`, props.collapsed ?? false)
+  : ref(props.collapsed ?? false)
 
 function toggleCollapse() {
   if (props.collapsible) {
@@ -20,19 +24,10 @@ function toggleCollapse() {
 
 <template>
   <div class="oui-card" :class="{ 'is-collapsible': collapsible, 'is-collapsed': isCollapsed }">
-    <div
-      v-if="$slots.header || $slots.title || title"
-      class="oui-card-header"
-      :class="{ 'is-clickable': collapsible }"
-      @click="toggleCollapse"
-    >
+    <div v-if="$slots.header || $slots.title || title" class="oui-card-header" :class="{ 'is-clickable': collapsible }" @click="toggleCollapse">
       <slot name="header">
         <div class="oui-card-header-content">
-          <span
-            v-if="collapsible && !hideArrow"
-            class="oui-card-arrow"
-            :class="{ 'is-collapsed': isCollapsed }"
-          >
+          <span v-if="collapsible && !hideArrow" class="oui-card-arrow" :class="{ 'is-collapsed': isCollapsed }">
             ▼
           </span>
           <slot name="title">

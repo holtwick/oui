@@ -25,7 +25,7 @@ const state = reactive({
       </OuiCheckbox>
     </OuiCard>
 
-    <OuiCard title="Collapsible Card (Initially Collapsed)" collapsible :collapsed="true">
+    <OuiCard title="Collapsible Card (Initially Collapsed, then persisted)" collapsible :collapsed="true" persist-state-key="demo-card-1">
       <p>This card starts collapsed</p>
     </OuiCard>
 
