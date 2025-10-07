@@ -7,12 +7,12 @@ const props = defineProps<{
   collapsible?: boolean
   collapsed?: boolean
   hideArrow?: boolean
-  persistStateKey?: string
+  name?: string
 }>()
 
 // const isCollapsed = defineModel({ required: false, default: false })
-const isCollapsed = props.persistStateKey
-  ? useLocalStorage(`oui.card.collapsed.${props.persistStateKey}`, props.collapsed ?? false)
+const isCollapsed = props.name
+  ? useLocalStorage(`oui.card.collapsed.${props.name}`, props.collapsed ?? false)
   : ref(props.collapsed ?? false)
 
 function toggleCollapse() {
