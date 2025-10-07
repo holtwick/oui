@@ -21,9 +21,8 @@ defineProps<{
         <template v-if="$slots.title || title">
           <div class="oui-form-item-title">
             <slot name="title">
-              {{ title }}
+              {{ title }} <span v-if="required">*</span>
             </slot>
-            <span v-if="required">*</span>
           </div>
         </template>
         <div class="oui-form-item-body">
