@@ -16,13 +16,38 @@ const state = reactive({
       Hello
     </OuiCard>
 
-    <OuiCard title="Sample Card">
+    <OuiCard title="Collapsible Card" collapsible>
       <OuiInput v-model="state.text" label="Text input" title="Sample" description="Some text" required />
       <OuiCheckbox v-model="state.checked" label="Check me" title="Sample">
         <template #description>
           <em>Some</em> description <a href="#">Link</a>
         </template>
       </OuiCheckbox>
+    </OuiCard>
+
+    <OuiCard title="Collapsible Card (Initially Collapsed)" collapsible :collapsed="true">
+      <p>This card starts collapsed</p>
+    </OuiCard>
+
+    <OuiCard title="Collapsible Card (No Arrow)" collapsible hide-arrow>
+      <p>This card has no arrow indicator</p>
+    </OuiCard>
+
+    <OuiCard title="Regular Card with Form">
+      <OuiInput v-model="state.text" label="Text input" title="Sample" description="Some text" required />
+      <OuiCheckbox v-model="state.checked" label="Check me" title="Sample">
+        <template #description>
+          <em>Some</em> description <a href="#">Link</a>
+        </template>
+      </OuiCheckbox>
+    </OuiCard>
+
+    <!-- Nested Cards -->
+    <OuiCard title="Parent Card" collapsible>
+      <p>This is the parent card content.</p>
+      <OuiCard title="Child Card" collapsible :collapsed="true">
+        <p>This is the child card content.</p>
+      </OuiCard>
     </OuiCard>
   </div>
 </template>
