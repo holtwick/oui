@@ -47,12 +47,17 @@ const date = computed({
 </script>
 
 <template>
-  <OuiFormItem
-    :id="id"
-    :title="title"
-    :description="description"
-    :required="required"
-  >
+  <OuiFormItem :id="id" :title="title" :description="description" :required="required">
+    <!-- Conditionally pass the title slot -->
+    <template v-if="$slots.title" #title>
+      <slot name="title" />
+    </template>
+
+    <!-- Conditionally pass the description slot -->
+    <template v-if="$slots.description" #description>
+      <slot name="description" />
+    </template>
+
     <input
       :id="id"
       v-model="date"

@@ -165,12 +165,17 @@ function navigateForward() {
 </script>
 
 <template>
-  <OuiFormItem
-    :id="id"
-    :title="title"
-    :description="description"
-    :required="required"
-  >
+  <OuiFormItem :id="id" :title="title" :description="description" :required="required">
+    <!-- Conditionally pass the title slot -->
+    <template v-if="$slots.title" #title>
+      <slot name="title" />
+    </template>
+
+    <!-- Conditionally pass the description slot -->
+    <template v-if="$slots.description" #description>
+      <slot name="description" />
+    </template>
+
     <div class="oui-day-range">
       <div class="_daterange oui-input-group">
         <OuiFloat v-model="showPicker" placement="bottom-start" :offset="10" close class="oui-float _dropdown">

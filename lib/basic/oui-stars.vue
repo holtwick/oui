@@ -18,12 +18,17 @@ const hover = ref(0)
 </script>
 
 <template>
-  <OuiFormItem
-    :id="id"
-    :title="title"
-    :description="description"
-    :required="required"
-  >
+  <OuiFormItem :id="id" :title="title" :description="description" :required="required">
+    <!-- Conditionally pass the title slot -->
+    <template v-if="$slots.title" #title>
+      <slot name="title" />
+    </template>
+
+    <!-- Conditionally pass the description slot -->
+    <template v-if="$slots.description" #description>
+      <slot name="description" />
+    </template>
+
     <div class="oui-stars">
       <template v-for="i in 5" :key="i">
         <div :class="{ _active: model >= i, _hover: hover >= i }" @click="model = i" @mouseover="hover = i">

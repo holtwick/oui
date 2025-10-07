@@ -60,6 +60,16 @@ const { textarea } = props.autosize === true ? useTextareaAutosize({ input: mode
 
 <template>
   <OuiFormItem :id="id" :title="title" :description="description" :required="required">
+    <!-- Conditionally pass the title slot -->
+    <template v-if="$slots.title" #title>
+      <slot name="title" />
+    </template>
+
+    <!-- Conditionally pass the description slot -->
+    <template v-if="$slots.description" #description>
+      <slot name="description" />
+    </template>
+
     <textarea :id="id" v-bind="$attrs" ref="textarea" v-model="tempValue" class="oui-textarea" :class="{ _autosize: props.autosize }" rows="6" @blur="lazyUpdate" />
   </OuiFormItem>
 </template>
