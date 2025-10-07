@@ -10,11 +10,11 @@
     margin: 0;
     padding: 4 8;
 
-    &:first-child {
+    > :first-child {
       padding-left: 0;
     }
 
-    &:last-child {
+    > :last-child {
       padding-right: 0;
     }
   }
@@ -29,7 +29,7 @@
       border-bottom: 1px solid var(--s2-fg);
       border-right: 1px solid var(--t3-bg);
 
-      &:last-child {
+      > :last-child {
         border-right: none;
       }
     }
